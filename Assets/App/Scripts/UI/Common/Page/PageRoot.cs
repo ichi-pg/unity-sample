@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PageRoot : MonoBehaviour
 {
-    public static PageRoot Instance { get; private set; }
-
     void Start() {
-        Instance = this;
         this.SwapChild("Title");
     }
 

@@ -8,6 +8,10 @@ public class PageSwapButton : MonoBehaviour
     private string prefabName;
 
     public void OnClick() {
-        PageRoot.Instance.SwapChild(this.prefabName);
+        PageRoot pageRoot = this.transform.root.GetComponent<PageRoot>();
+        if (pageRoot == null) {
+            return;
+        }
+        pageRoot.SwapChild(this.prefabName);
     }
 }
