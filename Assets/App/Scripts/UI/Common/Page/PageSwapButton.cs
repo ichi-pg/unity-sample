@@ -5,13 +5,13 @@ using UnityEngine;
 public class PageSwapButton : MonoBehaviour
 {
     [SerializeField]
-    private string prefabName;
+    private GameObject prefab;
 
     public void OnClick() {
-        PageRoot pageRoot = this.transform.root.GetComponent<PageRoot>();
+        PageRoot pageRoot = this.transform.root.GetComponentInChildren<PageRoot>();
         if (pageRoot == null) {
             return;
         }
-        pageRoot.SwapChild(this.prefabName);
+        pageRoot.SwapChild(this.prefab);
     }
 }

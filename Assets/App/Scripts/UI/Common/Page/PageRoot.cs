@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PageRoot : MonoBehaviour
 {
-    void Start() {
-        this.SwapChild("Title");
+    public void SwapChild(string prefabName) {
+        this.SwapChild(Resources.Load(prefabName) as GameObject);
     }
 
-    public void SwapChild(string prefabName) {
+    public void SwapChild(GameObject prefab) {
+        if (prefab == null) {
+            return;
+        }
         foreach (Transform child in this.transform) {
             Destroy(child.gameObject);
         }
-        GameObject prefab = Resources.Load("UI/Page/"+prefabName) as GameObject;
         Instantiate(prefab, this.transform);
     }
 }

@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b19b359f73843339bb65d318bfa861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabName: Dungeon
+  prefab: {fileID: 389899241806689052, guid: ae8df50149efb4fc789e01a04ce74c7b, type: 3}
 --- !u!1 &7993034404303358468
 GameObject:
   m_ObjectHideFlags: 0
