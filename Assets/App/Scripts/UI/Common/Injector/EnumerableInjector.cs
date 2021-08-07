@@ -8,6 +8,9 @@ public class EnumerableInjector : MonoBehaviour
     private GameObject prefab;
 
     public void Inject(IEnumerable enumerable) {
+        if (enumerable == null) {
+            return;
+        }
         foreach (Transform child in this.transform) {
             Destroy(child.gameObject);
         }

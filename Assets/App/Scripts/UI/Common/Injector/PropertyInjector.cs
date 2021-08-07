@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class PropertyInjector : MonoBehaviour
 {
     public void Inject(object obj) {
+        if (obj == null) {
+            return;
+        }
         foreach (Text text in this.GetComponentsInChildren<Text>(true)) {
             this.InjectText(obj, text);
         }
