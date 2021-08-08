@@ -7,18 +7,18 @@ public class UIStackButton : MonoBehaviour
     [SerializeField]
     private UIStack.Layer layer;
     [SerializeField]
-    private GameObject prefab;
+    private string prefabName;
 
     public void Clear() {
         UIStack.Instance.Clear(this.layer);
     }
 
     public void Change() {
-        UIStack.Instance.Change(this.layer, this.prefab);
+        UIStack.Instance.Change(this.layer, this.prefabName);
     }
 
     public void Push() {
-        UIStack.Instance.Push(this.layer, this.prefab);
+        UIStack.Instance.Push(this.layer, this.prefabName);
     }
 
     public void Pop() {

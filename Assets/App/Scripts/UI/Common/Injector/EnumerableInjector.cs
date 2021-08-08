@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnumerableInjector : MonoBehaviour
 {
     [SerializeField]
-    private GameObject prefab;
+    private string prefabName;
 
     public void Inject(IEnumerable enumerable) {
         if (enumerable == null) {
@@ -15,7 +15,8 @@ public class EnumerableInjector : MonoBehaviour
             Destroy(child.gameObject);
         }
         foreach (object obj in enumerable) {
-            GameObject gameObj = Instantiate(this.prefab, this.transform);
+            GameObject prefab = Resources.Load<GameObject>("UI/Item/"+this.prefabName);
+            GameObject gameObj = Instantiate(prefab, this.transform);
             PropertyInjector injector = gameObj.GetComponent<PropertyInjector>();
             if (injector == null) {
                 continue;

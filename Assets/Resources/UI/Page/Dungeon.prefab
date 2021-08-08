@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d932fceaaa63a46eebf0fe420e940ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5393491345541084110, guid: 4d4212cd849e74c5bb1e41d734d3a35a, type: 3}
+  prefabName: Card
 --- !u!114 &7172451863868034673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layer: 1
-  prefab: {fileID: 4998213712546161078, guid: 8a731f0f69e824ed494d7f2b4ce0899c, type: 3}
+  prefabName: CardModal
 --- !u!1001 &6229952641978987744
 PrefabInstance:
   m_ObjectHideFlags: 0
