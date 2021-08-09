@@ -8,7 +8,7 @@ public class UIStack : MonoBehaviour
     public enum Layer
     {
         Page,
-        Modal
+        Modal,
     }
 
     public static UIStack Instance { get; private set; }
