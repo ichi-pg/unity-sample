@@ -14,14 +14,13 @@ public class EnumerableInjector : MonoBehaviour
         foreach (Transform child in this.transform) {
             Destroy(child.gameObject);
         }
-        foreach (object obj in enumerable) {
+        foreach (object data in enumerable) {
             GameObject prefab = Resources.Load<GameObject>("UI/Item/"+this.prefabName);
-            GameObject gameObj = Instantiate(prefab, this.transform);
-            PropertyInjector injector = gameObj.GetComponent<PropertyInjector>();
-            if (injector == null) {
-                continue;
+            GameObject obj = Instantiate(prefab, this.transform);
+            PropertyInjector injector = obj.GetComponent<PropertyInjector>();
+            if (injector != null) {
+                injector.Inject(data);
             }
-            injector.Inject(obj);
         }
     }
 }

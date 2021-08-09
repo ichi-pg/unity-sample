@@ -24,22 +24,21 @@ public class UIStackLayer
         this.stack.Clear();
     }
 
-    public void Change(GameObject prefab) {
-        if (prefab == null) {
-            return;
-        }
-        this.Clear();
-        this.stack.Push(GameObject.Instantiate(prefab, this.transform));
-    }
-
-    public void Push(GameObject prefab) {
+    public void Push(GameObject prefab, object data) {
         if (prefab == null) {
             return;
         }
         if (this.stack.Count > 0) {
             this.stack.Peek().SetActive(false);
         }
-        this.stack.Push(GameObject.Instantiate(prefab, this.transform));
+        GameObject obj = GameObject.Instantiate(prefab, this.transform);
+        if (data != null) {
+            PropertyInjector injector = obj.GetComponent<PropertyInjector>();
+            if (injector != null) {
+                injector.Inject(data);
+            }
+        }
+        this.stack.Push(obj);
     }
 
     public void Pop() {

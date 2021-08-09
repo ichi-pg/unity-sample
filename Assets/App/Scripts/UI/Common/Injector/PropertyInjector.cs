@@ -7,43 +7,46 @@ using UnityEngine.UI;
 
 public class PropertyInjector : MonoBehaviour
 {
-    public void Inject(object obj) {
-        if (obj == null) {
+    public object Data { get; private set; }
+
+    public void Inject(object data) {
+        if (data == null) {
             return;
         }
         foreach (Text text in this.GetComponentsInChildren<Text>(true)) {
-            this.InjectText(obj, text);
+            this.InjectText(data, text);
         }
         foreach (Image image in this.GetComponentsInChildren<Image>(true)) {
-            this.InjectImage(obj, image);
+            this.InjectImage(data, image);
         }
-        this.InjectText(obj, this.GetComponent<Text>());
-        this.InjectImage(obj, this.GetComponent<Image>());
+        this.InjectText(data, this.GetComponent<Text>());
+        this.InjectImage(data, this.GetComponent<Image>());
+        this.Data = data;
     }
 
-    private void InjectText(object obj, Text text) {
+    private void InjectText(object data, Text text) {
         if (text == null) {
             return;
         }
-        Type type = obj.GetType();
+        Type type = data.GetType();
         PropertyInfo prop = type.GetProperty(text.name);
         if (prop == null) {
             return;
         }
-        object value = prop.GetValue(obj);
+        object value = prop.GetValue(data);
         text.text = value.ToString();
     }
 
-    private void InjectImage(object obj, Image image) {
+    private void InjectImage(object data, Image image) {
         if (image == null) {
             return;
         }
-        Type type = obj.GetType();
+        Type type = data.GetType();
         PropertyInfo prop = type.GetProperty(image.name);
         if (prop == null) {
             return;
         }
-        object value = prop.GetValue(obj);
+        object value = prop.GetValue(data);
         Sprite sprite = Resources.Load<Sprite>(value.ToString());
         if (sprite == null) {
             return;

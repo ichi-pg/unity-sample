@@ -26,19 +26,13 @@ public class UIStack : MonoBehaviour
         this.layers[layer].Clear();
     }
 
-    public void Change(Layer layer, string prefabName) {
-        this.layers[layer].Change(this.GetPrefab(layer, prefabName));
-    }
-
-    public void Push(Layer layer, string prefabName) {
-        this.layers[layer].Push(this.GetPrefab(layer, prefabName));
+    public void Push(Layer layer, string prefabName, object data) {
+        string layerName = Enum.GetName(typeof(Layer), layer);
+        GameObject prefab = Resources.Load<GameObject>("UI/"+layerName+"/"+prefabName);
+        this.layers[layer].Push(prefab, data);
     }
 
     public void Pop(Layer layer) {
         this.layers[layer].Pop();
-    }
-
-    private GameObject GetPrefab(Layer layer, string prefabName) {
-        return Resources.Load<GameObject>("UI/"+Enum.GetName(typeof(Layer), layer)+"/"+prefabName);
     }
 }

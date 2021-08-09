@@ -668,6 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer: 1
   prefabName: CardModal
+  injector: {fileID: 1525892166596919215}
 --- !u!1001 &6229952641978987744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,6 +766,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d4212cd849e74c5bb1e41d734d3a35a, type: 3}
+--- !u!114 &1525892166596919215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4852683835447872335, guid: 4d4212cd849e74c5bb1e41d734d3a35a, type: 3}
+  m_PrefabInstance: {fileID: 6229952641978987744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c44028da0c4c4564925a70b9b36310f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1247401413974809576 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5132577528440958728, guid: 4d4212cd849e74c5bb1e41d734d3a35a, type: 3}
