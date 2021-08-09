@@ -24,7 +24,8 @@ public class UIStackLayer
         this.stack.Clear();
     }
 
-    public void Push(GameObject prefab, object data) {
+    public void Push(string prefabName, object data) {
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
         if (prefab == null) {
             return;
         }

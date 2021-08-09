@@ -11,11 +11,14 @@ public class EnumerableInjector : MonoBehaviour
         if (enumerable == null) {
             return;
         }
+        GameObject prefab = Resources.Load<GameObject>(this.prefabName);
+        if (prefab == null) {
+            return;
+        }
         foreach (Transform child in this.transform) {
             Destroy(child.gameObject);
         }
         foreach (object data in enumerable) {
-            GameObject prefab = Resources.Load<GameObject>("UI/Item/"+this.prefabName);
             GameObject obj = Instantiate(prefab, this.transform);
             PropertyInjector injector = obj.GetComponent<PropertyInjector>();
             if (injector != null) {

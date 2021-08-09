@@ -27,9 +27,7 @@ public class UIStack : MonoBehaviour
     }
 
     public void Push(Layer layer, string prefabName, object data) {
-        string layerName = Enum.GetName(typeof(Layer), layer);
-        GameObject prefab = Resources.Load<GameObject>("UI/"+layerName+"/"+prefabName);
-        this.layers[layer].Push(prefab, data);
+        this.layers[layer].Push(prefabName, data);
     }
 
     public void Pop(Layer layer) {
