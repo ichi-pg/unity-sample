@@ -28,12 +28,10 @@ public class PropertyInjector : MonoBehaviour
         if (text == null) {
             return;
         }
-        Type type = data.GetType();
-        PropertyInfo prop = type.GetProperty(text.name);
-        if (prop == null) {
+        object value = this.GetValue(data, text.name);
+        if (value == null) {
             return;
         }
-        object value = prop.GetValue(data);
         text.text = value.ToString();
     }
 
@@ -41,16 +39,30 @@ public class PropertyInjector : MonoBehaviour
         if (image == null) {
             return;
         }
-        Type type = data.GetType();
-        PropertyInfo prop = type.GetProperty(image.name);
-        if (prop == null) {
+        object value = this.GetValue(data, image.name);
+        if (value == null) {
             return;
         }
-        object value = prop.GetValue(data);
         Sprite sprite = Resources.Load<Sprite>(value.ToString());
         if (sprite == null) {
             return;
         }
         image.sprite = sprite;
+    }
+
+    private object GetValue(object data, string name) {
+        string[] names = name.Split('.');
+        if (names.Length != 2) {
+            return null;
+        }
+        Type type = data.GetType();
+        if (names[0] != type.Name) {
+            return null;
+        }
+        PropertyInfo prop = type.GetProperty(names[1]);
+        if (prop == null) {
+            return null;
+        }
+        return prop.GetValue(data);
     }
 }
