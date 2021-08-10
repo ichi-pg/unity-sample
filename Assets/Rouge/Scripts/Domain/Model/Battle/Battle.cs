@@ -11,5 +11,7 @@ namespace Rouge
         }
 
         public Dictionary<Side, Team> Teams { get; private set; }
+
+        //TODO 単純に Battle = Clicker でいいんじゃない？
     }
 }
