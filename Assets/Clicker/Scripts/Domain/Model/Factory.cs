@@ -8,5 +8,6 @@ namespace Clicker
         public int Level { get; private set; }
 
         //TODO 単純に Factory = 女の子 でいいんじゃない？
+        //TODO Factory = Merge のパターン
     }
 }
