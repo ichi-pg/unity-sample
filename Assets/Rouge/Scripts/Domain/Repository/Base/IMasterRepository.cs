@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public class Event
+    public interface IMasterRepository
+
     {
     }
 }

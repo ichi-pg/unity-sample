@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public interface IUserDataRepository
+    public interface ICardRepository
     {
         List<Card> GetUnlockedCards();
-        void FinishDungeon();
     }
 }

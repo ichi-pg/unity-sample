@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public class Hand
+    public class Room
     {
-        public List<Card> Cards { get; private set; }
     }
 }

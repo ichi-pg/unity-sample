@@ -32,7 +32,7 @@ namespace Common
                 return;
             }
             if (this.stack.Count > 0) {
-                this.stack.Peek().SetActive(false);
+                this.stack.Peek().SetActive(false);//TODO 入れ替えず重ねるパターン
             }
             GameObject obj = GameObject.Instantiate(prefab, this.transform);
             if (data != null) {

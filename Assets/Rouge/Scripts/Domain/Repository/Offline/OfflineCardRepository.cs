@@ -3,13 +3,10 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public class OfflineUserDataRepository : IUserDataRepository
+    public class OfflineCardRepository : ICardRepository
     {
         public List<Card> GetUnlockedCards() {
             return OfflineSaveData.Instance.UnlockedCards;
-        }
-
-        public void FinishDungeon() {
         }
     }
 }

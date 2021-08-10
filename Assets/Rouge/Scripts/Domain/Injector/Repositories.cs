@@ -6,7 +6,7 @@ namespace Rouge
     public class Repositories
     {
         public static Repositories Instance { get; private set; } = new Repositories();
-        public IUserDataRepository UserDataRepository { get; private set; } = new OfflineUserDataRepository();
+        public ICardRepository CardRepository { get; private set; } = new OfflineCardRepository();
 
         private Repositories() {
         }

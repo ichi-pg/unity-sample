@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public class Team
+    public interface IBattleRepository
     {
-        public List<Unit> Units { get; private set; }
+        void Finish();
     }
 }
