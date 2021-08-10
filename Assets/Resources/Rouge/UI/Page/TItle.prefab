@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   layer: 0
-  prefabName: UI/Page/Dungeon
+  prefabName: Rouge/UI/Page/Dungeon
 --- !u!1 &7993034404303358468
 GameObject:
   m_ObjectHideFlags: 0
