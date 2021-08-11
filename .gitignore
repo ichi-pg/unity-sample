@@ -2,4 +2,6 @@ Library/
 Logs/
 Temp/
 UserSettings/
+Assets/Ignore/
+Assets/Ignore.meta
 .DS_Store
