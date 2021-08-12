@@ -66,5 +66,7 @@ namespace Common
             }
             return prop.GetValue(data);
         }
+
+        //TODO リアルタイム変更
     }
 }
