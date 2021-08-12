@@ -9,7 +9,7 @@ namespace Clicker
         public int Level { get; private set; } = 1;
         public int Rank { get; private set; }
         public int Power { get => this.Level * this.Rank * this.Rank; }
-        public int LevelUpCost { get => this.Level * this.Level * this.Rank * 10; }
+        public int LevelUpCost { get => this.Level * this.Level * this.Rank * this.Rank * 10; }
         public int BuyCost { get => this.Rank * this.Rank * 10; }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
