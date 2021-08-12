@@ -8,6 +8,10 @@ namespace Clicker
     {
         private Factory Factory { get => this.Data as Factory; }
 
-        //TODO 購入
+        public void Buy() {
+            Repositories.Instance.FactoryRepository.Buy(this.Factory);
+        }
+
+        //TODO コイン足りない時ボタンDisable
     }
 }

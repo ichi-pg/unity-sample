@@ -17,5 +17,7 @@ namespace Clicker
                 "Clicker/UI/Parts/BuyableFactory"
             );
         }
+
+        //TODO もっと Common にできる？
     }
 }

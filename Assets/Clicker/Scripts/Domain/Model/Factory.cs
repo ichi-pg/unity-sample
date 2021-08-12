@@ -37,5 +37,7 @@ namespace Clicker
             }
             return new Factory(rank);
         }
+
+        //TODO BuyCost == Level 0 の LevelUp 説
     }
 }

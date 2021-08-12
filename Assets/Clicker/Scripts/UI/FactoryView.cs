@@ -8,6 +8,11 @@ namespace Clicker
     {
         private Factory Factory { get => this.Data as Factory; }
 
-        //TODO レベルアップ
+        public void LevelUp() {
+            Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
+        }
+
+        //TODO コイン足りない時ボタンDisable
+        //TODO もっと Common にできる？
     }
 }

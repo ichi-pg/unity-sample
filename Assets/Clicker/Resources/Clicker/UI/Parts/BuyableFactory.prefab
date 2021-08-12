@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 16907972586191}
   - component: {fileID: 5183865653037916120}
   - component: {fileID: 8374351913742776227}
-  - component: {fileID: 5733285206513238353}
+  - component: {fileID: 9062026501010856369}
   m_Layer: 5
   m_Name: BuyableFactory
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5733285206513238353
+--- !u!114 &9062026501010856369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
