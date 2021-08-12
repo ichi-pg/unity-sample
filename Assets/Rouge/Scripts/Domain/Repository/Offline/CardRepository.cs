@@ -5,7 +5,7 @@ namespace Rouge
 {
     public class CardRepository : ICardRepository
     {
-        public List<Card> ListUnlocked() {
+        public IEnumerable<Card> ListUnlocked() {
             return SaveData.Instance.UnlockedCards;
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Clicker
 {
@@ -26,6 +27,15 @@ namespace Clicker
 
         public void LevelUp() {
             this.Level++;
+        }
+
+        public static Factory GetBuyable(IEnumerable<Factory> factories) {
+            var level = factories.Sum(t => t.Level) + 1;
+            var rank = factories.Max(t => t.Rank) + 1;
+            if (level < rank * rank) {
+                return null;
+            }
+            return new Factory(rank);
         }
     }
 }

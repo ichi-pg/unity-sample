@@ -5,7 +5,7 @@ namespace Clicker
 {
     public interface IFactoryRepository
     {
-        List<Factory> List();
+        IEnumerable<Factory> List();
         Factory GetBuyable();
         void LevelUp(Factory factory);
         void Produce(Factory factory);
