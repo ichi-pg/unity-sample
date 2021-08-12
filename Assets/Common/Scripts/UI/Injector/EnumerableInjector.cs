@@ -12,7 +12,7 @@ namespace Common
             }
         }
 
-        public void Inject(IEnumerable enumerable, string prefabName) {
+        public void InjectList(IEnumerable enumerable, string prefabName) {
             if (enumerable == null) {
                 return;
             }
@@ -21,11 +21,29 @@ namespace Common
                 return;
             }
             foreach (object data in enumerable) {
-                GameObject obj = Instantiate(prefab, this.transform);
-                PropertyInjector injector = obj.GetComponent<PropertyInjector>();
-                if (injector != null) {
-                    injector.Inject(data);
-                }
+                this.Inject(data, prefab);
+            }
+        }
+
+        public void Inject(object data, string prefabName) {
+            if (data == null) {
+                return;
+            }
+            GameObject prefab = Resources.Load<GameObject>(prefabName);
+            if (prefab == null) {
+                return;
+            }
+            this.Inject(data, prefab);
+        }
+
+        public void Inject(object data, GameObject prefab) {
+            if (data == null) {
+                return;
+            }
+            GameObject obj = Instantiate(prefab, this.transform);
+            PropertyInjector injector = obj.GetComponent<PropertyInjector>();
+            if (injector != null) {
+                injector.Inject(data);
             }
         }
     }

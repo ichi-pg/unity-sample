@@ -8,14 +8,12 @@ namespace Clicker
     {
         void Start() {
             this.Clear();
-            this.Inject(
+            this.InjectList(
                 Repositories.Instance.FactoryRepository.List(),
                 "Clicker/UI/Parts/Factory"
             );
             this.Inject(
-                new List<Factory>() {
-                    Repositories.Instance.FactoryRepository.GetBuyable(),
-                },
+                Repositories.Instance.FactoryRepository.GetBuyable(),
                 "Clicker/UI/Parts/BuyableFactory"
             );
         }
