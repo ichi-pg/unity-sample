@@ -8,11 +8,13 @@ namespace Common
     public class RepositoryInjector : MonoBehaviour
     {
         [SerializeField]
-        private string injectorName;
+        private string _namespace;
         [SerializeField]
         private string repositoryName;
         [SerializeField]
         private string methodName;
+        [SerializeField]
+        private string prefabName;
 
         void Start() {
             object obj = this.InvokeRepository();
@@ -24,28 +26,34 @@ namespace Common
         }
 
         private object InvokeRepository() {
-            var injectorType = System.Type.GetType(this.injectorName);
-            if (injectorType == null) {
+            var reposType = System.Type.GetType(this._namespace+".Repositories");
+            if (reposType == null) {
+                Debug.Log("reposType == null");
                 return null;
             }
-            var injectorProp = injectorType.GetProperty("Instance");
-            if (injectorProp == null) {
+            var reposProp = reposType.GetProperty("Instance");
+            if (reposProp == null) {
+                Debug.Log("reposProp == null");
                 return null;
             }
-            object injector = injectorProp.GetValue(null);
-            if (injector == null) {
+            object repos = reposProp.GetValue(null);
+            if (repos == null) {
+                Debug.Log("repos == null");
                 return null;
             }
-            var repoProp = injectorType.GetProperty(this.repositoryName);
+            var repoProp = reposType.GetProperty(this.repositoryName+"Repository");
             if (repoProp == null) {
+                Debug.Log("repoProp == null");
                 return null;
             }
-            object repo = repoProp.GetValue(injector);
+            object repo = repoProp.GetValue(repos);
             if (repo == null) {
+                Debug.Log("repo == null");
                 return null;
             }
             var method = repo.GetType().GetMethod(this.methodName);
             if (method == null) {
+                Debug.Log("method == null");
                 return null;
             }
             return method.Invoke(repo, null);
@@ -54,14 +62,17 @@ namespace Common
         private void InjectEnumerable(IEnumerable enumerable) {
             EnumerableInjector injector = this.GetComponent<EnumerableInjector>();
             if (injector == null) {
+                Debug.Log("injector == null");
                 return;
             }
-            injector.Inject(enumerable);
+            injector.Clear();
+            injector.Inject(enumerable, this.prefabName);
         }
 
         private void InjectProperty(object obj) {
             PropertyInjector injector = this.GetComponent<PropertyInjector>();
             if (injector == null) {
+                Debug.Log("injector == null");
                 return;
             }
             injector.Inject(obj);

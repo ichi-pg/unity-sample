@@ -14,14 +14,18 @@ namespace Clicker
                         instance = Common.SaveDataUtility.Load<SaveData>();
                     } else {
                         instance = new SaveData();
+                        instance.Factories = new List<Factory>();
+                        instance.Player = new Player();
+                        instance.Player.AddCoin(new Factory(1).BuyCost);
+                        //TODO ドメインに置きたいかな？
                     }
                 }
                 return instance;
             }
         }
 
-        public Player Player { get; private set; } = new Player();
-        public List<Factory> Factories { get; private set; } = new List<Factory>();
+        public Player Player { get; private set; }
+        public List<Factory> Factories { get; private set; }
 
         private SaveData() {
         }
