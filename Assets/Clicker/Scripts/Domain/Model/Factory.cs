@@ -11,6 +11,7 @@ namespace Clicker
         public int Power { get => this.Level * this.Rank * this.Rank; }
         public int LevelUpCost { get => this.Level * this.Level * this.Rank * this.Rank * 10; }
         public int BuyCost { get => this.Rank * this.Rank * 10; }
+        public float AutoProduceInterval { get; private set; } = 1.0f;//TODO
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設

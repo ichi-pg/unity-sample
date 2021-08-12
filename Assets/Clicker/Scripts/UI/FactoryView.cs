@@ -10,16 +10,21 @@ namespace Clicker
 
         public void LevelUp() {
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
-            StartCoroutine("Produce");
+            StartCoroutine("AutoProduce");
         }
 
-        private IEnumerator Produce() {
+        private IEnumerator AutoProduce() {
             while (true) {
-                yield return new WaitForSeconds(1.0f);//TODO 生産速度はドメイン
-                Repositories.Instance.FactoryRepository.Produce(this.Factory);
+                yield return new WaitForSeconds(this.Factory.AutoProduceInterval);
+                this.Produce();
             }
         }
 
+        public void Produce() {
+            Repositories.Instance.FactoryRepository.Produce(this.Factory);
+        }
+
+        //TODO オートモードとタップモードの切り替え（楽 or 効率）
         //TODO コイン足りない時ボタンDisable
         //TODO もっと Common にできる？
     }
