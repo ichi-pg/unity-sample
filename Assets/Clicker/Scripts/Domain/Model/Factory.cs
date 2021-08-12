@@ -11,5 +11,6 @@ namespace Clicker
         //TODO 正攻法だと精霊、道具、商品、土地、施設
         //TODO Factory = Merge のパターン
         //TODO 放置で増える
+        //TODO レアリティ(ハクスラ要素)
     }
 }
