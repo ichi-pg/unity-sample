@@ -4,7 +4,6 @@ using System.Collections.Generic;
 namespace Rouge
 {
     public interface IMasterRepository
-
     {
     }
 }

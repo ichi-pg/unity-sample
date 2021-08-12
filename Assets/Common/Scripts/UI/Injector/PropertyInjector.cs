@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,11 +56,11 @@ namespace Common
             if (names.Length != 2) {
                 return null;
             }
-            Type type = data.GetType();
+            var type = data.GetType();
             if (names[0] != type.Name) {
                 return null;
             }
-            PropertyInfo prop = type.GetProperty(names[1]);
+            var prop = type.GetProperty(names[1]);
             if (prop == null) {
                 return null;
             }

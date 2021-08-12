@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Reflection;
 using UnityEngine;
 
@@ -25,11 +24,11 @@ namespace Common
         }
 
         private object InvokeRepository() {
-            Type injectorType = Type.GetType(this.injectorName);
+            var injectorType = System.Type.GetType(this.injectorName);
             if (injectorType == null) {
                 return null;
             }
-            PropertyInfo injectorProp = injectorType.GetProperty("Instance");
+            var injectorProp = injectorType.GetProperty("Instance");
             if (injectorProp == null) {
                 return null;
             }
@@ -37,7 +36,7 @@ namespace Common
             if (injector == null) {
                 return null;
             }
-            PropertyInfo repoProp = injectorType.GetProperty(this.repositoryName);
+            var repoProp = injectorType.GetProperty(this.repositoryName);
             if (repoProp == null) {
                 return null;
             }
@@ -45,7 +44,7 @@ namespace Common
             if (repo == null) {
                 return null;
             }
-            MethodInfo method = repo.GetType().GetMethod(this.methodName);
+            var method = repo.GetType().GetMethod(this.methodName);
             if (method == null) {
                 return null;
             }

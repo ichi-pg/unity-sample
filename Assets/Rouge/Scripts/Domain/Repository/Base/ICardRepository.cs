@@ -5,6 +5,6 @@ namespace Rouge
 {
     public interface ICardRepository
     {
-        List<Card> GetUnlockedCards();
+        List<Card> ListUnlocked();
     }
 }

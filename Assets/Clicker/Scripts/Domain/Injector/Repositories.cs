@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Rouge
+namespace Clicker
 {
     public class Repositories
     {
         public static Repositories Instance { get; private set; } = new Repositories();
-        public ICardRepository CardRepository { get; private set; } = new CardRepository();
+        public IFactoryRepository FactoryRepository { get; private set; } = new FactoryRepository();
+        public IPlayerRepository PlayerRepository { get; private set; } = new PlayerRepository();
 
         private Repositories() {
         }

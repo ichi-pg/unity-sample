@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Rouge
 {
-    public class OfflineSaveData
+    public class SaveData
     {
-        public static OfflineSaveData Instance { get; private set; } = new OfflineSaveData();
+        public static SaveData Instance { get; private set; } = new SaveData();
         public List<Card> UnlockedCards { get; private set; } = new List<Card>() {
             new Card(),
             new Card(),
