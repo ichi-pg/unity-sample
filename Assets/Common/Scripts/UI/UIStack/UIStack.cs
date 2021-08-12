@@ -6,6 +6,7 @@ namespace Common
 {
     public class UIStack : MonoBehaviour
     {
+        //TODO レイヤー削除
         public enum Layer
         {
             Page,

@@ -7,6 +7,6 @@ namespace Rouge
     {
         public string Name { get; private set; } = "aaaa";
 
-        //TODO GANsで生成とか
+        //NOTE GANsで生成とか
     }
 }
