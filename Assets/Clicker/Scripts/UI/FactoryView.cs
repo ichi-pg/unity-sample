@@ -10,6 +10,14 @@ namespace Clicker
 
         public void LevelUp() {
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
+            StartCoroutine("Produce");
+        }
+
+        private IEnumerator Produce() {
+            while (true) {
+                yield return new WaitForSeconds(1.0f);//TODO 生産速度はドメイン
+                Repositories.Instance.FactoryRepository.Produce(this.Factory);
+            }
         }
 
         //TODO コイン足りない時ボタンDisable
