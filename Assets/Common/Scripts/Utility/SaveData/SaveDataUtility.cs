@@ -37,5 +37,6 @@ namespace Common
         }
 
         //TODO 難読化
+        //TODO バイナリ
     }
 }
