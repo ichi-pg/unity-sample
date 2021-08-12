@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Clicker
 {
     public class FactoryRepository : IFactoryRepository
     {
-        public List<Factory> ListUnlocked() {
+        public List<Factory> List() {
             return SaveData.Instance.Factories;
         }
-        public List<Factory> ListLocked() {
-            return new List<Factory>();//TODO
+        public Factory GetBuyable() {
+            var level = SaveData.Instance.Factories.Sum(t => t.Level) + 1;
+            var rank = SaveData.Instance.Factories.Max(t => t.Rank) + 1;
+            if (level < rank * rank) {
+                return null;
+            }
+            return new Factory(rank);
         }
 
         public void LevelUp(Factory factory) {

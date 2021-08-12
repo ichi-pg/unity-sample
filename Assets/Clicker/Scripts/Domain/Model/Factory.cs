@@ -6,7 +6,7 @@ namespace Clicker
     public class Factory
     {
         public int Level { get; private set; } = 1;
-        public int Rank { get; private set; } = 1;//TODO マスターから
+        public int Rank { get; private set; }
         public int Power { get => this.Level * this.Rank * this.Rank; }
         public int LevelUpCost { get => this.Level * this.Level * this.Rank * 10; }
         public int BuyCost { get => this.Rank * this.Rank * 10; }
@@ -19,6 +19,10 @@ namespace Clicker
         //NOTE ネクロのやつは生産の間に敵を挟んでるのがえらい
         //NOTE ネクロのやつはランクがハクスラになってるのがえらい
         //NOTE ネクロのやつはデッキ枠で選択が生まれるのがえらい
+
+        public Factory(int rank) {
+            this.Rank = rank;
+        }
 
         public void LevelUp() {
             this.Level++;

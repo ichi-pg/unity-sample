@@ -5,7 +5,7 @@ namespace Clicker
 {
     public class Player
     {
-        public int Coin { get; private set; } = new Factory().BuyCost;
+        public int Coin { get; private set; } = new Factory(1).BuyCost;
 
         public void ConsumCoin(int coin) {
             if (this.Coin < coin) {
