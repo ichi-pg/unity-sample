@@ -13,11 +13,15 @@ namespace Clicker
                     if (Common.SaveDataUtility.Exist<SaveData>()) {
                         instance = Common.SaveDataUtility.Load<SaveData>();
                     } else {
+                        Player player;
+                        List<Factory> factories;
+                        Player.Initialize(
+                            out player,
+                            out factories
+                        );
                         instance = new SaveData();
-                        instance.Factories = new List<Factory>();
-                        instance.Player = new Player();
-                        instance.Player.AddCoin(new Factory(1).BuyCost);
-                        //TODO ドメインに置きたいかな？
+                        instance.Player = player;
+                        instance.Factories = factories;
                     }
                 }
                 return instance;
@@ -33,7 +37,5 @@ namespace Clicker
         public void Save() {
             Common.SaveDataUtility.Save<SaveData>(this);
         }
-
-        //TODO スレッドセーフ
     }
 }

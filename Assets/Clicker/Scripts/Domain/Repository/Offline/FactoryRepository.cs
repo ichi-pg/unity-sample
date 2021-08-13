@@ -14,8 +14,7 @@ namespace Clicker
         }
 
         public void LevelUp(Factory factory) {
-            SaveData.Instance.Player.ConsumCoin(factory.LevelUpCost);
-            factory.LevelUp();
+            factory.LevelUp(SaveData.Instance.Player);
             SaveData.Instance.Save();
         }
 
@@ -25,9 +24,10 @@ namespace Clicker
         }
 
         public void Buy(Factory factory) {
-            //TODO 購入済みの時エラー
-            SaveData.Instance.Player.ConsumCoin(factory.BuyCost);
-            SaveData.Instance.Factories.Add(factory);
+            factory.Buy(
+                SaveData.Instance.Factories,
+                SaveData.Instance.Player
+            );
             SaveData.Instance.Save();
         }
     }

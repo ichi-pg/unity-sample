@@ -26,7 +26,8 @@ namespace Clicker
             this.Rank = rank;
         }
 
-        public void LevelUp() {
+        public void LevelUp(Player player) {
+            player.ConsumCoin(this.LevelUpCost);
             this.Level++;
         }
 
@@ -39,6 +40,12 @@ namespace Clicker
             return new Factory(rank);
         }
 
-        //TODO BuyCost == Level 0 の LevelUp 説
+        public void Buy(List<Factory> factories, Player player) {
+            if (factories.Any(t => t.Rank == this.Rank)) {
+                throw new System.Exception("購入済みです");//TODO ローカライズ
+            }
+            player.ConsumCoin(this.BuyCost);
+            factories.Add(this);
+        }
     }
 }

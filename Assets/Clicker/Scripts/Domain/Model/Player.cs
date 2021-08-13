@@ -17,5 +17,11 @@ namespace Clicker
         public void AddCoin(int coin) {
             this.Coin += coin;
         }
+
+        public static void Initialize(out Player player, out List<Factory> factories) {
+            factories = new List<Factory>();
+            player = new Player();
+            player.Coin = new Factory(1).BuyCost;
+        }
     }
 }
