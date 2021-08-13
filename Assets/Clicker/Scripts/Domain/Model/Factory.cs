@@ -38,7 +38,7 @@ namespace Clicker
         public static Factory GetBuyable(IEnumerable<Factory> factories) {
             var level = factories.Select(t => t.Level).Sum() + 1;
             var rank = factories.Select(t => t.Rank).DefaultIfEmpty().Max() + 1;
-            if (level < rank * rank) {
+            if (level < rank * rank * rank) {
                 return null;
             }
             return new Factory(rank);

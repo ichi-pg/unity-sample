@@ -33,6 +33,6 @@ namespace Clicker
         }
 
         //TODO オートモードとタップモードの切り替え（楽 or 効率）
-        //TODO コイン足りない時ボタンDisable
+        //TODO コイン足りない時ボタン interactable = false
     }
 }

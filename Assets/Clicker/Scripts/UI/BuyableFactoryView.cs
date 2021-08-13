@@ -13,6 +13,6 @@ namespace Clicker
             this.transform.parent.GetComponent<FactoryListView>().Reflesh();
         }
 
-        //TODO コイン足りない時ボタンDisable
+        //TODO コイン足りない時ボタン interactable = false
     }
 }

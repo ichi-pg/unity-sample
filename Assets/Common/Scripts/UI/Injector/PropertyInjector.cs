@@ -14,6 +14,7 @@ namespace Common
             foreach (PropertyInjector injector in this.transform.root.GetComponentsInChildren<PropertyInjector>(true)) {
                 injector.Inject(injector.Data);
             }
+            //TODO 処理が重いかも。最適化。
         }
 
         public void Inject(object data) {
