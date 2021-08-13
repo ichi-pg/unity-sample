@@ -30,5 +30,7 @@ namespace Clicker
             );
             SaveData.Instance.Save();
         }
+
+        //TODO この速度でSaveするのやりすぎでは。
     }
 }

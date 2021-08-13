@@ -28,6 +28,7 @@ namespace Clicker
 
         public void Produce() {
             Repositories.Instance.FactoryRepository.Produce(this.Factory);
+            this.Modify();
         }
 
         //TODO オートモードとタップモードの切り替え（楽 or 効率）

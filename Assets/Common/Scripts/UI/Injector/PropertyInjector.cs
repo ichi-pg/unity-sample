@@ -8,7 +8,24 @@ namespace Common
 {
     public class PropertyInjector : MonoBehaviour
     {
+        private static event System.Action modify;
         public object Data { get; private set; }
+
+        void Start() {
+            modify += this.OnModify;
+        }
+
+        void OnDestroy() {
+            modify -= this.OnModify;
+        }
+
+        private void OnModify() {
+            this.Inject(this.Data);
+        }
+
+        public void Modify() {
+            modify?.Invoke();
+        }
 
         public void Inject(object data) {
             if (data == null) {
@@ -66,7 +83,5 @@ namespace Common
             }
             return prop.GetValue(data);
         }
-
-        //TODO リアルタイム変更
     }
 }

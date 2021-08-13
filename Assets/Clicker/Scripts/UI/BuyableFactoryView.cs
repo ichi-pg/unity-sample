@@ -10,6 +10,7 @@ namespace Clicker
 
         public void Buy() {
             Repositories.Instance.FactoryRepository.Buy(this.Factory);
+            this.Modify();
         }
 
         //TODO コイン足りない時ボタンDisable
