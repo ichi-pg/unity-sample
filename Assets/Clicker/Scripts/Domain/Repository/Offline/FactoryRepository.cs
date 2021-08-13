@@ -14,19 +14,19 @@ namespace Clicker
         }
 
         public void LevelUp(Factory factory) {
-            factory.LevelUp(SaveData.Instance.Player);
+            factory.LevelUp(SaveData.Instance.Wallet);
             SaveData.Instance.Save();
         }
 
         public void Produce(Factory factory) {
-            SaveData.Instance.Player.AddCoin(factory.Power);
+            SaveData.Instance.Wallet.AddCoin(factory.Power);
             SaveData.Instance.Save();
         }
 
         public void Buy(Factory factory) {
             factory.Buy(
                 SaveData.Instance.Factories,
-                SaveData.Instance.Player
+                SaveData.Instance.Wallet
             );
             SaveData.Instance.Save();
         }

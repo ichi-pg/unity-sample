@@ -6,6 +6,7 @@ namespace Clicker
 {
     public class Factory
     {
+        public string Name { get => "Rank"+this.Rank+" Lv"+this.Level; }//TODO
         public int Level { get; private set; } = 1;
         public int Rank { get; private set; }
         public int Power { get => this.Level * this.Rank * this.Rank; }
@@ -26,8 +27,8 @@ namespace Clicker
             this.Rank = rank;
         }
 
-        public void LevelUp(Player player) {
-            player.ConsumCoin(this.LevelUpCost);
+        public void LevelUp(Wallet wallet) {
+            wallet.ConsumCoin(this.LevelUpCost);
             this.Level++;
         }
 
@@ -40,11 +41,11 @@ namespace Clicker
             return new Factory(rank);
         }
 
-        public void Buy(List<Factory> factories, Player player) {
+        public void Buy(List<Factory> factories, Wallet wallet) {
             if (factories.Any(t => t.Rank == this.Rank)) {
                 throw new System.Exception("購入済みです");//TODO ローカライズ
             }
-            player.ConsumCoin(this.BuyCost);
+            wallet.ConsumCoin(this.BuyCost);
             factories.Add(this);
         }
     }

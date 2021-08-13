@@ -5,6 +5,6 @@ namespace Clicker
 {
     public interface IPlayerRepository
     {
-        Player Get();
+        Wallet Get();
     }
 }

@@ -13,14 +13,14 @@ namespace Clicker
                     if (Common.SaveDataUtility.Exist<SaveData>()) {
                         instance = Common.SaveDataUtility.Load<SaveData>();
                     } else {
-                        Player player;
+                        Wallet wallet;
                         List<Factory> factories;
-                        Player.Initialize(
-                            out player,
+                        Initializer.Initialize(
+                            out wallet,
                             out factories
                         );
                         instance = new SaveData();
-                        instance.Player = player;
+                        instance.Wallet = wallet;
                         instance.Factories = factories;
                     }
                 }
@@ -28,7 +28,7 @@ namespace Clicker
             }
         }
 
-        public Player Player { get; private set; }
+        public Wallet Wallet { get; private set; }
         public List<Factory> Factories { get; private set; }
 
         private SaveData() {

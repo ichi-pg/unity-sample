@@ -5,8 +5,8 @@ namespace Clicker
 {
     public class PlayerRepository : IPlayerRepository
     {
-        public Player Get() {
-            return SaveData.Instance.Player;
+        public Wallet Get() {
+            return SaveData.Instance.Wallet;
         }
     }
 }
