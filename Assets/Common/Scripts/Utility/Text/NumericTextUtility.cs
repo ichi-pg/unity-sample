@@ -21,7 +21,7 @@ namespace Common
             }
             //TODO 'z'以降 ex) 1.02aa
             int alphabet = (int)'a' + offset;
-            return omit.ToString("F3") + (char)alphabet;
+            return omit.ToString("F3").TrimEnd('0').TrimEnd('.') + (char)alphabet;
         }
     }
 }
