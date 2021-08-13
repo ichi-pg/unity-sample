@@ -15,6 +15,7 @@ namespace Clicker
         public void LevelUp() {
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
             this.Modify();
+            this.transform.parent.GetComponent<FactoryListView>().Reflesh();
         }
 
         private IEnumerator AutoProduce() {
