@@ -6,7 +6,7 @@ namespace Clicker
     public class Wallet
     {
         public int Coin { get; private set; }
-        public string CoinText { get => "コイン"+this.Coin; }//TODO
+        public string CoinText { get => "コイン"+Common.NumericTextUtility.Omit(this.Coin); }//TODO
 
         public Wallet(int coin) {
             this.Coin = coin;
