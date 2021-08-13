@@ -14,6 +14,7 @@ namespace Clicker
 
         public void LevelUp() {
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
+            this.Modify();
         }
 
         private IEnumerator AutoProduce() {

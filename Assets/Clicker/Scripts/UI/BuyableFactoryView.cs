@@ -11,6 +11,7 @@ namespace Clicker
         public void Buy() {
             Repositories.Instance.FactoryRepository.Buy(this.Factory);
             this.Modify();
+            this.transform.parent.GetComponent<FactoryListView>().Reflesh();//FIXME Buyableが増えない
         }
 
         //TODO コイン足りない時ボタンDisable

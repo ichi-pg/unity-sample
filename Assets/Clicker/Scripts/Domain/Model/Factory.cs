@@ -12,7 +12,7 @@ namespace Clicker
         public int Power { get => this.Level * this.Rank * this.Rank; }
         public int LevelUpCost { get => this.Level * this.Level * this.Rank * this.Rank * 10; }
         public int BuyCost { get => this.Rank * this.Rank * 10; }
-        public float AutoProduceInterval { get; private set; } = 1.0f;//TODO
+        public float AutoProduceInterval { get; private set; } = 0.1f;//TODO
         public string LevelUpText { get => "LvUp"+this.LevelUpCost; }//TODO
         public string BuyText { get => "Buy"+this.BuyCost; }//TODO
 
@@ -21,9 +21,10 @@ namespace Clicker
         //NOTE Factory = Merge のパターン
         //NOTE 放置で増える
         //NOTE HPあって死ぬ、ランダム性と選択、何日生存
-        //NOTE ネクロのやつは生産の間に敵を挟んでるのがえらい
-        //NOTE ネクロのやつはランクがハクスラになってるのがえらい
-        //NOTE ネクロのやつはデッキ枠で選択が生まれるのがえらい
+        //NOTE ネクロは生産の間に敵を挟んでるのがえらい
+        //NOTE ネクロはランクがハクスラになってるのがえらい
+        //NOTE ネクロはデッキ枠で選択が生まれるのがえらい
+        //NOTE ネクロもギターも広告がうまい（通常プレイを妨げず、フィーバーorレアリティアップしたい欲で広告）
 
         public Factory(int rank) {
             this.Rank = rank;

@@ -7,6 +7,10 @@ namespace Clicker
     public class FactoryListView : Common.EnumerableInjector
     {
         void Start() {
+            this.Reflesh();
+        }
+
+        public void Reflesh() {
             this.Clear();
             this.InjectList(
                 Repositories.Instance.FactoryRepository.List(),

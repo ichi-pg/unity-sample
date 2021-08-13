@@ -8,23 +8,12 @@ namespace Common
 {
     public class PropertyInjector : MonoBehaviour
     {
-        private static event System.Action modify;
         public object Data { get; private set; }
 
-        void Start() {
-            modify += this.OnModify;
-        }
-
-        void OnDestroy() {
-            modify -= this.OnModify;
-        }
-
-        private void OnModify() {
-            this.Inject(this.Data);
-        }
-
         public void Modify() {
-            modify?.Invoke();
+            foreach (PropertyInjector injector in this.transform.root.GetComponentsInChildren<PropertyInjector>(true)) {
+                injector.Inject(injector.Data);
+            }
         }
 
         public void Inject(object data) {
