@@ -15,6 +15,9 @@ namespace Clicker
         public float AutoProduceInterval { get; private set; } = 0.1f;//TODO
         public string LevelUpText { get => "LvUp"+Common.NumericTextUtility.Omit(this.LevelUpCost); }//TODO
         public string BuyText { get => "Buy"+Common.NumericTextUtility.Omit(this.BuyCost); }//TODO
+        public string PowerText { get => "Power"+Common.NumericTextUtility.Omit(this.Power); }//TODO
+
+        //TODO 高ランクの方がレベル上げ効率が良すぎる。
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
