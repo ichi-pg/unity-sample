@@ -8,12 +8,12 @@ namespace Common
     public static class SaveDataUtility
     {
         public static void Save<T>(T obj) {
-            var path = FilePath(obj.GetType());
-            StreamWriter writer = new StreamWriter(path);
-            var json = JsonUtility.ToJson(obj);
-            writer.Write(json);
-            writer.Flush();
-            writer.Close();
+            // var path = FilePath(obj.GetType());
+            // StreamWriter writer = new StreamWriter(path);
+            // var json = JsonUtility.ToJson(obj);
+            // writer.Write(json);
+            // writer.Flush();
+            // writer.Close();
             //TODO DirectoryNotFoundException
         }
 
