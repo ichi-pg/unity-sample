@@ -14,6 +14,7 @@ namespace Common
             writer.Write(json);
             writer.Flush();
             writer.Close();
+            //TODO DirectoryNotFoundException
         }
 
         public static bool Exist<T>() {

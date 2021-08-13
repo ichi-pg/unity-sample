@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Clicker
 {
-    public interface IPlayerRepository
+    public interface IWalletRepository
     {
         Wallet Get();
     }

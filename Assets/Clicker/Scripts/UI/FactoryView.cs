@@ -8,12 +8,18 @@ namespace Clicker
     {
         private Factory Factory { get => this.Data as Factory; }
 
+        void Start() {
+            this.StartCoroutine("AutoProduce");
+        }
+
         public void LevelUp() {
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
-            StartCoroutine("AutoProduce");
         }
 
         private IEnumerator AutoProduce() {
+            while (this.Data == null) {
+                yield return null;
+            }
             while (true) {
                 yield return new WaitForSeconds(this.Factory.AutoProduceInterval);
                 this.Produce();

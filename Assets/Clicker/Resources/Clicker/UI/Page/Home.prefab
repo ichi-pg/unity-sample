@@ -486,8 +486,10 @@ GameObject:
   - component: {fileID: 7952162023042173794}
   - component: {fileID: 8263726730802140557}
   - component: {fileID: 486037386256418563}
+  - component: {fileID: 2150843605865638260}
+  - component: {fileID: 8706226958683272188}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Wallet.CoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,6 +556,34 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!114 &2150843605865638260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8572852627864412911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d0a80eda9f341d6a16364a7454f498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _namespace: Clicker
+  repositoryName: Wallet
+  methodName: Get
+  prefabName: 
+--- !u!114 &8706226958683272188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8572852627864412911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c44028da0c4c4564925a70b9b36310f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8862897403519146656
 GameObject:
   m_ObjectHideFlags: 0

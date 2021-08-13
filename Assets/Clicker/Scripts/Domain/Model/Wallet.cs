@@ -6,6 +6,7 @@ namespace Clicker
     public class Wallet
     {
         public int Coin { get; private set; }
+        public string CoinText { get => "コイン"+this.Coin; }//TODO
 
         public Wallet(int coin) {
             this.Coin = coin;
@@ -13,7 +14,7 @@ namespace Clicker
 
         public void ConsumCoin(int coin) {
             if (this.Coin < coin) {
-                throw new System.Exception("コインが足りません");//TODO ローカライズ
+                throw new System.Exception("コインが足りません");//TODO
             }
             this.Coin -= coin;
         }

@@ -7,7 +7,7 @@ namespace Clicker
     {
         public static Repositories Instance { get; private set; } = new Repositories();
         public IFactoryRepository FactoryRepository { get; private set; } = new FactoryRepository();
-        public IPlayerRepository PlayerRepository { get; private set; } = new PlayerRepository();
+        public IWalletRepository WalletRepository { get; private set; } = new WalletRepository();
 
         private Repositories() {
         }
