@@ -14,11 +14,13 @@ namespace Clicker
         }
 
         public void LevelUp(Factory factory) {
+            //TODO 未購入ならエラー
             factory.LevelUp(SaveData.Instance.Wallet);
             SaveData.Instance.Save();
         }
 
         public void Produce(Factory factory) {
+            //TODO 未購入ならエラー
             SaveData.Instance.Wallet.AddCoin(factory.Power);
             SaveData.Instance.Save();
         }

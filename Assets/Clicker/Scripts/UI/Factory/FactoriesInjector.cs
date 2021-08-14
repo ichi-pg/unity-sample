@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Clicker
@@ -10,31 +11,21 @@ namespace Clicker
 
         void Start() {
             this.enumerableInjector = this.GetComponent<Common.EnumerableInjector>();
-            this.Reflesh();
-        }
-
-        public void Reflesh() {
             this.enumerableInjector.Clear();
-            foreach (var factory in Repositories.Instance.FactoryRepository.List()) {
-                this.Add(factory);
+            var repository = Repositories.Instance.FactoryRepository;
+            foreach (var factory in repository.List()) {
+                this.Inject(factory);
             }
-            var buyableFactory = Repositories.Instance.FactoryRepository.GetBuyable();
+            var buyableFactory = repository.GetBuyable();
             if (buyableFactory != null) {
-                this.AddBuyable(buyableFactory);
+                this.Inject(buyableFactory);
             }
         }
 
-        public void Add(Factory factory) {
+        public void Inject(Factory factory) {
             this.enumerableInjector.Inject(
                 new FactoryAdapter(factory, this),
                 "Clicker/UI/Parts/Factory"
-            );
-        }
-
-        public void AddBuyable(Factory factory) {
-            this.enumerableInjector.Inject(
-                new FactoryAdapter(factory, this),
-                "Clicker/UI/Parts/BuyableFactory"
             );
         }
     }

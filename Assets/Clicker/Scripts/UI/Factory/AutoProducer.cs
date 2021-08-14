@@ -18,7 +18,9 @@ namespace Clicker
             var adapter = injector.Data as FactoryAdapter;
             while (true) {
                 yield return new WaitForSeconds(adapter.Factory.AutoProduceInterval);
-                adapter.Produce();
+                if (adapter.LevelUpActive) {
+                    adapter.Produce();
+                }
             }
         }
 

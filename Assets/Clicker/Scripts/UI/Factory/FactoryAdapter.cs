@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Clicker
 {
@@ -12,22 +13,31 @@ namespace Clicker
         public string LevelUpCost { get => "LvUp"+Common.NumericTextUtility.Omit(this.Factory.LevelUpCost); }//TODO
         public string BuyCost { get => "Buy"+Common.NumericTextUtility.Omit(this.Factory.BuyCost); }//TODO
         public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO
-        public bool CanBuy { get { return Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.LevelUpCost; } }
-        public bool CanLevelUp { get { return Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.LevelUpCost; } }
+        public bool BuyActive { get => !this.LevelUpActive; }
+        public bool BuyInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.BuyCost; }
+        public bool LevelUpActive { get; private set; }
+        public bool LevelUpInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.LevelUpCost; }
 
         public FactoryAdapter(Factory factory, FactoriesInjector factoriesInjector) {
             this.Factory = factory;
             this.factoriesInjector = factoriesInjector;
+            this.LevelUpActive = Repositories.Instance.FactoryRepository.List().Contains(factory);
         }
 
         public void LevelUp() {
-            Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
-            this.factoriesInjector.Reflesh();//TODO 数が増えた時だけ足すだけ
+            var repository = Repositories.Instance.FactoryRepository;
+            var before = repository.GetBuyable();
+            repository.LevelUp(this.Factory);
+            var after = repository.GetBuyable();
+            if (before != after) {
+                this.factoriesInjector.Inject(after);
+            }
         }
 
         public void Buy() {
             Repositories.Instance.FactoryRepository.Buy(this.Factory);
-            this.factoriesInjector.Reflesh();//TODO 数が増えた時だけ足すだけ
+            this.LevelUpActive = true;
+            Common.PropertyInjector.Modify();
         }
 
         public void Produce() {

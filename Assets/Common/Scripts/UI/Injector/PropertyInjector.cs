@@ -78,9 +78,13 @@ namespace Common
             if (button == null) {
                 return;
             }
-            var enable = this.GetValue(data, button.name.Replace(".", ".Can"));
-            if (enable != null && enable is bool) {
-                button.interactable = (bool)enable;
+            var interactable = this.GetValue(data, button.name+"Interactable");
+            if (interactable != null && interactable is bool) {
+                button.interactable = (bool)interactable;
+            }
+            var active = this.GetValue(data, button.name+"Active");
+            if (active != null && active is bool) {
+                button.gameObject.SetActive((bool)active);
             }
             var action = this.GetAction(data, button.name);
             if (action != null) {
