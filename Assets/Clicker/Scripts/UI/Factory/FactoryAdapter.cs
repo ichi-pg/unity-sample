@@ -15,16 +15,21 @@ namespace Clicker
         public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO
         public bool BuyActive { get => !this.LevelUpActive; }
         public bool BuyInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.BuyCost; }
-        public bool LevelUpActive { get; private set; }
+        public bool LevelUpActive { get => Repositories.Instance.FactoryRepository.List().Contains(this.Factory); }
         public bool LevelUpInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.LevelUpCost; }
 
         public FactoryAdapter(Factory factory, FactoriesInjector factoriesInjector) {
             this.Factory = factory;
             this.factoriesInjector = factoriesInjector;
-            this.LevelUpActive = Repositories.Instance.FactoryRepository.List().Contains(factory);
         }
 
         public void LevelUp() {
+            if (!this.LevelUpActive) {
+                return;
+            }
+            if (!this.LevelUpInteractable) {
+                return;
+            }
             var repository = Repositories.Instance.FactoryRepository;
             var before = repository.GetBuyable();
             repository.LevelUp(this.Factory);
@@ -35,12 +40,20 @@ namespace Clicker
         }
 
         public void Buy() {
+            if (!this.BuyActive) {
+                return;
+            }
+            if (!this.BuyInteractable) {
+                return;
+            }
             Repositories.Instance.FactoryRepository.Buy(this.Factory);
-            this.LevelUpActive = true;
             Common.PropertyInjector.Modify();
         }
 
         public void Produce() {
+            if (!this.LevelUpActive) {
+                return;
+            }
             Repositories.Instance.FactoryRepository.Produce(this.Factory);
             Common.PropertyInjector.Modify();
         }
