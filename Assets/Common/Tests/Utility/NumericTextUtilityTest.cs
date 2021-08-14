@@ -30,5 +30,7 @@ namespace Common
             Assert.AreEqual("1.235b", NumericTextUtility.Omit(1234567));
             //TODO そもそも単純な整数型では持ちきれない桁数
         }
+
+        //TODO Consoleで自動実行されない
     }
 }
