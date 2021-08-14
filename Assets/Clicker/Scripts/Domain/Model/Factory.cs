@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Clicker
 {
+    [System.Serializable]
     public class Factory
     {
         public int Level { get; private set; } = 1;
@@ -12,7 +13,8 @@ namespace Clicker
         public int Power { get => this.Level * this.Rank * this.Rank; }//TODO 高ランクの方がレベル上げ効率が良すぎる。
         public int LevelUpCost { get => this.Level * this.Level * this.Rank * this.Rank * 10; }
         public int BuyCost { get => this.Rank * this.Rank * 10; }
-        public float AutoProduceInterval { get; private set; } = 0.1f;//TODO
+        public float AutoProduceInterval { get => 0.1f; }//TODO
+        public bool IsUnlocked { get; private set; }//TODO 保存しない。ロード時にtrue。
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
@@ -29,6 +31,9 @@ namespace Clicker
         }
 
         public void LevelUp(Wallet wallet) {
+            if (!this.IsUnlocked) {
+                throw new System.Exception("未購入です");//TODO
+            }
             wallet.ConsumCoin(this.LevelUpCost);
             this.Level++;
         }
@@ -43,11 +48,19 @@ namespace Clicker
         }
 
         public void Buy(List<Factory> factories, Wallet wallet) {
-            if (factories.Any(t => t.Rank == this.Rank)) {
+            if (this.IsUnlocked) {
                 throw new System.Exception("購入済みです");//TODO
             }
             wallet.ConsumCoin(this.BuyCost);
             factories.Add(this);
+            this.IsUnlocked = true;
+        }
+
+        public void Produce(Wallet wallet) {
+            if (!this.IsUnlocked) {
+                throw new System.Exception("未購入です");//TODO
+            }
+            wallet.AddCoin(this.Power);
         }
     }
 }
