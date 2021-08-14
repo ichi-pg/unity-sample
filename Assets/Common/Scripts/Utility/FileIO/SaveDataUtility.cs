@@ -25,7 +25,7 @@ namespace Common
         public static T Load<T>() {
             var path = FilePath(typeof(T));
             if (!File.Exists(path)) {
-                throw new System.Exception("Not found save data. ");
+                throw new System.Exception("Not found save data.");
             }
             StringReader reader = new StringReader(path);
             var json = reader.ReadToEnd();

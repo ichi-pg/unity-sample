@@ -25,6 +25,7 @@ namespace Common
         }
 
         private object InvokeRepository() {
+            //FIXME アセンブリ別れてると取れない
             var reposType = System.Type.GetType(this._namespace+".Repositories");
             if (reposType == null) {
                 Debug.Log("reposType == null");

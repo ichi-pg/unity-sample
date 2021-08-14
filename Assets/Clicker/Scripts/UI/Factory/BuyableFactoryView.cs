@@ -5,18 +5,19 @@ using UnityEngine.UI;
 
 namespace Clicker
 {
-    public class BuyableFactoryView : Common.PropertyInjector
+    public class BuyableFactoryView : MonoBehaviour
     {
         [SerializeField]
         private Button button;
-        private Factory Factory { get => this.Data as Factory; }
+        private Common.PropertyInjector PropertyInjector { get => this.GetComponent<Common.PropertyInjector>(); }
+        private Factory Factory { get => this.PropertyInjector.Data as Factory; }
 
         void Start() {
-            ModifyHander += this.UpdateButton;
+            Common.PropertyInjector.ModifyHander += this.UpdateButton;
         }
 
         void OnDestroy() {
-            ModifyHander -= this.UpdateButton;
+            Common.PropertyInjector.ModifyHander -= this.UpdateButton;
         }
 
         public void Buy() {

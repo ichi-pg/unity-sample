@@ -5,21 +5,20 @@ namespace Common
 {
     public static class NumericTextUtility
     {
-        private const int digit = 1000;
-
         public static string Omit(int number) {
-            if (number < digit) {
-                return number.ToString();
+            double result = number;
+            int i = 0;
+            while (result >= 1000) {
+                result /= 1000;
+                i++;
             }
-            double omit = number;
-            int offset = -1;
-            while (omit >= digit) {
-                omit /= digit;
-                offset++;
+            string units = "";
+            while (i > 0) {
+                int unit = (int)'a' + (i % 26) - 1;
+                units += ((char)unit).ToString();
+                i /= 26;
             }
-            //TODO 'z'以降 ex) 1.02aa
-            int alphabet = (int)'a' + offset;
-            return omit.ToString("F3").TrimEnd('0').TrimEnd('.') + (char)alphabet;
+            return result.ToString("F3").TrimEnd('0').TrimEnd('.') + units;
         }
     }
 }

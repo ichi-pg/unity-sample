@@ -5,19 +5,20 @@ using UnityEngine.UI;
 
 namespace Clicker
 {
-    public class FactoryView : Common.PropertyInjector
+    public class FactoryView : MonoBehaviour
     {
         [SerializeField]
         private Button button;
-        private Factory Factory { get => this.Data as Factory; }
+        private Common.PropertyInjector PropertyInjector { get => this.GetComponent<Common.PropertyInjector>(); }
+        private Factory Factory { get => this.PropertyInjector.Data as Factory; }
 
         void Start() {
             this.StartCoroutine("AutoProduce");
-            ModifyHander += this.UpdateButton;
+            Common.PropertyInjector.ModifyHander += this.UpdateButton;
         }
 
         void OnDestroy() {
-            ModifyHander -= this.UpdateButton;
+            Common.PropertyInjector.ModifyHander -= this.UpdateButton;
         }
 
         public void LevelUp() {
@@ -26,7 +27,7 @@ namespace Clicker
         }
 
         private IEnumerator AutoProduce() {
-            while (this.Data == null) {
+            while (this.Factory == null) {
                 yield return null;
             }
             while (true) {
@@ -37,7 +38,7 @@ namespace Clicker
 
         public void Produce() {
             Repositories.Instance.FactoryRepository.Produce(this.Factory);
-            this.Modify();
+            this.PropertyInjector.Modify();
         }
 
         private void UpdateButton() {
