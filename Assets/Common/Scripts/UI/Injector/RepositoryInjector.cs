@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace Common
@@ -36,7 +35,7 @@ namespace Common
                 Debug.Log("reposProp == null");
                 return null;
             }
-            object repos = reposProp.GetValue(null);
+            var repos = reposProp.GetValue(null);
             if (repos == null) {
                 Debug.Log("repos == null");
                 return null;
@@ -46,7 +45,7 @@ namespace Common
                 Debug.Log("repoProp == null");
                 return null;
             }
-            object repo = repoProp.GetValue(repos);
+            var repo = repoProp.GetValue(repos);
             if (repo == null) {
                 Debug.Log("repo == null");
                 return null;
@@ -70,7 +69,7 @@ namespace Common
         }
 
         private void InjectProperty(object obj) {
-            PropertyInjector injector = this.GetComponent<PropertyInjector>();
+            var injector = this.GetComponent<PropertyInjector>();
             if (injector == null) {
                 Debug.Log("injector == null");
                 return;

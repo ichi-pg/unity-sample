@@ -27,14 +27,14 @@ namespace Common
         }
 
         public void Push(string prefabName, object data) {
-            GameObject prefab = Resources.Load<GameObject>(prefabName);
+            var prefab = Resources.Load<GameObject>(prefabName);
             if (prefab == null) {
                 return;
             }
             if (this.stack.Count > 0) {
                 this.stack.Peek().SetActive(false);//TODO 入れ替えず重ねるパターン
             }
-            GameObject obj = GameObject.Instantiate(prefab, this.transform);
+            var obj = GameObject.Instantiate(prefab, this.transform);
             if (data != null) {
                 PropertyInjector injector = obj.GetComponent<PropertyInjector>();
                 if (injector != null) {

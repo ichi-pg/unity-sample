@@ -16,7 +16,7 @@ namespace Common
             if (enumerable == null) {
                 return;
             }
-            GameObject prefab = Resources.Load<GameObject>(prefabName);
+            var prefab = Resources.Load<GameObject>(prefabName);
             if (prefab == null) {
                 return;
             }
@@ -29,7 +29,7 @@ namespace Common
             if (data == null) {
                 return;
             }
-            GameObject prefab = Resources.Load<GameObject>(prefabName);
+            var prefab = Resources.Load<GameObject>(prefabName);
             if (prefab == null) {
                 return;
             }
@@ -40,8 +40,8 @@ namespace Common
             if (data == null) {
                 return;
             }
-            GameObject obj = Instantiate(prefab, this.transform);
-            PropertyInjector injector = obj.GetComponent<PropertyInjector>();
+            var obj = Instantiate(prefab, this.transform);
+            var injector = obj.GetComponent<PropertyInjector>();
             if (injector != null) {
                 injector.Inject(data);
             }
