@@ -10,8 +10,7 @@ namespace Common
     public class NumericTextUtilityTest
     {
         [Test]
-        public void OmitTest()
-        {
+        public void OmitTest() {
             Assert.AreEqual("-1000", NumericTextUtility.Omit(-1000));
             Assert.AreEqual("-1", NumericTextUtility.Omit(-1));
             Assert.AreEqual("0", NumericTextUtility.Omit(0));
