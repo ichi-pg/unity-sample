@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2420155680183984844}
   - component: {fileID: 8259419326980255702}
   m_Layer: 5
-  m_Name: Factory.BuyText
+  m_Name: Factory.BuyCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5585845046898085514}
   - component: {fileID: 726615782152217816}
   m_Layer: 5
-  m_Name: Factory.PowerText
+  m_Name: Factory.Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,6 @@ GameObject:
   - component: {fileID: 16907972586191}
   - component: {fileID: 5183865653037916120}
   - component: {fileID: 8374351913742776227}
-  - component: {fileID: 9062026501010856369}
   - component: {fileID: 459465497594821211}
   m_Layer: 5
   m_Name: BuyableFactory
@@ -239,19 +238,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9062026501010856369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847433119979035752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64f7aabd02294437a157865fbfbd0ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 2064539873006649582}
 --- !u!114 &459465497594821211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +263,7 @@ GameObject:
   - component: {fileID: 4483490669275267344}
   - component: {fileID: 2064539873006649582}
   m_Layer: 5
-  m_Name: Factory.BuyButton
+  m_Name: Factory.Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +371,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9062026501010856369}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Clicker.BuyableFactoryView, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2420155680183984844}
   - component: {fileID: 8259419326980255702}
   m_Layer: 5
-  m_Name: Factory.LevelUpText
+  m_Name: Factory.LevelUpCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,8 +169,8 @@ GameObject:
   - component: {fileID: 16907972586191}
   - component: {fileID: 5183865653037916120}
   - component: {fileID: 8374351913742776227}
-  - component: {fileID: 3881062514569552676}
   - component: {fileID: 8772537488640113506}
+  - component: {fileID: 1627952032386039829}
   m_Layer: 5
   m_Name: Factory
   m_TagString: Untagged
@@ -239,19 +239,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3881062514569552676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847433119979035752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfee297651a482880d66b6dd272925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 2064539873006649582}
 --- !u!114 &8772537488640113506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +249,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c44028da0c4c4564925a70b9b36310f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1627952032386039829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847433119979035752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e81d184bfa04e8ab2141248d1cac77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2894870671225710925
@@ -277,7 +276,7 @@ GameObject:
   - component: {fileID: 4483490669275267344}
   - component: {fileID: 2064539873006649582}
   m_Layer: 5
-  m_Name: Factory.LevelUpButton
+  m_Name: Factory.LevelUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3881062514569552676}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Clicker.FactoryView, Assembly-CSharp
         m_MethodName: LevelUp
         m_Mode: 1
@@ -409,7 +408,7 @@ GameObject:
   - component: {fileID: 4656688829510827336}
   - component: {fileID: 506439974722618592}
   m_Layer: 5
-  m_Name: Factory.PowerText
+  m_Name: Factory.Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

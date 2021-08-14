@@ -24,7 +24,7 @@ namespace Common
             this.Inject(this.Data);//TODO 重いかも。最適化。
         }
 
-        public void Modify() {
+        public static void Modify() {
             ModifyHander?.Invoke();
         }
 
@@ -78,11 +78,11 @@ namespace Common
             if (button == null) {
                 return;
             }
-            var enable = this.GetValue(data, button.name+"Enable");
+            var enable = this.GetValue(data, button.name.Replace(".", ".Can"));
             if (enable != null && enable is bool) {
                 button.interactable = (bool)enable;
             }
-            var action = this.GetAction(data, "OnClick", button.name);
+            var action = this.GetAction(data, button.name);
             if (action != null) {
                 button.onClick.RemoveListener(action);
                 button.onClick.AddListener(action);
@@ -91,11 +91,8 @@ namespace Common
 
         private object GetValue(object data, string name) {
             var names = name.Split('.');
-            if (names.Length != 2) {
-                return null;
-            }
-            var type = data.GetType();
-            if (names[0] != type.Name) {
+            var type = this.GetType(data, names);
+            if (type == null) {
                 return null;
             }
             var prop = type.GetProperty(names[1]);
@@ -105,24 +102,32 @@ namespace Common
             return prop.GetValue(data);
         }
 
-        private UnityAction GetAction(object data, string head, string name) {
+        private UnityAction GetAction(object data, string name) {
             if (this.actions.ContainsKey(name)) {
                 return this.actions[name];
             }
             var names = name.Split('.');
-            if (names.Length != 2) {
+            var type = this.GetType(data, names);
+            if (type == null) {
                 return null;
             }
-            var type = data.GetType();
-            if (names[0] != type.Name) {
-                return null;
-            }
-            var method = type.GetMethod(head+names[1]);
+            var method = type.GetMethod(names[1]);
             if (method == null) {
                 return null;
             }
             this.actions.Add(name, () => method.Invoke(data, null));
             return this.actions[name];
+        }
+
+        private System.Type GetType(object data, string[] names) {
+            if (names.Length != 2) {
+                return null;
+            }
+            var type = data.GetType();
+            if (!type.Name.Contains(names[0])) {
+                return null;
+            }
+            return type;
         }
     }
 }
