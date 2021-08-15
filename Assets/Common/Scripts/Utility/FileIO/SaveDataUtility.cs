@@ -8,13 +8,16 @@ namespace Common
     public static class SaveDataUtility
     {
         public static void Save<T>(T obj) {
-            // var path = FilePath(obj.GetType());
-            // StreamWriter writer = new StreamWriter(path);
-            // var json = JsonUtility.ToJson(obj);
-            // writer.Write(json);
-            // writer.Flush();
-            // writer.Close();
-            //TODO DirectoryNotFoundException
+            var path = FilePath(obj.GetType());
+            var dir = Path.GetDirectoryName(path);
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
+            var writer = new StreamWriter(path);
+            var json = JsonUtility.ToJson(obj);
+            writer.Write(json);
+            writer.Flush();
+            writer.Close();
         }
 
         public static bool Exist<T>() {
@@ -27,14 +30,14 @@ namespace Common
             if (!File.Exists(path)) {
                 throw new System.Exception("Not found save data.");
             }
-            StringReader reader = new StringReader(path);
+            var reader = new StreamReader(path);
             var json = reader.ReadToEnd();
             reader.Close();
             return JsonUtility.FromJson<T>(json);
         }
 
         private static string FilePath(System.Type type) {
-            return Application.persistentDataPath + "/" + type.Namespace + "/" + type.Name;
+            return Application.persistentDataPath + "/" + type.Namespace + "/" + type.Name + ".json";
         }
 
         //TODO 難読化

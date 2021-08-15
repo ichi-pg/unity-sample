@@ -28,8 +28,8 @@ namespace Clicker
             }
         }
 
-        public Wallet Wallet { get; private set; }
-        public List<Factory> Factories { get; private set; }
+        public Wallet Wallet;
+        public List<Factory> Factories;
 
         private SaveData() {
         }

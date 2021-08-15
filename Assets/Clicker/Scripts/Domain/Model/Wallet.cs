@@ -4,9 +4,10 @@ using System.Numerics;
 
 namespace Clicker
 {
+    [System.Serializable]
     public class Wallet
     {
-        public BigInteger Coin { get; private set; }
+        public BigInteger Coin;//TODO シリアライズされない
 
         public Wallet(BigInteger coin) {
             this.Coin = coin;

@@ -13,9 +13,9 @@ namespace Clicker
         public string LevelUpCost { get => "LvUp"+Common.NumericTextUtility.Omit(this.Factory.LevelUpCost); }//TODO
         public string BuyCost { get => "Buy"+Common.NumericTextUtility.Omit(this.Factory.BuyCost); }//TODO
         public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO
-        public bool BuyActive { get => !this.Factory.IsUnlocked; }
+        public bool BuyActive { get => this.Factory.IsLocked; }
         public bool BuyInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.BuyCost; }
-        public bool LevelUpActive { get => this.Factory.IsUnlocked; }
+        public bool LevelUpActive { get => !this.Factory.IsLocked; }
         public bool LevelUpInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.LevelUpCost; }
 
         public FactoryAdapter(Factory factory, FactoriesInjector factoriesInjector) {
@@ -54,7 +54,7 @@ namespace Clicker
         }
 
         public void Produce() {
-            if (!this.Factory.IsUnlocked) {
+            if (this.Factory.IsLocked) {
                 return;
             }
             Repositories.Instance.FactoryRepository.Produce(this.Factory);
