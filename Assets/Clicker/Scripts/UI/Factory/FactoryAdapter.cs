@@ -12,7 +12,7 @@ namespace Clicker
         public string Name { get => "Rank"+this.Factory.Rank+" Lv"+this.Factory.Level; }//TODO
         public string LevelUpCost { get => "LvUp"+Common.NumericTextUtility.Omit(this.Factory.LevelUpCost); }//TODO
         public string BuyCost { get => "Buy"+Common.NumericTextUtility.Omit(this.Factory.BuyCost); }//TODO
-        public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }
+        public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO
         public bool BuyActive { get => this.Factory.IsLocked; }
         public bool BuyInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.BuyCost; }
         public bool LevelUpActive { get => !this.Factory.IsLocked; }
