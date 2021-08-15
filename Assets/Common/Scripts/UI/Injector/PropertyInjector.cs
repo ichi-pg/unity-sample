@@ -21,11 +21,11 @@ namespace Common
         }
 
         private void OnModify() {
-            this.Inject(this.Data);//TODO 重いかも。最適化。
+            this.Inject(this.Data);//TODO 変化したパラメーターだけ更新したい
         }
 
         public static void Modify() {
-            ModifyHander?.Invoke();
+            ModifyHander?.Invoke();//TODO 変化したオブジェクトだけ更新したい
         }
 
         public void Inject(object data) {

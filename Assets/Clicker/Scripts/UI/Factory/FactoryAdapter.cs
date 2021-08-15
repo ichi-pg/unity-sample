@@ -37,6 +37,7 @@ namespace Clicker
             if (before != after) {
                 this.factoriesInjector.Inject(after);
             }
+            Common.PropertyInjector.Modify();
         }
 
         public void Buy() {
