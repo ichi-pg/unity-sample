@@ -27,7 +27,7 @@ namespace Common
         }
 
         public static string Omit(BigInteger number) {
-            return Omit((System.Numerics.BigInteger)number);
+            return Omit(number.I);
         }
     }
 }

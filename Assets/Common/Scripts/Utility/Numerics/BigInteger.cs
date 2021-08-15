@@ -8,7 +8,7 @@ namespace Common
     {
         public string s;
         private System.Numerics.BigInteger i;
-        private System.Numerics.BigInteger I {
+        public System.Numerics.BigInteger I {
             get {
                 //TODO System.Numerics.BigIntegerがシリアライズされないので一旦
                 if (this.i == 0 && this.s != "") {
@@ -16,7 +16,7 @@ namespace Common
                 }
                 return this.i;
             }
-            set {
+            private set {
                 this.i = value;
                 this.s = value.ToString();
             }
@@ -40,10 +40,10 @@ namespace Common
             this.i = i;
         }
 
-        public static BigInteger operator +(BigInteger a, BigInteger b) => new BigInteger(a.I + b.I);
-        public static BigInteger operator -(BigInteger a, BigInteger b) => new BigInteger(a.I - b.I);
-        public static BigInteger operator *(BigInteger a, BigInteger b) => new BigInteger(a.I * b.I);
-        public static BigInteger operator /(BigInteger a, BigInteger b) => new BigInteger(a.I / b.I);
+        public static BigInteger operator +(BigInteger a, BigInteger b) { a.I += b.I; return a; }
+        public static BigInteger operator -(BigInteger a, BigInteger b) { a.I -= b.I; return a; }
+        public static BigInteger operator *(BigInteger a, BigInteger b) { a.I *= b.I; return a; }
+        public static BigInteger operator /(BigInteger a, BigInteger b) { a.I /= b.I; return a; }
         public static bool operator ==(BigInteger a, BigInteger b) => a.I == b.I;
         public static bool operator !=(BigInteger a, BigInteger b) => a.I != b.I;
         public static bool operator <(BigInteger a, BigInteger b) => a.I < b.I;
@@ -51,18 +51,16 @@ namespace Common
         public static bool operator >(BigInteger a, BigInteger b) => a.I > b.I;
         public static bool operator >=(BigInteger a, BigInteger b) => a.I >= b.I;
 
-        public static BigInteger operator +(BigInteger a, int b) => new BigInteger(a.I + b);
-        public static BigInteger operator -(BigInteger a, int b) => new BigInteger(a.I - b);
-        public static BigInteger operator *(BigInteger a, int b) => new BigInteger(a.I * b);
-        public static BigInteger operator /(BigInteger a, int b) => new BigInteger(a.I / b);
+        public static BigInteger operator +(BigInteger a, int b) { a.I += b; return a; }
+        public static BigInteger operator -(BigInteger a, int b) { a.I -= b; return a; }
+        public static BigInteger operator *(BigInteger a, int b) { a.I *= b; return a; }
+        public static BigInteger operator /(BigInteger a, int b) { a.I /= b; return a; }
         public static bool operator ==(BigInteger a, int b) => a.I == b;
         public static bool operator !=(BigInteger a, int b) => a.I != b;
         public static bool operator <(BigInteger a, int b) => a.I < b;
         public static bool operator <=(BigInteger a, int b) => a.I <= b;
         public static bool operator >(BigInteger a, int b) => a.I > b;
         public static bool operator >=(BigInteger a, int b) => a.I >= b;
-
-        public static explicit operator System.Numerics.BigInteger(BigInteger a) => a.I;
 
         public override string ToString() => this.s;
     }
