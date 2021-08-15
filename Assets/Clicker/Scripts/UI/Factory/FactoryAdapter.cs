@@ -31,11 +31,13 @@ namespace Clicker
                 return;
             }
             var repository = Repositories.Instance.FactoryRepository;
-            var before = repository.GetBuyable();
+            var factories = repository.ListBuyable();
             repository.LevelUp(this.Factory);
-            var after = repository.GetBuyable();
-            if (before != after) {
-                this.factoriesInjector.Inject(after);
+            foreach (var factory in repository.ListBuyable()) {
+                if (factories.Any(t => t == factory)) {
+                    continue;
+                }
+                this.factoriesInjector.Inject(factory);
             }
             Common.PropertyInjector.Modify();
         }

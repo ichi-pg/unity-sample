@@ -38,13 +38,14 @@ namespace Clicker
             this.Level++;
         }
 
-        public static Factory GetBuyable(IEnumerable<Factory> factories) {
+        public static IEnumerable<Factory> ListBuyable(IEnumerable<Factory> factories) {
+            var result = new List<Factory>();
             var level = factories.Select(t => t.Level).Sum() + 1;
             var rank = factories.Select(t => t.Rank).DefaultIfEmpty().Max() + 1;
-            if (level < rank * rank * rank) {
-                return null;
+            if (level >= rank * rank * rank) {
+                result.Add(new Factory(rank));
             }
-            return new Factory(rank);
+            return result;
         }
 
         public void Buy(List<Factory> factories, Wallet wallet) {

@@ -16,9 +16,8 @@ namespace Clicker
             foreach (var factory in repository.List()) {
                 this.Inject(factory);
             }
-            var buyableFactory = repository.GetBuyable();
-            if (buyableFactory != null) {
-                this.Inject(buyableFactory);
+            foreach (var factory in repository.ListBuyable()) {
+                this.Inject(factory);
             }
         }
 

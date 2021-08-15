@@ -9,8 +9,8 @@ namespace Clicker
             return SaveData.Instance.Factories;
         }
 
-        public Factory GetBuyable() {
-            return Factory.GetBuyable(SaveData.Instance.Factories);
+        public IEnumerable<Factory> ListBuyable() {
+            return Factory.ListBuyable(SaveData.Instance.Factories);
         }
 
         public void LevelUp(Factory factory) {
