@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Common
 {
     public static class NumericTextUtility
     {
-        public static string Omit(int number) {
-            double result = number;
+        public static string Omit(BigInteger number) {
+            BigInteger remainder = 0;
             int i = 0;
-            while (result >= 1000) {
-                result /= 1000;
+            while (number >= 1000) {
+                remainder = number % 1000;
+                number /= 1000;
                 i++;
             }
             string units = "";
@@ -18,7 +20,10 @@ namespace Common
                 units += ((char)unit).ToString();
                 i /= 26;
             }
-            return result.ToString("F3").TrimEnd('0').TrimEnd('.') + units;
+            if (remainder > 0) {
+                return number + "." + remainder + units;
+            }
+            return number + units;
         }
     }
 }

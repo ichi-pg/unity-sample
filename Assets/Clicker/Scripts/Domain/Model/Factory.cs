@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Clicker
 {
-    [System.Serializable]
     public class Factory
     {
         public int Level { get; private set; } = 1;
         public int Rank { get; private set; }
         public int Rarity { get; private set; }//TODO
-        public int Power { get => this.Level * this.Rank * this.Rank; }//TODO 高ランクの方がレベル上げ効率が良すぎる。
-        public int LevelUpCost { get => this.Level * this.Level * this.Rank * this.Rank * 10; }
-        public int BuyCost { get => this.Rank * this.Rank * 10; }
+        public BigInteger Power { get => new BigInteger(this.Level) * this.Rank * this.Rank; }//TODO
+        public BigInteger LevelUpCost { get => new BigInteger(this.Level) * this.Level * this.Rank * this.Rank * 10; }//TODO
+        public BigInteger BuyCost { get => new BigInteger(this.Rank)  * this.Rank * 10; }//TODO
         public float AutoProduceInterval { get => 0.1f; }//TODO
         public bool IsUnlocked { get; private set; }//TODO 保存しない。ロード時にtrue。
 
