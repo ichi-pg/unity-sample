@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace Clicker
 {
@@ -11,9 +10,9 @@ namespace Clicker
         public int Level = 1;
         public int Rank;
         public int Rarity;//TODO
-        public BigInteger Power { get => new BigInteger(this.Level) * this.Rank * this.Rank; }//TODO
-        public BigInteger LevelUpCost { get => new BigInteger(this.Level) * this.Level * this.Rank * this.Rank * 10; }//TODO
-        public BigInteger BuyCost { get => new BigInteger(this.Rank)  * this.Rank * 10; }//TODO
+        public Common.BigInteger Power { get => new Common.BigInteger(this.Level) * this.Rank * this.Rank; }//TODO
+        public Common.BigInteger LevelUpCost { get => new Common.BigInteger(this.Level) * this.Level * this.Rank * this.Rank * 10; }//TODO
+        public Common.BigInteger BuyCost { get => new Common.BigInteger(this.Rank)  * this.Rank * 10; }//TODO
         public float AutoProduceInterval { get => 0.1f; }//TODO
         public bool IsLocked { get; private set; }
 
