@@ -38,7 +38,6 @@ namespace Common
             foreach (Image image in this.GetComponentsInChildren<Image>(true)) {
                 this.InjectImage(data, image);
             }
-            //TODO 非アクティブボタンが取れてない
             foreach (Button button in this.GetComponentsInChildren<Button>(true)) {
                 this.InjectButton(data, button);
             }
