@@ -37,7 +37,7 @@ namespace Clicker
                 if (factories.Any(t => t == factory)) {
                     continue;
                 }
-                //TODO 勢い余って二つ追加される場合がある
+                //TODO 勢い余って二つ追加される場合がある(ビュー側のリストと照合すれば良い)
                 this.factoriesInjector.Inject(factory);
             }
             Common.PropertyInjector.Modify();
