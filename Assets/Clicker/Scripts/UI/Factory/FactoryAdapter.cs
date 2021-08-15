@@ -12,7 +12,7 @@ namespace Clicker
         public string Name { get => "Rank"+this.Factory.Rank+" Lv"+this.Factory.Level; }//TODO
         public string LevelUpCost { get => "LvUp"+Common.NumericTextUtility.Omit(this.Factory.LevelUpCost); }//TODO
         public string BuyCost { get => "Buy"+Common.NumericTextUtility.Omit(this.Factory.BuyCost); }//TODO
-        public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO
+        public string Power { get => "Power"+Common.NumericTextUtility.Omit(this.Factory.Power); }//TODO 1aあたりから何か表示がおかしい
         public bool BuyActive { get => this.Factory.IsLocked; }
         public bool BuyInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.BuyCost; }
         public bool LevelUpActive { get => !this.Factory.IsLocked; }
@@ -31,13 +31,8 @@ namespace Clicker
                 return;
             }
             var repository = Repositories.Instance.FactoryRepository;
-            var factories = repository.ListBuyable();
             repository.LevelUp(this.Factory);
             foreach (var factory in repository.ListBuyable()) {
-                if (factories.Any(t => t == factory)) {
-                    continue;
-                }
-                //TODO 勢い余って二つ追加される場合がある(ビュー側のリストと照合すれば良い)
                 this.factoriesInjector.Inject(factory);
             }
             Common.PropertyInjector.Modify();

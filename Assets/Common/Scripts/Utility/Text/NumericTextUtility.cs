@@ -21,7 +21,7 @@ namespace Common
                 i /= 26;
             }
             if (remainder > 0) {
-                return number + "." + remainder + units;
+                return number + "." + remainder.ToString("D3").TrimEnd('0') + units;
             }
             return number + units;
         }
