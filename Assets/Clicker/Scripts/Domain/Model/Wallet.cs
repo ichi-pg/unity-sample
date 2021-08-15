@@ -7,7 +7,21 @@ namespace Clicker
     [System.Serializable]
     public class Wallet
     {
-        public BigInteger Coin;//TODO シリアライズされない
+        public string coinString;
+        private BigInteger coinInteger;
+        public BigInteger Coin {
+            get {
+                if (this.coinInteger == 0 && this.coinString != "") {
+                    this.coinInteger = BigInteger.Parse(this.coinString);
+                }
+                return this.coinInteger;
+            }
+            set {
+                //TODO BigIntegerがシリアライズされないので一旦
+                this.coinInteger = value;
+                this.coinString = this.coinInteger.ToString();
+            }
+        }
 
         public Wallet(BigInteger coin) {
             this.Coin = coin;
