@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Clicker
 {
@@ -8,18 +9,16 @@ namespace Clicker
     public class Factory
     {
         public interface IResource {
-            void Consum(Common.BigInteger coin);
-            void Add(Common.BigInteger coin);
+            void Consum(BigInteger coin);
+            void Add(BigInteger coin);
         }
-
-        //TODO シリアライズしない部分は System.Numerics.BigInteger で良い
 
         public int Level = 1;
         public int Rank;
         public int Rarity = 1;//TODO
-        public Common.BigInteger Power { get => new Common.BigInteger(this.Level) * this.Rank * this.Rank * 10; }//TODO
-        public Common.BigInteger LevelUpCost { get => new Common.BigInteger(this.Level) * this.Level * this.BuyCost; }//TODO
-        public Common.BigInteger BuyCost { get => new Common.BigInteger(this.Rank)  * this.Rank * 10; }//TODO
+        public BigInteger Power { get => new BigInteger(this.Level) * this.Rank * this.Rank * 10; }//TODO
+        public BigInteger LevelUpCost { get => new BigInteger(this.Level) * this.Level * this.BuyCost; }//TODO
+        public BigInteger BuyCost { get => new BigInteger(this.Rank)  * this.Rank * 10; }//TODO
         public float AutoProduceInterval { get => 1.0f; }//TODO
         public bool IsLocked { get; private set; } = true;
 
