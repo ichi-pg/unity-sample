@@ -6,11 +6,7 @@ namespace Clicker
 {
     public class AutoProducer : MonoBehaviour
     {
-        void Start() {
-            this.StartCoroutine("Execute");
-        }
-
-        private IEnumerator Execute() {
+        IEnumerator Start() {
             var injector = this.GetComponent<Common.PropertyInjector>();
             while (injector.Data == null) {
                 yield return null;
@@ -20,8 +16,7 @@ namespace Clicker
                 yield return new WaitForSeconds(adapter.Factory.AutoProduceInterval);
                 adapter.Produce();
             }
+            //TODO オートモードとタップモードの切り替え（楽 or 効率）
         }
-
-        //TODO オートモードとタップモードの切り替え（楽 or 効率）
     }
 }
