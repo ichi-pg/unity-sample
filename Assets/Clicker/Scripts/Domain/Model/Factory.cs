@@ -15,7 +15,6 @@ namespace Clicker
 
         public int Level = 1;
         public int Rank;
-        public int Rarity = 1;//TODO
         public BigInteger Power { get => new BigInteger(this.Level) * this.Rank * this.Rank * 10; }//TODO
         public BigInteger LevelUpCost { get => new BigInteger(this.Level) * this.Level * this.BuyCost; }//TODO
         public BigInteger BuyCost { get => new BigInteger(this.Rank)  * this.Rank * 10; }//TODO
@@ -38,6 +37,10 @@ namespace Clicker
         //NOTE 見ていて楽しいガワが必須（ギターは演奏とLine、ネクロはミニキャラがちょこちょこ動いて戦闘）
         //NOTE 生産力は共通で毎秒＋タップ加速＋フィーバー
         //NOTE クリッカー＋リズムゲーム（音ゲー）のパターン
+        //NOTE 借金返済が目的で、返済をするごとにレベルアップ、完済でゲームクリア
+        //NOTE levelで開放じゃなくて単に見えてるがBuyCostが高い
+        //NOTE 各施設レベルマックスを設ける
+        //NOTE だんだん詰まってきて、新しい施設開放で枷が外れる、を繰り返すカタルシスポイント
 
         public Factory(int rank) {
             this.Rank = rank;
@@ -57,7 +60,6 @@ namespace Clicker
         }
 
         public static IEnumerable<Factory> ListBuyable(IEnumerable<Factory> factories) {
-            //TODO levelで開放じゃなくて単に見えてるがBuyCostが高い
             var result = new List<Factory>();
             var level = GetPlayerLevel(factories);
             var rank = GetNextRank(factories);
