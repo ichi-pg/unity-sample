@@ -7,10 +7,12 @@ namespace Clicker
     [System.Serializable]
     public class Factory
     {
-        public interface IWallet {
-            void ConsumCoin(Common.BigInteger coin);
-            void AddCoin(Common.BigInteger coin);
+        public interface IResource {
+            void Consum(Common.BigInteger coin);
+            void Add(Common.BigInteger coin);
         }
+
+        //TODO シリアライズしない部分は System.Numerics.BigInteger で良い
 
         public int Level = 1;
         public int Rank;
@@ -46,11 +48,11 @@ namespace Clicker
             this.Level = level;
         }
 
-        public void LevelUp(IWallet wallet) {
+        public void LevelUp(IResource resource) {
             if (this.IsLocked) {
                 throw new System.Exception("未購入です");//TODO
             }
-            wallet.ConsumCoin(this.LevelUpCost);
+            resource.Consum(this.LevelUpCost);
             this.Level++;
         }
 
@@ -64,20 +66,20 @@ namespace Clicker
             return result;
         }
 
-        public void Buy(List<Factory> factories, IWallet wallet) {
+        public void Buy(List<Factory> factories, IResource resource) {
             if (!this.IsLocked) {
                 throw new System.Exception("購入済みです");//TODO
             }
-            wallet.ConsumCoin(this.BuyCost);
+            resource.Consum(this.BuyCost);
             factories.Add(this);
             this.IsLocked = false;
         }
 
-        public void Produce(IWallet wallet) {
+        public void Produce(IResource resource) {
             if (this.IsLocked) {
                 throw new System.Exception("未購入です");//TODO
             }
-            wallet.AddCoin(this.Power);
+            resource.Add(this.Power);
         }
 
         public bool EqualsFactory(Factory factory) {

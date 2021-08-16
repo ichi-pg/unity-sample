@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Clicker
 {
-    public class WalletInjector : MonoBehaviour
+    public class StatusInjector : MonoBehaviour
     {
         void Start() {
             var injector = this.GetComponent<Common.PropertyInjector>();
-            var adapter = new WalletAdapter(Repositories.Instance.WalletRepository.Get());
+            var adapter = new StatusAdapter();
             injector.Inject(adapter);
         }
     }

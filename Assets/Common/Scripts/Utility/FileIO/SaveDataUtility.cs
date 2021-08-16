@@ -14,7 +14,7 @@ namespace Common
                 Directory.CreateDirectory(dir);
             }
             var writer = new StreamWriter(path);
-            var json = JsonUtility.ToJson(obj);
+            var json = JsonUtility.ToJson(obj, true);
             writer.Write(json);
             writer.Flush();
             writer.Close();

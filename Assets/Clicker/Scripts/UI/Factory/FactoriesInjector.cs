@@ -34,6 +34,5 @@ namespace Clicker
         }
 
         //TODO NEXTロック解除条件の表示
-        //TODO 総生産力の表示
     }
 }

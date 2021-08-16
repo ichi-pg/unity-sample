@@ -23,6 +23,8 @@ namespace Common
         }
 
         public BigInteger() {
+            this.s = "";
+            this.i = 0;
         }
 
         public BigInteger(BigInteger i) {
