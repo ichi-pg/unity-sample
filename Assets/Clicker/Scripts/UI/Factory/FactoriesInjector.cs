@@ -44,5 +44,8 @@ namespace Clicker
         void OnApplicationQuit() {
             Repositories.Instance.SaveRepository.Save();
         }
+
+        //TODO NEXTロック解除条件の表示
+        //TODO 総生産力の表示
     }
 }
