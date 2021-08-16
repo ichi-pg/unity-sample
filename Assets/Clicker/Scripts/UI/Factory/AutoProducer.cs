@@ -17,5 +17,7 @@ namespace Clicker
                 adapter.Produce();
             }
         }
+
+        //TODO フィーバー
     }
 }
