@@ -33,18 +33,6 @@ namespace Clicker
             this.factories.Add(factory);
         }
 
-        void OnApplicationFocus(bool focus) {
-            Repositories.Instance.SaveRepository.Save();
-        }
-
-        void OnApplicationPause(bool pause) {
-            Repositories.Instance.SaveRepository.Save();
-        }
-
-        void OnApplicationQuit() {
-            Repositories.Instance.SaveRepository.Save();
-        }
-
         //TODO NEXTロック解除条件の表示
         //TODO 総生産力の表示
     }
