@@ -15,10 +15,10 @@ namespace Clicker
         public int Level = 1;
         public int Rank;
         public int Rarity = 1;//TODO
-        public Common.BigInteger Power { get => new Common.BigInteger(this.Level) * this.Rank * this.Rank; }//TODO
+        public Common.BigInteger Power { get => new Common.BigInteger(this.Level) * this.Rank * this.Rank * 10; }//TODO
         public Common.BigInteger LevelUpCost { get => new Common.BigInteger(this.Level) * this.Level * this.BuyCost; }//TODO
         public Common.BigInteger BuyCost { get => new Common.BigInteger(this.Rank)  * this.Rank * 10; }//TODO
-        public float AutoProduceInterval { get => 0.1f; }//TODO
+        public float AutoProduceInterval { get => 1.0f; }//TODO
         public bool IsLocked { get; private set; } = true;
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
@@ -30,6 +30,7 @@ namespace Clicker
         //NOTE ネクロはランクがハクスラになってるのがえらい
         //NOTE ネクロはデッキ枠で選択が生まれるのがえらい
         //NOTE ネクロもギターも広告がうまい（通常プレイを妨げず、フィーバーorレアリティアップしたい欲で広告）
+        //NOTE 高ランクの生産効率が良すぎるが、ランク解放には全体のレベル上げないといけないので良バランスかも。レベルアップ頻度に不満があるので、ランク開放と合わせてライン上げするくらいでちょうどいいかも。
 
         public Factory(int rank) {
             this.Rank = rank;
