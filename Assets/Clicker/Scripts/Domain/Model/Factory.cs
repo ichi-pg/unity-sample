@@ -7,6 +7,11 @@ namespace Clicker
     [System.Serializable]
     public class Factory
     {
+        public interface IWallet {
+            void ConsumCoin(Common.BigInteger coin);
+            void AddCoin(Common.BigInteger coin);
+        }
+
         public int Level = 1;
         public int Rank;
         public int Rarity = 1;//TODO
@@ -35,7 +40,7 @@ namespace Clicker
             this.Level = level;
         }
 
-        public void LevelUp(Wallet wallet) {
+        public void LevelUp(IWallet wallet) {
             if (this.IsLocked) {
                 throw new System.Exception("未購入です");//TODO
             }
@@ -53,7 +58,7 @@ namespace Clicker
             return result;
         }
 
-        public void Buy(List<Factory> factories, Wallet wallet) {
+        public void Buy(List<Factory> factories, IWallet wallet) {
             if (!this.IsLocked) {
                 throw new System.Exception("購入済みです");//TODO
             }
@@ -62,11 +67,15 @@ namespace Clicker
             this.IsLocked = false;
         }
 
-        public void Produce(Wallet wallet) {
+        public void Produce(IWallet wallet) {
             if (this.IsLocked) {
                 throw new System.Exception("未購入です");//TODO
             }
             wallet.AddCoin(this.Power);
+        }
+
+        public bool EqualsFactory(Factory factory) {
+            return this.Rank == factory.Rank;
         }
     }
 }

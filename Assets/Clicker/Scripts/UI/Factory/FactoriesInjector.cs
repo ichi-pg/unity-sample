@@ -23,7 +23,7 @@ namespace Clicker
         }
 
         public void Inject(Factory factory) {
-            if (this.factories.Any(t => t.Rank == factory.Rank)) {
+            if (this.factories.Any(t => t.EqualsFactory(factory))) {
                 return;
             }
             this.enumerableInjector.Inject(

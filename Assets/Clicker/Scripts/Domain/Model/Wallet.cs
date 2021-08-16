@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Clicker
 {
     [System.Serializable]
-    public class Wallet
+    public class Wallet : Factory.IWallet
     {
         public Common.BigInteger Coin;
 
