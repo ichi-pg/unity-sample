@@ -32,5 +32,17 @@ namespace Clicker
             );
             this.factories.Add(factory);
         }
+
+        void OnApplicationFocus(bool focus) {
+            Repositories.Instance.SaveRepository.Save();
+        }
+
+        void OnApplicationPause(bool pause) {
+            Repositories.Instance.SaveRepository.Save();
+        }
+
+        void OnApplicationQuit() {
+            Repositories.Instance.SaveRepository.Save();
+        }
     }
 }

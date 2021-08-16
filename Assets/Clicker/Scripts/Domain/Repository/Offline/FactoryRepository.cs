@@ -20,7 +20,6 @@ namespace Clicker
 
         public void Produce(Factory factory) {
             factory.Produce(SaveData.Instance.Wallet);
-            SaveData.Instance.Save();
         }
 
         public void Buy(Factory factory) {
@@ -30,7 +29,5 @@ namespace Clicker
             );
             SaveData.Instance.Save();
         }
-
-        //TODO この速度でSaveするのやりすぎでは。
     }
 }
