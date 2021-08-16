@@ -56,13 +56,30 @@ namespace Clicker
         }
 
         public static IEnumerable<Factory> ListBuyable(IEnumerable<Factory> factories) {
+            //TODO levelで開放じゃなくて単に見えてるがBuyCostが高い
             var result = new List<Factory>();
-            var level = factories.Select(t => t.Level).Sum() + 1;
-            var rank = factories.Select(t => t.Rank).DefaultIfEmpty().Max() + 1;
-            if (level >= rank * rank * rank) {
+            var level = GetPlayerLevel(factories);
+            var rank = GetNextRank(factories);
+            if (level >= GetNextPlayerLevel(rank)) {
                 result.Add(new Factory(rank));
             }
             return result;
+        }
+
+        public static int GetPlayerLevel(IEnumerable<Factory> factories) {
+            return factories.Select(t => t.Level).Sum() + 1;
+        }
+
+        public static int GetNextRank(IEnumerable<Factory> factories) {
+            return factories.Select(t => t.Rank).DefaultIfEmpty().Max() + 1;
+        }
+
+        public static int GetNextPlayerLevel(IEnumerable<Factory> factories) {
+            return GetNextPlayerLevel(GetNextRank(factories));
+        }
+
+        public static int GetNextPlayerLevel(int rank) {
+            return rank * rank * rank;
         }
 
         public void Buy(List<Factory> factories, IResource resource) {

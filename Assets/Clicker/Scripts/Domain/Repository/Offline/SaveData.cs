@@ -10,8 +10,8 @@ namespace Clicker
         public static SaveData Instance {
             get {
                 if (instance == null) {
-                    if (Common.SaveDataUtility.Exist<SaveData>()) {
-                        instance = Common.SaveDataUtility.Load<SaveData>();
+                    if (Common.JsonSaveData.Exist<SaveData>()) {
+                        instance = Common.JsonSaveData.Load<SaveData>();
                     } else {
                         Wallet wallet;
                         List<Factory> factories;
@@ -35,7 +35,7 @@ namespace Clicker
         }
 
         public void Save() {
-            Common.SaveDataUtility.Save<SaveData>(this);
+            Common.JsonSaveData.Save<SaveData>(this);
         }
     }
 }

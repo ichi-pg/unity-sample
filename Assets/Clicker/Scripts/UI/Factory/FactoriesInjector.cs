@@ -32,7 +32,5 @@ namespace Clicker
             );
             this.factories.Add(factory);
         }
-
-        //TODO NEXTロック解除条件の表示
     }
 }

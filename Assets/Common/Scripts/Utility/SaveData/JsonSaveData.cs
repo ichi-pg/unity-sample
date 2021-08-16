@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class SaveDataUtility
+    public static class JsonSaveData
     {
-        public static void Save<T>(T obj) {
+        public static void Save<T>(T obj, bool pretty = true) {
             var path = FilePath(obj.GetType());
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
             var writer = new StreamWriter(path);
-            var json = JsonUtility.ToJson(obj, true);
+            var json = JsonUtility.ToJson(obj, pretty);
             writer.Write(json);
             writer.Flush();
             writer.Close();
