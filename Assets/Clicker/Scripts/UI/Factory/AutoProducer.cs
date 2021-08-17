@@ -15,7 +15,7 @@ namespace Clicker
             }
             var adapter = injector.Data as FactoryAdapter;
             while (true) {
-                yield return new WaitForSeconds(adapter.Factory.AutoProduceInterval*this.feverRate);
+                yield return new WaitForSeconds(adapter.Factory.Interval*this.feverRate);
                 adapter.Produce();
             }
         }

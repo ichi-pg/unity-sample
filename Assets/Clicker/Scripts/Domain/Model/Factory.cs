@@ -13,13 +13,20 @@ namespace Clicker
             void Add(BigInteger coin);
         }
 
-        public int Level = 1;
+        public interface ICalculator {
+            float Interval { get; }
+            BigInteger Power(int level, int rank);
+            BigInteger Cost(int level, int rank);
+        }
+
+        public int Level = 0;
         public int Rank;
-        public BigInteger Power { get => new BigInteger(this.Level) * this.Rank * this.Rank * 10; }//TODO
-        public BigInteger LevelUpCost { get => new BigInteger(this.Level) * this.Level * this.BuyCost; }//TODO
-        public BigInteger BuyCost { get => new BigInteger(this.Rank)  * this.Rank * 10; }//TODO
-        public float AutoProduceInterval { get => 1.0f; }//TODO
-        public bool IsLocked { get; private set; } = true;
+        public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank); }
+        public BigInteger NextPower { get => this.Calculator.Power(this.Level+1, this.Rank); }
+        public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank); }
+        public float Interval { get => this.Calculator.Interval; }
+        public bool IsLocked { get => this.Level <= 0; }
+        public ICalculator Calculator { private get; set; }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
@@ -46,56 +53,20 @@ namespace Clicker
         //NOTE 購入速度がだんだん鈍化するのがある点を超えると飽きにつながる（＝リセット？）
         //NOTE クリッカーPvPってできそうだけど。ランダム性、取捨選択を加えないと競技性がない。
 
-        public Factory(int rank) {
+        public Factory(ICalculator calculator, int rank) {
             this.Rank = rank;
+            this.Calculator = calculator;
         }
 
-        public Factory(int rank, int level) {
+        public Factory(ICalculator calculator, int rank, int level) {
             this.Rank = rank;
             this.Level = level;
+            this.Calculator = calculator;
         }
 
         public void LevelUp(IResource resource) {
-            if (this.IsLocked) {
-                throw new System.Exception("未購入です");//TODO
-            }
-            resource.Consum(this.LevelUpCost);
+            resource.Consum(this.Cost);
             this.Level++;
-        }
-
-        public static IEnumerable<Factory> ListBuyable(IEnumerable<Factory> factories) {
-            var result = new List<Factory>();
-            var level = GetPlayerLevel(factories);
-            var rank = GetNextRank(factories);
-            if (level >= GetNextPlayerLevel(rank)) {
-                result.Add(new Factory(rank));
-            }
-            return result;
-        }
-
-        public static int GetPlayerLevel(IEnumerable<Factory> factories) {
-            return factories.Select(t => t.Level).Sum() + 1;
-        }
-
-        public static int GetNextRank(IEnumerable<Factory> factories) {
-            return factories.Select(t => t.Rank).DefaultIfEmpty().Max() + 1;
-        }
-
-        public static int GetNextPlayerLevel(IEnumerable<Factory> factories) {
-            return GetNextPlayerLevel(GetNextRank(factories));
-        }
-
-        public static int GetNextPlayerLevel(int rank) {
-            return rank * rank * rank;
-        }
-
-        public void Buy(List<Factory> factories, IResource resource) {
-            if (!this.IsLocked) {
-                throw new System.Exception("購入済みです");//TODO
-            }
-            resource.Consum(this.BuyCost);
-            factories.Add(this);
-            this.IsLocked = false;
         }
 
         public void Produce(IResource resource) {

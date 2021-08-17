@@ -12,6 +12,7 @@ namespace Clicker
                 if (instance == null) {
                     if (Common.JsonSaveData.Exist<SaveData>()) {
                         instance = Common.JsonSaveData.Load<SaveData>();
+                        Initializer.Load(instance.Factories);
                     } else {
                         Wallet wallet;
                         List<Factory> factories;
