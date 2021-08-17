@@ -20,7 +20,7 @@ namespace Common
                 units += ((char)unit).ToString();
                 i /= 26;
             }
-            return number + "." + (remainder / 1000) + units;
+            return number + "." + (remainder / 100) + units;
         }
     }
 }
