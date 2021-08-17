@@ -6,7 +6,7 @@ namespace Common
 {
     public static class BigIntegerText
     {
-        public static string ToString(BigInteger number, bool shortening = true, char alphabet = 'A') {
+        public static string ToString(BigInteger number) {
             BigInteger remainder = 0;
             int i = 0;
             while (number >= 1000) {
@@ -16,17 +16,11 @@ namespace Common
             }
             string units = "";
             while (i > 0) {
-                int unit = (int)alphabet + (i % 26) - 1;
+                int unit = (int)'A' + (i % 26) - 1;
                 units += ((char)unit).ToString();
                 i /= 26;
             }
-            if (shortening) {
-                return number + "." + (remainder / 1000) + units;
-            }
-            if (remainder > 0) {
-                return number + "." + remainder.ToString("D3").TrimEnd('0') + units;
-            }
-            return number + units;
+            return number + "." + (remainder / 1000) + units;
         }
     }
 }
