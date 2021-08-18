@@ -15,15 +15,18 @@ namespace Clicker
 
         public interface ICalculator {
             float Interval { get; }
-            BigInteger Power(BigInteger level, BigInteger rank);
-            BigInteger Cost(BigInteger level, BigInteger rank);
+            BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity);
+            BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
+            BigInteger Sale(BigInteger level, BigInteger rank, BigInteger rarity);
         }
 
         public int Level = 0;
         public int Rank;
-        public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank); }
-        public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank); }
-        public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank); }
+        public int Rarity;
+        public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
+        public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
+        public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
+        public BigInteger Sale { get => this.Calculator.Sale(this.Level, this.Rank, this.Rarity); }
         public float Interval { get => this.Calculator.Interval; }
         public bool IsLocked { get => this.Level <= 0; }
         public ICalculator Calculator { private get; set; }
@@ -76,6 +79,14 @@ namespace Clicker
                 throw new System.Exception("未購入です");//TODO
             }
             resource.Add(this.Power);
+        }
+
+        public void Sell(IResource resource, List<Factory> factories) {
+            if (!factories.Contains(this)) {
+                throw new System.Exception("未購入です");//TODO
+            }
+            factories.Remove(this);
+            resource.Add(this.Sale);
         }
 
         public bool EqualsFactory(Factory factory) {
