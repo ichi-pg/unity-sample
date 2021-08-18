@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 6387583968050099544}
   - component: {fileID: 5504598500282927717}
   - component: {fileID: 1358623372939758132}
-  - component: {fileID: 652284136910062481}
+  - component: {fileID: 6769975254285625294}
   m_Layer: 5
   m_Name: FactoriesButton
   m_TagString: Untagged
@@ -385,9 +385,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 652284136910062481}
-        m_TargetAssemblyTypeName: Clicker.FeverButton, Clicker
-        m_MethodName: Fever
+      - m_Target: {fileID: 6769975254285625294}
+        m_TargetAssemblyTypeName: Common.OpenModalButton, Common
+        m_MethodName: Open
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -397,7 +397,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &652284136910062481
+--- !u!114 &6769975254285625294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,9 +406,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2066102029174398383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f0a155f41c7481892e636dc73cda54, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ed2c452a34ba4b1fa48b34108e49d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modal: {fileID: 1812456321201454185, guid: af839aa52cd4045b89d59e22970049ce, type: 3}
 --- !u!1 &3152418238634298646
 GameObject:
   m_ObjectHideFlags: 0

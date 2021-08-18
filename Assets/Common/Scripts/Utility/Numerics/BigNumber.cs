@@ -58,5 +58,9 @@ namespace Common
         public static implicit operator BigNumber(BigInteger a) => new BigNumber(a);
 
         public override string ToString() => this.s;
+
+        public override bool Equals(object obj) => base.Equals(obj);
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }
