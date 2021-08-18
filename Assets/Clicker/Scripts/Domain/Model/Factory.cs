@@ -53,6 +53,7 @@ namespace Clicker
         //NOTE 購入速度がだんだん鈍化するのがある点を超えると飽きにつながる（＝リセット？）
         //NOTE クリッカーPvPってできそうだけど。ランダム性、取捨選択を加えないと競技性がない。
         //NOTE ランク別に生産カーブを変化させる案（早熟、晩熟）
+        //NOTE 施設を購入だけでなく売れる（総レベルアップ費用×n）
 
         public Factory(ICalculator calculator, int rank) {
             this.Rank = rank;
