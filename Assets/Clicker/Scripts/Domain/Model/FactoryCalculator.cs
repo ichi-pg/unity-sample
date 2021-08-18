@@ -9,11 +9,21 @@ namespace Clicker
     {
         public float Interval { get => 1.0f; }
 
-        public BigInteger Power(int level, int rank) {
-            return new BigInteger(level) * rank * (rank + 4);
+
+        public BigInteger Power(BigInteger level, BigInteger rank) {
+            rank--;
+            if (level > 0) {
+                level += BigInteger.Pow(5, (int)rank);
+            }
+            return level;
         }
-        public BigInteger Cost(int level, int rank) {
-            return new BigInteger(level) * level * rank + 20 * rank * rank * rank;
+
+
+        public BigInteger Cost(BigInteger level, BigInteger rank) {
+            rank--;
+            level += 1;
+            level += BigInteger.Pow(5, (int)rank);
+            return level * level;
         }
     }
 }

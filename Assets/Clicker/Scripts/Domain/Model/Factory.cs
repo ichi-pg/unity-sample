@@ -15,14 +15,14 @@ namespace Clicker
 
         public interface ICalculator {
             float Interval { get; }
-            BigInteger Power(int level, int rank);
-            BigInteger Cost(int level, int rank);
+            BigInteger Power(BigInteger level, BigInteger rank);
+            BigInteger Cost(BigInteger level, BigInteger rank);
         }
 
         public int Level = 0;
         public int Rank;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank); }
-        public BigInteger NextPower { get => this.Calculator.Power(this.Level+1, this.Rank); }
+        public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank); }
         public float Interval { get => this.Calculator.Interval; }
         public bool IsLocked { get => this.Level <= 0; }
