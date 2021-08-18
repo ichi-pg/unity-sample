@@ -10,10 +10,10 @@ namespace Clicker
         private FactoriesInjector factoriesInjector;
 
         public string Name { get => "Rank"+this.Factory.Rank+(this.Factory.IsLocked ? "" : " Lv"+this.Factory.Level); }//TODO
-        public string Cost { get => (this.Factory.IsLocked ? "Buy" : "LvUp")+Common.BigIntegerText.ToString(this.Factory.Cost); }//TODO
+        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost)+"\n("+Common.BigIntegerText.ToString(this.Factory.Cost / (this.Factory.NextPower - this.Factory.Power))+")"; }//TODO
         public string Power { get => "Power"+Common.BigIntegerText.ToString(this.Factory.IsLocked ? this.Factory.NextPower : this.Factory.Power); }//TODO
-        public string Next { get => "Next"+Common.BigIntegerText.ToString(this.Factory.Cost / (this.Factory.NextPower - this.Factory.Power)); }//TODO
-        public bool LevelUpInteractable { get => Repositories.Instance.WalletRepository.Get().Coin >= this.Factory.Cost; }
+        public bool LevelUpDisable { get => Repositories.Instance.WalletRepository.Get().Coin < this.Factory.Cost; }
+        public bool BackgroundDisable { get => this.Factory.IsLocked; }
 
         public FactoryAdapter(Factory factory, FactoriesInjector factoriesInjector) {
             this.Factory = factory;
@@ -21,7 +21,7 @@ namespace Clicker
         }
 
         public void LevelUp() {
-            if (!this.LevelUpInteractable) {
+            if (this.LevelUpDisable) {
                 return;
             }
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);

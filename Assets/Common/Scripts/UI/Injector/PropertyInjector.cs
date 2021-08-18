@@ -62,28 +62,30 @@ namespace Common
             if (image == null) {
                 return;
             }
-            var value = this.GetValue(data, image.name);
-            if (value == null) {
-                return;
+            var imageName = this.GetValue(data, image.name);
+            if (imageName != null) {
+                var sprite = Resources.Load<Sprite>(imageName.ToString());
+                if (sprite != null) {
+                    image.sprite = sprite;
+                }
             }
-            var sprite = Resources.Load<Sprite>(value.ToString());
-            if (sprite == null) {
-                return;
+            var disable = this.GetValue(data, image.name+"Disable");
+            if (disable != null && disable is bool) {
+                image.color = (bool)disable ? Color.gray : Color.white;
             }
-            image.sprite = sprite;
         }
 
         private void InjectButton(object data, Button button) {
             if (button == null) {
                 return;
             }
-            var interactable = this.GetValue(data, button.name+"Interactable");
-            if (interactable != null && interactable is bool) {
-                button.interactable = (bool)interactable;
+            var disable = this.GetValue(data, button.name+"Disable");
+            if (disable != null && disable is bool) {
+                button.interactable = !(bool)disable;
             }
-            var active = this.GetValue(data, button.name+"Active");
-            if (active != null && active is bool) {
-                button.gameObject.SetActive((bool)active);
+            var hidden = this.GetValue(data, button.name+"Hidden");
+            if (hidden != null && hidden is bool) {
+                button.gameObject.SetActive(!(bool)hidden);
             }
             var action = this.GetAction(data, button.name);
             if (action != null) {
