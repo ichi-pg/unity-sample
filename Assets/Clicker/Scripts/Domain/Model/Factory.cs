@@ -9,12 +9,11 @@ namespace Clicker
     public class Factory
     {
         public interface IResource {
-            void Consum(BigInteger coin);
+            bool Consum(BigInteger coin);
             void Add(BigInteger coin);
         }
 
         public interface ICalculator {
-            float Interval { get; }
             BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Sale(BigInteger level, BigInteger rank, BigInteger rarity);
@@ -27,7 +26,6 @@ namespace Clicker
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
         public BigInteger Sale { get => this.Calculator.Sale(this.Level, this.Rank, this.Rarity); }
-        public float Interval { get => this.Calculator.Interval; }
         public bool IsLocked { get => this.Level <= 0; }
         public ICalculator Calculator { private get; set; }
 
@@ -70,23 +68,20 @@ namespace Clicker
         }
 
         public void LevelUp(IResource resource) {
-            resource.Consum(this.Cost);
-            this.Level++;
+            if (resource.Consum(this.Cost)) {
+                this.Level++;
+            }
         }
 
         public void Produce(IResource resource) {
-            if (this.IsLocked) {
-                throw new System.Exception("未購入です");//TODO
-            }
             resource.Add(this.Power);
         }
 
         public void Sell(IResource resource, List<Factory> factories) {
-            if (!factories.Contains(this)) {
-                throw new System.Exception("未購入です");//TODO
+            if (factories.Contains(this)) {
+                factories.Remove(this);
+                resource.Add(this.Sale);
             }
-            factories.Remove(this);
-            resource.Add(this.Sale);
         }
 
         public bool EqualsFactory(Factory factory) {

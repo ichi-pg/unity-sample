@@ -7,8 +7,6 @@ namespace Clicker
 {
     public class FactoryCalculator : Factory.ICalculator
     {
-        public float Interval { get => 1.0f; }
-
         public BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity) {
             if (level <= 0) {
                 return 0;

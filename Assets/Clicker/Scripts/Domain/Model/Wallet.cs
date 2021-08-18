@@ -13,11 +13,12 @@ namespace Clicker
             this.Coin = coin;
         }
 
-        public void Consum(BigInteger coin) {
+        public bool Consum(BigInteger coin) {
             if (this.Coin < coin) {
-                throw new System.Exception("コインが足りません");//TODO
+                return false;
             }
             this.Coin -= coin;
+            return true;
         }
 
         public void Add(BigInteger coin) {
