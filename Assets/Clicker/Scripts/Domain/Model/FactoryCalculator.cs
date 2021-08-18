@@ -13,14 +13,12 @@ namespace Clicker
             if (level <= 0) {
                 return 0;
             }
-            rank--;
-            level += BigInteger.Pow(5, (int)rank);
-            return level;
+            level += BigInteger.Pow(5, (int)(rank - 1));
+            return level * rank;
         }
 
         public BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity) {
-            rank--;
-            level += BigInteger.Pow(5, (int)rank);
+            level += BigInteger.Pow(5, (int)(rank - 1));
             return level * level;
         }
 
