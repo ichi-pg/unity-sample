@@ -52,6 +52,7 @@ namespace Clicker
         //NOTE だんだん詰まってきて、新しい施設開放で枷が外れる、を繰り返すカタルシスポイント
         //NOTE 購入速度がだんだん鈍化するのがある点を超えると飽きにつながる（＝リセット？）
         //NOTE クリッカーPvPってできそうだけど。ランダム性、取捨選択を加えないと競技性がない。
+        //NOTE ランク別に生産カーブを変化させる案（早熟、晩熟）
 
         public Factory(ICalculator calculator, int rank) {
             this.Rank = rank;
