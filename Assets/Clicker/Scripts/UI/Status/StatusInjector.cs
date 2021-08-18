@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Clicker
 {
+    [RequireComponent(typeof(Common.PropertyInjector))]
     public class StatusInjector : MonoBehaviour
     {
         void Start() {

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Clicker
 {
+    [RequireComponent(typeof(Common.EnumerableInjector))]
     public class FactoriesInjector : MonoBehaviour
     {
         private Common.EnumerableInjector enumerableInjector;
