@@ -10,7 +10,7 @@ namespace Clicker
         private FactoriesInjector factoriesInjector;
 
         public string Name { get => "Rank"+this.Factory.Rank+(this.Factory.IsLocked ? "" : " Lv"+this.Factory.Level); }//TODO
-        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost)+"\n("+Common.BigIntegerText.ToString(this.Factory.Cost / (this.Factory.NextPower - this.Factory.Power))+")"; }//TODO
+        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost)+"\n("+Common.BigIntegerText.ToString(this.Factory.LevelUpEfficiency)+")"; }//TODO
         public string Power { get => "Power"+Common.BigIntegerText.ToString(this.Factory.IsLocked ? this.Factory.NextPower : this.Factory.Power); }//TODO
         public bool LevelUpDisable { get => Repositories.Instance.WalletRepository.Get().Coin < this.Factory.Cost; }
         public bool BackgroundDisable { get => this.Factory.IsLocked; }

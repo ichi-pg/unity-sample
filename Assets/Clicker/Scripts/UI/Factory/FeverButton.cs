@@ -11,5 +11,7 @@ namespace Clicker
                 autoProducer.StartCoroutine("Fever");
             }
         }
+
+        //TODO フィーバー中 Disable
     }
 }

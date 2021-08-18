@@ -26,6 +26,7 @@ namespace Clicker
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
         public BigInteger Sale { get => this.Calculator.Sale(this.Level, this.Rank, this.Rarity); }
+        public BigInteger LevelUpEfficiency { get => this.Cost / (this.NextPower - this.Power); }
         public bool IsLocked { get => this.Level <= 0; }
         public ICalculator Calculator { private get; set; }
 
