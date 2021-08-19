@@ -12,34 +12,13 @@ namespace Common
             }
         }
 
-        public void InjectList(IEnumerable enumerable, string prefabName) {
-            if (enumerable == null) {
-                return;
-            }
-            var prefab = Resources.Load<GameObject>(prefabName);
-            if (prefab == null) {
-                return;
-            }
+        public void InjectList(IEnumerable enumerable, GameObject prefab) {
             foreach (object data in enumerable) {
                 this.Inject(data, prefab);
             }
         }
 
-        public void Inject(object data, string prefabName) {
-            if (data == null) {
-                return;
-            }
-            var prefab = Resources.Load<GameObject>(prefabName);
-            if (prefab == null) {
-                return;
-            }
-            this.Inject(data, prefab);
-        }
-
         public void Inject(object data, GameObject prefab) {
-            if (data == null) {
-                return;
-            }
             var obj = Instantiate(prefab, this.transform);
             var injector = obj.GetComponent<PropertyInjector>();
             if (injector != null) {

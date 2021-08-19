@@ -8,9 +8,7 @@ namespace Clicker
     public class StatusInjector : MonoBehaviour
     {
         void Start() {
-            var injector = this.GetComponent<Common.PropertyInjector>();
-            var adapter = new StatusAdapter();
-            injector.Inject(adapter);
+            this.GetComponent<Common.PropertyInjector>().Inject(new StatusAdapter());
         }
     }
 }
