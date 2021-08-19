@@ -12,6 +12,9 @@ namespace Common
         public object Data { get; private set; }
         private IResourceLoader loader;
         private Dictionary<string, UnityAction> actions = new Dictionary<string, UnityAction>();
+        private HashSet<Text> texts = new HashSet<Text>();
+        private HashSet<Image> images = new HashSet<Image>();
+        private HashSet<Button> buttons = new HashSet<Button>();
 
         void Start() {
             ModifyHander += this.OnModify;
@@ -22,15 +25,24 @@ namespace Common
         }
 
         private void OnModify() {
-            this.Inject(this.Data, this.loader);//TODO 変化したパラメーターだけ更新したい
+            foreach (Text text in this.texts) {
+                this.InjectText(this.Data, text);
+            }
+            foreach (Image image in this.images) {
+                this.InjectImage(this.Data, image, this.loader);
+            }
+            foreach (Button button in this.buttons) {
+                this.InjectButton(this.Data, button);
+            }
+            //TODO 変化したパラメーターだけ更新したい
         }
 
         public static void Modify() {
-            ModifyHander?.Invoke();//TODO 変化したオブジェクトだけ更新したい
+            ModifyHander?.Invoke();
+            //TODO 変化したオブジェクトだけ更新したい
         }
 
-        //TODO キャッシュして探査をできるだけ初回だけにする。
-        //TODO Rx、asyncでもっと綺麗にできる部分ない（全体的に）。
+        //TODO Rx、asyncでもっと綺麗にできる部分ない（全体的に）？
 
         public void Inject(object data, IResourceLoader loader) {
             foreach (Text text in this.GetComponentsInChildren<Text>(true)) {
@@ -58,6 +70,7 @@ namespace Common
                 return;
             }
             text.text = value.ToString();
+            this.texts.Add(text);
         }
 
         private void InjectImage(object data, Image image, IResourceLoader loader) {
@@ -69,11 +82,13 @@ namespace Common
                 var sprite = loader?.Load<Sprite>(imageName.ToString());
                 if (sprite != null) {
                     image.sprite = sprite;
+                    this.images.Add(image);
                 }
             }
             var disable = this.GetValue(data, image.name+"Disable");
             if (disable != null && disable is bool) {
                 image.color = (bool)disable ? Color.gray : Color.white;
+                this.images.Add(image);
             }
         }
 
@@ -84,15 +99,18 @@ namespace Common
             var disable = this.GetValue(data, button.name+"Disable");
             if (disable != null && disable is bool) {
                 button.interactable = !(bool)disable;
+                this.buttons.Add(button);
             }
             var hidden = this.GetValue(data, button.name+"Hidden");
             if (hidden != null && hidden is bool) {
                 button.gameObject.SetActive(!(bool)hidden);
+                this.buttons.Add(button);
             }
             var action = this.GetAction(data, button.name);
             if (action != null) {
                 button.onClick.RemoveListener(action);
                 button.onClick.AddListener(action);
+                this.buttons.Add(button);
             }
         }
 

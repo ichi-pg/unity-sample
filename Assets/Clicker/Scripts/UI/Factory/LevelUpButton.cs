@@ -20,15 +20,15 @@ namespace Clicker
         }
 
         void Start() {
-            Common.PropertyInjector.ModifyHander += this.Modify;
-            this.Modify();
+            Common.PropertyInjector.ModifyHander += this.OnModify;
+            this.OnModify();
         }
 
         void OnDestory() {
-            Common.PropertyInjector.ModifyHander -= this.Modify;
+            Common.PropertyInjector.ModifyHander -= this.OnModify;
         }
 
-        private void Modify() {
+        private void OnModify() {
             var factory = this.Factory;
             var wallet = Repositories.Instance.WalletRepository.Get();
             var button = this.GetComponent<Button>();
