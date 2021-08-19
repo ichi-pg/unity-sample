@@ -26,11 +26,7 @@ namespace Common
             this.stack.Clear();
         }
 
-        public void Push(string prefabName, object data) {
-            var prefab = Resources.Load<GameObject>(prefabName);
-            if (prefab == null) {
-                return;
-            }
+        public void Push(GameObject prefab, object data) {
             if (this.stack.Count > 0) {
                 this.stack.Peek().SetActive(false);//TODO 入れ替えず重ねるパターン
             }

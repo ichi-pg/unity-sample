@@ -9,7 +9,7 @@ namespace Clicker
     public class Factory
     {
         public interface IResource {
-            bool Consum(BigInteger coin);
+            bool Consume(BigInteger coin);
             void Add(BigInteger coin);
         }
 
@@ -70,7 +70,7 @@ namespace Clicker
         }
 
         public void LevelUp(IResource resource) {
-            if (resource.Consum(this.Cost)) {
+            if (resource.Consume(this.Cost)) {
                 this.Level++;
             }
         }

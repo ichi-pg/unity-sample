@@ -9,7 +9,7 @@ namespace Common
         [SerializeField]
         private UIStack.Layer layer;
         [SerializeField]
-        private string prefabName;
+        private GameObject prefab;
         [SerializeField]
         private PropertyInjector injector;
 
@@ -23,7 +23,7 @@ namespace Common
         }
 
         public void Push() {
-            UIStack.Instance.Push(this.layer, this.prefabName, this.injector?.Data);
+            UIStack.Instance.Push(this.layer, this.prefab, this.injector?.Data);
         }
 
         public void Pop() {

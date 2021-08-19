@@ -13,7 +13,7 @@ namespace Clicker
             this.Coin = coin;
         }
 
-        public bool Consum(BigInteger coin) {
+        public bool Consume(BigInteger coin) {
             if (this.Coin < coin) {
                 return false;
             }

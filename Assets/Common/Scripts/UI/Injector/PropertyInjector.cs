@@ -64,6 +64,7 @@ namespace Common
             }
             var imageName = this.GetValue(data, image.name);
             if (imageName != null) {
+                //TODO 抽象化してロード方法を制限しない
                 var sprite = Resources.Load<Sprite>(imageName.ToString());
                 if (sprite != null) {
                     image.sprite = sprite;

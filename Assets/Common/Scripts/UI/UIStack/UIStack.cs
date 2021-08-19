@@ -28,8 +28,8 @@ namespace Common
             this.layers[layer].Clear();
         }
 
-        public void Push(Layer layer, string prefabName, object data) {
-            this.layers[layer].Push(prefabName, data);
+        public void Push(Layer layer, GameObject prefab, object data) {
+            this.layers[layer].Push(prefab, data);
         }
 
         public void Pop(Layer layer) {
