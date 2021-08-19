@@ -31,8 +31,9 @@ namespace Clicker
             this.interval = FeverInterval;
             yield return new WaitForSeconds(FeverSeconds);
             this.interval = NormalInterval;
-            //TODO ドメイン？
             //TODO 広告
+            //TODO クリック施設だけフィーバー
+            //TODO オート施設は放置時間増加
         }
     }
 }
