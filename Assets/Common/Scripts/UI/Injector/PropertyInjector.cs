@@ -10,6 +10,7 @@ namespace Common
     {
         public static event System.Action ModifyHander;
         public object Data { get; private set; }
+        private IResourceLoader loader;
         private Dictionary<string, UnityAction> actions = new Dictionary<string, UnityAction>();
 
         void Start() {
@@ -21,7 +22,7 @@ namespace Common
         }
 
         private void OnModify() {
-            this.Inject(this.Data);//TODO 変化したパラメーターだけ更新したい
+            this.Inject(this.Data, this.loader);//TODO 変化したパラメーターだけ更新したい
         }
 
         public static void Modify() {
@@ -31,20 +32,21 @@ namespace Common
         //TODO キャッシュして探査をできるだけ初回だけにする。
         //TODO Rx、asyncでもっと綺麗にできる部分ない（全体的に）。
 
-        public void Inject(object data) {
+        public void Inject(object data, IResourceLoader loader) {
             foreach (Text text in this.GetComponentsInChildren<Text>(true)) {
                 this.InjectText(data, text);
             }
             foreach (Image image in this.GetComponentsInChildren<Image>(true)) {
-                this.InjectImage(data, image);
+                this.InjectImage(data, image, loader);
             }
             foreach (Button button in this.GetComponentsInChildren<Button>(true)) {
                 this.InjectButton(data, button);
             }
             this.InjectText(data, this.GetComponent<Text>());
-            this.InjectImage(data, this.GetComponent<Image>());
+            this.InjectImage(data, this.GetComponent<Image>(), loader);
             this.InjectButton(data, this.GetComponent<Button>());
             this.Data = data;
+            this.loader = loader;
         }
 
         private void InjectText(object data, Text text) {
@@ -58,14 +60,13 @@ namespace Common
             text.text = value.ToString();
         }
 
-        private void InjectImage(object data, Image image) {
+        private void InjectImage(object data, Image image, IResourceLoader loader) {
             if (image == null) {
                 return;
             }
             var imageName = this.GetValue(data, image.name);
             if (imageName != null) {
-                //TODO 抽象化してロード方法を制限しない
-                var sprite = Resources.Load<Sprite>(imageName.ToString());
+                var sprite = loader?.Load<Sprite>(imageName.ToString());
                 if (sprite != null) {
                     image.sprite = sprite;
                 }

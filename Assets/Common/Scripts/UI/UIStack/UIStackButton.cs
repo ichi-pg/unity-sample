@@ -23,7 +23,8 @@ namespace Common
         }
 
         public void Push() {
-            UIStack.Instance.Push(this.layer, this.prefab, this.injector?.Data);
+            //TODO ローダーの注入方法
+            UIStack.Instance.Push(this.layer, this.prefab, this.injector?.Data, new ResourceLoader());
         }
 
         public void Pop() {

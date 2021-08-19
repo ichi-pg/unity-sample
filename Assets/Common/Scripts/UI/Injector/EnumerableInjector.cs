@@ -12,17 +12,17 @@ namespace Common
             }
         }
 
-        public void InjectList(IEnumerable enumerable, GameObject prefab) {
+        public void InjectList(IEnumerable enumerable, GameObject prefab, IResourceLoader loader) {
             foreach (object data in enumerable) {
-                this.Inject(data, prefab);
+                this.Inject(data, prefab, loader);
             }
         }
 
-        public void Inject(object data, GameObject prefab) {
+        public void Inject(object data, GameObject prefab, IResourceLoader loader) {
             var obj = Instantiate(prefab, this.transform);
             var injector = obj.GetComponent<PropertyInjector>();
             if (injector != null) {
-                injector.Inject(data);
+                injector.Inject(data, loader);
             }
         }
     }

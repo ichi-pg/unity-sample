@@ -26,7 +26,7 @@ namespace Common
             this.stack.Clear();
         }
 
-        public void Push(GameObject prefab, object data) {
+        public void Push(GameObject prefab, object data, IResourceLoader loader) {
             if (this.stack.Count > 0) {
                 this.stack.Peek().SetActive(false);//TODO 入れ替えず重ねるパターン
             }
@@ -34,7 +34,7 @@ namespace Common
             if (data != null) {
                 PropertyInjector injector = obj.GetComponent<PropertyInjector>();
                 if (injector != null) {
-                    injector.Inject(data);
+                    injector.Inject(data, loader);
                 }
             }
             this.stack.Push(obj);
