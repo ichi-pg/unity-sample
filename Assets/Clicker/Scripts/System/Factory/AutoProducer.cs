@@ -6,7 +6,10 @@ namespace Clicker
 {
     public class AutoProducer : MonoBehaviour
     {
-        private float interval = 1.0f;
+        public const float FeverSeconds = 30.0f;
+        public const float NormalInterval = 1.0f;
+        public const float FeverInterval = 0.1f;
+        private float interval = NormalInterval;
 
         IEnumerator Start() {
             var repository = Repositories.Instance.FactoryRepository;
@@ -21,13 +24,13 @@ namespace Clicker
             }
         }
 
-        public IEnumerator Fever() {
-            if (this.interval < 1.0f) {
+        IEnumerator Fever() {
+            if (this.interval < NormalInterval) {
                 yield break;
             }
-            this.interval = 0.1f;
-            yield return new WaitForSeconds(30.0f);
-            this.interval = 1.0f;
+            this.interval = FeverInterval;
+            yield return new WaitForSeconds(FeverSeconds);
+            this.interval = NormalInterval;
             //TODO ドメイン？
             //TODO 広告
         }

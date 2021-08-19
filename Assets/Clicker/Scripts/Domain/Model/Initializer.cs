@@ -6,6 +6,8 @@ namespace Clicker
 {
     public static class Initializer
     {
+        private const int MaxRank = 20;
+
         public static void Initialize(out Wallet wallet, out List<Factory> factories) {
             var factory = new Factory(GetCalculator(), 1);
             wallet = new Wallet(factory.Cost);
@@ -15,7 +17,7 @@ namespace Clicker
 
         public static void Load(List<Factory> factories) {
             var calculator = GetCalculator();
-            for (var i = 1; i <= 20; ++i) {
+            for (var i = 1; i <= MaxRank; ++i) {
                 var factory = new Factory(calculator, i);
                 var find = factories.Find(t => t.EqualsFactory(factory));
                 if (find != null) {
