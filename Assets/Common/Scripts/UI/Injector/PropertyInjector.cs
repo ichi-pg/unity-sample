@@ -28,6 +28,8 @@ namespace Common
             ModifyHander?.Invoke();//TODO 変化したオブジェクトだけ更新したい
         }
 
+        //TODO キャッシュして探査をできるだけ初回だけにする。
+
         public void Inject(object data) {
             if (data == null) {
                 return;
