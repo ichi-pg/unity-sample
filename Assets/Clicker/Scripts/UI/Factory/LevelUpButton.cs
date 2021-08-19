@@ -6,21 +6,48 @@ using UnityEngine.UI;
 
 namespace Clicker
 {
+    [RequireComponent(typeof(Button))]
     public class LevelUpButton : MonoBehaviour
     {
-        public void LevelUp() {
-            var repository = Repositories.Instance.FactoryRepository;
-            var wallet = Repositories.Instance.WalletRepository.Get();
-            var factories = repository.List()
-                .Where(t => wallet.Coin >= t.Cost)
-                .OrderBy(t => t.LevelUpEfficiency);
-            foreach (var factory in factories) {
-                repository.LevelUp(factory);
-                Common.PropertyInjector.Modify();
-                break;
+        [SerializeField]
+        private Text text;
+
+        private Factory EfficiencyFactory {
+            get {
+                var coin = Repositories.Instance.WalletRepository.Get().Coin;
+                return Repositories.Instance.FactoryRepository.List()
+                    .Where(t => t.Cost <= coin)
+                    .OrderBy(t => t.LevelUpEfficiency)
+                    .FirstOrDefault();
             }
         }
 
-        //TODO ボタンのテキスト変更、Disable
+        void Start() {
+            Common.PropertyInjector.ModifyHander += this.Modify;
+            this.Modify();
+        }
+
+        void OnDestory() {
+            Common.PropertyInjector.ModifyHander -= this.Modify;
+        }
+
+        private void Modify() {
+            var factory = this.EfficiencyFactory;
+            var button = this.GetComponent<Button>();
+            button.interactable = factory != null;
+            if (factory != null) {
+                this.text.text = Common.BigIntegerText.ToString(factory.Cost);//TODO もうちょい詳細に
+            } else {
+                //TODO 何を表示？お金貯まる具合で変化しちゃうから、一番安いのを返すのが正解？
+            }
+        }
+
+        public void LevelUp() {
+            var factory = this.EfficiencyFactory;
+            if (factory != null) {
+                Repositories.Instance.FactoryRepository.LevelUp(this.EfficiencyFactory);
+                Common.PropertyInjector.Modify();
+            }
+        }
     }
 }
