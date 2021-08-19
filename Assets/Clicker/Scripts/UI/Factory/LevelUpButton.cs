@@ -12,14 +12,11 @@ namespace Clicker
         [SerializeField]
         private Text text;
 
-        private Factory EfficiencyFactory {
-            get {
-                var coin = Repositories.Instance.WalletRepository.Get().Coin;
-                return Repositories.Instance.FactoryRepository.List()
-                    .Where(t => t.Cost <= coin)
-                    .OrderBy(t => t.LevelUpEfficiency)
-                    .FirstOrDefault();
-            }
+        private Factory Factory {
+            get => Repositories.Instance.FactoryRepository
+                .List()
+                .OrderBy(t => t.Cost)
+                .FirstOrDefault();
         }
 
         void Start() {
@@ -32,22 +29,23 @@ namespace Clicker
         }
 
         private void Modify() {
-            var factory = this.EfficiencyFactory;
+            var factory = this.Factory;
+            var wallet = Repositories.Instance.WalletRepository.Get();
             var button = this.GetComponent<Button>();
-            button.interactable = factory != null;
-            if (factory != null) {
-                this.text.text = Common.BigIntegerText.ToString(factory.Cost);//TODO もうちょい詳細に
-            } else {
-                //TODO 何を表示？お金貯まる具合で変化しちゃうから、一番安いのを返すのが正解？
-            }
+            button.interactable = wallet.Coin >= factory.Cost;
+            this.text.text = "Rank"+factory.Rank+
+                " Lv"+factory.Level+
+                "\n"+Common.BigIntegerText.ToString(factory.Cost);
         }
 
         public void LevelUp() {
-            var factory = this.EfficiencyFactory;
-            if (factory != null) {
-                Repositories.Instance.FactoryRepository.LevelUp(this.EfficiencyFactory);
-                Common.PropertyInjector.Modify();
+            var factory = this.Factory;
+            var wallet = Repositories.Instance.WalletRepository.Get();
+            if (wallet.Coin < factory.Cost) {
+                return;
             }
+            Repositories.Instance.FactoryRepository.LevelUp(factory);
+            Common.PropertyInjector.Modify();
         }
     }
 }
