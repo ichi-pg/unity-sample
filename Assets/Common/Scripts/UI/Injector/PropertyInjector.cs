@@ -29,6 +29,7 @@ namespace Common
         }
 
         //TODO キャッシュして探査をできるだけ初回だけにする。
+        //TODO Rx、asyncでもっと綺麗にできる部分ない（全体的に）。
 
         public void Inject(object data) {
             if (data == null) {
