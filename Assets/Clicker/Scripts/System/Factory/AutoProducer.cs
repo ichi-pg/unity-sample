@@ -12,7 +12,9 @@ namespace Clicker
             var repository = Repositories.Instance.FactoryRepository;
             while (true) {
                 foreach (var factory in repository.List()) {
-                    repository.Produce(factory);
+                    if (!factory.IsLocked) {
+                        repository.Produce(factory);
+                    }
                 }
                 Common.PropertyInjector.Modify();
                 yield return new WaitForSeconds(this.interval);
