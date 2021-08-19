@@ -57,6 +57,7 @@ namespace Clicker
         //NOTE ランク別に生産カーブを変化させる（早熟、晩熟）
         //NOTE 施設を購入だけでなく売れる（総レベルアップ費用×n）
         //NOTE コインじゃなく、モノを生産する。ビジュアル的面白さ。モノを中継してコインを得る。
+        //NOTE 最初にクリックから始まり、徐々に施設が充実する。
 
         public Factory(ICalculator calculator, int rank) {
             this.Rank = rank;
