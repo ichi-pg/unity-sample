@@ -10,6 +10,8 @@ namespace Clicker
         public IWalletRepository WalletRepository { get; private set; } = new WalletRepository();
         public ISaveRepository SaveRepository { get; private set; } = new SaveRepository();
 
+        //TODO ResourcesもLocalizationも一緒にInjectorでいいのでは
+
         private Repositories() {
         }
     }
