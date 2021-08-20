@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Clicker
 {
-    [RequireComponent(typeof(Common.PropertyInjector))]
+    [RequireComponent(typeof(Common.DataInjector))]
     public class StatusInjector : MonoBehaviour
     {
         void Start() {
-            this.GetComponent<Common.PropertyInjector>().Inject(
+            this.GetComponent<Common.DataInjector>().Inject(
                 new StatusAdapter(),
                 ResourceLoader.Instance
             );

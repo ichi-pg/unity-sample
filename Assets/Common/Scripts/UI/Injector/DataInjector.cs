@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Common
 {
-    public class PropertyInjector : MonoBehaviour
+    public class DataInjector : MonoBehaviour
     {
         public static event System.Action ModifyHander;
         public object Data { get; private set; }

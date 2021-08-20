@@ -19,7 +19,7 @@ namespace Clicker
                         repository.Produce(factory);
                     }
                 }
-                Common.PropertyInjector.Modify();
+                Common.DataInjector.Modify();
                 yield return new WaitForSeconds(this.interval);
             }
         }

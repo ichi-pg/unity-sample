@@ -13,7 +13,7 @@ namespace Clicker
                     repository.Produce(factory);
                 }
             }
-            Common.PropertyInjector.Modify();
+            Common.DataInjector.Modify();
         }
     }
 }

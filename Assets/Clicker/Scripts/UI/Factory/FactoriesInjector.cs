@@ -17,7 +17,7 @@ namespace Clicker
             this.enumerableInjector.Clear();
             foreach (var factory in Repositories.Instance.FactoryRepository.List()) {
                 this.enumerableInjector.Inject(
-                    new FactoryAdapter(factory, this),
+                    new FactoryAdapter(factory),
                     this.prefab,
                     ResourceLoader.Instance
                 );

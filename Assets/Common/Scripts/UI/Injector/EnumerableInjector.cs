@@ -18,7 +18,7 @@ namespace Common
 
         public void Inject(object data, GameObject prefab, IResourceLoader loader) {
             var obj = Instantiate(prefab, this.transform);
-            var injector = obj.GetComponent<PropertyInjector>();
+            var injector = obj.GetComponent<DataInjector>();
             if (injector != null) {
                 injector.Inject(data, loader);
             }

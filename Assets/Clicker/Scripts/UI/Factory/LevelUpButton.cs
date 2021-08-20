@@ -20,12 +20,12 @@ namespace Clicker
         }
 
         void Start() {
-            Common.PropertyInjector.ModifyHander += this.OnModify;
+            Common.DataInjector.ModifyHander += this.OnModify;
             this.OnModify();
         }
 
         void OnDestroy() {
-            Common.PropertyInjector.ModifyHander -= this.OnModify;
+            Common.DataInjector.ModifyHander -= this.OnModify;
         }
 
         private void OnModify() {
@@ -45,7 +45,7 @@ namespace Clicker
                 return;
             }
             Repositories.Instance.FactoryRepository.LevelUp(factory);
-            Common.PropertyInjector.Modify();
+            Common.DataInjector.Modify();
         }
     }
 }
