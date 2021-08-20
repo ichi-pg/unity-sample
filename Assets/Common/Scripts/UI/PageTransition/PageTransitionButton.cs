@@ -16,6 +16,7 @@ namespace Common
             //TODO UI以外の画面遷移
             //TODO 戻る
             //TODO フッターなど重ねる系
+            //TODO フッターなどトグル表示
         }
     }
 }
