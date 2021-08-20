@@ -1,0 +1,7 @@
+﻿Key,Japanese(ja)
+"Factory.Name","ランク{Rank} Lv{Level}\n生産{Power}/秒"
+"Factory.Cost","Lvアップ{Cost}\n生産{NextPower}/秒"
+"Status.Coin","コイン{Coin}"
+"Status.Power","総生産{Power}/秒"
+"Fever","フィーバー"
+"Factories","施設一覧"

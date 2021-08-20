@@ -7,9 +7,13 @@ namespace Clicker
     public class FactoryAdapter
     {
         public Factory Factory { get; private set; }
-        public string Name { get => "Rank"+this.Factory.Rank+(this.Factory.IsLocked ? "" : " Lv"+this.Factory.Level); }//TODO
-        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost)+"\n("+Common.BigIntegerText.ToString(this.Factory.CostPerformance)+")"; }//TODO
-        public string Power { get => "Power"+Common.BigIntegerText.ToString(this.Factory.IsLocked ? this.Factory.NextPower : this.Factory.Power); }//TODO
+        public string NameText { get => LocalizationText.Instance.ToString("Factory.Name", this); }
+        public string CostText { get => LocalizationText.Instance.ToString("Factory.Cost", this); }
+        public int Rank { get => this.Factory.Rank; }
+        public int Level { get => this.Factory.Level; }
+        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost); }
+        public string Power { get => Common.BigIntegerText.ToString(this.Factory.Power); }
+        public string NextPower { get => Common.BigIntegerText.ToString(this.Factory.NextPower); }
         public bool LevelUpDisable { get => Repositories.Instance.WalletRepository.Get().Coin < this.Factory.Cost; }
         public bool BackgroundDisable { get => this.Factory.IsLocked; }
 
