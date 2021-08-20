@@ -10,7 +10,7 @@ namespace Ichi.Clicker
         void Start() {
             this.GetComponent<Ichi.Common.DataInjector>().Inject(
                 new StatusAdapter(),
-                ResourceLoader.Instance
+                Dependency.ResourceLoader
             );
         }
     }

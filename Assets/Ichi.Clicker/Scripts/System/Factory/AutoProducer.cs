@@ -12,7 +12,7 @@ namespace Ichi.Clicker
         private float interval = NormalInterval;
 
         IEnumerator Start() {
-            var repository = Repositories.Instance.FactoryRepository;
+            var repository = Dependency.FactoryRepository;
             while (true) {
                 foreach (var factory in repository.List()) {
                     if (!factory.IsLocked) {

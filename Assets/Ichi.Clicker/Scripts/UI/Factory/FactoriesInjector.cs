@@ -15,11 +15,11 @@ namespace Ichi.Clicker
         void Start() {
             this.enumerableInjector = this.GetComponent<Ichi.Common.EnumerableInjector>();
             this.enumerableInjector.Clear();
-            foreach (var factory in Repositories.Instance.FactoryRepository.List()) {
+            foreach (var factory in Dependency.FactoryRepository.List()) {
                 this.enumerableInjector.Inject(
                     new FactoryAdapter(factory),
                     this.prefab,
-                    ResourceLoader.Instance
+                    Dependency.ResourceLoader
                 );
             }
         }
