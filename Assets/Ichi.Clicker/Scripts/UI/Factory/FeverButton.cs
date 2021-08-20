@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour

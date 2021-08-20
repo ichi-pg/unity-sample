@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     [System.Serializable]
     public class SaveData
@@ -10,8 +10,8 @@ namespace Clicker
         public static SaveData Instance {
             get {
                 if (instance == null) {
-                    if (Common.JsonSaveData.Exist<SaveData>()) {
-                        instance = Common.JsonSaveData.Load<SaveData>();
+                    if (Ichi.Common.JsonSaveData.Exist<SaveData>()) {
+                        instance = Ichi.Common.JsonSaveData.Load<SaveData>();
                         Initializer.Load(instance.Factories);
                     } else {
                         Wallet wallet;
@@ -36,7 +36,7 @@ namespace Clicker
         }
 
         public void Save() {
-            Common.JsonSaveData.Save<SaveData>(this);
+            Ichi.Common.JsonSaveData.Save<SaveData>(this);
         }
     }
 }

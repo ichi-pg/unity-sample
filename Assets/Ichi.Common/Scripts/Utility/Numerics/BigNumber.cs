@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Common
+namespace Ichi.Common
 {
     [System.Serializable]
     public class BigNumber

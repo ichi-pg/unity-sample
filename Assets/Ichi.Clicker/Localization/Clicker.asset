@@ -27,7 +27,7 @@ MonoBehaviour:
         m_ColumnsList:
         - id: 1
         - id: 2
-        m_ConnectedFile: Assets/Clicker/Localization/Clicker.csv
+        m_ConnectedFile: Assets/Ichi.Clicker/Localization/Ichi.Clicker.csv
     00000001:
       type: {class: KeyIdColumns, ns: UnityEditor.Localization.Plugins.CSV.Columns, asm: Unity.Localization.Editor}
       data:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Common
+namespace Ichi.Common
 {
     public static class JsonSaveData
     {

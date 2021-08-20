@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Common
+namespace Ichi.Common
 {
     public class PageTransitionButton : MonoBehaviour
     {

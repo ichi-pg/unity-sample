@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     public class FactoryAdapter
     {
@@ -11,9 +11,9 @@ namespace Clicker
         public string CostText { get => LocalizationText.Instance.ToString("Factory.Cost", this); }
         public int Rank { get => this.Factory.Rank; }
         public int Level { get => this.Factory.Level; }
-        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost); }
-        public string Power { get => Common.BigIntegerText.ToString(this.Factory.Power); }
-        public string NextPower { get => Common.BigIntegerText.ToString(this.Factory.NextPower); }
+        public string Cost { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Cost); }
+        public string Power { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Power); }
+        public string NextPower { get => Ichi.Common.BigIntegerText.ToString(this.Factory.NextPower); }
         public bool LevelUpDisable { get => Repositories.Instance.WalletRepository.Get().Coin < this.Factory.Cost; }
         public bool BackgroundDisable { get => this.Factory.IsLocked; }
 
@@ -26,7 +26,7 @@ namespace Clicker
                 return;
             }
             Repositories.Instance.FactoryRepository.LevelUp(this.Factory);
-            Common.DataInjector.Modify();
+            Ichi.Common.DataInjector.Modify();
         }
 
         public void Produce() {
@@ -34,7 +34,7 @@ namespace Clicker
                 return;
             }
             Repositories.Instance.FactoryRepository.Produce(this.Factory);
-            Common.DataInjector.Modify();
+            Ichi.Common.DataInjector.Modify();
         }
     }
 }

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     public class LocalizationText
     {
-        public static Common.ILocalizationText Instance { get; private set; } = new Common.LocalizationText("Clicker");
+        public static Ichi.Common.ILocalizationText Instance { get; private set; } = new Ichi.Common.LocalizationText("Ichi.Clicker");
     }
 }

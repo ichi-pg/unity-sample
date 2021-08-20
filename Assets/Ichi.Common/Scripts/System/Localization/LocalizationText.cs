@@ -4,7 +4,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.SmartFormat;
 
-namespace Common
+namespace Ichi.Common
 {
     public class LocalizationText : ILocalizationText
     {

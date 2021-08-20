@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 4765df1d0dd604cdba22ec4794525fda
   m_SerializeEntries:
   - m_GUID: 4f5ada0029f7a4b2a8cd9f3315409187
-    m_Address: Assets/Clicker/Localization/Clicker Shared Data.asset
+    m_Address: Assets/Ichi.Clicker/Localization/Ichi.Clicker Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
   m_ReadOnly: 1

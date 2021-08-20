@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     public class ProduceButton : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Clicker
                     repository.Produce(factory);
                 }
             }
-            Common.DataInjector.Modify();
+            Ichi.Common.DataInjector.Modify();
         }
     }
 }

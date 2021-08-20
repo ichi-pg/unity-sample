@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     [System.Serializable]
     public class Wallet : Factory.IResource
     {
-        public Common.BigNumber Coin;
+        public Ichi.Common.BigNumber Coin;
 
         public Wallet(BigInteger coin) {
             this.Coin = coin;

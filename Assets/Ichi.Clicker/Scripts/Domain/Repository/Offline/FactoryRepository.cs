@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     public class FactoryRepository : IFactoryRepository
     {

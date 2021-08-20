@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     public class SaveController : MonoBehaviour
     {

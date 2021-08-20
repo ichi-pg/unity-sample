@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Clicker
+namespace Ichi.Clicker
 {
     [RequireComponent(typeof(Button))]
     public class LevelUpButton : MonoBehaviour
@@ -13,12 +13,12 @@ namespace Clicker
         private Text text;
 
         void Start() {
-            Common.DataInjector.ModifyHander += this.OnModify;
+            Ichi.Common.DataInjector.ModifyHander += this.OnModify;
             this.OnModify();
         }
 
         void OnDestroy() {
-            Common.DataInjector.ModifyHander -= this.OnModify;
+            Ichi.Common.DataInjector.ModifyHander -= this.OnModify;
         }
 
         private void OnModify() {

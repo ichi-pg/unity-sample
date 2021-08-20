@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-namespace Common
+namespace Ichi.Common
 {
     public class DataInjector : MonoBehaviour
     {
