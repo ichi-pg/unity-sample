@@ -15,6 +15,7 @@ namespace Common
             Instantiate(this.page, canvas.transform);
             //TODO UI以外の画面遷移
             //TODO 戻る
+            //TODO フッターなど重ねる系
         }
     }
 }
