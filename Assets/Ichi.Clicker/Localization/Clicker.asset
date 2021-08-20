@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
   m_Name: Clicker
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   m_SharedTableData: {fileID: 11400000, guid: 4f5ada0029f7a4b2a8cd9f3315409187, type: 2}
   m_Tables:
   - {fileID: 11400000, guid: 89937e5b62e2e4ecbb6cf92d2ae4d570, type: 2}
