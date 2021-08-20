@@ -6,11 +6,8 @@ namespace Common
 {
     public class CloseModalButton : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject modal;
-
         public void Close() {
-            Destroy(modal);
+            Destroy(HierarchySearch.FindParentIn<Canvas>(this.transform).gameObject);
         }
     }
 }

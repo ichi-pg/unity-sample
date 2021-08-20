@@ -24,7 +24,7 @@ namespace Clicker
             this.OnModify();
         }
 
-        void OnDestory() {
+        void OnDestroy() {
             Common.PropertyInjector.ModifyHander -= this.OnModify;
         }
 

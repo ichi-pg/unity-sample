@@ -7,9 +7,7 @@ namespace Common
     public class EnumerableInjector : MonoBehaviour
     {
         public void Clear() {
-            foreach (Transform child in this.transform) {
-                Destroy(child.gameObject);
-            }
+            HierarchyDestroy.DestroyChildren(this.transform);
         }
 
         public void InjectList(IEnumerable enumerable, GameObject prefab, IResourceLoader loader) {

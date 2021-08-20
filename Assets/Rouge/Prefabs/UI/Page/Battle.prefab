@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 1775092565150946696}
   - component: {fileID: 1775092565150946697}
   - component: {fileID: 1775092565150946698}
-  - component: {fileID: 7395923392978345986}
+  - component: {fileID: 7022337534555715855}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,9 +201,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7395923392978345986}
-        m_TargetAssemblyTypeName: Common.UIStackButton, Assembly-CSharp
-        m_MethodName: Push
+      - m_Target: {fileID: 7022337534555715855}
+        m_TargetAssemblyTypeName: Common.OpenModalButton, Common
+        m_MethodName: Open
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7395923392978345986
+--- !u!114 &7022337534555715855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,12 +222,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775092565150946700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7360da573b7cb40a3b48d67c9009369f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ed2c452a34ba4b1fa48b34108e49d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 1
-  prefab: {fileID: 4998213712546161078, guid: 8a731f0f69e824ed494d7f2b4ce0899c, type: 3}
-  injector: {fileID: 0}
+  modal: {fileID: 4998213712546161078, guid: 8a731f0f69e824ed494d7f2b4ce0899c, type: 3}
 --- !u!1 &2118112952058037719
 GameObject:
   m_ObjectHideFlags: 0

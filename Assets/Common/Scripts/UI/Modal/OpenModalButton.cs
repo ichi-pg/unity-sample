@@ -10,7 +10,9 @@ namespace Common
         private GameObject modal;
 
         public void Open() {
-            Instantiate(modal, this.GetComponentInParent<Canvas>().gameObject.transform);
+            Instantiate(this.modal, this.GetComponentInParent<Canvas>().transform);
+            //TODO データ注入
+            //TODO 入れ替えるパターン
         }
     }
 }
