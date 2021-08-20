@@ -20,7 +20,7 @@ namespace Clicker
             return level * level;
         }
 
-        public BigInteger Sale(BigInteger level, BigInteger rank, BigInteger rarity) {
+        public BigInteger Price(BigInteger level, BigInteger rank, BigInteger rarity) {
             return 0;
         }
     }

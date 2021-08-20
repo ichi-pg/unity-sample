@@ -16,7 +16,7 @@ namespace Clicker
         public interface ICalculator {
             BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
-            BigInteger Sale(BigInteger level, BigInteger rank, BigInteger rarity);
+            BigInteger Price(BigInteger level, BigInteger rank, BigInteger rarity);
         }
 
         public int Level = 0;
@@ -25,8 +25,8 @@ namespace Clicker
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
-        public BigInteger Sale { get => this.Calculator.Sale(this.Level, this.Rank, this.Rarity); }
-        public BigInteger LevelUpEfficiency { get => this.Cost / (this.NextPower - this.Power); }
+        public BigInteger CostPerformance { get => this.Cost / (this.NextPower - this.Power); }
+        public BigInteger Price { get => this.Calculator.Price(this.Level, this.Rank, this.Rarity); }
         public bool IsLocked { get => this.Level <= 0; }
         public ICalculator Calculator { private get; set; }
 
@@ -83,7 +83,7 @@ namespace Clicker
         public void Sell(IResource resource, List<Factory> factories) {
             if (factories.Contains(this)) {
                 factories.Remove(this);
-                resource.Add(this.Sale);
+                resource.Add(this.Price);
             }
         }
 
