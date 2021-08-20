@@ -1,5 +1,5 @@
 {
-    "name": "CommonTests",
+    "name": "Ichi.Common.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
