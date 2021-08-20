@@ -12,13 +12,6 @@ namespace Clicker
         [SerializeField]
         private Text text;
 
-        private Factory Factory {
-            get => Repositories.Instance.FactoryRepository
-                .List()
-                .OrderBy(t => t.Cost)
-                .FirstOrDefault();
-        }
-
         void Start() {
             Common.DataInjector.ModifyHander += this.OnModify;
             this.OnModify();
@@ -29,23 +22,22 @@ namespace Clicker
         }
 
         private void OnModify() {
-            var factory = this.Factory;
-            var wallet = Repositories.Instance.WalletRepository.Get();
-            var button = this.GetComponent<Button>();
-            button.interactable = wallet.Coin >= factory.Cost;
-            this.text.text = "Rank"+factory.Rank+
-                " Lv"+factory.Level+
-                "\n"+Common.BigIntegerText.ToString(factory.Cost);
+            var adpter = this.FindFactory();
+            this.GetComponent<Button>().interactable = !adpter.LevelUpDisable;
+            this.text.text = LocalizationText.Instance.ToString("LevelUpButton", adpter);
         }
 
         public void LevelUp() {
-            var factory = this.Factory;
-            var wallet = Repositories.Instance.WalletRepository.Get();
-            if (wallet.Coin < factory.Cost) {
-                return;
-            }
-            Repositories.Instance.FactoryRepository.LevelUp(factory);
-            Common.DataInjector.Modify();
+            this.FindFactory().LevelUp();
+        }
+
+        private FactoryAdapter FindFactory() {
+            return new FactoryAdapter(
+                Repositories.Instance.FactoryRepository
+                .List()
+                .OrderBy(t => t.Cost)
+                .FirstOrDefault()
+            );
         }
     }
 }

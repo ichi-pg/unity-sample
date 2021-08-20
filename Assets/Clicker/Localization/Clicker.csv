@@ -5,3 +5,4 @@
 "Status.Power","総生産{Power}/秒"
 "Fever","フィーバー"
 "Factories","施設一覧"
+"LevelUpButton","ランク{Rank} Lv{Level}\nLvアップ{Cost}"

@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: Factories
     m_Metadata:
       m_Items: []
+  - m_Id: 33041882800128
+    m_Key: LevelUpButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
