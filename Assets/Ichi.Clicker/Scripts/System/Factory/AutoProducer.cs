@@ -32,7 +32,6 @@ namespace Ichi.Clicker
             yield return new WaitForSeconds(FeverSeconds);
             this.interval = NormalInterval;
             //TODO 広告
-            //TODO クリック施設だけフィーバー
             //TODO オート施設は放置時間増加
         }
     }
