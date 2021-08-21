@@ -10,8 +10,14 @@ namespace Ichi.Common
         private GameObject modal;
 
         public void Open() {
-            Instantiate(this.modal, this.GetComponentInParent<Canvas>().transform);
-            //TODO データ注入
+            var obj = Instantiate(this.modal, this.GetComponentInParent<Canvas>().transform);
+            var parentInjector = this.GetComponentInParent<DataInjector>();
+            var childInjector = obj.GetComponentInChildren<DataInjector>();//TODO Enumerableだった時バッティングするかも
+            Debug.Log(parentInjector);
+            Debug.Log(childInjector);
+            if (parentInjector != null && childInjector != null) {
+                childInjector.Inject(parentInjector.Data, parentInjector.Loader);
+            }
             //TODO 入れ替えるパターン
         }
     }

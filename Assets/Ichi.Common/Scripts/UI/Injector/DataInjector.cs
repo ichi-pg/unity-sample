@@ -10,7 +10,7 @@ namespace Ichi.Common
     {
         public static event System.Action ModifyHander;
         public object Data { get; private set; }
-        private IResourceLoader loader;
+        public IResourceLoader Loader { get; private set; }
         private Dictionary<string, UnityAction> actions = new Dictionary<string, UnityAction>();
         private HashSet<Text> texts = new HashSet<Text>();
         private HashSet<Image> images = new HashSet<Image>();
@@ -29,7 +29,7 @@ namespace Ichi.Common
                 this.InjectText(this.Data, text);
             }
             foreach (Image image in this.images) {
-                this.InjectImage(this.Data, image, this.loader);
+                this.InjectImage(this.Data, image, this.Loader);
             }
             foreach (Button button in this.buttons) {
                 this.InjectButton(this.Data, button);
@@ -58,7 +58,7 @@ namespace Ichi.Common
             this.InjectImage(data, this.GetComponent<Image>(), loader);
             this.InjectButton(data, this.GetComponent<Button>());
             this.Data = data;
-            this.loader = loader;
+            this.Loader = loader;
         }
 
         private void InjectText(object data, Text text) {
