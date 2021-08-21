@@ -21,6 +21,7 @@ namespace Ichi.Clicker
         public int Level = 0;
         public int Rank = 0;
         public int Rarity = 0;
+        public int Category = 0;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }

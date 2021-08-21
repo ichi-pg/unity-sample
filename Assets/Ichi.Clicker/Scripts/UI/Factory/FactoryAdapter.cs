@@ -27,13 +27,5 @@ namespace Ichi.Clicker
             Dependency.FactoryRepository.LevelUp(this.Factory);
             Ichi.Common.DataInjector.Modify();
         }
-
-        public void Produce() {
-            if (this.Factory.IsLocked) {
-                return;
-            }
-            Dependency.FactoryRepository.Produce(this.Factory);
-            Ichi.Common.DataInjector.Modify();
-        }
     }
 }

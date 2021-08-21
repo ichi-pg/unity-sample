@@ -15,7 +15,7 @@ namespace Ichi.Clicker
             var repository = Dependency.FactoryRepository;
             while (true) {
                 foreach (var factory in repository.List()) {
-                    if (!factory.IsLocked) {
+                    if (!factory.IsLocked && factory.Category == (int)FactoryCategory.Auto) {
                         repository.Produce(factory);
                     }
                 }

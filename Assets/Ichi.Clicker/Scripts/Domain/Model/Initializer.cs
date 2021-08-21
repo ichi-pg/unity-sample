@@ -6,9 +6,10 @@ namespace Ichi.Clicker
     public static class Initializer
     {
         private const int MaxRank = 20;
+        private static Factory.ICalculator calculator = new FactoryCalculator();
 
         public static void Initialize(out Wallet wallet, out List<Factory> factories) {
-            var factory = new Factory(GetCalculator()) {
+            var factory = new Factory(calculator) {
                 Rank = 1,
             };
             wallet = new Wallet(factory.Cost);
@@ -17,10 +18,10 @@ namespace Ichi.Clicker
         }
 
         public static void Load(List<Factory> factories) {
-            var calculator = GetCalculator();
             for (var rank = 1; rank <= MaxRank; ++rank) {
                 var factory = new Factory(calculator) {
-                    Rank = rank
+                    Rank = rank,
+                    Category = (int)FactoryCategory.Auto,
                 };
                 var find = factories.Find(t => t.EqualsFactory(factory));
                 if (find != null) {
@@ -29,10 +30,6 @@ namespace Ichi.Clicker
                     factories.Add(factory);
                 }
             }
-        }
-
-        private static Factory.ICalculator GetCalculator() {
-            return new FactoryCalculator();
         }
     }
 }
