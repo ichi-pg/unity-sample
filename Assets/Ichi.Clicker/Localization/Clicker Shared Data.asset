@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: LevelUpButton
     m_Metadata:
       m_Items: []
+  - m_Id: 244815613648896
+    m_Key: Close
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

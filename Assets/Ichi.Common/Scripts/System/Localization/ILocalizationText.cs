@@ -5,6 +5,6 @@ namespace Ichi.Common
 {
     public interface ILocalizationText
     {
-        string ToString(string key, params object[] values);
+        string Localize(string key, params object[] values);
     }
 }

@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Ichi.Clicker
 {
     public class FactoryAdapter
     {
         public Factory Factory { get; private set; }
-        public string NameText { get => Dependency.LocalizationText.ToString("Factory.Name", this); }
-        public string CostText { get => Dependency.LocalizationText.ToString("Factory.Cost", this); }
+        public string NameText { get => Dependency.LocalizationText.Localize("Factory.Name", this); }
+        public string CostText { get => Dependency.LocalizationText.Localize("Factory.Cost", this); }
         public int Rank { get => this.Factory.Rank; }
         public int Level { get => this.Factory.Level; }
         public string Cost { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Cost); }

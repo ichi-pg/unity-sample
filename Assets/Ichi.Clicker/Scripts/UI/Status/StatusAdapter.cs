@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Linq;
 
 namespace Ichi.Clicker
 {
     public class StatusAdapter
     {
-        public string CoinText { get => Dependency.LocalizationText.ToString("Status.Coin", this); }
-        public string PowerText { get => Dependency.LocalizationText.ToString("Status.Power", this); }
+        public string CoinText { get => Dependency.LocalizationText.Localize("Status.Coin", this); }
+        public string PowerText { get => Dependency.LocalizationText.Localize("Status.Power", this); }
         public string Coin { get => Ichi.Common.BigIntegerText.ToString(Dependency.WalletRepository.Get().Coin); }
         public string Power {
             get {

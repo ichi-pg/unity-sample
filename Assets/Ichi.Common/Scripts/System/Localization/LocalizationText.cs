@@ -14,7 +14,7 @@ namespace Ichi.Common
             this.table = table;
         }
 
-        public string ToString(string key, params object[] values) {
+        public string Localize(string key, params object[] values) {
             return new LocalizedStringTable(this.table)
                 .GetTable()
                 .GetEntry(key)
