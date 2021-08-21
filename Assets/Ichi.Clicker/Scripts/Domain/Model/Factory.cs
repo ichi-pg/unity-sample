@@ -19,8 +19,8 @@ namespace Ichi.Clicker
         }
 
         public int Level = 0;
-        public int Rank;
-        public int Rarity;
+        public int Rank = 0;
+        public int Rarity = 0;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
@@ -58,14 +58,7 @@ namespace Ichi.Clicker
         //NOTE コインじゃなく、モノを生産する。ビジュアル的面白さ。モノを中継してコインを得る。
         //NOTE 最初にクリックから始まり、徐々に施設が充実する。
 
-        public Factory(ICalculator calculator, int rank) {
-            this.Rank = rank;
-            this.Calculator = calculator;
-        }
-
-        public Factory(ICalculator calculator, int rank, int level) {
-            this.Rank = rank;
-            this.Level = level;
+        public Factory(ICalculator calculator) {
             this.Calculator = calculator;
         }
 
