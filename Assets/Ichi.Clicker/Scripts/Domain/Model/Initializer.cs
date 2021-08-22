@@ -20,7 +20,7 @@ namespace Ichi.Clicker
             for (var rank = 1; rank <= maxRank; ++rank) {
                 var factory = factories.Find(t => t.Category == (int)category && t.Rank == rank);
                 if (factory == null) {
-                    factories.Add(new Factory(calculator){
+                    factories.Add(new Factory(calculator) {
                         Category = (int)category,
                         Rank = rank,
                         Level = level,

@@ -19,11 +19,11 @@ namespace Ichi.Clicker
             long Interval { get; }
         }
 
-        public int Level = 0;
-        public int Rank = 0;
-        public int Rarity = 0;
-        public int Category = 0;
-        public long CollectedAt = 0;
+        public int Level;
+        public int Rank;
+        public int Rarity;
+        public int Category;
+        public long CollectedAt;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }

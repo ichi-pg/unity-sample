@@ -9,6 +9,10 @@ namespace Ichi.Clicker
     {
         public Ichi.Common.BigNumber Coin;
 
+        public Wallet() {
+            this.Coin = new Common.BigNumber();
+        }
+
         public bool Consume(BigInteger coin) {
             if (coin < 0) {
                 return false;
