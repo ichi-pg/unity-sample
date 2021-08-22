@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ichi.Clicker
 {
@@ -13,7 +14,7 @@ namespace Ichi.Clicker
 
         private static void Initialize(List<Factory> factories, Factory.ICalculator calculator, Factory.Categories category, int maxRank, int level, long now) {
             for (var rank = 1; rank <= maxRank; ++rank) {
-                var factory = factories.Find(t => t.Category == (int)category && t.Rank == rank);
+                var factory = factories.FirstOrDefault(t => t.Category == (int)category && t.Rank == rank);
                 if (factory == null) {
                     factories.Add(new Factory(calculator) {
                         Category = (int)category,
@@ -28,7 +29,7 @@ namespace Ichi.Clicker
         }
 
         private static void Initialize(List<Item> items, Item.Categories category, int quantity) {
-            var item = items.Find(t => t.Category == (int)category);
+            var item = items.FirstOrDefault(t => t.Category == (int)category);
             if (item == null) {
                 items.Add(new Item() {
                     Category = (int)category,

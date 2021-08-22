@@ -10,7 +10,7 @@ namespace Ichi.Clicker
         public enum Categories
         {
             Coin,
-            Crop,
+            Product,
         }
 
         public Ichi.Common.BigNumber Quantity;

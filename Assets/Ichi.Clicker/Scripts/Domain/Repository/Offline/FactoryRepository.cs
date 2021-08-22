@@ -16,7 +16,8 @@ namespace Ichi.Clicker
 
         public void LevelUp(Factory factory) {
             //TODO
-            factory.LevelUp(SaveData.Instance.Items.First(), Common.Time.Now);
+            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
+            factory.LevelUp(coin, Common.Time.Now);
             SaveData.Instance.Save();
         }
 
@@ -25,14 +26,17 @@ namespace Ichi.Clicker
                 throw new System.Exception("Can not produce not click factory.");
             }
             //TODO
-            factory.Produce(SaveData.Instance.Items.First());
+            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
+            factory.Produce(coin);
         }
 
         public void Collect(Factory factory) {
             if (factory.Category != (int)Factory.Categories.Auto) {
                 throw new System.Exception("Can not collect not auto factory.");
             }
-            factory.Collect(SaveData.Instance.Items.First(), Common.Time.Now);
+            //TODO
+            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
+            factory.Collect(coin, Common.Time.Now);
         }
     }
 }

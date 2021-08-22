@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     {
         public string CoinText { get => Dependency.LocalizationText.Localize("Status.Coin", this); }
         public string PowerText { get => Dependency.LocalizationText.Localize("Status.Power", this); }
-        public string Coin { get => Ichi.Common.BigIntegerText.ToString(Dependency.ItemRepository.Get().Quantity); }
+        public string Coin { get => Ichi.Common.BigIntegerText.ToString(Dependency.ItemRepository.Get(Item.Categories.Coin).Quantity); }
         public string Power {
             get {
                 BigInteger power;

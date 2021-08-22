@@ -6,8 +6,8 @@ namespace Ichi.Clicker
 {
     public class ItemRepository : IItemRepository
     {
-        public Item Get() {
-            return SaveData.Instance.Items.First();//TODO
+        public Item Get(Item.Categories category) {
+            return SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)category);
         }
     }
 }
