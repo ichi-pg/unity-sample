@@ -24,7 +24,7 @@ namespace Ichi.Clicker
                         Category = (int)category,
                         Rank = rank,
                         Level = level,
-                        CollectedAt = now,
+                        CollectedAt = level > 0 ? now : 0,
                     });
                 } else {
                     factory.Calculator = calculator;

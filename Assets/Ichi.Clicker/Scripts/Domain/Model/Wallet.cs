@@ -10,6 +10,9 @@ namespace Ichi.Clicker
         public Ichi.Common.BigNumber Coin;
 
         public bool Consume(BigInteger coin) {
+            if (coin < 0) {
+                return false;
+            }
             if (this.Coin < coin) {
                 return false;
             }
@@ -17,8 +20,12 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public void Add(BigInteger coin) {
+        public bool Add(BigInteger coin) {
+            if (coin < 0) {
+                return false;
+            }
             this.Coin += coin;
+            return true;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Ichi.Clicker
         }
 
         public void LevelUp(Factory factory) {
-            factory.LevelUp(SaveData.Instance.Wallet);
+            factory.LevelUp(SaveData.Instance.Wallet, Common.Time.Now);
             SaveData.Instance.Save();
         }
 

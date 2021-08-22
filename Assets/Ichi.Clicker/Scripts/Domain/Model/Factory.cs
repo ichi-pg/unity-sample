@@ -9,7 +9,7 @@ namespace Ichi.Clicker
     {
         public interface IResource {
             bool Consume(BigInteger coin);
-            void Add(BigInteger coin);
+            bool Add(BigInteger coin);
         }
 
         public interface ICalculator {
@@ -36,41 +36,49 @@ namespace Ichi.Clicker
             this.Calculator = calculator;
         }
 
-        public void LevelUp(IResource resource) {
+        public void LevelUp(IResource resource, long now) {
             if (!resource.Consume(this.Cost)) {
-                throw new System.Exception("Not enough factory level up resource.");
+                throw new System.Exception("Failed consume resource.");
+            }
+            if (this.Level <= 0) {
+                this.CollectedAt = now;
             }
             this.Level++;
         }
 
         public void Produce(IResource resource) {
             if (this.IsLocked) {
-                throw new System.Exception("Can not produce locked factory.");
+                throw new System.Exception("Locked factory.");
             }
-            resource.Add(this.Power);
+            if (!resource.Add(this.Power)) {
+                throw new System.Exception("Failed add resource.");
+            }
         }
 
         public void Collect(IResource resource, long now) {
             if (this.IsLocked) {
-                throw new System.Exception("Can not collect locked factory.");
+                throw new System.Exception("Locked factory.");
+            }
+            if (now < this.CollectedAt) {
+                throw new System.Exception("Invalid time.");
             }
             var count = (now - this.CollectedAt) / this.Calculator.Interval;
-            if (count < 0) {
-                throw new System.Exception("Can not collect from past time.");
+            if (!resource.Add(this.Power * count)) {
+                throw new System.Exception("Failed add resource.");
             }
-            resource.Add(this.Power * count);
             this.CollectedAt = now;
         }
 
         public void Sell(IResource resource, List<Factory> factories) {
             if (this.IsLocked) {
-                throw new System.Exception("Can not sell locked factory.");
+                throw new System.Exception("Locked factory.");
             }
-            if (!factories.Contains(this)) {
-                throw new System.Exception("Can not sell not in factories.");
+            if (!factories.Remove(this)) {
+                throw new System.Exception("Invalid factories.");
             }
-            factories.Remove(this);
-            resource.Add(this.Price);
+            if (!resource.Add(this.Price)) {
+                throw new System.Exception("Failed add resource.");
+            }
         }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
