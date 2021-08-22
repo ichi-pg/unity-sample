@@ -42,8 +42,6 @@ namespace Ichi.Common
             //TODO 変化したオブジェクトだけ更新したい
         }
 
-        //TODO Rx、asyncでもっと綺麗にできる部分ない（全体的に）？
-
         public void Inject(object data, IResourceLoader loader) {
             foreach (Text text in this.GetComponentsInChildren<Text>(true)) {
                 this.InjectText(data, text);
