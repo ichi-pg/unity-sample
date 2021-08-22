@@ -11,7 +11,7 @@ namespace Ichi.Clicker
     {
         [Test]
         public void PowerTest() {
-            var calculator = new FactoryCalculator.Auto();
+            var calculator = new AutoFactory();
             Assert.AreEqual("1078", new Factory(calculator){Rank=7,Level=22}.Power.ToString());
             Assert.AreEqual("1.078a", Ichi.Common.BigIntegerText.ToString(new Factory(calculator){Rank=7,Level=22}.Power));
             Assert.AreEqual("1127", new Factory(calculator){Rank=7,Level=23}.Power.ToString());

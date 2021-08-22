@@ -15,7 +15,32 @@ MonoBehaviour:
   m_SharedTableData: {fileID: 11400000, guid: 1d99284da25e5441b917a27bc71ef63b, type: 2}
   m_Tables:
   - {fileID: 11400000, guid: af771e3064c0442e6a015d1182df0bf5, type: 2}
-  m_Extensions: []
+  m_Extensions:
+  - id: 0
   m_Group: String Table
   references:
     version: 1
+    00000000:
+      type: {class: CsvExtension, ns: UnityEditor.Localization.Plugins.CSV, asm: Unity.Localization.Editor}
+      data:
+        m_Collection: {fileID: 11400000}
+        m_ColumnsList:
+        - id: 1
+        - id: 2
+        m_ConnectedFile: /Users/d.ikeda/workspace/unity-sample/Assets/Ichi.Clicker/Localization/Ichi.Clicker.csv
+    00000001:
+      type: {class: KeyIdColumns, ns: UnityEditor.Localization.Plugins.CSV.Columns, asm: Unity.Localization.Editor}
+      data:
+        m_IncludeId: 0
+        m_IncludeSharedComments: 0
+        m_KeyFieldName: Key
+        m_IdFieldName: Id
+        m_CommentFieldName: Shared Comments
+    00000002:
+      type: {class: LocaleColumns, ns: UnityEditor.Localization.Plugins.CSV.Columns, asm: Unity.Localization.Editor}
+      data:
+        m_LocaleIdentifier:
+          m_Code: ja
+        m_FieldName: Japanese(ja)
+        m_CommentFieldName: Japanese(ja) Comments
+        m_IncludeComments: 0

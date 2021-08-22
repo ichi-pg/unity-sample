@@ -14,10 +14,8 @@ namespace Ichi.Clicker
         IEnumerator Start() {
             var repository = Dependency.FactoryRepository;
             while (true) {
-                foreach (var factory in repository.List()) {
-                    if (!factory.IsLocked && factory.Category == (int)FactoryCategory.Auto) {
-                        repository.Produce(factory);
-                    }
+                foreach (var factory in repository.List(FactoryCategory.Auto)) {
+                    repository.Produce(factory);
                 }
                 Ichi.Common.DataInjector.Modify();
                 yield return new WaitForSeconds(this.interval);
@@ -32,7 +30,7 @@ namespace Ichi.Clicker
             yield return new WaitForSeconds(FeverSeconds);
             this.interval = NormalInterval;
             //TODO 広告
-            //TODO オート施設は放置時間増加
+            //TODO フィーバーするのはクリック施設
         }
     }
 }

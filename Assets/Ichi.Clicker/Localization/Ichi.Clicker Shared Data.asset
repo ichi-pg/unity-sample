@@ -13,8 +13,40 @@ MonoBehaviour:
   m_Name: Ichi.Clicker Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Ichi.Clicker
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: 1d99284da25e5441b917a27bc71ef63b
+  m_Entries:
+  - m_Id: 313624563277824
+    m_Key: Factory.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624575860736
+    m_Key: Factory.Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055040
+    m_Key: Status.Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055041
+    m_Key: Status.Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055042
+    m_Key: Fever
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055043
+    m_Key: Factories
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055044
+    m_Key: LevelUpButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313624580055045
+    m_Key: Close
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

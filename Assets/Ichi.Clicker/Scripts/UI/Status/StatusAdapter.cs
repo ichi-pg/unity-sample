@@ -12,7 +12,7 @@ namespace Ichi.Clicker
         public string Power {
             get {
                 BigInteger power;
-                foreach (var factory in Dependency.FactoryRepository.List()) {
+                foreach (var factory in Dependency.FactoryRepository.List(FactoryCategory.Auto)) {
                     power += factory.Power;
                 }
                 return Ichi.Common.BigIntegerText.ToString(power);

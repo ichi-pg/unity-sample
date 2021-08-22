@@ -16,12 +16,14 @@ namespace Ichi.Clicker
             BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Price(BigInteger level, BigInteger rank, BigInteger rarity);
+            long Interval { get; }
         }
 
         public int Level = 0;
         public int Rank = 0;
         public int Rarity = 0;
         public int Category = 0;
+        public long CollectedAt = 0;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
@@ -29,6 +31,47 @@ namespace Ichi.Clicker
         public BigInteger Price { get => this.Calculator.Price(this.Level, this.Rank, this.Rarity); }
         public bool IsLocked { get => this.Level <= 0; }
         public ICalculator Calculator { private get; set; }
+
+        public Factory(ICalculator calculator) {
+            this.Calculator = calculator;
+        }
+
+        public void LevelUp(IResource resource) {
+            if (!resource.Consume(this.Cost)) {
+                throw new System.Exception("Not enough factory level up resource.");
+            }
+            this.Level++;
+        }
+
+        public void Produce(IResource resource) {
+            if (this.IsLocked) {
+                throw new System.Exception("Can not produce locked factory.");
+            }
+            resource.Add(this.Power);
+        }
+
+        public void Collect(IResource resource, long now) {
+            if (this.IsLocked) {
+                throw new System.Exception("Can not collect locked factory.");
+            }
+            var count = (now - this.CollectedAt) / this.Calculator.Interval;
+            if (count < 0) {
+                throw new System.Exception("Can not collect from past time.");
+            }
+            resource.Add(this.Power * count);
+            this.CollectedAt = now;
+        }
+
+        public void Sell(IResource resource, List<Factory> factories) {
+            if (this.IsLocked) {
+                throw new System.Exception("Can not sell locked factory.");
+            }
+            if (!factories.Contains(this)) {
+                throw new System.Exception("Can not sell not in factories.");
+            }
+            factories.Remove(this);
+            resource.Add(this.Price);
+        }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
@@ -58,30 +101,5 @@ namespace Ichi.Clicker
         //NOTE 施設を購入だけでなく売れる（総レベルアップ費用×n）
         //NOTE コインじゃなく、モノを生産する。ビジュアル的面白さ。モノを中継してコインを得る。
         //NOTE 最初にクリックから始まり、徐々に施設が充実する。
-
-        public Factory(ICalculator calculator) {
-            this.Calculator = calculator;
-        }
-
-        public void LevelUp(IResource resource) {
-            if (resource.Consume(this.Cost)) {
-                this.Level++;
-            }
-        }
-
-        public void Produce(IResource resource) {
-            resource.Add(this.Power);
-        }
-
-        public void Sell(IResource resource, List<Factory> factories) {
-            if (factories.Contains(this)) {
-                factories.Remove(this);
-                resource.Add(this.Price);
-            }
-        }
-
-        public bool EqualsFactory(Factory factory) {
-            return this.Rank == factory.Rank;
-        }
     }
 }
