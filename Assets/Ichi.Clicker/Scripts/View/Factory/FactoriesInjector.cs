@@ -14,7 +14,7 @@ namespace Ichi.Clicker
         void Start() {
             this.enumerableInjector = this.GetComponent<Ichi.Common.EnumerableInjector>();
             this.enumerableInjector.Clear();
-            foreach (var factory in Dependency.FactoryRepository.List()) {
+            foreach (var factory in Dependency.FactoryRepository.Factories) {
                 this.enumerableInjector.Inject(
                     new FactoryAdapter(factory),
                     this.prefab,

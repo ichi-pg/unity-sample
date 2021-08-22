@@ -6,37 +6,30 @@ namespace Ichi.Clicker
 {
     public class FactoryRepository : IFactoryRepository
     {
-        public IEnumerable<Factory> List() {
-            return SaveData.Instance.Factories;
-        }
-
-        public IEnumerable<Factory> List(Factory.Categories category, bool isLocked = false) {
-            return SaveData.Instance.Factories.Where(t => t.Category == (int)category && t.IsLocked == isLocked);
-        }
+        public IEnumerable<Factory> Factories { get => SaveData.Instance.Factories; }
+        public IEnumerable<Factory> ClickFactories { get => SaveData.Instance.ClickFactories; }
+        public IEnumerable<Factory> AutoFactories { get => SaveData.Instance.AutoFactories; }
 
         public void LevelUp(Factory factory) {
             //TODO
-            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
-            factory.LevelUp(coin, Common.Time.Now);
+            factory.LevelUp(SaveData.Instance.Coin, Common.Time.Now);
             SaveData.Instance.Save();
         }
 
         public void Produce(Factory factory) {
             if (factory.Category != (int)Factory.Categories.Click) {
-                throw new System.Exception("Can not produce not click factory.");
+                throw new System.Exception("Invalid factory.");
             }
             //TODO
-            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
-            factory.Produce(coin);
+            factory.Produce(SaveData.Instance.Coin);
         }
 
         public void Collect(Factory factory) {
             if (factory.Category != (int)Factory.Categories.Auto) {
-                throw new System.Exception("Can not collect not auto factory.");
+                throw new System.Exception("Invalid factory.");
             }
             //TODO
-            var coin = SaveData.Instance.Items.FirstOrDefault(t => t.Category == (int)Item.Categories.Coin);
-            factory.Collect(coin, Common.Time.Now);
+            factory.Collect(SaveData.Instance.Coin, Common.Time.Now);
         }
     }
 }

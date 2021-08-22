@@ -16,7 +16,7 @@ namespace Ichi.Clicker
 
         private void Collect() {
             var repository = Dependency.FactoryRepository;
-            foreach (var factory in repository.List(Factory.Categories.Auto)) {
+            foreach (var factory in repository.AutoFactories) {
                 repository.Collect(factory);
             }
             Ichi.Common.DataInjector.Modify();

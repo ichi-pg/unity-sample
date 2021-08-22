@@ -5,6 +5,7 @@ namespace Ichi.Clicker
 {
     public interface IItemRepository
     {
-        Item Get(Item.Categories category);
+        Item Coin { get; }
+        Item Product { get; }
     }
 }

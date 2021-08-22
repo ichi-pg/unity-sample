@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ichi.Clicker
 {
@@ -22,6 +23,10 @@ namespace Ichi.Clicker
                         instance.Factories,
                         instance.Items
                     );
+                    instance.ClickFactories = instance.Factories.Where(factory => factory.Category == (int)Factory.Categories.Click);
+                    instance.AutoFactories = instance.Factories.Where(factory => factory.Category == (int)Factory.Categories.Auto);
+                    instance.Coin = instance.Items.FirstOrDefault(item => item.Category == (int)Item.Categories.Coin);
+                    instance.Product = instance.Items.FirstOrDefault(item => item.Category == (int)Item.Categories.Product);
                 }
                 return instance;
             }
@@ -29,6 +34,10 @@ namespace Ichi.Clicker
 
         public List<Factory> Factories;
         public List<Item> Items;
+        public Item Coin { get; private set; }
+        public Item Product { get; private set; }
+        public IEnumerable<Factory> ClickFactories { get; private set; }
+        public IEnumerable<Factory> AutoFactories { get; private set; }
 
         private SaveData() {
         }

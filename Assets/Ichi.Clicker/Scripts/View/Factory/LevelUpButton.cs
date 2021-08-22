@@ -34,8 +34,8 @@ namespace Ichi.Clicker
         private FactoryAdapter FindFactory() {
             return new FactoryAdapter(
                 Dependency.FactoryRepository
-                    .List()
-                    .OrderBy(t => t.Cost)
+                    .Factories
+                    .OrderBy(factory => factory.Cost)
                     .FirstOrDefault()
             );
         }
