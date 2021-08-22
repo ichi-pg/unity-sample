@@ -10,27 +10,29 @@ namespace Ichi.Clicker
             return SaveData.Instance.Factories;
         }
 
-        public IEnumerable<Factory> List(FactoryCategory category, bool isLocked = false) {
+        public IEnumerable<Factory> List(Factory.Categories category, bool isLocked = false) {
             return SaveData.Instance.Factories.Where(t => t.Category == (int)category && t.IsLocked == isLocked);
         }
 
         public void LevelUp(Factory factory) {
-            factory.LevelUp(SaveData.Instance.Wallet, Common.Time.Now);
+            //TODO
+            factory.LevelUp(SaveData.Instance.Items.First(), Common.Time.Now);
             SaveData.Instance.Save();
         }
 
         public void Produce(Factory factory) {
-            if (factory.Category != (int)FactoryCategory.Click) {
+            if (factory.Category != (int)Factory.Categories.Click) {
                 throw new System.Exception("Can not produce not click factory.");
             }
-            factory.Produce(SaveData.Instance.Wallet);
+            //TODO
+            factory.Produce(SaveData.Instance.Items.First());
         }
 
         public void Collect(Factory factory) {
-            if (factory.Category != (int)FactoryCategory.Auto) {
+            if (factory.Category != (int)Factory.Categories.Auto) {
                 throw new System.Exception("Can not collect not auto factory.");
             }
-            factory.Collect(SaveData.Instance.Wallet, Common.Time.Now);
+            factory.Collect(SaveData.Instance.Items.First(), Common.Time.Now);
         }
     }
 }

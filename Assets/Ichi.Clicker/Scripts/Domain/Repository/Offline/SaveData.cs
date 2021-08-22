@@ -12,25 +12,23 @@ namespace Ichi.Clicker
                 if (instance == null) {
                     if (Ichi.Common.JsonSaveData.Exist<SaveData>()) {
                         instance = Ichi.Common.JsonSaveData.Load<SaveData>();
-                        Initializer.Load(instance.Factories);
                     } else {
-                        Wallet wallet;
-                        List<Factory> factories;
-                        Initializer.Initialize(
-                            out wallet,
-                            out factories
-                        );
-                        instance = new SaveData();
-                        instance.Wallet = wallet;
-                        instance.Factories = factories;
+                        instance = new SaveData() {
+                            Factories = new List<Factory>(),
+                            Items = new List<Item>(),
+                        };
                     }
+                    Initializer.Initialize(
+                        instance.Factories,
+                        instance.Items
+                    );
                 }
                 return instance;
             }
         }
 
-        public Wallet Wallet;
         public List<Factory> Factories;
+        public List<Item> Items;
 
         private SaveData() {
         }

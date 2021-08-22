@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public interface IWalletRepository
+    public interface IItemRepository
     {
-        Wallet Get();
+        Item Get();
     }
 }

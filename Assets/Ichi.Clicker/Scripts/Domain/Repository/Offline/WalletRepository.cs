@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ichi.Clicker
 {
-    public class WalletRepository : IWalletRepository
+    public class ItemRepository : IItemRepository
     {
-        public Wallet Get() {
-            return SaveData.Instance.Wallet;
+        public Item Get() {
+            return SaveData.Instance.Items.First();//TODO
         }
     }
 }

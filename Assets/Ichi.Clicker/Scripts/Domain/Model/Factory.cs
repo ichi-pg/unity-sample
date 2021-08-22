@@ -7,7 +7,7 @@ namespace Ichi.Clicker
     [System.Serializable]
     public class Factory
     {
-        public interface IResource {
+        public interface IItem {
             bool Consume(BigInteger coin);
             bool Add(BigInteger coin);
         }
@@ -17,6 +17,12 @@ namespace Ichi.Clicker
             BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
             BigInteger Price(BigInteger level, BigInteger rank, BigInteger rarity);
             long Interval { get; }
+        }
+
+        public enum Categories
+        {
+            Click,
+            Auto,
         }
 
         public int Level;
@@ -36,9 +42,9 @@ namespace Ichi.Clicker
             this.Calculator = calculator;
         }
 
-        public void LevelUp(IResource resource, long now) {
-            if (!resource.Consume(this.Cost)) {
-                throw new System.Exception("Failed consume resource.");
+        public void LevelUp(IItem item, long now) {
+            if (!item.Consume(this.Cost)) {
+                throw new System.Exception("Failed consume item.");
             }
             if (this.Level <= 0) {
                 this.CollectedAt = now;
@@ -46,16 +52,16 @@ namespace Ichi.Clicker
             this.Level++;
         }
 
-        public void Produce(IResource resource) {
+        public void Produce(IItem item) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
-            if (!resource.Add(this.Power)) {
-                throw new System.Exception("Failed add resource.");
+            if (!item.Add(this.Power)) {
+                throw new System.Exception("Failed add item.");
             }
         }
 
-        public void Collect(IResource resource, long now) {
+        public void Collect(IItem item, long now) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
@@ -63,21 +69,21 @@ namespace Ichi.Clicker
                 throw new System.Exception("Invalid time.");
             }
             var count = (now - this.CollectedAt) / this.Calculator.Interval;
-            if (!resource.Add(this.Power * count)) {
-                throw new System.Exception("Failed add resource.");
+            if (!item.Add(this.Power * count)) {
+                throw new System.Exception("Failed add item.");
             }
             this.CollectedAt = now;
         }
 
-        public void Sell(IResource resource, List<Factory> factories) {
+        public void Sell(IItem item, List<Factory> factories) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
             if (!factories.Remove(this)) {
                 throw new System.Exception("Invalid factories.");
             }
-            if (!resource.Add(this.Price)) {
-                throw new System.Exception("Failed add resource.");
+            if (!item.Add(this.Price)) {
+                throw new System.Exception("Failed add item.");
             }
         }
 

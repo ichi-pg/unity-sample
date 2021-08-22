@@ -5,18 +5,13 @@ namespace Ichi.Clicker
 {
     public static class Initializer
     {
-        public static void Initialize(out Wallet wallet, out List<Factory> factories) {
-            wallet = new Wallet();
-            factories = new List<Factory>();
-            Load(factories);
+        public static void Initialize(List<Factory> factories, List<Item> items) {
+            Initialize(factories, new ClickFactory(), Factory.Categories.Click, 1, 1, 0);
+            Initialize(factories, new AutoFactory(), Factory.Categories.Auto, 20, 0, Common.Time.Now);
+            Initialize(items, Item.Categories.Coin, 0);
         }
 
-        public static void Load(List<Factory> factories) {
-            Load(factories, new ClickFactory(), FactoryCategory.Click, 1, 1, 0);
-            Load(factories, new AutoFactory(), FactoryCategory.Auto, 20, 0, Common.Time.Now);
-        }
-
-        private static void Load(List<Factory> factories, Factory.ICalculator calculator, FactoryCategory category, int maxRank, int level, long now) {
+        private static void Initialize(List<Factory> factories, Factory.ICalculator calculator, Factory.Categories category, int maxRank, int level, long now) {
             for (var rank = 1; rank <= maxRank; ++rank) {
                 var factory = factories.Find(t => t.Category == (int)category && t.Rank == rank);
                 if (factory == null) {
@@ -29,6 +24,16 @@ namespace Ichi.Clicker
                 } else {
                     factory.Calculator = calculator;
                 }
+            }
+        }
+
+        private static void Initialize(List<Item> items, Item.Categories category, int quantity) {
+            var item = items.Find(t => t.Category == (int)category);
+            if (item == null) {
+                items.Add(new Item() {
+                    Category = (int)category,
+                    Quantity = new Common.BigNumber(quantity),
+                });
             }
         }
     }

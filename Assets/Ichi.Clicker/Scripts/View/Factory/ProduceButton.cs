@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     {
         public void Produce() {
             var repository = Dependency.FactoryRepository;
-            foreach (var factory in repository.List(FactoryCategory.Click)) {
+            foreach (var factory in repository.List(Factory.Categories.Click)) {
                 repository.Produce(factory);
             }
             Ichi.Common.DataInjector.Modify();

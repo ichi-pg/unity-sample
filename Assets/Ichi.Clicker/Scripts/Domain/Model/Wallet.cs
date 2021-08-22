@@ -5,30 +5,33 @@ using System.Numerics;
 namespace Ichi.Clicker
 {
     [System.Serializable]
-    public class Wallet : Factory.IResource
+    public class Item : Factory.IItem
     {
-        public Ichi.Common.BigNumber Coin;
-
-        public Wallet() {
-            this.Coin = new Common.BigNumber();
+        public enum Categories
+        {
+            Coin,
+            Crop,
         }
 
-        public bool Consume(BigInteger coin) {
-            if (coin < 0) {
+        public Ichi.Common.BigNumber Quantity;
+        public int Category;
+
+        public bool Consume(BigInteger quantity) {
+            if (quantity < 0) {
                 return false;
             }
-            if (this.Coin < coin) {
+            if (this.Quantity < quantity) {
                 return false;
             }
-            this.Coin -= coin;
+            this.Quantity -= quantity;
             return true;
         }
 
-        public bool Add(BigInteger coin) {
-            if (coin < 0) {
+        public bool Add(BigInteger quantity) {
+            if (quantity < 0) {
                 return false;
             }
-            this.Coin += coin;
+            this.Quantity += quantity;
             return true;
         }
     }
