@@ -24,6 +24,7 @@ namespace Ichi.Clicker
             observer.Dispose();
             button.interactable = true;
             //TODO 広告
+            //TODO OperationCanceledException
         }
 
         public void ProduceAll() {
