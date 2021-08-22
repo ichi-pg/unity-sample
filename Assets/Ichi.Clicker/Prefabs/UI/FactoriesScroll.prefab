@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3170245074049679217}
   - component: {fileID: 3413155721365763822}
   m_Layer: 5
-  m_Name: Factories
+  m_Name: FactoriesScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
