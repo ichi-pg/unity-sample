@@ -10,6 +10,7 @@ namespace Ichi.Clicker
             Initialize(factories, new ClickFactory(), Factory.Categories.Click, 1, 1, 0);
             Initialize(factories, new AutoFactory(), Factory.Categories.Auto, 20, 0, Common.Time.Now);
             Initialize(items, Item.Categories.Coin, 0);
+            Initialize(items, Item.Categories.Product, 0);
         }
 
         private static void Initialize(List<Factory> factories, Factory.ICalculator calculator, Factory.Categories category, int maxRank, int level, long now) {
