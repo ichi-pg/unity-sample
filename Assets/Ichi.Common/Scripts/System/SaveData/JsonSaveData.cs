@@ -8,6 +8,7 @@ namespace Ichi.Common
     public static class JsonSaveData
     {
         public static void Save<T>(T obj, bool pretty = true) {
+            //TODO 非同期
             var path = FilePath(obj.GetType());
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {

@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,25 +11,25 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour
     {
-        public const float FeverSeconds = 30.0f;
-
-        public void Fever() {
-            foreach (var produceButton in this.transform.root.GetComponentsInChildren<ProduceButton>()) {
-                produceButton.StartCoroutine("Fever");
-            }
-            this.StartCoroutine("Disable");
+        public async void Fever() {
+            var button = this.GetComponent<Button>();
+            button.interactable = false;
+            var observer = Observable.Interval(TimeSpan.FromMilliseconds(100))
+                .Subscribe(_ => this.ProduceAll())
+                .AddTo(this);
+            await UniTask.Delay(
+                TimeSpan.FromSeconds(30),
+                cancellationToken: this.GetCancellationTokenOnDestroy()
+            );
+            observer.Dispose();
+            button.interactable = true;
             //TODO 広告
         }
 
-        IEnumerator Disable() {
-            var button = this.GetComponent<Button>();
-            button.interactable = false;
-            yield return new WaitForSeconds(FeverSeconds);
+        public void ProduceAll() {
             foreach (var produceButton in this.transform.root.GetComponentsInChildren<ProduceButton>()) {
-                produceButton.StopCoroutine("Fever");
+                produceButton.Produce();
             }
-            button.interactable = true;
-            //TODO 残り時間の表示
         }
     }
 }
