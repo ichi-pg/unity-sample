@@ -29,7 +29,7 @@ namespace Ichi.Clicker
         public int Rank;
         public int Rarity;
         public int Category;
-        public long CollectedAt;
+        public long ProducedAt;
         public BigInteger Power { get => this.Calculator.Power(this.Level, this.Rank, this.Rarity); }
         public BigInteger NextPower { get => this.Calculator.Power(this.Level + 1, this.Rank, this.Rarity); }
         public BigInteger Cost { get => this.Calculator.Cost(this.Level, this.Rank, this.Rarity); }
@@ -47,7 +47,7 @@ namespace Ichi.Clicker
                 throw new System.Exception("Failed consume item.");
             }
             if (this.Level <= 0) {
-                this.CollectedAt = now;
+                this.ProducedAt = now;
             }
             this.Level++;
         }
@@ -61,30 +61,29 @@ namespace Ichi.Clicker
             }
         }
 
-        public void Collect(IItem item, long now) {
+        public void TimeProduce(IItem item, long now) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
-            if (now < this.CollectedAt) {
+            if (now < this.ProducedAt) {
                 throw new System.Exception("Invalid time.");
             }
-            var count = (now - this.CollectedAt) / this.Calculator.Interval;
+            var count = (now - this.ProducedAt) / this.Calculator.Interval;
             if (!item.Add(this.Power * count)) {
                 throw new System.Exception("Failed add item.");
             }
-            this.CollectedAt = now;
+            this.ProducedAt = now;
         }
 
-        public void Sell(IItem item, List<Factory> factories) {
+        public void Sell(IItem item) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
-            }
-            if (!factories.Remove(this)) {
-                throw new System.Exception("Invalid factories.");
             }
             if (!item.Add(this.Price)) {
                 throw new System.Exception("Failed add item.");
             }
+            this.ProducedAt = 0;
+            this.Level = 0;
         }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？

@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 889169763}
   - component: {fileID: 889169762}
   m_Layer: 0
-  m_Name: AutoProducer
+  m_Name: TimeProducer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,10 +295,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 889169761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e81d184bfa04e8ab2141248d1cac77, type: 3}
+  m_Script: {fileID: 11500000, guid: 64b40bd6040ae4dd786d633f8494a38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
 --- !u!4 &889169763
 Transform:
   m_ObjectHideFlags: 0

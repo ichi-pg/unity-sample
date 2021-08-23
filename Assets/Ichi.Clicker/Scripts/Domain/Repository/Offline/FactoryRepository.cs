@@ -24,12 +24,12 @@ namespace Ichi.Clicker
             factory.Produce(SaveData.Instance.Coin);
         }
 
-        public void Collect(Factory factory) {
+        public void TimeProduce(Factory factory) {
             if (factory.Category != (int)Factory.Categories.Auto) {
                 throw new System.Exception("Invalid factory.");
             }
             //TODO
-            factory.Collect(SaveData.Instance.Coin, Common.Time.Now);
+            factory.TimeProduce(SaveData.Instance.Coin, Common.Time.Now);
         }
     }
 }

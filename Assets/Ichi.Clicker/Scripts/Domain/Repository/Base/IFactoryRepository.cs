@@ -10,6 +10,6 @@ namespace Ichi.Clicker
         IEnumerable<Factory> AutoFactories { get; }
         void LevelUp(Factory factory);
         void Produce(Factory factory);
-        void Collect(Factory factory);
+        void TimeProduce(Factory factory);
     }
 }

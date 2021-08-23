@@ -6,18 +6,18 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
-    public class AutoCollector : MonoBehaviour
+    public class TimeProducer : MonoBehaviour
     {
         void Start() {
             Observable.Interval(TimeSpan.FromSeconds(1))
-                .Subscribe(_ => this.Collect())
+                .Subscribe(_ => this.TimeProduce())
                 .AddTo(this);
         }
 
-        private void Collect() {
+        private void TimeProduce() {
             var repository = Dependency.FactoryRepository;
             foreach (var factory in repository.AutoFactories) {
-                repository.Collect(factory);
+                repository.TimeProduce(factory);
             }
             Ichi.Common.DataInjector.Modify();
         }
