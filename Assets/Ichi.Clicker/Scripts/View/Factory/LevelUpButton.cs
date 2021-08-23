@@ -9,6 +9,8 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class LevelUpButton : MonoBehaviour
     {
+        //TODO ViewModelにしたい
+
         [SerializeField]
         private Text text;
 

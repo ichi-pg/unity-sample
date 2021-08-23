@@ -953,7 +953,7 @@ GameObject:
   - component: {fileID: 8082911126846736762}
   - component: {fileID: 2899922716818195688}
   - component: {fileID: 2742793559544273620}
-  - component: {fileID: 4394707087295286844}
+  - component: {fileID: 8490843525372691941}
   m_Layer: 5
   m_Name: CollectButton
   m_TagString: Untagged
@@ -1063,9 +1063,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4394707087295286844}
-        m_TargetAssemblyTypeName: Ichi.Clicker.LevelUpButton, Ichi.Clicker
-        m_MethodName: LevelUp
+      - m_Target: {fileID: 8490843525372691941}
+        m_TargetAssemblyTypeName: Ichi.Clicker.CollectButton, Ichi.Clicker
+        m_MethodName: Collect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1075,7 +1075,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4394707087295286844
+--- !u!114 &8490843525372691941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1084,10 +1084,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6009809854560193978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7feb6f56f8d334dfd837e0cc0bf0c4f8, type: 3}
+  m_Script: {fileID: 11500000, guid: db2d14143711f4426b95dbeb07c81efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 2234247694841402651}
 --- !u!1 &6752708621681067384
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ namespace Ichi.Clicker
         public IEnumerable<Factory> AutoFactories { get => SaveData.Instance.AutoFactories; }
 
         public void LevelUp(Factory factory) {
-            //TODO
             factory.LevelUp(SaveData.Instance.Coin, Common.Time.Now);
             SaveData.Instance.Save();
         }
@@ -20,16 +19,14 @@ namespace Ichi.Clicker
             if (factory.Category != (int)FactoryCategory.Click) {
                 throw new System.Exception("Invalid factory.");
             }
-            //TODO
-            factory.Produce(SaveData.Instance.Coin);
+            factory.Produce(SaveData.Instance.Product);
         }
 
         public void TimeProduce(Factory factory) {
             if (factory.Category != (int)FactoryCategory.Auto) {
                 throw new System.Exception("Invalid factory.");
             }
-            //TODO
-            factory.TimeProduce(SaveData.Instance.Coin, Common.Time.Now);
+            factory.TimeProduce(SaveData.Instance.Product, Common.Time.Now);
         }
     }
 }

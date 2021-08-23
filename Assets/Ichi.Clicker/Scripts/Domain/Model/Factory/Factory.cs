@@ -58,6 +58,7 @@ namespace Ichi.Clicker
             if (now < this.ProducedAt) {
                 throw new System.Exception("Invalid time.");
             }
+            //TODO リミッター
             var count = (now - this.ProducedAt) / this.Calculator.Interval;
             if (!item.Add(this.Power * count)) {
                 throw new System.Exception("Failed add item.");

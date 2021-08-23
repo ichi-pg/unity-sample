@@ -7,6 +7,7 @@ namespace Ichi.Clicker
     public class AutoFactory : IFactoryCalculator
     {
         public BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity) {
+            //TODO バランス調整
             if (level <= 0) {
                 return 0;
             }
@@ -15,6 +16,7 @@ namespace Ichi.Clicker
         }
 
         public BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity) {
+            //TODO バランス調整
             level += BigInteger.Pow(5, (int)(rank - 1));
             return level * level;
         }
