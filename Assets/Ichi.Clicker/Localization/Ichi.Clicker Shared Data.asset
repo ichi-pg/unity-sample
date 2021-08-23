@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: Unit.Auto
     m_Metadata:
       m_Items: []
+  - m_Id: 690202107437056
+    m_Key: Collect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

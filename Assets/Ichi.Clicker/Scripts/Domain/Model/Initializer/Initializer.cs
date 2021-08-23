@@ -7,34 +7,35 @@ namespace Ichi.Clicker
     public static class Initializer
     {
         public static void Initialize(List<Factory> factories, List<Item> items) {
-            Initialize(factories, new ClickFactory(), (int)FactoryCategory.Click, 1, 1, 0);
-            Initialize(factories, new AutoFactory(), (int)FactoryCategory.Auto, 20, 0, Common.Time.Now);
+            Initialize(factories, new LevelLinear(), new LevelExponential(), new Producer(), (int)FactoryCategory.Click, 1, 1);
+            Initialize(factories, new LevelLinear(), new LevelExponential(), new TimeProducer(), (int)FactoryCategory.Auto, 20, 0);
             Initialize(items, (int)ItemCategory.Coin, 0);
             Initialize(items, (int)ItemCategory.Product, 0);
         }
 
-        private static void Initialize(List<Factory> factories, IFactoryCalculator calculator, int category, int maxRank, int level, long now) {
+        private static void Initialize(List<Factory> factories, ILevelCalculator power, ILevelCalculator cost, IProducer producer, int category, int maxRank, int level) {
             for (var rank = 1; rank <= maxRank; ++rank) {
-                var factory = factories.FirstOrDefault(factory => factory.Category == category && factory.Rank == rank);
+                var factory = factories.FirstOrDefault(factory => factory.category == category && factory.rank == rank);
                 if (factory == null) {
-                    factories.Add(new Factory(calculator) {
-                        Category = category,
-                        Rank = rank,
-                        Level = level,
-                        ProducedAt = level > 0 ? now : 0,
-                    });
-                } else {
-                    factory.Calculator = calculator;
+                    factory = new Factory() {
+                        category = category,
+                        rank = rank,
+                        level = level,
+                    };
+                    factories.Add(factory);
                 }
+                factory.PowerCalculator = power;
+                factory.CostCalculator = cost;
+                factory.Producer = producer;
             }
         }
 
         private static void Initialize(List<Item> items, int category, int quantity) {
-            var item = items.FirstOrDefault(item => item.Category == category);
+            var item = items.FirstOrDefault(item => item.category == category);
             if (item == null) {
                 items.Add(new Item() {
-                    Category = category,
-                    Quantity = new Common.BigNumber(quantity),
+                    category = category,
+                    quantity = new Common.BigNumber(quantity),
                 });
             }
         }

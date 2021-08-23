@@ -4,8 +4,8 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface ISell
+    public interface ILevelCalculator
     {
-        bool Sell(IStore store);
+        BigInteger Calculate(BigInteger level, BigInteger rank, BigInteger rarity);
     }
 }

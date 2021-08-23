@@ -5,7 +5,7 @@ namespace Ichi.Clicker
 {
     public class FactoryAdapter
     {
-        public Factory Factory { get; private set; }
+        public IFactory Factory { get; private set; }
         public string NameText { get => Dependency.LocalizationText.Localize("Factory.Name", this); }
         public string CostText { get => Dependency.LocalizationText.Localize("Factory.Cost", this); }
         public int Rank { get => this.Factory.Rank; }
@@ -29,7 +29,7 @@ namespace Ichi.Clicker
             }
         }
 
-        public FactoryAdapter(Factory factory) {
+        public FactoryAdapter(IFactory factory) {
             this.Factory = factory;
         }
 

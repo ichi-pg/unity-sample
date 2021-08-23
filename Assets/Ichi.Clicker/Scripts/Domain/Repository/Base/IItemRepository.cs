@@ -5,8 +5,8 @@ namespace Ichi.Clicker
 {
     public interface IItemRepository
     {
-        Item Coin { get; }
-        Item Product { get; }
-        void Sell(Item item);
+        IItem Coin { get; }
+        IItem Product { get; }
+        void Sell(IItem item);
     }
 }

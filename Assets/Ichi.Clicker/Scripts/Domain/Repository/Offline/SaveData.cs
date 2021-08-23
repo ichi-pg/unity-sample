@@ -15,25 +15,25 @@ namespace Ichi.Clicker
                         instance = Ichi.Common.JsonSaveData.Load<SaveData>();
                     } else {
                         instance = new SaveData() {
-                            Factories = new List<Factory>(),
-                            Items = new List<Item>(),
+                            factories = new List<Factory>(),
+                            items = new List<Item>(),
                         };
                     }
                     Initializer.Initialize(
-                        instance.Factories,
-                        instance.Items
+                        instance.factories,
+                        instance.items
                     );
-                    instance.ClickFactories = instance.Factories.Where(factory => factory.Category == (int)FactoryCategory.Click);
-                    instance.AutoFactories = instance.Factories.Where(factory => factory.Category == (int)FactoryCategory.Auto);
-                    instance.Coin = instance.Items.FirstOrDefault(item => item.Category == (int)ItemCategory.Coin);
-                    instance.Product = instance.Items.FirstOrDefault(item => item.Category == (int)ItemCategory.Product);
+                    instance.ClickFactories = instance.factories.Where(factory => factory.category == (int)FactoryCategory.Click);
+                    instance.AutoFactories = instance.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);
+                    instance.Coin = instance.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
+                    instance.Product = instance.items.FirstOrDefault(item => item.category == (int)ItemCategory.Product);
                 }
                 return instance;
             }
         }
 
-        public List<Factory> Factories;
-        public List<Item> Items;
+        public List<Factory> factories;
+        public List<Item> items;
         public Item Coin { get; private set; }
         public Item Product { get; private set; }
         public IEnumerable<Factory> ClickFactories { get; private set; }

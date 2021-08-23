@@ -5,19 +5,20 @@ using System.Numerics;
 namespace Ichi.Clicker
 {
     [System.Serializable]
-    public class Item : IStore, IConsume, ISell
+    public class Item : IItem
     {
-        public Ichi.Common.BigNumber Quantity;
-        public int Category;
+        public Ichi.Common.BigNumber quantity;
+        public int category;
+        public BigInteger Quantity { get => this.quantity.Integer; }
 
         public bool Consume(BigInteger quantity) {
             if (quantity < 0) {
                 return false;
             }
-            if (this.Quantity < quantity) {
+            if (this.quantity < quantity) {
                 return false;
             }
-            this.Quantity -= quantity;
+            this.quantity -= quantity;
             return true;
         }
 
@@ -25,7 +26,7 @@ namespace Ichi.Clicker
             if (quantity < 0) {
                 return false;
             }
-            this.Quantity += quantity;
+            this.quantity += quantity;
             return true;
         }
 
@@ -33,10 +34,10 @@ namespace Ichi.Clicker
             if (this == store) {
                 return false;
             }
-            if (!store.Store(this.Quantity)) {
+            if (!store.Store(this.quantity)) {
                 return false;
             }
-            this.Quantity = 0;
+            this.quantity = 0;
             return true;
         }
     }

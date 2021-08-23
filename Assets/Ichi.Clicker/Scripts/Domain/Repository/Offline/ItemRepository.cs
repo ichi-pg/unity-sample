@@ -6,10 +6,10 @@ namespace Ichi.Clicker
 {
     public class ItemRepository : IItemRepository
     {
-        public Item Coin { get => SaveData.Instance.Coin; }
-        public Item Product { get => SaveData.Instance.Product; }
+        public IItem Coin { get => SaveData.Instance.Coin; }
+        public IItem Product { get => SaveData.Instance.Product; }
 
-        public void Sell(Item item) {
+        public void Sell(IItem item) {
             item.Sell(this.Coin);
         }
     }

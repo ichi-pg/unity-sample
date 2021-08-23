@@ -5,11 +5,10 @@ namespace Ichi.Clicker
 {
     public interface IFactoryRepository
     {
-        IEnumerable<Factory> Factories { get; }
-        IEnumerable<Factory> ClickFactories { get; }
-        IEnumerable<Factory> AutoFactories { get; }
-        void LevelUp(Factory factory);
-        void Produce(Factory factory);
-        void TimeProduce(Factory factory);
+        IEnumerable<IFactory> Factories { get; }
+        IEnumerable<IFactory> ClickFactories { get; }
+        IEnumerable<IFactory> AutoFactories { get; }
+        void LevelUp(IFactory factory);
+        void Produce(IFactory factory);
     }
 }
