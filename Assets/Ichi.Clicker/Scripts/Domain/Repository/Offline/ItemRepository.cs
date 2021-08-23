@@ -9,8 +9,8 @@ namespace Ichi.Clicker
         public Item Coin { get => SaveData.Instance.Coin; }
         public Item Product { get => SaveData.Instance.Product; }
 
-        public void Collect() {
-            this.Coin.Collect(this.Product);
+        public void Sell(Item item) {
+            item.Sell(this.Coin);
         }
     }
 }

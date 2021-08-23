@@ -35,9 +35,14 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public void Collect(Item item) {
-            this.Quantity += item.Quantity;
-            item.Quantity = 0;
+        public void Sell(Factory.IItem item) {
+            if (this == item) {
+                throw new System.Exception("Invalid item.");
+            }
+            if (!item.Add(this.Quantity)) {
+                throw new System.Exception("Failed add item.");
+            }
+            this.Quantity = 0;
         }
     }
 }
