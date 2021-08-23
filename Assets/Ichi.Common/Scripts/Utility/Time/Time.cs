@@ -6,6 +6,7 @@ namespace Ichi.Common
 {
     public static class Time
     {
-        public static long Now { get => DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond; } //TODO チート対策
+        //TODO チート対策（NTP or 起動時間）
+        public static long Now { get => DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond; }
     }
 }
