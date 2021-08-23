@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System;
 using Cysharp.Threading.Tasks;
-using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,22 +14,28 @@ namespace Ichi.Clicker
         public async void Fever() {
             var button = this.GetComponent<Button>();
             button.interactable = false;
-            var observer = Observable.Interval(TimeSpan.FromMilliseconds(100))
-                .Subscribe(_ => this.ProduceAll())
-                .AddTo(this);
-            await UniTask.Delay(
-                TimeSpan.FromSeconds(30),
-                cancellationToken: this.GetCancellationTokenOnDestroy()
-            );
-            observer.Dispose();
-            button.interactable = true;
+            var token = new CancellationTokenSource();
+            this.AutoProduce(token.Token).Forget();
+            try {
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(30),
+                    cancellationToken: this.GetCancellationTokenOnDestroy()
+                );
+                button.interactable = true;
+            } catch(OperationCanceledException) {
+            } finally {
+                token.Cancel();
+            }
             //TODO 広告
-            //TODO OperationCanceledException
         }
 
-        public void ProduceAll() {
-            foreach (var produceButton in this.transform.root.GetComponentsInChildren<ProduceButton>()) {
-                produceButton.Produce();
+        public async UniTask AutoProduce(CancellationToken token) {
+            while (true)
+            {
+                foreach (var produceButton in this.transform.root.GetComponentsInChildren<ProduceButton>()) {
+                    produceButton.Produce();
+                }
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
         }
     }

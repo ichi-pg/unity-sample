@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System;
-using UniRx;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Ichi.Clicker
@@ -9,19 +10,21 @@ namespace Ichi.Clicker
     public class AutoProducer : MonoBehaviour
     {
         void Start() {
-            Observable.Interval(TimeSpan.FromSeconds(1))
-                .Subscribe(_ => this.TimeProduce())
-                .AddTo(this);
+            this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private void TimeProduce() {
-            var repository = Dependency.FactoryRepository;
-            foreach (var factory in repository.AutoFactories) {
-                if (!factory.IsLocked) {
-                    repository.TimeProduce(factory);
+        private async UniTask AutoProduce(CancellationToken token) {
+            while (true)
+            {
+                var repository = Dependency.FactoryRepository;
+                foreach (var factory in repository.AutoFactories) {
+                    if (!factory.IsLocked) {
+                        repository.TimeProduce(factory);
+                    }
                 }
+                Ichi.Common.DataInjector.Modify();
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
-            Ichi.Common.DataInjector.Modify();
         }
     }
 }
