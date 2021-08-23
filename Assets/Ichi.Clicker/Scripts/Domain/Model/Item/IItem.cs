@@ -8,5 +8,7 @@ namespace Ichi.Clicker
     {
         bool Consume(BigInteger coin);
         bool Add(BigInteger coin);
+
+        //TODO IConsume, IAddまで分解できるけど…？
     }
 }

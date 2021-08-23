@@ -29,6 +29,8 @@ namespace Ichi.Clicker
             return true;
         }
 
+        //TODO ISellで良いかも
+
         public void Sell(IItem item) {
             if (this == item) {
                 throw new System.Exception("Invalid item.");

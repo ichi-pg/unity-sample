@@ -34,7 +34,7 @@ namespace Ichi.Clicker
             this.Level++;
         }
 
-        //TODO 時間生産とクリック生産どっちも持ってるの歪よな
+        //TODO 時間生産とクリック生産どっちも持ってるの歪よな。リスト的にはILevelUpがあれば良い。
 
         public void Produce(IItem item) {
             if (this.IsLocked) {
