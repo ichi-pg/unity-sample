@@ -7,5 +7,6 @@ namespace Ichi.Clicker
     {
         Item Coin { get; }
         Item Product { get; }
+        void Collect();
     }
 }

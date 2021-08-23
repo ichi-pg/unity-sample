@@ -43,6 +43,17 @@ namespace Ichi.Common
             this.i = i;
         }
 
+        public static BigNumber operator +(BigNumber a, BigNumber b) { a.Integer += b.Integer; return a; }
+        public static BigNumber operator -(BigNumber a, BigNumber b) { a.Integer -= b.Integer; return a; }
+        public static BigNumber operator *(BigNumber a, BigNumber b) { a.Integer *= b.Integer; return a; }
+        public static BigNumber operator /(BigNumber a, BigNumber b) { a.Integer /= b.Integer; return a; }
+        public static bool operator ==(BigNumber a, BigNumber b) => a.Integer == b.Integer;
+        public static bool operator !=(BigNumber a, BigNumber b) => a.Integer != b.Integer;
+        public static bool operator <(BigNumber a, BigNumber b) => a.Integer < b.Integer;
+        public static bool operator <=(BigNumber a, BigNumber b) => a.Integer <= b.Integer;
+        public static bool operator >(BigNumber a, BigNumber b) => a.Integer > b.Integer;
+        public static bool operator >=(BigNumber a, BigNumber b) => a.Integer >= b.Integer;
+
         public static BigNumber operator +(BigNumber a, BigInteger b) { a.Integer += b; return a; }
         public static BigNumber operator -(BigNumber a, BigInteger b) { a.Integer -= b; return a; }
         public static BigNumber operator *(BigNumber a, BigInteger b) { a.Integer *= b; return a; }
@@ -54,8 +65,22 @@ namespace Ichi.Common
         public static bool operator >(BigNumber a, BigInteger b) => a.Integer > b;
         public static bool operator >=(BigNumber a, BigInteger b) => a.Integer >= b;
 
+        public static BigNumber operator +(BigNumber a, int b) { a.Integer += b; return a; }
+        public static BigNumber operator -(BigNumber a, int b) { a.Integer -= b; return a; }
+        public static BigNumber operator *(BigNumber a, int b) { a.Integer *= b; return a; }
+        public static BigNumber operator /(BigNumber a, int b) { a.Integer /= b; return a; }
+        public static bool operator ==(BigNumber a, int b) => a.Integer == b;
+        public static bool operator !=(BigNumber a, int b) => a.Integer != b;
+        public static bool operator <(BigNumber a, int b) => a.Integer < b;
+        public static bool operator <=(BigNumber a, int b) => a.Integer <= b;
+        public static bool operator >(BigNumber a, int b) => a.Integer > b;
+        public static bool operator >=(BigNumber a, int b) => a.Integer >= b;
+
         public static implicit operator BigInteger(BigNumber a) => a.Integer;
         public static implicit operator BigNumber(BigInteger a) => new BigNumber(a);
+
+        public static implicit operator int(BigNumber a) => (int)a.Integer;
+        public static implicit operator BigNumber(int a) => new BigNumber(a);
 
         public override string ToString() => this.s;
 

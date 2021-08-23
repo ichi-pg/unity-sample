@@ -34,5 +34,10 @@ namespace Ichi.Clicker
             this.Quantity += quantity;
             return true;
         }
+
+        public void Collect(Item item) {
+            this.Quantity += item.Quantity;
+            item.Quantity = 0;
+        }
     }
 }
