@@ -13,7 +13,7 @@ namespace Ichi.Clicker
             this.OverwriteTexts();
         }
 
-        void OnGUI() {
+        void OnTransformChildrenChanged() {
             this.OverwriteTexts();
         }
 
