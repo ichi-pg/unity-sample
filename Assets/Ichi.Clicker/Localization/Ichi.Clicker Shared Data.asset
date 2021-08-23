@@ -47,6 +47,26 @@ MonoBehaviour:
     m_Key: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 669928590925824
+    m_Key: Status.Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 669928603508736
+    m_Key: Status.ClickPower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 669928603508737
+    m_Key: Status.AutoPower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 669928603508738
+    m_Key: Unit.Click
+    m_Metadata:
+      m_Items: []
+  - m_Id: 669928603508739
+    m_Key: Unit.Auto
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

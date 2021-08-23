@@ -16,6 +16,19 @@ namespace Ichi.Clicker
         public bool LevelUpDisable { get => Dependency.ItemRepository.Coin.Quantity < this.Factory.Cost; }
         public bool BackgroundDisable { get => this.Factory.IsLocked; }
 
+        public string Unit {
+            get {
+                switch (this.Factory.Category) {
+                    case (int)Factory.Categories.Click:
+                        return Dependency.LocalizationText.Localize("Unit.Click");
+                    case (int)Factory.Categories.Auto:
+                        return Dependency.LocalizationText.Localize("Unit.Auto");
+                    default:
+                        return "";
+                }
+            }
+        }
+
         public FactoryAdapter(Factory factory) {
             this.Factory = factory;
         }

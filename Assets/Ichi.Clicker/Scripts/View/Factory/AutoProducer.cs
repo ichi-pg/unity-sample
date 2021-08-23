@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
-    public class TimeProducer : MonoBehaviour
+    public class AutoProducer : MonoBehaviour
     {
         void Start() {
             Observable.Interval(TimeSpan.FromSeconds(1))

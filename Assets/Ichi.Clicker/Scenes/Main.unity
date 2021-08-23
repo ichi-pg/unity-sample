@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 889169763}
   - component: {fileID: 889169762}
   m_Layer: 0
-  m_Name: TimeProducer
+  m_Name: AutoProducer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
