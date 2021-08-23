@@ -5,7 +5,7 @@ using System.Numerics;
 namespace Ichi.Clicker
 {
     [System.Serializable]
-    public class Factory
+    public class Factory : ISell
     {
         public int Level;
         public int Rank;
@@ -24,9 +24,9 @@ namespace Ichi.Clicker
             this.Calculator = calculator;
         }
 
-        public void LevelUp(IItem item, long now) {
-            if (!item.Consume(this.Cost)) {
-                throw new System.Exception("Failed consume item.");
+        public void LevelUp(IConsume consume, long now) {
+            if (!consume.Consume(this.Cost)) {
+                throw new System.Exception("Failed consume.");
             }
             if (this.Level <= 0) {
                 this.ProducedAt = now;
@@ -36,19 +36,19 @@ namespace Ichi.Clicker
 
         //TODO 時間生産とクリック生産どっちも持ってるの歪よな。リスト的にはILevelUpがあれば良い。
 
-        public void Produce(IItem item) {
+        public void Produce(IStore store) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
             if (this.Calculator.Interval > 0) {
                 throw new System.Exception("Invalid interval.");
             }
-            if (!item.Add(this.Power)) {
-                throw new System.Exception("Failed add item.");
+            if (!store.Store(this.Power)) {
+                throw new System.Exception("Failed store.");
             }
         }
 
-        public void TimeProduce(IItem item, long now) {
+        public void TimeProduce(IStore store, long now) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
@@ -60,21 +60,22 @@ namespace Ichi.Clicker
             }
             //TODO リミッター
             var count = (now - this.ProducedAt) / this.Calculator.Interval;
-            if (!item.Add(this.Power * count)) {
-                throw new System.Exception("Failed add item.");
+            if (!store.Store(this.Power * count)) {
+                throw new System.Exception("Failed store.");
             }
             this.ProducedAt = now;
         }
 
-        public void Sell(IItem item) {
+        public bool Sell(IStore store) {
             if (this.IsLocked) {
-                throw new System.Exception("Locked factory.");
+                return false;
             }
-            if (!item.Add(this.Price)) {
-                throw new System.Exception("Failed add item.");
+            if (!store.Store(this.Price)) {
+                return false;
             }
             this.ProducedAt = 0;
             this.Level = 0;
+            return true;
         }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？

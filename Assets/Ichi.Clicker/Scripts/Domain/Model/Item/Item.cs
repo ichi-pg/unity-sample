@@ -5,7 +5,7 @@ using System.Numerics;
 namespace Ichi.Clicker
 {
     [System.Serializable]
-    public class Item : IItem
+    public class Item : IStore, IConsume, ISell
     {
         public Ichi.Common.BigNumber Quantity;
         public int Category;
@@ -21,7 +21,7 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public bool Add(BigInteger quantity) {
+        public bool Store(BigInteger quantity) {
             if (quantity < 0) {
                 return false;
             }
@@ -29,16 +29,15 @@ namespace Ichi.Clicker
             return true;
         }
 
-        //TODO ISellで良いかも
-
-        public void Sell(IItem item) {
-            if (this == item) {
-                throw new System.Exception("Invalid item.");
+        public bool Sell(IStore store) {
+            if (this == store) {
+                return false;
             }
-            if (!item.Add(this.Quantity)) {
-                throw new System.Exception("Failed add item.");
+            if (!store.Store(this.Quantity)) {
+                return false;
             }
             this.Quantity = 0;
+            return true;
         }
     }
 }
