@@ -17,7 +17,9 @@ namespace Ichi.Clicker
         private void TimeProduce() {
             var repository = Dependency.FactoryRepository;
             foreach (var factory in repository.AutoFactories) {
-                repository.TimeProduce(factory);
+                if (!factory.IsLocked) {
+                    repository.TimeProduce(factory);
+                }
             }
             Ichi.Common.DataInjector.Modify();
         }

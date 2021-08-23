@@ -52,9 +52,14 @@ namespace Ichi.Clicker
             this.Level++;
         }
 
+        //TODO 時間生産とクリック生産どっちも持ってるの歪よな
+
         public void Produce(IItem item) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
+            }
+            if (this.Calculator.Interval > 0) {
+                throw new System.Exception("Invalid interval.");
             }
             if (!item.Add(this.Power)) {
                 throw new System.Exception("Failed add item.");
@@ -64,6 +69,9 @@ namespace Ichi.Clicker
         public void TimeProduce(IItem item, long now) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
+            }
+            if (this.Calculator.Interval <= 0) {
+                throw new System.Exception("Invalid interval.");
             }
             if (now < this.ProducedAt) {
                 throw new System.Exception("Invalid time.");

@@ -9,7 +9,9 @@ namespace Ichi.Clicker
         public void Produce() {
             var repository = Dependency.FactoryRepository;
             foreach (var factory in repository.ClickFactories) {
-                repository.Produce(factory);
+                if (!factory.IsLocked) {
+                    repository.Produce(factory);
+                }
             }
             Ichi.Common.DataInjector.Modify();
         }

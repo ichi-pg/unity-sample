@@ -25,6 +25,6 @@ namespace Ichi.Clicker
             throw new System.NotImplementedException();
         }
 
-        public long Interval => throw new System.NotImplementedException();
+        public long Interval => 0;
     }
 }
