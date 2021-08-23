@@ -20,6 +20,8 @@ namespace Ichi.Clicker
         public bool IsLocked { get => this.Level <= 0; }
         public IFactoryCalculator Calculator { private get; set; }
 
+        //TODO IPower, ICost, IPrice に分解できる。いや、全部ILevelか。
+
         public Factory(IFactoryCalculator calculator) {
             this.Calculator = calculator;
         }
@@ -34,7 +36,8 @@ namespace Ichi.Clicker
             this.Level++;
         }
 
-        //TODO 時間生産とクリック生産どっちも持ってるの歪よな。リスト的にはILevelUpがあれば良い。
+        //TODO リスト的にはILevelUpがあれば良い。
+        //TODO IProduceを持てば良い。
 
         public void Produce(IStore store) {
             if (this.IsLocked) {
