@@ -20,7 +20,7 @@ namespace Ichi.Clicker
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
         public bool IsLocked { get => this.level <= 0; }
-        public BigInteger Power { get => this.PowerCalculator.Calculate(this.level, this.rank, this.rarity); }
+        public BigInteger Power { get => this.IsLocked ? 0 : this.PowerCalculator.Calculate(this.level, this.rank, this.rarity); }
         public BigInteger NextPower { get => this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity); }
         public BigInteger Cost { get => this.CostCalculator.Calculate(this.level, this.rank, this.rarity); }
         public BigInteger CostPerformance { get => this.Cost / (this.NextPower - this.Power); }

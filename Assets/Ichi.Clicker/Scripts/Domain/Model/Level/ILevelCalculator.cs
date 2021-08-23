@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface ILevelCalculator
     {
-        BigInteger Calculate(BigInteger level, BigInteger rank, BigInteger rarity);
+        BigInteger Calculate(int level, int rank, int rarity);
     }
 }
