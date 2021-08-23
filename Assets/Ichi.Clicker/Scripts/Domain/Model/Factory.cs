@@ -7,24 +7,6 @@ namespace Ichi.Clicker
     [System.Serializable]
     public class Factory
     {
-        public interface IItem {
-            bool Consume(BigInteger coin);
-            bool Add(BigInteger coin);
-        }
-
-        public interface ICalculator {
-            BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity);
-            BigInteger Cost(BigInteger level, BigInteger rank, BigInteger rarity);
-            BigInteger Price(BigInteger level, BigInteger rank, BigInteger rarity);
-            long Interval { get; }
-        }
-
-        public enum Categories
-        {
-            Click,
-            Auto,
-        }
-
         public int Level;
         public int Rank;
         public int Rarity;
@@ -36,9 +18,9 @@ namespace Ichi.Clicker
         public BigInteger CostPerformance { get => this.Cost / (this.NextPower - this.Power); }
         public BigInteger Price { get => this.Calculator.Price(this.Level, this.Rank, this.Rarity); }
         public bool IsLocked { get => this.Level <= 0; }
-        public ICalculator Calculator { private get; set; }
+        public IFactoryCalculator Calculator { private get; set; }
 
-        public Factory(ICalculator calculator) {
+        public Factory(IFactoryCalculator calculator) {
             this.Calculator = calculator;
         }
 

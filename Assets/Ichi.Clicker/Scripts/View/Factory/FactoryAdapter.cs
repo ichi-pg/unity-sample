@@ -19,9 +19,9 @@ namespace Ichi.Clicker
         public string Unit {
             get {
                 switch (this.Factory.Category) {
-                    case (int)Factory.Categories.Click:
+                    case (int)FactoryCategory.Click:
                         return Dependency.LocalizationText.Localize("Unit.Click");
-                    case (int)Factory.Categories.Auto:
+                    case (int)FactoryCategory.Auto:
                         return Dependency.LocalizationText.Localize("Unit.Auto");
                     default:
                         return "";

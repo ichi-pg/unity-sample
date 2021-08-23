@@ -7,13 +7,13 @@ namespace Ichi.Clicker
     public static class Initializer
     {
         public static void Initialize(List<Factory> factories, List<Item> items) {
-            Initialize(factories, new ClickFactory(), (int)Factory.Categories.Click, 1, 1, 0);
-            Initialize(factories, new AutoFactory(), (int)Factory.Categories.Auto, 20, 0, Common.Time.Now);
-            Initialize(items, (int)Item.Categories.Coin, 0);
-            Initialize(items, (int)Item.Categories.Product, 0);
+            Initialize(factories, new ClickFactory(), (int)FactoryCategory.Click, 1, 1, 0);
+            Initialize(factories, new AutoFactory(), (int)FactoryCategory.Auto, 20, 0, Common.Time.Now);
+            Initialize(items, (int)ItemCategory.Coin, 0);
+            Initialize(items, (int)ItemCategory.Product, 0);
         }
 
-        private static void Initialize(List<Factory> factories, Factory.ICalculator calculator, int category, int maxRank, int level, long now) {
+        private static void Initialize(List<Factory> factories, IFactoryCalculator calculator, int category, int maxRank, int level, long now) {
             for (var rank = 1; rank <= maxRank; ++rank) {
                 var factory = factories.FirstOrDefault(factory => factory.Category == category && factory.Rank == rank);
                 if (factory == null) {

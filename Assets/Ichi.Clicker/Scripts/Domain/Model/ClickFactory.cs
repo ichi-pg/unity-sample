@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public class ClickFactory : Factory.ICalculator
+    public class ClickFactory : IFactoryCalculator
     {
         public BigInteger Power(BigInteger level, BigInteger rank, BigInteger rarity) {
             //TODO

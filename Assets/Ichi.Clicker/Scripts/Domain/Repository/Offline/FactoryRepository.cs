@@ -17,7 +17,7 @@ namespace Ichi.Clicker
         }
 
         public void Produce(Factory factory) {
-            if (factory.Category != (int)Factory.Categories.Click) {
+            if (factory.Category != (int)FactoryCategory.Click) {
                 throw new System.Exception("Invalid factory.");
             }
             //TODO
@@ -25,7 +25,7 @@ namespace Ichi.Clicker
         }
 
         public void TimeProduce(Factory factory) {
-            if (factory.Category != (int)Factory.Categories.Auto) {
+            if (factory.Category != (int)FactoryCategory.Auto) {
                 throw new System.Exception("Invalid factory.");
             }
             //TODO

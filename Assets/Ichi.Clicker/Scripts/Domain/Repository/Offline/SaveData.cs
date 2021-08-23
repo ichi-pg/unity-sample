@@ -23,10 +23,10 @@ namespace Ichi.Clicker
                         instance.Factories,
                         instance.Items
                     );
-                    instance.ClickFactories = instance.Factories.Where(factory => factory.Category == (int)Factory.Categories.Click);
-                    instance.AutoFactories = instance.Factories.Where(factory => factory.Category == (int)Factory.Categories.Auto);
-                    instance.Coin = instance.Items.FirstOrDefault(item => item.Category == (int)Item.Categories.Coin);
-                    instance.Product = instance.Items.FirstOrDefault(item => item.Category == (int)Item.Categories.Product);
+                    instance.ClickFactories = instance.Factories.Where(factory => factory.Category == (int)FactoryCategory.Click);
+                    instance.AutoFactories = instance.Factories.Where(factory => factory.Category == (int)FactoryCategory.Auto);
+                    instance.Coin = instance.Items.FirstOrDefault(item => item.Category == (int)ItemCategory.Coin);
+                    instance.Product = instance.Items.FirstOrDefault(item => item.Category == (int)ItemCategory.Product);
                 }
                 return instance;
             }

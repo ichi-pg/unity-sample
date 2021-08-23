@@ -5,14 +5,8 @@ using System.Numerics;
 namespace Ichi.Clicker
 {
     [System.Serializable]
-    public class Item : Factory.IItem
+    public class Item : IItem
     {
-        public enum Categories
-        {
-            Coin,
-            Product,
-        }
-
         public Ichi.Common.BigNumber Quantity;
         public int Category;
 
@@ -35,7 +29,7 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public void Sell(Factory.IItem item) {
+        public void Sell(IItem item) {
             if (this == item) {
                 throw new System.Exception("Invalid item.");
             }
