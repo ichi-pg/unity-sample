@@ -11,8 +11,12 @@ namespace Ichi.Clicker
                 //コストに対してランク分の指数（上位ランクの開放難易度）
                 return BigInteger.Pow(8, rank - 1) * 100;
             }
+            return CostCalculate(PowerCalculator.PowerCalculate(level, rank), level);
+        }
+
+        public static BigInteger CostCalculate(BigInteger power, int level) {
             //パワーに対してレベル分の指数（インクリメンタルゲームの基本式）
-            return PowerCalculator.PowerCalculate(level, rank) * level * 10;
+            return power * level * 10;
         }
     }
 }
