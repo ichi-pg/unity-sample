@@ -8,5 +8,7 @@ namespace Ichi.Clicker
     {
         BigInteger Quantity { get; }
         bool Sell(IStore store);
+
+        //TODO UIにプロパティだけ公開する
     }
 }

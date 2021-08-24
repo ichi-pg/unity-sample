@@ -16,6 +16,8 @@ namespace Ichi.Clicker
         void LevelUp(IConsume consume, long now);
         void Produce(IStore store, long now);
 
+        //TODO UIにプロパティだけ公開する
+
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
         //NOTE Factory = Merge のパターン
