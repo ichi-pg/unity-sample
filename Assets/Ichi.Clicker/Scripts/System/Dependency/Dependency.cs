@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
+    //TODO Extenject or VContainer
     public static class Dependency
     {
         public static IFactoryRepository FactoryRepository { get; private set; } = new FactoryRepository();
