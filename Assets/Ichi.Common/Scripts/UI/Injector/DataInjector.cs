@@ -35,6 +35,7 @@ namespace Ichi.Common
                 this.InjectButton(this.Data, button);
             }
             //TODO 変化したパラメーターだけ更新したい
+            //TODO ReactiveProperty？
         }
 
         public static void Modify() {
