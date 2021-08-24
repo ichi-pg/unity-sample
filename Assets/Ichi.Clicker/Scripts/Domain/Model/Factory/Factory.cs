@@ -14,26 +14,33 @@ namespace Ichi.Clicker
         public long producedAt;
         public ILevelCalculator PowerCalculator { private get; set; }
         public ILevelCalculator CostCalculator { private get; set; }
-        public ILevelCalculator PriceCalculator { private get; set; }
         public IProducer Producer { private get; set; }
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
         public bool IsLocked { get => this.level <= 0; }
-        public BigInteger Power { get => this.IsLocked ? 0 : this.PowerCalculator.Calculate(this.level, this.rank, this.rarity); }
-        public BigInteger NextPower { get => this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity); }
-        public BigInteger Cost { get => this.CostCalculator.Calculate(this.level, this.rank, this.rarity); }
-        public BigInteger CostPerformance { get => this.Cost / (this.NextPower - this.Power); }
-        public BigInteger Price { get => this.PriceCalculator.Calculate(this.level, this.rank, this.rarity); }
+        public BigInteger Power { get; private set; }
+        public BigInteger NextPower { get; private set; }
+        public BigInteger Cost { get; private set; }
+        public BigInteger CostPerformance { get; private set; }
+        public BigInteger Price { get; private set; }
+
+        public void Calculate() {
+            this.Power = this.PowerCalculator.Calculate(this.level, this.rank, this.rarity);
+            this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
+            this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
+            this.CostPerformance = this.Cost / (this.NextPower - this.Power);
+        }
 
         public void LevelUp(IConsume consume, long now) {
             if (!consume.Consume(this.Cost)) {
                 throw new System.Exception("Failed consume.");
             }
-            if (this.level <= 0) {
+            if (this.IsLocked) {
                 this.producedAt = now;
             }
             this.level++;
+            this.Calculate();
         }
 
         public bool Sell(IStore store) {

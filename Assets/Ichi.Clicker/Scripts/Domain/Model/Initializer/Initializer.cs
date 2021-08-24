@@ -7,8 +7,8 @@ namespace Ichi.Clicker
     public static class Initializer
     {
         public static void Initialize(List<Factory> factories, List<Item> items) {
-            Initialize(factories, new LinearCalculator(5), new ExponentialCalculator(5), new Producer(), (int)FactoryCategory.Click, 1, 1);
-            Initialize(factories, new LinearCalculator(5), new ExponentialCalculator(5), new TimeProducer(), (int)FactoryCategory.Auto, 20, 0);
+            Initialize(factories, new ClickerCalculator(), new CostCalculator(), new Producer(), (int)FactoryCategory.Click, 1, 1);
+            Initialize(factories, new PowerCalculator(), new CostCalculator(), new TimeProducer(), (int)FactoryCategory.Auto, 20, 0);
             Initialize(items, (int)ItemCategory.Coin, 0);
             Initialize(items, (int)ItemCategory.Product, 0);
         }
@@ -27,6 +27,7 @@ namespace Ichi.Clicker
                 factory.PowerCalculator = power;
                 factory.CostCalculator = cost;
                 factory.Producer = producer;
+                factory.Calculate();
             }
         }
 

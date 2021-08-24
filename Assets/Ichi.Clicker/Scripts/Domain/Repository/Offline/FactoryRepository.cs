@@ -16,7 +16,7 @@ namespace Ichi.Clicker
         }
 
         public void Produce(IFactory factory) {
-            factory.Produce(SaveData.Instance.Product, Common.Time.Now);
+            factory.Produce(SaveData.Instance.Coin, Common.Time.Now);
         }
     }
 }
