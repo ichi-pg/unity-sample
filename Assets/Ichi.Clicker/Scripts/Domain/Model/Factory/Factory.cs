@@ -55,11 +55,11 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public void Produce(IStore store, long now) {
+        public void Produce(IStore store, long now, BigInteger bonus) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }
-            if (!this.Producer.Produce(store, this.Power, now, ref this.producedAt)) {
+            if (!this.Producer.Produce(store, this.Power * bonus, now, ref this.producedAt)) {
                 throw new System.Exception("Failed produce.");
             }
         }

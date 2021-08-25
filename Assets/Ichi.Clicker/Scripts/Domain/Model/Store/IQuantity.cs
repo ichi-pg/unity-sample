@@ -4,11 +4,8 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface IItem : IStore, IConsume
+    public interface IQuantity
     {
         BigInteger Quantity { get; }
-        bool Sell(IStore store);
-
-        //TODO UIにプロパティだけ公開する
     }
 }

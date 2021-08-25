@@ -11,12 +11,13 @@ namespace Ichi.Clicker
         public IEnumerable<IFactory> AutoFactories { get => SaveData.Instance.AutoFactories; }
 
         public void LevelUp(IFactory factory) {
-            factory.LevelUp(SaveData.Instance.Coin, Common.Time.Now);
+            (factory as Factory).LevelUp(SaveData.Instance.Coin, Common.Time.Now);
             SaveData.Instance.Save();
         }
 
         public void Produce(IFactory factory) {
-            factory.Produce(SaveData.Instance.Coin, Common.Time.Now);
+            //TODO ボーナス
+            (factory as Factory).Produce(SaveData.Instance.Coin, Common.Time.Now, 1);
         }
     }
 }
