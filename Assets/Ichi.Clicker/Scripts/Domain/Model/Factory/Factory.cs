@@ -37,6 +37,7 @@ namespace Ichi.Clicker
                 throw new System.Exception("Failed consume.");
             }
             if (this.IsLocked) {
+                //TODO 開放制限
                 this.producedAt = now;
             }
             this.level++;
