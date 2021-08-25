@@ -16,8 +16,11 @@ namespace Ichi.Clicker
         }
 
         public void Produce(IFactory factory) {
-            //TODO ボーナス
-            (factory as Factory).Produce(SaveData.Instance.Coin, Common.Time.Now, 1);
+            (factory as Factory).Produce(SaveData.Instance.Coin, Common.Time.Now);
+        }
+
+        public void FeverProduce(IFactory factory) {
+            (factory as Factory).Produce(SaveData.Instance.Coin, Common.Time.Now, factory.FeverRate);
         }
     }
 }

@@ -20,8 +20,9 @@ namespace Ichi.Clicker
         }
 
         public static int OffsetLevel(int level, int rank) {
-            //ランクが上がるごとに50レベルずつオフセット
-            return level + (rank - 1) * 50;
+            //ランクが上がるごとに指数的にオフセット
+            //TODO レベル制限設けて線形の方がプレイフィールいいかも
+            return level + (rank - 1) * (rank - 1) * 25;
         }
     }
 }

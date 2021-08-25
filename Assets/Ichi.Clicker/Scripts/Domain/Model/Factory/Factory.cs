@@ -19,6 +19,8 @@ namespace Ichi.Clicker
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
         public bool IsLocked { get => this.level <= 0; }
+        public int FeverRate { get => this.Level / 50 + 1; }
+        public int NextFeverRate { get => (this.Level + 1) / 50 + 1; }
         public BigInteger Power { get; private set; }
         public BigInteger NextPower { get; private set; }
         public BigInteger Cost { get; private set; }
@@ -56,7 +58,7 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public void Produce(IStore store, long now, BigInteger bonus) {
+        public void Produce(IStore store, long now, int bonus = 1) {
             if (this.IsLocked) {
                 throw new System.Exception("Locked factory.");
             }

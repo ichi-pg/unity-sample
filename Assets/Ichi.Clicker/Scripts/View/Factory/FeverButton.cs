@@ -15,7 +15,7 @@ namespace Ichi.Clicker
             var button = this.GetComponent<Button>();
             button.interactable = false;
             var token = new CancellationTokenSource();
-            this.AutoProduce(token.Token).Forget();
+            this.FeverProduce(token.Token).Forget();
             try {
                 await UniTask.Delay(
                     TimeSpan.FromSeconds(30),
@@ -27,15 +27,18 @@ namespace Ichi.Clicker
                 token.Cancel();
             }
             //TODO 広告でフィーバー回復
-            //TODO フィーバーレベル
         }
 
-        public async UniTask AutoProduce(CancellationToken token) {
+        public async UniTask FeverProduce(CancellationToken token) {
             while (true)
             {
-                foreach (var produceButton in this.transform.root.GetComponentsInChildren<ProduceButton>()) {
-                    produceButton.Produce();
+                var repository = Dependency.FactoryRepository;
+                foreach (var factory in repository.ClickFactories) {
+                    if (!factory.IsLocked) {
+                        repository.FeverProduce(factory);
+                    }
                 }
+                Ichi.Common.DataInjector.Modify();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
         }

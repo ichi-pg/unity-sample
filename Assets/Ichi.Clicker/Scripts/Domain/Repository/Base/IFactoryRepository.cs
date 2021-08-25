@@ -10,5 +10,6 @@ namespace Ichi.Clicker
         IEnumerable<IFactory> AutoFactories { get; }
         void LevelUp(IFactory factory);
         void Produce(IFactory factory);
+        void FeverProduce(IFactory factory);
     }
 }
