@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Ichi.Clicker
 {
@@ -8,8 +9,11 @@ namespace Ichi.Clicker
         IEnumerable<IFactory> Factories { get; }
         IEnumerable<IFactory> ClickFactories { get; }
         IEnumerable<IFactory> AutoFactories { get; }
+        DateTime NextFeverAt { get; }
+        TimeSpan FeverSpan { get; }
+        TimeSpan FeverInterval { get; }
         void LevelUp(IFactory factory);
         void Produce(IFactory factory);
-        void FeverProduce(IFactory factory);
+        void FeverProduce();
     }
 }

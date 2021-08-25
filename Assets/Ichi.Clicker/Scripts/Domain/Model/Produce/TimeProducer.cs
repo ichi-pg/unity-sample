@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace Ichi.Clicker
 {
     public class TimeProducer : IProducer
     {
-        private long interval = 1000;//TODO ブースト
-        private long limit = 12*60*60*1000;//TODO 広告で2倍
+        private TimeSpan interval = TimeSpan.FromSeconds(1);//TODO ブースト
+        private TimeSpan limit = TimeSpan.FromHours(12);//TODO 広告で2倍
 
-        public bool Produce(IStore store, BigInteger power, long now, ref long producedAt) {
+        public bool Produce(IStore store, BigInteger power, DateTime now, ref DateTime producedAt) {
             if (now < producedAt) {
                 return false;
             }
             var span = now - producedAt;
-            if (span > limit) {
-                span = limit;
+            if (span > this.limit) {
+                span = this.limit;
             }
-            var count = span / this.interval;
+            var count = span.Ticks / this.interval.Ticks;
             if (!store.Store(power * count)) {
                 return false;
             }
