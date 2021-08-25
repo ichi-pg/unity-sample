@@ -31,7 +31,7 @@ namespace Ichi.Clicker
 
         public FactoryAdapter(IFactory factory) {
             this.Factory = factory;
-            //TODO 25レベルでのパワー2倍、50レベルでのフィーバー2倍のアピール表示
+            //TODO 25レベルでのパワー2倍、50レベルでのフィーバー倍率アップのアピール表示
         }
 
         public void LevelUp() {
