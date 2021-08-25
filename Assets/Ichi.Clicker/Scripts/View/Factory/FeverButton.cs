@@ -27,6 +27,7 @@ namespace Ichi.Clicker
                 token.Cancel();
             }
             //TODO 広告でフィーバー回復
+            //TODO フィーバーレベル
         }
 
         public async UniTask AutoProduce(CancellationToken token) {
