@@ -20,6 +20,7 @@ namespace Ichi.Common
                 units += ((char)unit).ToString();
                 i /= 26;
             }
+            //TODO 桁が上がると変化量見えなくなるので、やっぱり長いパターン必要
             return number + "." + (remainder / 100) + units;
         }
     }
