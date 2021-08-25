@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace Ichi.Clicker
 {
-    [System.Serializable]
+    [Serializable]
     public class Item : IQuantity, IStore, IConsume
     {
         public Ichi.Common.BigNumber quantity;

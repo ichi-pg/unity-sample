@@ -5,7 +5,7 @@ using System;
 
 namespace Ichi.Clicker
 {
-    [System.Serializable]
+    [Serializable]
     public class Factory : IFactory
     {
         public int level;

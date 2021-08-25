@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace Ichi.Common
 {
-    [System.Serializable]
+    [Serializable]
     public class BigNumber
     {
         public string s;

@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
+using System.Threading;
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +21,7 @@ namespace Ichi.Clicker
         void Start() {
             Ichi.Common.DataInjector.ModifyHander += this.OnModify;
             this.OnModify();
+            this.StartAutoLevelUp();//TODO デバッグメニューからON OFF
         }
 
         void OnDestroy() {
@@ -40,6 +45,19 @@ namespace Ichi.Clicker
                     .OrderBy(factory => factory.Cost)
                     .FirstOrDefault()
             );
+        }
+
+        [Conditional("UNITY_EDITOR")]
+        private void StartAutoLevelUp() {
+            this.AutoLevelUp(this.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private async UniTask AutoLevelUp(CancellationToken token) {
+            while (true)
+            {
+                this.LevelUp();
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
+            }
         }
     }
 }

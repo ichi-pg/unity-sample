@@ -5,7 +5,7 @@ using System;
 
 namespace Ichi.Clicker
 {
-    [System.Serializable]
+    [Serializable]
     public class SaveData
     {
         private static SaveData instance = null;
