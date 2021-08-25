@@ -10,7 +10,8 @@ namespace Ichi.Clicker
             if (level <= 0) {
                 return 0;
             }
-            return LevelUpInflation(OffsetLevel(level, rank)) * 5;
+            var offsetLevel = OffsetLevel(level, rank);
+            return LevelUpInflation(offsetLevel) * offsetLevel * 5;
         }
 
         public static BigInteger LevelUpInflation(int level) {
