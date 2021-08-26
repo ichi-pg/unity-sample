@@ -4,8 +4,8 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface ILevelCalculator
+    public interface IStatusCalculator<T>
     {
-        BigInteger Calculate(int level, int rank, int rarity);
+        T Calculate(int level, int rank, int rarity);
     }
 }

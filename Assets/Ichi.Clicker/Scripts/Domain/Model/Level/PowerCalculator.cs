@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public class PowerCalculator : ILevelCalculator
+    public class PowerCalculator : IStatusCalculator<BigInteger>
     {
         public BigInteger Calculate(int level, int rank, int rarity) {
             if (level <= 0) {
@@ -20,8 +20,7 @@ namespace Ichi.Clicker
         }
 
         public static int OffsetLevel(int level, int rank) {
-            //ランクが上がるごとに指数的にオフセット
-            //TODO ランク開放にレベル制限設けて線形の方がプレイフィールいいかも
+            //ランクが上がるごとにレベルにオフセット
             return level + (rank - 1) * (rank - 1) * 25;
         }
     }

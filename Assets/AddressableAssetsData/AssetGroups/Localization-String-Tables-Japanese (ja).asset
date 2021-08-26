@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 21dbc4baee95543eab9ecda29c576a14
   m_SerializeEntries:
-  - m_GUID: 89937e5b62e2e4ecbb6cf92d2ae4d570
-    m_Address: Ichi.Clicker_ja
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja
   - m_GUID: af771e3064c0442e6a015d1182df0bf5
     m_Address: Ichi.Clicker_ja
     m_ReadOnly: 1

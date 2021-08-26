@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public class CostCalculator : ILevelCalculator
+    public class CostCalculator : IStatusCalculator<BigInteger>
     {
         public BigInteger Calculate(int level, int rank, int rarity) {
             //パワーに対してレベル分の指数

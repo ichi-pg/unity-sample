@@ -26,12 +26,13 @@ namespace Ichi.Clicker
         public void FeverProduce() {
             var now = Common.Time.Now;
             foreach (var factory in SaveData.Instance.ClickFactories) {
-                if (!factory.IsLocked) {
+                if (factory.IsBought) {
                     factory.Produce(SaveData.Instance.Coin, now, factory.FeverRate);
                 }
             }
-            SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);//TODO 調整
+            SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             //TODO 広告でフィーバー回復
+            //TODO チートモード（100倍速）
         }
     }
 }

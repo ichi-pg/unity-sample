@@ -18,7 +18,7 @@ namespace Ichi.Clicker
             {
                 var repository = Dependency.FactoryRepository;
                 foreach (var factory in repository.AutoFactories) {
-                    if (!factory.IsLocked) {
+                    if (factory.IsBought) {
                         repository.Produce(factory);
                     }
                 }

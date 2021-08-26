@@ -4,15 +4,15 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface IFactory
+    public interface IFactory : ICost
     {
         int Level { get; }
         int Rank { get; }
         int Category { get; }
         BigInteger Power { get; }
         BigInteger NextPower { get; }
-        BigInteger Cost { get; }
-        bool IsLocked { get; }
+        bool IsLock { get; }
+        bool IsBought { get; }
         int FeverRate { get; }
         int NextFeverRate { get; }
 

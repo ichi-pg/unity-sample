@@ -13,15 +13,18 @@ namespace Ichi.Clicker
         public int rarity;
         public int category;
         public long producedTicks;
-        public ILevelCalculator PowerCalculator { private get; set; }
-        public ILevelCalculator CostCalculator { private get; set; }
+        public IStatusCalculator<BigInteger> PowerCalculator { private get; set; }
+        public IStatusCalculator<BigInteger> CostCalculator { private get; set; }
         public IProducer Producer { private get; set; }
+        public ILock Lock { private get; set; }
+        public IStatusCalculator<int> FeverCalculator { private get; set; }
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
-        public bool IsLocked { get => this.level <= 0; }
-        public int FeverRate { get => this.CalculateFeverRate(this.Level); }
-        public int NextFeverRate { get => this.CalculateFeverRate(this.Level + 1); }
+        public bool IsLock { get => this.Lock.IsLock; }
+        public bool IsBought { get => this.level > 0; }
+        public int FeverRate { get; private set; }
+        public int NextFeverRate { get; private set; }
         public BigInteger Power { get; private set; }
         public BigInteger NextPower { get; private set; }
         public BigInteger Cost { get; private set; }
@@ -33,22 +36,20 @@ namespace Ichi.Clicker
             set => this.producedTicks = value.Ticks;
         }
 
-        private int CalculateFeverRate(int level) {
-            return level / 50 + 1;//TODO 調整
-        }
-
         public void Calculate() {
             this.Power = this.PowerCalculator.Calculate(this.level, this.rank, this.rarity);
             this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
             this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
             this.CostPerformance = this.Cost / (this.NextPower - this.Power);
+            this.FeverRate = this.FeverCalculator.Calculate(this.level, this.rank, this.rarity);
+            this.NextFeverRate = this.FeverCalculator.Calculate(this.level + 1, this.rank, this.rarity);
         }
 
         public void LevelUp(IConsume consume, DateTime now) {
             if (!consume.Consume(this.Cost)) {
                 throw new System.Exception("Failed consume.");
             }
-            if (this.IsLocked) {
+            if (!this.IsBought) {
                 this.ProducedAt = now;
             }
             this.level++;
@@ -56,7 +57,7 @@ namespace Ichi.Clicker
         }
 
         public bool Sell(IStore store) {
-            if (this.IsLocked) {
+            if (!this.IsBought) {
                 return false;
             }
             if (!store.Store(this.Price)) {
@@ -67,8 +68,8 @@ namespace Ichi.Clicker
         }
 
         public void Produce(IStore store, DateTime now, int bonus = 1) {
-            if (this.IsLocked) {
-                throw new System.Exception("Locked factory.");
+            if (!this.IsBought) {
+                throw new System.Exception("Not bought factory.");
             }
             var producedAt = this.ProducedAt;
             if (!this.Producer.Produce(store, this.Power * bonus, now, ref producedAt)) {

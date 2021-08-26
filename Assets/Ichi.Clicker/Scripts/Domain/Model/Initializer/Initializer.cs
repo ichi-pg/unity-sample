@@ -7,35 +7,46 @@ namespace Ichi.Clicker
     public static class Initializer
     {
         public static void Initialize(List<Factory> factories, List<Item> items) {
-            Initialize(factories, new PowerCalculator(), new CostCalculator(), new Producer(), (int)FactoryCategory.Click, 1, 1, 1);
-            Initialize(factories, new PowerCalculator(), new CostCalculator(), new TimeProducer(), (int)FactoryCategory.Auto, 2, 20, 0);
-            Initialize(items, (int)ItemCategory.Coin, 0);
-            Initialize(items, (int)ItemCategory.Product, 0);
+            Initialize(factories, FactoryCategory.Click, 1, 1, 1);
+            Initialize(factories, FactoryCategory.Auto, 2, 20, 0);
+            Initialize(items, ItemCategory.Coin, 0);
+            Initialize(items, ItemCategory.Product, 0);
         }
 
-        private static void Initialize(List<Factory> factories, ILevelCalculator power, ILevelCalculator cost, IProducer producer, int category, int rank, int maxRank, int level) {
+        private static void Initialize(List<Factory> factories, FactoryCategory category, int rank, int maxRank, int level) {
+            ICost premise = null;
             for (; rank <= maxRank; ++rank) {
-                var factory = factories.FirstOrDefault(factory => factory.category == category && factory.rank == rank);
+                var factory = factories.FirstOrDefault(factory => factory.category == (int)category && factory.rank == rank);
                 if (factory == null) {
                     factory = new Factory() {
-                        category = category,
+                        category = (int)category,
                         rank = rank,
                         level = level,
                     };
                     factories.Add(factory);
                 }
-                factory.PowerCalculator = power;
-                factory.CostCalculator = cost;
-                factory.Producer = producer;
+                switch (category) {
+                    case FactoryCategory.Click:
+                        factory.Producer = new Producer();
+                        break;
+                    case FactoryCategory.Auto:
+                        factory.Producer = new TimeProducer();
+                        break;
+                }
+                factory.PowerCalculator = new PowerCalculator();
+                factory.CostCalculator = new CostCalculator();
+                factory.FeverCalculator = new FeverCalculator();
+                factory.Lock = new PremiseLock(factory, premise);
                 factory.Calculate();
+                premise = factory;
             }
         }
 
-        private static void Initialize(List<Item> items, int category, int quantity) {
-            var item = items.FirstOrDefault(item => item.category == category);
+        private static void Initialize(List<Item> items, ItemCategory category, int quantity) {
+            var item = items.FirstOrDefault(item => item.category == (int)category);
             if (item == null) {
                 items.Add(new Item() {
-                    category = category,
+                    category = (int)category,
                     quantity = new Common.BigNumber(quantity),
                 });
             }
