@@ -6,7 +6,7 @@ using System;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Factory : IFactory
+    public class Factory : IFactory, IProducedAt
     {
         public int level;
         public int rank;
@@ -71,11 +71,9 @@ namespace Ichi.Clicker
             if (!this.IsBought) {
                 throw new System.Exception("Not bought factory.");
             }
-            var producedAt = this.ProducedAt;
-            if (!this.Producer.Produce(store, this.Power * bonus, now, ref producedAt)) {
+            if (!this.Producer.Produce(store, this.Power * bonus, now)) {
                 throw new System.Exception("Failed produce.");
             }
-            this.ProducedAt = producedAt;
         }
     }
 }

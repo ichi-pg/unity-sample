@@ -7,6 +7,6 @@ namespace Ichi.Clicker
 {
     public interface IProducer
     {
-        bool Produce(IStore store, BigInteger power, DateTime now, ref DateTime producedAt);
+        bool Produce(IStore store, BigInteger power, DateTime now);
     }
 }

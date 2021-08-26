@@ -30,7 +30,7 @@ namespace Ichi.Clicker
                         factory.Producer = new Producer();
                         break;
                     case FactoryCategory.Auto:
-                        factory.Producer = new TimeProducer();
+                        factory.Producer = new TimeProducer(factory);
                         break;
                 }
                 factory.PowerCalculator = new PowerCalculator();
