@@ -35,7 +35,6 @@ namespace Ichi.Clicker
                 }
                 factory.PowerCalculator = new PowerCalculator();
                 factory.CostCalculator = new CostCalculator();
-                factory.FeverCalculator = new FeverCalculator();
                 factory.Lock = new PremiseLock(factory, premise);
                 factory.Calculate();
                 premise = factory;

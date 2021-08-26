@@ -12,6 +12,7 @@ namespace Ichi.Clicker
 
         void OnValidate() {
             Dependency.FactoryRepository.CheatMode(this.enable);
+            //TODO オート操作と倍率チートを勘違いするので分ける
         }
     }
 }

@@ -17,14 +17,11 @@ namespace Ichi.Clicker
         public IStatusCalculator<BigInteger> CostCalculator { private get; set; }
         public IProducer Producer { private get; set; }
         public ILock Lock { private get; set; }
-        public IStatusCalculator<int> FeverCalculator { private get; set; }
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
         public bool IsLock { get => this.Lock.IsLock; }
         public bool IsBought { get => this.level > 0; }
-        public int FeverRate { get; private set; }
-        public int NextFeverRate { get; private set; }
         public BigInteger Power { get; private set; }
         public BigInteger NextPower { get; private set; }
         public BigInteger Cost { get; private set; }
@@ -41,8 +38,6 @@ namespace Ichi.Clicker
             this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
             this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
             this.CostPerformance = this.Cost / (this.NextPower - this.Power);
-            this.FeverRate = this.FeverCalculator.Calculate(this.level, this.rank, this.rarity);
-            this.NextFeverRate = this.FeverCalculator.Calculate(this.level + 1, this.rank, this.rarity);
         }
 
         public void LevelUp(IConsume consume, DateTime now) {

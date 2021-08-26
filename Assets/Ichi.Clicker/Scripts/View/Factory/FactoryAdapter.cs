@@ -42,6 +42,7 @@ namespace Ichi.Clicker
             Ichi.Common.DataInjector.Modify();
             //TODO シナリオ誘導
             //TODO フィールド表現
+            //TODO 長押し
         }
     }
 }

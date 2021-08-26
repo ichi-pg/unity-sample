@@ -12,6 +12,7 @@ namespace Ichi.Clicker
         public string AutoPowerText { get => Dependency.LocalizationText.Localize("Status.AutoPower", this); }
         public string Coin { get => Ichi.Common.BigIntegerText.ToString(Dependency.ItemRepository.Coin.Quantity); }
         public string Product { get => Ichi.Common.BigIntegerText.ToString(Dependency.ItemRepository.Product.Quantity); }
+        //TODO フィーバーレート表示
 
         public string ClickPower {
             get {

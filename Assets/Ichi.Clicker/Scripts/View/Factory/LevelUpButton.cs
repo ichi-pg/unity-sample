@@ -14,6 +14,7 @@ namespace Ichi.Clicker
     public class LevelUpButton : MonoBehaviour
     {
         //TODO ViewModelにしたい
+        //TODO 長押し
 
         [SerializeField]
         private Text text;

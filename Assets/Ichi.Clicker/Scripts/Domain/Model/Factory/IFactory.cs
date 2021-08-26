@@ -13,8 +13,6 @@ namespace Ichi.Clicker
         BigInteger NextPower { get; }
         bool IsLock { get; }
         bool IsBought { get; }
-        int FeverRate { get; }
-        int NextFeverRate { get; }
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
         //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
