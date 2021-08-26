@@ -14,7 +14,6 @@ namespace Ichi.Clicker
     public class LevelUpButton : MonoBehaviour
     {
         //TODO ViewModelにしたい
-        //TODO デバッグメニューからチートモードをオンオフ
 
         [SerializeField]
         private Text text;
@@ -50,13 +49,16 @@ namespace Ichi.Clicker
 
         [Conditional("UNITY_EDITOR")]
         private void StartCheatMode() {
-            // this.CheatMode(this.GetCancellationTokenOnDestroy()).Forget();
+            this.CheatMode(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private async UniTask CheatMode(CancellationToken token) {
             while (true)
             {
-                this.LevelUp();
+                var cheatMode = this.transform.root.GetComponentInChildren<CheatMode>();
+                if (cheatMode != null && cheatMode.Enable) {
+                    this.LevelUp();
+                }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
         }
