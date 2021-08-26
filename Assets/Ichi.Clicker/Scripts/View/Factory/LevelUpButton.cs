@@ -57,7 +57,7 @@ namespace Ichi.Clicker
             while (true)
             {
                 var cheatMode = this.transform.root.GetComponentInChildren<CheatMode>();
-                if (cheatMode != null && cheatMode.Enable) {
+                if (cheatMode != null && cheatMode.Auto) {
                     this.LevelUp();
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);

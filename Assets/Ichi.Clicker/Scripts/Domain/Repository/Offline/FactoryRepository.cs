@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     public class FactoryRepository : IFactoryRepository
     {
         public IEnumerable<IFactory> Factories { get => SaveData.Instance.factories; }
-        public IEnumerable<IFactory> ClickFactories { get => SaveData.Instance.ClickFactories; }//TODO 単数でいい
+        public IEnumerable<IFactory> ClickFactories { get => SaveData.Instance.ClickFactories; }
         public IEnumerable<IFactory> AutoFactories { get => SaveData.Instance.AutoFactories; }
         public DateTime NextFeverAt { get => SaveData.Instance.NextFeverAt; }
         public TimeSpan FeverSpan { get => TimeSpan.FromSeconds(30); }
