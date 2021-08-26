@@ -15,5 +15,6 @@ namespace Ichi.Clicker
         void LevelUp(IFactory factory);
         void Produce(IFactory factory);
         void FeverProduce();
+        void CheatMode(bool enable);
     }
 }

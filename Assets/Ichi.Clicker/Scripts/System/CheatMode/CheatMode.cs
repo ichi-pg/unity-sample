@@ -9,5 +9,9 @@ namespace Ichi.Clicker
         [SerializeField]
         private bool enable;
         public bool Enable { get => this.enable; }
+
+        void OnValidate() {
+            Dependency.FactoryRepository.CheatMode(this.enable);
+        }
     }
 }
