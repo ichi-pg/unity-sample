@@ -14,8 +14,8 @@ namespace Ichi.Clicker
             return LevelUpInflation(offsetLevel) * offsetLevel * 5;
         }
 
-        public static BigInteger LevelUpInflation(int level) {
-            //レベルが25上がるごとに生産量が倍
+        private static BigInteger LevelUpInflation(int level) {
+            //レベルが25上がるごとに生産量が倍（階段）
             return BigInteger.Pow(2, (level - 1) / 25);
         }
 
