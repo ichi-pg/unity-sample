@@ -47,7 +47,6 @@ namespace Ichi.Clicker
         //NOTE 最初にクリックから始まり、徐々に施設が充実する。
         //NOTE PowerをHP,ATK,DEFに分解、戻した値を経験値に置き換えればRPGに転用できる
         //NOTE 途中でミニゲームを挟むとか要素
-
-        //TODO クリッカーゲームのレベルデザインについてQiitaまとめたいカモ
+        //NOTE クリッカーゲームのレベルデザインについてQiitaまとめたいかも
     }
 }
