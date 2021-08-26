@@ -10,6 +10,7 @@ namespace Ichi.Clicker
             if (level <= 0) {
                 return 0;
             }
+            //定数倍でレベルアップ速度を調整
             var offsetLevel = OffsetLevel(level, rank);
             return LevelUpInflation(offsetLevel) * offsetLevel * 5;
         }

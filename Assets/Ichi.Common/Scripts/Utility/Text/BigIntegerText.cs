@@ -14,6 +14,7 @@ namespace Ichi.Common
                 number /= 1000;
                 i++;
             }
+            //TODO 逆順
             string units = "";
             while (i > 0) {
                 int unit = (int)'A' + (i % 26) - 1;
