@@ -31,11 +31,11 @@ namespace Ichi.Clicker
             return true;
         }
 
-        public bool Sell(IStore store) {
+        public bool Sell(IStore store, int bonus = 1) {
             if (this == store) {
                 return false;
             }
-            if (!store.Store(this.quantity)) {
+            if (!store.Store(this.quantity * bonus)) {
                 return false;
             }
             this.quantity = 0;

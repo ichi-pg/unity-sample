@@ -8,5 +8,6 @@ namespace Ichi.Clicker
     {
         Coin,
         Product,
+        LoginProduct,
     }
 }

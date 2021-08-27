@@ -30,6 +30,7 @@ namespace Ichi.Clicker.Offline
                     instance.AutoFactories = instance.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);
                     instance.Coin = instance.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
                     instance.Product = instance.items.FirstOrDefault(item => item.category == (int)ItemCategory.Product);
+                    instance.LoginProduct = instance.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginProduct);
                 }
                 return instance;
             }
@@ -40,6 +41,7 @@ namespace Ichi.Clicker.Offline
         public long nextFeverTicks;
         public Item Coin { get; private set; }
         public Item Product { get; private set; }
+        public Item LoginProduct { get; private set; }
         public IEnumerable<Factory> ClickFactories { get; private set; }
         public IEnumerable<Factory> AutoFactories { get; private set; }
 
