@@ -34,5 +34,6 @@ namespace Ichi.Clicker
 
         //TODO ブースト
         //TODO 広告で2倍
+        //TODO ログインポップ
     }
 }

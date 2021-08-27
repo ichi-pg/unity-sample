@@ -14,6 +14,7 @@ namespace Ichi.Clicker
                 if (instance == null) {
                     if (Ichi.Common.JsonSaveData.Exist<SaveData>()) {
                         instance = Ichi.Common.JsonSaveData.Load<SaveData>();
+                        //TODO クラウドセーブ
                     } else {
                         instance = new SaveData() {
                             factories = new List<Factory>(),

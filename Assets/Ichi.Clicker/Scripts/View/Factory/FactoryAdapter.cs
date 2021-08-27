@@ -40,8 +40,10 @@ namespace Ichi.Clicker
             }
             Dependency.FactoryRepository.LevelUp(this.Factory);
             Ichi.Common.DataInjector.Modify();
-            //TODO シナリオ誘導
-            //TODO フィールド表現
+            //TODO シナリオ
+            //TODO キャラ
+            //TODO 背景
+            //TODO インクリメントエフェクト
             //TODO 長押し
         }
     }
