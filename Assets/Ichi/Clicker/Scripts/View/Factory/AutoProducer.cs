@@ -11,6 +11,7 @@ namespace Ichi.Clicker
     {
         void Start() {
             DIContainer.LoginRepository.Produce();
+            //TODO ログインポップ
             this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
