@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.Offline
 {
     public class ItemRepository : IItemRepository
     {

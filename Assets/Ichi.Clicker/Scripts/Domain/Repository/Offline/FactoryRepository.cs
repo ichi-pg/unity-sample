@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.Offline
 {
     public class FactoryRepository : IFactoryRepository
     {

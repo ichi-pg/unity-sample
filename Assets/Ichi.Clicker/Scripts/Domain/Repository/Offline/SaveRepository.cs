@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.Offline
 {
     public class SaveRepository : ISaveRepository
     {
