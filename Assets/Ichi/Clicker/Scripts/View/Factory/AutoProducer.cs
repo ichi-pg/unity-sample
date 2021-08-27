@@ -7,11 +7,14 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
+    [RequireComponent(typeof(Common.OpenModalButton))]
     public class AutoProducer : MonoBehaviour
     {
         void Start() {
             DIContainer.LoginRepository.Produce();
-            //TODO ログインポップ
+            if (DIContainer.LoginRepository.Quanity > 0) {
+                this.GetComponent<Common.OpenModalButton>().Open();
+            }
             this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
