@@ -31,9 +31,5 @@ namespace Ichi.Clicker
             this.self.ProducedAt = now;
             return true;
         }
-
-        //TODO ブースト
-        //TODO 広告で2倍
-        //TODO ログインポップ
     }
 }
