@@ -10,6 +10,7 @@ namespace Ichi.Clicker
     public class AutoProducer : MonoBehaviour
     {
         void Start() {
+            DIContainer.LoginRepository.Produce();
             this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();
         }
 

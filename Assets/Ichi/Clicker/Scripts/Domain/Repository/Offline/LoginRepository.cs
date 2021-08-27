@@ -16,7 +16,6 @@ namespace Ichi.Clicker.Offline
 
         public void Collect(bool bonus) {
             //TODO
-            //TODO 広告で2倍
         }
     }
 }
