@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface IQuantity
+    public interface IItem
     {
         BigInteger Quantity { get; }
     }

@@ -10,8 +10,8 @@ namespace Ichi.Clicker
         public string ProductText { get => DIContainer.TextLocalizer.Localize("Status.Product", this); }
         public string ClickPowerText { get => DIContainer.TextLocalizer.Localize("Status.ClickPower", this); }
         public string AutoPowerText { get => DIContainer.TextLocalizer.Localize("Status.AutoPower", this); }
-        public string Coin { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ItemRepository.Coin.Quantity); }
-        public string Product { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ItemRepository.Product.Quantity); }
+        public string Coin { get => Ichi.Common.BigIntegerText.ToString(DIContainer.CoinRepository.Coin.Quantity); }
+        public string Product { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ProductRepository.Product.Quantity); }
         //TODO フィーバーレート表示
 
         public string ClickPower {

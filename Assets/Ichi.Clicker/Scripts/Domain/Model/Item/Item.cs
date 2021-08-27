@@ -6,7 +6,7 @@ using System;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Item : IQuantity, IStore, IConsume
+    public class Item : IItem, IStore, IConsume
     {
         public Ichi.Common.BigNumber quantity;
         public int category;

@@ -9,8 +9,7 @@ namespace Ichi.Clicker
     public class CollectButton : MonoBehaviour
     {
         public void Collect() {
-            var repository = DIContainer.ItemRepository;
-            repository.Sell(repository.Product);
+            DIContainer.ProductRepository.Collect();
             Common.DataInjector.Modify();
         }
     }
