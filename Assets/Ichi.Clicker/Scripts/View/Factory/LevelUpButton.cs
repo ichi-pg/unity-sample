@@ -32,7 +32,7 @@ namespace Ichi.Clicker
         private void OnModify() {
             var adpter = this.FindFactory();
             this.GetComponent<Button>().interactable = !adpter.LevelUpDisable;
-            this.text.text = DIContainer.LocalizationText.Localize("LevelUpButton", adpter);
+            this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adpter);
         }
 
         public void LevelUp() {

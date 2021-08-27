@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ichi.Common
 {
-    public interface ILocalizationText
+    public interface ITextLocalizer
     {
         string Localize(string key, params object[] values);
     }

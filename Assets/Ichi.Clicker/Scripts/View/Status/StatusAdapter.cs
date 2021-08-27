@@ -6,10 +6,10 @@ namespace Ichi.Clicker
 {
     public class StatusAdapter
     {
-        public string CoinText { get => DIContainer.LocalizationText.Localize("Status.Coin", this); }
-        public string ProductText { get => DIContainer.LocalizationText.Localize("Status.Product", this); }
-        public string ClickPowerText { get => DIContainer.LocalizationText.Localize("Status.ClickPower", this); }
-        public string AutoPowerText { get => DIContainer.LocalizationText.Localize("Status.AutoPower", this); }
+        public string CoinText { get => DIContainer.TextLocalizer.Localize("Status.Coin", this); }
+        public string ProductText { get => DIContainer.TextLocalizer.Localize("Status.Product", this); }
+        public string ClickPowerText { get => DIContainer.TextLocalizer.Localize("Status.ClickPower", this); }
+        public string AutoPowerText { get => DIContainer.TextLocalizer.Localize("Status.AutoPower", this); }
         public string Coin { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ItemRepository.Coin.Quantity); }
         public string Product { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ItemRepository.Product.Quantity); }
         //TODO フィーバーレート表示

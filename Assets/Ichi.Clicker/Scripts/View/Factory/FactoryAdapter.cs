@@ -6,8 +6,8 @@ namespace Ichi.Clicker
     public class FactoryAdapter
     {
         public IFactory Factory { get; private set; }
-        public string NameText { get => DIContainer.LocalizationText.Localize("Factory.Name", this); }
-        public string CostText { get => DIContainer.LocalizationText.Localize("Factory.Cost", this); }
+        public string NameText { get => DIContainer.TextLocalizer.Localize("Factory.Name", this); }
+        public string CostText { get => DIContainer.TextLocalizer.Localize("Factory.Cost", this); }
         public int Rank { get => this.Factory.Rank; }
         public int Level { get => this.Factory.Level; }
         public string Cost { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Cost); }
@@ -20,9 +20,9 @@ namespace Ichi.Clicker
             get {
                 switch (this.Factory.Category) {
                     case (int)FactoryCategory.Click:
-                        return DIContainer.LocalizationText.Localize("Unit.Click");
+                        return DIContainer.TextLocalizer.Localize("Unit.Click");
                     case (int)FactoryCategory.Auto:
-                        return DIContainer.LocalizationText.Localize("Unit.Auto");
+                        return DIContainer.TextLocalizer.Localize("Unit.Auto");
                     default:
                         return "";
                 }

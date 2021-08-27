@@ -6,11 +6,11 @@ using UnityEngine.Localization.SmartFormat;
 
 namespace Ichi.Common
 {
-    public class LocalizationText : ILocalizationText
+    public class TextLocalizer : ITextLocalizer
     {
         private string table;
 
-        public LocalizationText(string table) {
+        public TextLocalizer(string table) {
             this.table = table;
         }
 
