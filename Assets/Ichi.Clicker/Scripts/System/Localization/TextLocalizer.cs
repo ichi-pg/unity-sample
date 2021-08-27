@@ -21,7 +21,7 @@ namespace Ichi.Clicker
             foreach (Text text in this.GetComponentsInChildren<Text>()) {
                 if (text.name.StartsWith(Prefix)) {
                     var key = text.name.Replace(Prefix,"");
-                    text.text = Dependency.LocalizationText.Localize(key);
+                    text.text = DIContainer.LocalizationText.Localize(key);
                 }
             }
         }

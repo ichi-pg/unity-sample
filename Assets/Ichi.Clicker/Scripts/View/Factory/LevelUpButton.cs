@@ -32,7 +32,7 @@ namespace Ichi.Clicker
         private void OnModify() {
             var adpter = this.FindFactory();
             this.GetComponent<Button>().interactable = !adpter.LevelUpDisable;
-            this.text.text = Dependency.LocalizationText.Localize("LevelUpButton", adpter);
+            this.text.text = DIContainer.LocalizationText.Localize("LevelUpButton", adpter);
         }
 
         public void LevelUp() {
@@ -41,7 +41,7 @@ namespace Ichi.Clicker
 
         private FactoryAdapter FindFactory() {
             return new FactoryAdapter(
-                Dependency.FactoryRepository
+                DIContainer.FactoryRepository
                     .Factories
                     .OrderBy(factory => factory.Cost)
                     .FirstOrDefault()

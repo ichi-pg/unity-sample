@@ -7,15 +7,15 @@ namespace Ichi.Clicker
     public class SaveController : MonoBehaviour
     {
         void OnApplicationFocus(bool focus) {
-            Dependency.SaveRepository.Save();
+            DIContainer.SaveRepository.Save();
         }
 
         void OnApplicationPause(bool pause) {
-            Dependency.SaveRepository.Save();
+            DIContainer.SaveRepository.Save();
         }
 
         void OnApplicationQuit() {
-            Dependency.SaveRepository.Save();
+            DIContainer.SaveRepository.Save();
         }
     }
 }

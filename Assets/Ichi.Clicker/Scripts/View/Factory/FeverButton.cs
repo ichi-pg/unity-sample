@@ -18,7 +18,7 @@ namespace Ichi.Clicker
             this.FeverProduce(token.Token).Forget();
             try {
                 await UniTask.Delay(
-                    Dependency.FactoryRepository.FeverSpan,
+                    DIContainer.FactoryRepository.FeverSpan,
                     cancellationToken: this.GetCancellationTokenOnDestroy()
                 );
                 button.interactable = true;
@@ -31,10 +31,10 @@ namespace Ichi.Clicker
         public async UniTask FeverProduce(CancellationToken token) {
             while (true)
             {
-                Dependency.FactoryRepository.FeverProduce();
+                DIContainer.FactoryRepository.FeverProduce();
                 Ichi.Common.DataInjector.Modify();
                 await UniTask.Delay(
-                    Dependency.FactoryRepository.FeverInterval,
+                    DIContainer.FactoryRepository.FeverInterval,
                     cancellationToken: token
                 );
             }

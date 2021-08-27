@@ -7,7 +7,7 @@ namespace Ichi.Clicker
     public class ProduceButton : MonoBehaviour
     {
         public void Produce() {
-            var repository = Dependency.FactoryRepository;
+            var repository = DIContainer.FactoryRepository;
             foreach (var factory in repository.ClickFactories) {
                 if (factory.IsBought) {
                     repository.Produce(factory);

@@ -16,7 +16,7 @@ namespace Ichi.Clicker
         private async UniTask AutoProduce(CancellationToken token) {
             while (true)
             {
-                var repository = Dependency.FactoryRepository;
+                var repository = DIContainer.FactoryRepository;
                 foreach (var factory in repository.AutoFactories) {
                     if (factory.IsBought) {
                         repository.Produce(factory);

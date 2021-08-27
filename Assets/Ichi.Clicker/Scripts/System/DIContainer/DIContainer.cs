@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public static class Dependency
+    public static class DIContainer
     {
         public static IFactoryRepository FactoryRepository { get; private set; } = new FactoryRepository();
         public static IItemRepository ItemRepository { get; private set; } = new ItemRepository();
