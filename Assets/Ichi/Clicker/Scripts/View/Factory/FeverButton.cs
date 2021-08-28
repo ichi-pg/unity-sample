@@ -52,7 +52,7 @@ namespace Ichi.Clicker
             while (true)
             {
                 DIContainer.FeverRepository.Produce();
-                Ichi.Common.DataInjector.Modify();
+                Common.DataInjector.Modify();
                 await UniTask.Delay(
                     DIContainer.FeverRepository.Interval,
                     cancellationToken: token

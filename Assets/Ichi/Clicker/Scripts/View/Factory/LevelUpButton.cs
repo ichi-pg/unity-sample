@@ -20,13 +20,13 @@ namespace Ichi.Clicker
         private Text text;
 
         void Start() {
-            Ichi.Common.DataInjector.ModifyHander += this.OnModify;
+            Common.DataInjector.ModifyHander += this.OnModify;
             this.OnModify();
             this.StartCheatMode();
         }
 
         void OnDestroy() {
-            Ichi.Common.DataInjector.ModifyHander -= this.OnModify;
+            Common.DataInjector.ModifyHander -= this.OnModify;
         }
 
         private void OnModify() {

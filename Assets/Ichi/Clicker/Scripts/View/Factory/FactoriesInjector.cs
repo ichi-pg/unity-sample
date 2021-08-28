@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
-    [RequireComponent(typeof(Ichi.Common.EnumerableInjector))]
+    [RequireComponent(typeof(Common.EnumerableInjector))]
     public class FactoriesInjector : MonoBehaviour
     {
         [SerializeField]
         private GameObject prefab;
 
         void Start() {
-            var enumerableInjector = this.GetComponent<Ichi.Common.EnumerableInjector>();
+            var enumerableInjector = this.GetComponent<Common.EnumerableInjector>();
             enumerableInjector.Clear();
             foreach (var factory in DIContainer.FactoryRepository.Factories) {
                 enumerableInjector.Inject(

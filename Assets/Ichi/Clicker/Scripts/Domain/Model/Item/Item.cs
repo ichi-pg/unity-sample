@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     [Serializable]
     public class Item : IItem, IStore, IConsume
     {
-        public Ichi.Common.BigNumber quantity;
+        public Common.BigNumber quantity;
         public int category;
         public BigInteger Quantity { get => this.quantity.Integer; }
 

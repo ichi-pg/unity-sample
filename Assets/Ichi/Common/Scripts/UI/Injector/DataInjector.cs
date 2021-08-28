@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -8,7 +9,7 @@ namespace Ichi.Common
 {
     public class DataInjector : MonoBehaviour
     {
-        public static event System.Action ModifyHander;
+        public static event Action ModifyHander;
         public object Data { get; private set; }
         public IResourceLoader Loader { get; private set; }
         private Dictionary<string, UnityAction> actions = new Dictionary<string, UnityAction>();
@@ -144,7 +145,7 @@ namespace Ichi.Common
             return this.actions[name];
         }
 
-        private System.Type GetType(object data, string[] names) {
+        private Type GetType(object data, string[] names) {
             if (names.Length != 2) {
                 return null;
             }

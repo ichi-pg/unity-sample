@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using System;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -31,16 +33,16 @@ namespace Ichi.Common
             Assert.AreEqual("1.234b", BigIntegerText.ToString(1234567));
             Assert.AreEqual("2.147c", BigIntegerText.ToString(int.MaxValue));
             Assert.AreEqual("18.446f", BigIntegerText.ToString(ulong.MaxValue));
-            Assert.AreEqual("340.282l", BigIntegerText.ToString(System.Numerics.BigInteger.Pow(ulong.MaxValue, 2)));
-            Assert.AreEqual("6.277s", BigIntegerText.ToString(System.Numerics.BigInteger.Pow(ulong.MaxValue, 3)));
-            Assert.AreEqual("3.908rx", BigIntegerText.ToString(System.Numerics.BigInteger.Pow(ulong.MaxValue, 100)));
+            Assert.AreEqual("340.282l", BigIntegerText.ToString(BigInteger.Pow(ulong.MaxValue, 2)));
+            Assert.AreEqual("6.277s", BigIntegerText.ToString(BigInteger.Pow(ulong.MaxValue, 3)));
+            Assert.AreEqual("3.908rx", BigIntegerText.ToString(BigInteger.Pow(ulong.MaxValue, 100)));
             //TOOD BigIntegerの限界桁数の把握
             //TOOD Omitの限界パフォーマンスの把握
-            // BigIntegerText.ToString(System.Numerics.BigInteger.Pow(ulong.MaxValue, 123456));//これはフリーズした
+            // BigIntegerText.ToString(BigInteger.Pow(ulong.MaxValue, 123456));//これはフリーズした
             try {
-                System.Numerics.BigInteger.Pow(int.MaxValue, int.MaxValue);
-            } catch (System.Exception e) {
-                Assert.AreEqual(typeof(System.OverflowException), e.GetType());
+                BigInteger.Pow(int.MaxValue, int.MaxValue);
+            } catch (Exception e) {
+                Assert.AreEqual(typeof(OverflowException), e.GetType());
             }
         }
     }

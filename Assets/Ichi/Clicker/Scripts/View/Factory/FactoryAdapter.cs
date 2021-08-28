@@ -10,9 +10,9 @@ namespace Ichi.Clicker
         public string CostText { get => DIContainer.TextLocalizer.Localize("Factory.Cost", this); }
         public int Rank { get => this.Factory.Rank; }
         public int Level { get => this.Factory.Level; }
-        public string Cost { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Cost); }
-        public string Power { get => Ichi.Common.BigIntegerText.ToString(this.Factory.Power); }
-        public string NextPower { get => Ichi.Common.BigIntegerText.ToString(this.Factory.NextPower); }
+        public string Cost { get => Common.BigIntegerText.ToString(this.Factory.Cost); }
+        public string Power { get => Common.BigIntegerText.ToString(this.Factory.Power); }
+        public string NextPower { get => Common.BigIntegerText.ToString(this.Factory.NextPower); }
         public bool LevelUpDisable { get => this.Factory.IsLock || DIContainer.CoinRepository.Coin.Quantity < this.Factory.Cost; }
         public bool BackgroundDisable { get => !this.Factory.IsBought; }
 
@@ -39,7 +39,7 @@ namespace Ichi.Clicker
                 return;
             }
             DIContainer.FactoryRepository.LevelUp(this.Factory);
-            Ichi.Common.DataInjector.Modify();
+            Common.DataInjector.Modify();
             //TODO シナリオ
             //TODO キャラ
             //TODO シェーダー

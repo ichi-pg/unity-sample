@@ -12,8 +12,8 @@ namespace Ichi.Clicker.Offline
         public static SaveData Instance {
             get {
                 if (instance == null) {
-                    if (Ichi.Common.JsonSaveData.Exist<SaveData>()) {
-                        instance = Ichi.Common.JsonSaveData.Load<SaveData>();
+                    if (Common.JsonSaveData.Exist<SaveData>()) {
+                        instance = Common.JsonSaveData.Load<SaveData>();
                         //TODO クラウドセーブ
                     } else {
                         instance = new SaveData() {
@@ -54,7 +54,7 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Save() {
-            Ichi.Common.JsonSaveData.Save<SaveData>(this);
+            Common.JsonSaveData.Save<SaveData>(this);
         }
     }
 }

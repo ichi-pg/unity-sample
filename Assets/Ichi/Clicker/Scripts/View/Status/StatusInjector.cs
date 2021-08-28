@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
-    [RequireComponent(typeof(Ichi.Common.DataInjector))]
+    [RequireComponent(typeof(Common.DataInjector))]
     public class StatusInjector : MonoBehaviour
     {
         void Start() {
-            this.GetComponent<Ichi.Common.DataInjector>().Inject(
+            this.GetComponent<Common.DataInjector>().Inject(
                 new StatusAdapter(),
                 DIContainer.ResourceLoader
             );

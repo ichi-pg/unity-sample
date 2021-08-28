@@ -27,7 +27,7 @@ namespace Ichi.Clicker
                         repository.Produce(factory);
                     }
                 }
-                Ichi.Common.DataInjector.Modify();
+                Common.DataInjector.Modify();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }
