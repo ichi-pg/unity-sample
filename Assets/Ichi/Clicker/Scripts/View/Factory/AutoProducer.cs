@@ -15,10 +15,10 @@ namespace Ichi.Clicker
             if (DIContainer.LoginRepository.Quantity > 0) {
                 this.GetComponent<Common.OpenModalButton>().Open();
             }
-            this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();
+            this.Produce(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private async UniTask AutoProduce(CancellationToken token) {
+        private async UniTask Produce(CancellationToken token) {
             while (true)
             {
                 var repository = DIContainer.FactoryRepository;

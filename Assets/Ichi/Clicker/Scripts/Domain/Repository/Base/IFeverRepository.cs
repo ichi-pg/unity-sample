@@ -6,10 +6,10 @@ namespace Ichi.Clicker
 {
     public interface IFeverRepository
     {
-        DateTime NextFeverAt { get; }
-        TimeSpan FeverSpan { get; }
-        TimeSpan FeverInterval { get; }
-        int FeverRate { get; }
+        TimeSpan CoolTime { get; }
+        TimeSpan Duration { get; }
+        TimeSpan Interval { get; }
+        int Rate { get; }
         void Produce();
         void CheatMode(bool enable);
     }

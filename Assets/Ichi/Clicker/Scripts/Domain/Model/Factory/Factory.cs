@@ -42,7 +42,7 @@ namespace Ichi.Clicker
 
         public void LevelUp(IConsume consume, DateTime now) {
             if (!consume.Consume(this.Cost)) {
-                throw new System.Exception("Failed consume.");
+                throw new Exception("Failed consume.");
             }
             if (!this.IsBought) {
                 this.ProducedAt = now;
@@ -64,10 +64,10 @@ namespace Ichi.Clicker
 
         public void Produce(IStore store, DateTime now, int bonus = 1) {
             if (!this.IsBought) {
-                throw new System.Exception("Not bought factory.");
+                throw new Exception("Not bought factory.");
             }
             if (!this.Producer.Produce(store, this.Power * bonus, now)) {
-                throw new System.Exception("Failed produce.");
+                throw new Exception("Failed produce.");
             }
         }
     }

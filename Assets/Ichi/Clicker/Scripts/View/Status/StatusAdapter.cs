@@ -13,6 +13,8 @@ namespace Ichi.Clicker
         public string Coin { get => Ichi.Common.BigIntegerText.ToString(DIContainer.CoinRepository.Coin.Quantity); }
         public string Product { get => Ichi.Common.BigIntegerText.ToString(DIContainer.ProductRepository.Product.Quantity); }
         //TODO フィーバーレート表示
+        //TODO フィーバー残り時間表示
+        //TODO フィーバークールタイム表示
 
         public string ClickPower {
             get {

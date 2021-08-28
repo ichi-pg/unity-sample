@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 
 namespace Ichi.Common
@@ -29,7 +30,7 @@ namespace Ichi.Common
         public static T Load<T>() {
             var path = FilePath(typeof(T));
             if (!File.Exists(path)) {
-                throw new System.Exception("Not found save data.");
+                throw new Exception("Not found save data.");
             }
             var reader = new StreamReader(path);
             var json = reader.ReadToEnd();
@@ -37,7 +38,7 @@ namespace Ichi.Common
             return JsonUtility.FromJson<T>(json);
         }
 
-        private static string FilePath(System.Type type) {
+        private static string FilePath(Type type) {
             return Application.persistentDataPath + "/" + type.Namespace + "/" + type.Name + ".json";
         }
 

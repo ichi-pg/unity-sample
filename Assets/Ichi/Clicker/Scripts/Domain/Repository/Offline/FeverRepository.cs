@@ -7,12 +7,11 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        public DateTime NextFeverAt { get => SaveData.Instance.NextFeverAt; }
-        public TimeSpan FeverSpan { get => TimeSpan.FromSeconds(30); }
-        public TimeSpan FeverInterval { get => TimeSpan.FromMilliseconds(100); }
+        public TimeSpan Duration { get => TimeSpan.FromSeconds(30); }
+        public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         private int cheatBonus = 1;
 
-        public int FeverRate {
+        public int Rate {
             get {
                 //施設が多くなると相対的にフィーバーの性能が下がるので補正（ランクアップの動機にもなる）
                 var count = SaveData.Instance.ClickFactories.Count(factory => factory.IsBought);
@@ -21,11 +20,23 @@ namespace Ichi.Clicker.Offline
             }
         }
 
+        public TimeSpan CoolTime {
+            get {
+                if (SaveData.Instance.NextFeverAt < Common.Time.Now) {
+                    return TimeSpan.Zero;
+                }
+                return SaveData.Instance.NextFeverAt - Common.Time.Now;
+            }
+        }
+
         public void Produce() {
             var now = Common.Time.Now;
+            if (now < SaveData.Instance.NextFeverAt) {
+                throw new Exception("Invalid fever cool time.");
+            }
             foreach (var factory in SaveData.Instance.ClickFactories) {
                 if (factory.IsBought) {
-                    factory.Produce(SaveData.Instance.Coin, now, this.FeverRate * this.cheatBonus);
+                    factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
                 }
             }
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
