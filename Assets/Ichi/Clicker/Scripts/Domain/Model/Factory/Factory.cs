@@ -59,6 +59,7 @@ namespace Ichi.Clicker
                 return false;
             }
             this.level = 0;
+            this.Calculate();
             return true;
         }
 
