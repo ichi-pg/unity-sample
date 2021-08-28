@@ -12,7 +12,7 @@ namespace Ichi.Clicker
     {
         void Start() {
             DIContainer.LoginRepository.Produce();
-            if (DIContainer.LoginRepository.Quanity > 0) {
+            if (DIContainer.LoginRepository.Quantity > 0) {
                 this.GetComponent<Common.OpenModalButton>().Open();
             }
             this.AutoProduce(this.GetCancellationTokenOnDestroy()).Forget();

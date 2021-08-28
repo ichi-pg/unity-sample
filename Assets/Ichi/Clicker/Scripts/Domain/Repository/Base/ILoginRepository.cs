@@ -7,8 +7,8 @@ namespace Ichi.Clicker
 {
     public interface ILoginRepository
     {
-        BigInteger Quanity { get; }
-        float Percentage { get; }
+        BigInteger Quantity { get; }
+        int Percentage { get; }
         void Produce();
         void Collect(bool bonus);
     }

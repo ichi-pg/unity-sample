@@ -16,20 +16,14 @@ namespace Ichi.Clicker
 
         public string ClickPower {
             get {
-                BigInteger power;
-                foreach (var factory in DIContainer.FactoryRepository.ClickFactories) {
-                    power += factory.Power;
-                }
+                var power = FactoryUtility.SumPower(DIContainer.FactoryRepository.ClickFactories);
                 return Ichi.Common.BigIntegerText.ToString(power);
             }
         }
 
         public string AutoPower {
             get {
-                BigInteger power;
-                foreach (var factory in DIContainer.FactoryRepository.AutoFactories) {
-                    power += factory.Power;
-                }
+                var power = FactoryUtility.SumPower(DIContainer.FactoryRepository.AutoFactories);
                 return Ichi.Common.BigIntegerText.ToString(power);
             }
         }

@@ -9,13 +9,12 @@ namespace Ichi.Clicker
     {
         [SerializeField]
         private GameObject prefab;
-        private Ichi.Common.EnumerableInjector enumerableInjector;
 
         void Start() {
-            this.enumerableInjector = this.GetComponent<Ichi.Common.EnumerableInjector>();
-            this.enumerableInjector.Clear();
+            var enumerableInjector = this.GetComponent<Ichi.Common.EnumerableInjector>();
+            enumerableInjector.Clear();
             foreach (var factory in DIContainer.FactoryRepository.Factories) {
-                this.enumerableInjector.Inject(
+                enumerableInjector.Inject(
                     new FactoryAdapter(factory),
                     this.prefab,
                     DIContainer.ResourceLoader

@@ -7,8 +7,8 @@ namespace Ichi.Clicker
 {
     public class TimeProducer : IProducer
     {
-        private static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
-        private static readonly TimeSpan Limit = TimeSpan.FromHours(12);
+        public static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
+        public static readonly TimeSpan Limit = TimeSpan.FromHours(12);
 
         private IProducedAt self;
 
