@@ -13,7 +13,6 @@ namespace Ichi.Clicker
                     repository.Produce(factory);
                 }
             }
-            Common.DataInjector.Alter();
         }
     }
 }

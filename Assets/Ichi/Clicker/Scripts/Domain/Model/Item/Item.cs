@@ -11,6 +11,7 @@ namespace Ichi.Clicker
         public Common.BigNumber quantity;
         public int category;
         public BigInteger Quantity { get => this.quantity.Integer; }
+        public event Action AlterHandler;
 
         public bool Consume(BigInteger quantity) {
             if (quantity < 0) {
@@ -20,6 +21,7 @@ namespace Ichi.Clicker
                 return false;
             }
             this.quantity -= quantity;
+            this.AlterHandler?.Invoke();
             return true;
         }
 
@@ -28,6 +30,7 @@ namespace Ichi.Clicker
                 return false;
             }
             this.quantity += quantity;
+            this.AlterHandler?.Invoke();
             return true;
         }
 
@@ -39,6 +42,7 @@ namespace Ichi.Clicker
                 return false;
             }
             this.quantity = 0;
+            this.AlterHandler?.Invoke();
             return true;
         }
     }

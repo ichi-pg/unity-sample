@@ -21,18 +21,18 @@ namespace Ichi.Clicker
         public async void Fever() {
             var button = this.GetComponent<Button>();
             button.interactable = false;
-            var token = new CancellationTokenSource();
-            this.Produce(token.Token).Forget();
+            var loop = new CancellationTokenSource();
+            this.Produce(loop.Token).Forget();
             try {
                 await UniTask.Delay(
                     DIContainer.FeverRepository.Duration,
                     cancellationToken: this.GetCancellationTokenOnDestroy()
                 );
+                loop.Cancel();
+                await this.CoolTime();
             } catch(OperationCanceledException) {
-            } finally {
-                token.Cancel();
+                loop.Cancel();
             }
-            await this.CoolTime();
         }
 
         private async UniTask CoolTime() {
@@ -52,7 +52,6 @@ namespace Ichi.Clicker
             while (true)
             {
                 DIContainer.FeverRepository.Produce();
-                Common.DataInjector.Alter();
                 await UniTask.Delay(
                     DIContainer.FeverRepository.Interval,
                     cancellationToken: token

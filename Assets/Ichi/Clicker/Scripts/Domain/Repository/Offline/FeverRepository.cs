@@ -31,9 +31,6 @@ namespace Ichi.Clicker.Offline
 
         public void Produce() {
             var now = Common.Time.Now;
-            if (now < SaveData.Instance.NextFeverAt) {
-                throw new Exception("Invalid fever cool time.");
-            }
             foreach (var factory in SaveData.Instance.ClickFactories) {
                 if (factory.IsBought) {
                     factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
@@ -42,6 +39,7 @@ namespace Ichi.Clicker.Offline
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             //TODO 広告でフィーバー回復
             //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
+            //TODO クールタイムチェック
         }
 
         public void CheatMode(bool enable) {

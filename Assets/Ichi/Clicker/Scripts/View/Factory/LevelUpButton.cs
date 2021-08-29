@@ -13,39 +13,40 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class LevelUpButton : MonoBehaviour
     {
-        //TODO ViewModelにしたい
-        //TODO 長押し
 
         [SerializeField]
         private Text text;
+        private Button button;
 
         void Start() {
-            Common.DataInjector.AlterHander += this.OnAlter;
+            this.button = this.GetComponent<Button>();
+            DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
+            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             this.OnAlter();
             this.StartCheatMode();
         }
 
         void OnDestroy() {
-            Common.DataInjector.AlterHander -= this.OnAlter;
+            DIContainer.FactoryRepository.AlterHandler -= this.OnAlter;
+            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
-            var adpter = this.FindFactory();
-            this.GetComponent<Button>().interactable = !adpter.LevelUpDisable;
+            var adpter = new FactoryAdapter(this.FindFactory());
+            this.button.interactable = adpter.CanLevelUp;
             this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adpter);
         }
 
         public void LevelUp() {
-            this.FindFactory().LevelUp();
+            DIContainer.FactoryRepository.LevelUp(this.FindFactory());
+            //TODO 長押し
         }
 
-        private FactoryAdapter FindFactory() {
-            return new FactoryAdapter(
-                DIContainer.FactoryRepository
+        private IFactory FindFactory() {
+            return DIContainer.FactoryRepository
                     .Factories
                     .OrderBy(factory => factory.Cost)
-                    .FirstOrDefault()
-            );
+                    .FirstOrDefault();
         }
 
         [Conditional("UNITY_EDITOR")]

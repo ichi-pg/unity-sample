@@ -10,7 +10,6 @@ namespace Ichi.Clicker
     {
         public void Collect() {
             DIContainer.ProductRepository.Collect();
-            Common.DataInjector.Alter();
         }
     }
 }

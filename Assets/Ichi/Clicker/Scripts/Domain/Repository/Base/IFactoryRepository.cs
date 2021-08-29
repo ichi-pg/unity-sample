@@ -12,5 +12,6 @@ namespace Ichi.Clicker
         void LevelUp(IFactory factory);
         void Produce(IFactory factory);
         void CheatMode(bool enable);
+        event Action AlterHandler;
     }
 }

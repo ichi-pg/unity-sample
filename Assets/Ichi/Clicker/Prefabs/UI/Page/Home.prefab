@@ -886,7 +886,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529256000855434497}
-  - component: {fileID: 946891757364393029}
   - component: {fileID: 7781362297693519969}
   m_Layer: 5
   m_Name: Status
@@ -918,18 +917,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &946891757364393029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797140343911203449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c44028da0c4c4564925a70b9b36310f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7781362297693519969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,6 +929,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206d5fd12d0864787ab176d672bb7064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coin: {fileID: 2863151313705779038}
+  product: {fileID: 4587944960036593221}
+  clickPower: {fileID: 4225044500559762973}
+  autoPower: {fileID: 6155539012833997485}
 --- !u!1 &6009809854560193978
 GameObject:
   m_ObjectHideFlags: 0

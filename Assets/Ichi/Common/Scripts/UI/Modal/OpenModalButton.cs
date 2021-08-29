@@ -12,11 +12,12 @@ namespace Ichi.Common
         public void Open() {
             var obj = Instantiate(this.modal, this.GetComponentInParent<Canvas>().transform);
             var parentInjector = this.GetComponentInParent<DataInjector>();
-            var childInjector = obj.GetComponentInChildren<DataInjector>();//TODO Enumerableだった時バッティングするかも
+            var childInjector = obj.GetComponentInChildren<DataInjector>();
             if (parentInjector != null && childInjector != null) {
                 childInjector.Inject(parentInjector.Data, parentInjector.Loader);
             }
             //TODO 入れ替えるパターン
+            //TODO Enumerableだった時バッティングするかも
         }
     }
 }

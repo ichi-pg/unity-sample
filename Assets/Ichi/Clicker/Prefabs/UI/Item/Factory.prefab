@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 16907972586191}
   - component: {fileID: 5183865653037916120}
   - component: {fileID: 8374351913742776227}
-  - component: {fileID: 8772537488640113506}
+  - component: {fileID: 649953556188258463}
   m_Layer: 5
   m_Name: Factory
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8772537488640113506
+--- !u!114 &649953556188258463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,9 +246,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 847433119979035752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c44028da0c4c4564925a70b9b36310f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1db39f6e691bd4fc5a4d69dd5180153d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: {fileID: 5707728670943496423}
+  cost: {fileID: 8259419326980255702}
+  levelUpButton: {fileID: 2064539873006649582}
+  background: {fileID: 1657002334320074600}
 --- !u!1 &2894870671225710925
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +374,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Ichi.Clicker.FactoryView, Assembly-CSharp
+      - m_Target: {fileID: 649953556188258463}
+        m_TargetAssemblyTypeName: Ichi.Clicker.FactoryView, Ichi.Clicker
         m_MethodName: LevelUp
         m_Mode: 1
         m_Arguments:

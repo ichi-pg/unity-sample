@@ -9,14 +9,14 @@ namespace Ichi.Common
 {
     public class TextLocalizer : ITextLocalizer
     {
-        private StringTable table;
+        private LocalizedStringTable table;
 
         public TextLocalizer(string table) {
-            this.table = new LocalizedStringTable(table).GetTable();
+            this.table = new LocalizedStringTable(table);
         }
 
         public string Localize(string key, params object[] values) {
-            return this.table.GetEntry(key).GetLocalizedString(values);
+            return this.table.GetTable().GetEntry(key).GetLocalizedString(values);
         }
     }
 }

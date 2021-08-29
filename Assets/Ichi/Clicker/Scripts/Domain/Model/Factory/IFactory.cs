@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace Ichi.Clicker
 {
@@ -13,6 +14,7 @@ namespace Ichi.Clicker
         BigInteger NextPower { get; }
         bool IsLock { get; }
         bool IsBought { get; }
+        event Action AlterHandler;
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない？
         //NOTE カフェ、農園、廃墟、街

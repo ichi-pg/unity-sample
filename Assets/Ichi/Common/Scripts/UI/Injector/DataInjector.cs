@@ -35,13 +35,10 @@ namespace Ichi.Common
             foreach (Button button in this.buttons) {
                 this.InjectButton(this.Data, button);
             }
-            //TODO 変化したパラメーターだけ更新したい
-            //TODO ReactiveProperty？
         }
 
         public static void Alter() {
             AlterHander?.Invoke();
-            //TODO 変化したオブジェクトだけ更新したい
         }
 
         public void Inject(object data, IResourceLoader loader) {
@@ -59,7 +56,6 @@ namespace Ichi.Common
             this.InjectButton(data, this.GetComponent<Button>());
             this.Data = data;
             this.Loader = loader;
-            //TODO オブジェクト自体を非表示のオプション
         }
 
         private void InjectText(object data, Text text) {
