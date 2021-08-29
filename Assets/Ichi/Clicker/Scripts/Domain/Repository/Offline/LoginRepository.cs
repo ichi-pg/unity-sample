@@ -24,10 +24,12 @@ namespace Ichi.Clicker.Offline
                     factory.Produce(SaveData.Instance.LoginProduct, Common.Time.Now);
                 }
             }
+            SaveData.Instance.Save();
         }
 
         public void Collect(bool bonus) {
             SaveData.Instance.LoginProduct.Sell(SaveData.Instance.Coin, bonus ? 2 : 1);
+            SaveData.Instance.Save();
         }
     }
 }

@@ -37,15 +37,20 @@ namespace Ichi.Clicker.Offline
                     throw new Exception("Invalid cool time.");
                 }
                 this.finishAt = now + this.Duration;
+                SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
+                SaveData.Instance.Save();
             }
             foreach (var factory in SaveData.Instance.ClickFactories) {
                 if (factory.IsBought) {
                     factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
                 }
             }
-            SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
-            //TODO 広告でフィーバー回復
             //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
+        }
+
+        public void CoolDown() {
+            SaveData.Instance.NextFeverAt = Common.Time.Now;
+            SaveData.Instance.Save();
         }
 
         public void CheatMode(bool enable) {

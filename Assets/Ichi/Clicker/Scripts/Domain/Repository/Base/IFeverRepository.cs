@@ -11,6 +11,7 @@ namespace Ichi.Clicker
         TimeSpan Interval { get; }
         int Rate { get; }
         void Produce();
+        void CoolDown();
         void CheatMode(bool enable);
     }
 }

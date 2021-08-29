@@ -6,6 +6,7 @@
 "Status.ClickPower","総生産{ClickPower}/クリック"
 "Status.AutoPower","総生産{AutoPower}/秒"
 "Fever","フィーバー"
+"FeverAds","広告視聴でフィーバー回復"
 "Factories","施設一覧"
 "LevelUpButton","ランク{Rank} Lv{Level}\nLvアップ{Cost}"
 "Close","閉じる"
