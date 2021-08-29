@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db39f6e691bd4fc5a4d69dd5180153d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 5707728670943496423}
+  label: {fileID: 5707728670943496423}
   cost: {fileID: 8259419326980255702}
   levelUpButton: {fileID: 2064539873006649582}
   background: {fileID: 1657002334320074600}

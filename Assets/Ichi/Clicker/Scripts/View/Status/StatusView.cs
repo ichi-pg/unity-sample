@@ -22,11 +22,13 @@ namespace Ichi.Clicker
             this.adapter = new StatusAdapter();
             DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
+            DIContainer.ProductRepository.Product.AlterHandler += this.OnAlter;
         }
 
         void OnDestroy() {
             DIContainer.FactoryRepository.AlterHandler -= this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
+            DIContainer.ProductRepository.Product.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
