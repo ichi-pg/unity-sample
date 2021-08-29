@@ -34,6 +34,7 @@ namespace Ichi.Clicker
         }
 
         public void Fever() {
+            DIContainer.FeverRepository.Fever();
             this.Produce().Forget();
             this.CoolTime().Forget();
         }

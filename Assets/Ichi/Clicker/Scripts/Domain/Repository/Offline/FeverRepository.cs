@@ -44,17 +44,25 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public void Produce() {
-            var now = Common.Time.Now;
-            if (this.finishAt < now) {
-                if (now < SaveData.Instance.NextFeverAt) {
-                    throw new Exception("Invalid cool time.");
-                }
-                this.finishAt = now + TimeSpan.FromSeconds(30);
-                SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
-                SaveData.Instance.Save();
-                this.AlterHandler?.Invoke();
+        public void Fever() {
+            if (this.IsFever) {
+                throw new Exception("Invalid fever.");
             }
+            if (this.IsCoolTime) {
+                throw new Exception("Invalid cool time.");
+            }
+            var now = Common.Time.Now;
+            this.finishAt = now + TimeSpan.FromSeconds(30);
+            SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
+            SaveData.Instance.Save();
+            this.AlterHandler?.Invoke();
+        }
+
+        public void Produce() {
+            if (!this.IsFever) {
+                throw new Exception("Invalid fever.");
+            }
+            var now = Common.Time.Now;
             foreach (var factory in SaveData.Instance.ClickFactories) {
                 if (factory.IsBought) {
                     factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
@@ -65,12 +73,20 @@ namespace Ichi.Clicker.Offline
         }
 
         public void CoolDown() {
+            if (this.IsFever) {
+                throw new Exception("Invalid fever.");
+            }
+            if (!this.IsCoolTime) {
+                throw new Exception("Invalid cool time.");
+            }
+            if (this.IsAdsCoolTime) {
+                throw new Exception("Invalid ads cool time.");
+            }
             var now = Common.Time.Now;
             SaveData.Instance.NextFeverAt = now;
             SaveData.Instance.NextFeverAdsAt = now + TimeSpan.FromMinutes(30);
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
-            //TODO クールタイムないかフィーバー中ならエラー
         }
 
         public void CheatMode(bool enable) {

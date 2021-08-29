@@ -13,6 +13,7 @@ namespace Ichi.Clicker
         bool IsCoolTime { get; }
         bool IsFever { get; }
         int Rate { get; }
+        void Fever();
         void Produce();
         void CoolDown();
         void CheatMode(bool enable);
