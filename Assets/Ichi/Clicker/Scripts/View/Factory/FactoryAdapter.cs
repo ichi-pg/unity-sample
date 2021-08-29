@@ -15,6 +15,7 @@ namespace Ichi.Clicker
         public string Power { get => Common.BigIntegerText.ToString(this.factory.Power); }
         public string NextPower { get => Common.BigIntegerText.ToString(this.factory.NextPower); }
         public bool CanLevelUp { get => !this.factory.IsLock && DIContainer.CoinRepository.Coin.Quantity >= this.factory.Cost; }
+        public bool IsInflation { get => this.factory.NextPower >= this.factory.Power * 2 && this.factory.Level > 1; }
 
         public string Unit {
             get {

@@ -23,6 +23,7 @@ namespace Ichi.Clicker
             DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             DIContainer.ProductRepository.Product.AlterHandler += this.OnAlter;
+            this.OnAlter();
         }
 
         void OnDestroy() {

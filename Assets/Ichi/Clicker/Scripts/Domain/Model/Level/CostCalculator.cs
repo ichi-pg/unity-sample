@@ -10,12 +10,13 @@ namespace Ichi.Clicker
         public BigInteger Calculate(int level, int rank, int rarity) {
             //パワーに対してレベル分の指数
             var offsetLevel = PowerCalculator.OffsetLevel(level, rank);
-            return LevelUpInflation(offsetLevel) * offsetLevel * offsetLevel;
+            return new BigInteger(LevelUpInflation(offsetLevel) * offsetLevel) * offsetLevel;
         }
 
-        private static BigInteger LevelUpInflation(int level) {
+        private static double LevelUpInflation(int level) {
             //レベルが25上がるごとに生産量が倍（シームレス）
-            return new BigInteger(Math.Pow(2, (double)(level - 1) / 25));
+            //TODO シームレスになってない
+            return Math.Pow(2, (double)level / 25);
         }
     }
 }

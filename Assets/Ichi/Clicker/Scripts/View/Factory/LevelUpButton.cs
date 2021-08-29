@@ -35,6 +35,7 @@ namespace Ichi.Clicker
             var adpter = new FactoryAdapter(this.FindFactory());
             this.button.interactable = adpter.CanLevelUp;
             this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adpter);
+            this.text.color = adpter.IsInflation ? Color.red : Color.black;
         }
 
         public void LevelUp() {

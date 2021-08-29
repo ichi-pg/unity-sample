@@ -23,6 +23,7 @@ namespace Ichi.Clicker
             this.factory = factory;
             this.adapter = new FactoryAdapter(factory);
             this.factory.AlterHandler += this.OnAlter;
+            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             this.OnAlter();
         }
 
@@ -30,11 +31,13 @@ namespace Ichi.Clicker
             if (this.factory != null) {
                 this.factory.AlterHandler -= this.OnAlter;
             }
+            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
             this.label.text = DIContainer.TextLocalizer.Localize("Factory.Name", this.adapter);
             this.cost.text = DIContainer.TextLocalizer.Localize("Factory.Cost", this.adapter);
+            this.cost.color = this.adapter.IsInflation ? Color.red : Color.black;
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
             this.background.color = this.factory.IsBought ? Color.white : Color.gray;
         }
@@ -50,7 +53,6 @@ namespace Ichi.Clicker
             //TODO GUI
             //TODO インクリメントエフェクト
             //TODO 長押し
-            //TODO 25レベルでの倍率アップのアピール表示
         }
     }
 }
