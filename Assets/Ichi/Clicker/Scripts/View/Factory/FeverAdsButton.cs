@@ -13,11 +13,7 @@ namespace Ichi.Clicker
             this.ads.RewardHandler += OnReward;
         }
 
-        void OnDestroy() {
-            this.ads.RewardHandler -= OnReward;
-        }
-
-        public void ShowAds() {
+        public void PlayAds() {
             this.ads.Play();
             //TODO ロード完了までボタン非活性
         }

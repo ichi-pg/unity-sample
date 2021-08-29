@@ -7,6 +7,7 @@
 "Status.AutoPower","総生産{AutoPower}/秒"
 "Fever","フィーバー"
 "FeverAds","広告視聴でフィーバー回復"
+"LoginAds","広告視聴で2倍"
 "Factories","施設一覧"
 "LevelUpButton","ランク{Rank} Lv{Level}\nLvアップ{Cost}"
 "Close","閉じる"
