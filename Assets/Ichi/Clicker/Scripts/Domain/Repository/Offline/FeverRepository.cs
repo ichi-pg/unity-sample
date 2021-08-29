@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 
 namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         public bool IsFever { get => Common.Time.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
@@ -54,7 +55,7 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public void Fever() {
+        public void Fever(CancellationToken token) {
             if (this.IsFever) {
                 throw new Exception("Invalid fever.");
             }
@@ -65,21 +66,23 @@ namespace Ichi.Clicker.Offline
             this.finishAt = now + TimeSpan.FromSeconds(30);
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             SaveData.Instance.Save();
+            this.Produce(token).Forget();
             this.AlterHandler?.Invoke();
         }
 
-        public void Produce() {
-            if (!this.IsFever) {
-                throw new Exception("Invalid fever.");
-            }
-            var now = Common.Time.Now;
-            foreach (var factory in SaveData.Instance.ClickFactories) {
-                if (factory.IsBought) {
-                    factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
+        private async UniTask Produce(CancellationToken token) {
+            while (this.IsFever)
+            {
+                var now = Common.Time.Now;
+                foreach (var factory in SaveData.Instance.ClickFactories) {
+                    if (factory.IsBought) {
+                        factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
+                    }
                 }
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
+            this.AlterHandler?.Invoke();
             //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
-            //TODO インターバルを超えたらエラー
         }
 
         public void CoolDown() {

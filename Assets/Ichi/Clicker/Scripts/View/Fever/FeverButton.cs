@@ -10,8 +10,6 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour
     {
-        [SerializeField]
-        private FeverAdsButton adsButton;
         private Button button;
         private CancellationToken token;
 
@@ -34,25 +32,13 @@ namespace Ichi.Clicker
         }
 
         public void Fever() {
-            DIContainer.FeverRepository.Fever();
-            this.Produce().Forget();
+            DIContainer.FeverRepository.Fever(this.token);
             this.CoolTime().Forget();
         }
 
         private async UniTask CoolTime() {
             await UniTask.Delay(DIContainer.FeverRepository.CoolTime, cancellationToken: this.token);
             this.OnAlter();
-        }
-
-        private async UniTask Produce() {
-            do
-            {
-                DIContainer.FeverRepository.Produce();
-                await UniTask.Delay(DIContainer.FeverRepository.Interval, cancellationToken: this.token);
-            }
-            while (DIContainer.FeverRepository.IsFever);
-            this.OnAlter();
-            this.adsButton.OnAlter();
         }
     }
 }

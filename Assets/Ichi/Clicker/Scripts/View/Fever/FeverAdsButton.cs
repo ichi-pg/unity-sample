@@ -29,7 +29,7 @@ namespace Ichi.Clicker
             DIContainer.FeverRepository.AlterHandler -= this.OnAlter;
         }
 
-        public void OnAlter() {
+        private void OnAlter() {
             this.button.interactable = this.ads.IsLoaded &&
                 DIContainer.FeverRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsAdsCoolTime &&
