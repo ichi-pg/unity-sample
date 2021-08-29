@@ -12,6 +12,8 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour
     {
+        [SerializeField]
+        private FeverAdsButton adsButton;
         private Button button;
         private CancellationToken token;
 
@@ -51,7 +53,7 @@ namespace Ichi.Clicker
             }
             while (DIContainer.FeverRepository.IsFever);
             this.OnAlter();
-            //TODO このタイミングの広告開放が通知できない
+            this.adsButton.OnAlter();
         }
     }
 }
