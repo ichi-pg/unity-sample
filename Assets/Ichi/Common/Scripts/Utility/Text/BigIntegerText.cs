@@ -14,11 +14,10 @@ namespace Ichi.Common
                 number /= 1000;
                 i++;
             }
-            //TODO 逆順
             string units = "";
             while (i > 0) {
                 int unit = (int)'A' + (i % 26) - 1;
-                units += ((char)unit).ToString();
+                units = ((char)unit).ToString() + units;
                 i /= 26;
             }
             //TODO 桁が上がると変化量見えなくなるので、やっぱり長いパターン必要
