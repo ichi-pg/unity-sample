@@ -12,6 +12,8 @@ namespace Ichi.Clicker
         private Text quantity;
         [SerializeField]
         private Text percentage;
+        [SerializeField]
+        private Button adsButton;
 
         private Common.IAds ads;
 
@@ -20,6 +22,11 @@ namespace Ichi.Clicker
             this.percentage.text = DIContainer.LoginRepository.Percentage+"%";
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
+            this.ads.LoadedHandler += this.OnAlter;
+        }
+
+        private void OnAlter() {
+            this.adsButton.interactable = this.ads.IsLoaded;
         }
 
         public void Collect() {
@@ -28,7 +35,6 @@ namespace Ichi.Clicker
 
         public void PlayAds() {
             this.ads.Play();
-            //TODO ロード完了までボタン非活性
         }
 
         private void OnReward() {

@@ -7,11 +7,11 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        public event Action AlterHandler;
         public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         public bool IsFever { get => Common.Time.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
+        public event Action AlterHandler;
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
 

@@ -18,7 +18,8 @@ namespace Ichi.Clicker
             this.button = this.GetComponent<Button>();
             this.token = this.GetCancellationTokenOnDestroy();
             this.ads = DIContainer.AdsCreator.Create();
-            this.ads.RewardHandler += OnReward;
+            this.ads.RewardHandler += this.OnReward;
+            this.ads.LoadedHandler += this.OnAlter;
             DIContainer.FeverRepository.AlterHandler += this.OnAlter;
             this.OnAlter();
             this.CoolTime().Forget();
@@ -29,7 +30,7 @@ namespace Ichi.Clicker
         }
 
         public void OnAlter() {
-            this.button.interactable =
+            this.button.interactable = this.ads.IsLoaded &&
                 DIContainer.FeverRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsAdsCoolTime &&
                 !DIContainer.FeverRepository.IsFever;
@@ -37,7 +38,6 @@ namespace Ichi.Clicker
 
         public void PlayAds() {
             this.ads.Play();
-            //TODO ロード完了までボタン非活性
         }
 
         private void OnReward() {

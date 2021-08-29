@@ -10,6 +10,8 @@ namespace Ichi.Common
     {
         private RewardedAd rewardedAd;
         public event Action RewardHandler;
+        public event Action LoadedHandler;
+        public bool IsLoaded { get => this.rewardedAd.IsLoaded(); }
 
         public GoogleAds() {
             this.CreateAndLoadRewardedAd();
@@ -19,6 +21,9 @@ namespace Ichi.Common
         }
 
         public void Play() {
+            if (!this.IsLoaded) {
+                throw new Exception("Invalid loaded.");
+            }
             this.rewardedAd.Show();
         }
 
@@ -32,9 +37,14 @@ namespace Ichi.Common
                 var adUnitId = "unexpected_platform";
             #endif
             this.rewardedAd = new RewardedAd(adUnitId);
+            this.rewardedAd.OnAdLoaded += this.HandleRewardedAdLoaded;
             this.rewardedAd.OnUserEarnedReward += this.HandleUserEarnedReward;
             this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
             this.rewardedAd.LoadAd(new AdRequest.Builder().Build());
+        }
+
+        public void HandleRewardedAdLoaded(object sender, EventArgs args) {
+            this.LoadedHandler?.Invoke();
         }
 
         private void HandleUserEarnedReward(object sender, Reward args) {
