@@ -19,7 +19,7 @@ namespace Ichi.Clicker
             this.token = this.GetCancellationTokenOnDestroy();
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
-            this.ads.LoadedHandler += this.OnAlter;
+            this.ads.LoadHandler += this.OnAlter;
             DIContainer.FeverRepository.AlterHandler += this.OnAlter;
             this.OnAlter();
             this.CoolTime().Forget();

@@ -11,7 +11,7 @@ namespace Ichi.Common
     public interface IAds
     {
         event Action RewardHandler;
-        event Action LoadedHandler;
+        event Action LoadHandler;
         void Play();
         bool IsLoaded { get; }
     }

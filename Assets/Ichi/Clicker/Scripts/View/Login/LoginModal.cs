@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker
 {
+    [RequireComponent(typeof(Common.CloseModalButton))]
     public class LoginModal : MonoBehaviour
     {
         [SerializeField]
@@ -14,15 +15,18 @@ namespace Ichi.Clicker
         private Text percentage;
         [SerializeField]
         private Button adsButton;
+        private Common.CloseModalButton closeButton;
 
         private Common.IAds ads;
 
         void Start() {
+            this.closeButton = this.GetComponent<Common.CloseModalButton>();
             this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Quantity);
             this.percentage.text = DIContainer.LoginRepository.Percentage+"%";
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
-            this.ads.LoadedHandler += this.OnAlter;
+            this.ads.LoadHandler += this.OnAlter;
+            this.OnAlter();
         }
 
         private void OnAlter() {
@@ -31,6 +35,7 @@ namespace Ichi.Clicker
 
         public void Collect() {
             DIContainer.LoginRepository.Collect(false);
+            this.closeButton.Close();
         }
 
         public void PlayAds() {
@@ -39,7 +44,7 @@ namespace Ichi.Clicker
 
         private void OnReward() {
             DIContainer.LoginRepository.Collect(true);
-            //TODO キャンセルした場合、普通に受け取れる
+            this.closeButton.Close();
         }
     }
 }

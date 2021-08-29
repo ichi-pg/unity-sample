@@ -10,7 +10,7 @@ namespace Ichi.Common
     {
         private RewardedAd rewardedAd;
         public event Action RewardHandler;
-        public event Action LoadedHandler;
+        public event Action LoadHandler;
         public bool IsLoaded { get => this.rewardedAd.IsLoaded(); }
 
         public GoogleAds() {
@@ -18,6 +18,7 @@ namespace Ichi.Common
             //TODO new警告が出るの気持ち悪い
             //TODO ダミーGameObjectが残ることがある
             //TODO UnityAdsも試したい
+            //TODO Loadedまでボタン非表示じゃなくてダミー広告出すのが主流？
         }
 
         public void Play() {
@@ -41,10 +42,11 @@ namespace Ichi.Common
             this.rewardedAd.OnUserEarnedReward += this.HandleUserEarnedReward;
             this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
             this.rewardedAd.LoadAd(new AdRequest.Builder().Build());
+            this.LoadHandler?.Invoke();
         }
 
         public void HandleRewardedAdLoaded(object sender, EventArgs args) {
-            this.LoadedHandler?.Invoke();
+            this.LoadHandler?.Invoke();
         }
 
         private void HandleUserEarnedReward(object sender, Reward args) {
