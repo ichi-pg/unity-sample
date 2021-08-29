@@ -9,9 +9,11 @@ namespace Ichi.Clicker
         TimeSpan CoolTime { get; }
         TimeSpan Duration { get; }
         TimeSpan Interval { get; }
+        TimeSpan RemainDuration { get; }
         int Rate { get; }
         void Produce();
         void CoolDown();
         void CheatMode(bool enable);
+        event Action AlterHandler;
     }
 }

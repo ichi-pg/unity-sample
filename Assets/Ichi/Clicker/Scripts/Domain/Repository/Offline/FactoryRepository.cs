@@ -14,8 +14,8 @@ namespace Ichi.Clicker.Offline
 
         public void LevelUp(IFactory factory) {
             (factory as Factory).LevelUp(SaveData.Instance.Coin, Common.Time.Now);
-            this.AlterHandler?.Invoke();
             SaveData.Instance.Save();
+            this.AlterHandler?.Invoke();
         }
 
         public void Produce(IFactory factory) {

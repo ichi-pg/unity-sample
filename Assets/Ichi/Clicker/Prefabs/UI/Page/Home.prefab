@@ -844,7 +844,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 536969978325851777}
         m_TargetAssemblyTypeName: Ichi.Clicker.FeverAdsButton, Ichi.Clicker
-        m_MethodName: ShowAds
+        m_MethodName: PlayAds
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

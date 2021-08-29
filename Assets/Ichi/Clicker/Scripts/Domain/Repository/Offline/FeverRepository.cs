@@ -11,6 +11,8 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         private int cheatBonus = 1;
         private DateTime finishAt = DateTime.MinValue;
+        private DateTime lastAt = DateTime.MinValue;
+        public event Action AlterHandler;
 
         public int Rate {
             get {
@@ -30,8 +32,22 @@ namespace Ichi.Clicker.Offline
             }
         }
 
+        public TimeSpan RemainDuration {
+            get {
+                if (this.finishAt < Common.Time.Now) {
+                    return TimeSpan.Zero;
+                }
+                return this.finishAt - Common.Time.Now;
+            }
+        }
+
         public void Produce() {
             var now = Common.Time.Now;
+            //TODO
+            // if (now - this.lastAt < this.Interval) {
+            //     throw new Exception("Invalid interval.");
+            // }
+            // this.lastAt = now;
             if (this.finishAt < now) {
                 if (now < SaveData.Instance.NextFeverAt) {
                     throw new Exception("Invalid cool time.");
@@ -39,6 +55,7 @@ namespace Ichi.Clicker.Offline
                 this.finishAt = now + this.Duration;
                 SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
                 SaveData.Instance.Save();
+                this.AlterHandler?.Invoke();
             }
             foreach (var factory in SaveData.Instance.ClickFactories) {
                 if (factory.IsBought) {
@@ -51,6 +68,7 @@ namespace Ichi.Clicker.Offline
         public void CoolDown() {
             SaveData.Instance.NextFeverAt = Common.Time.Now;
             SaveData.Instance.Save();
+            this.AlterHandler?.Invoke();
         }
 
         public void CheatMode(bool enable) {
