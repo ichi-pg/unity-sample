@@ -14,14 +14,16 @@ namespace Ichi.Common
                 number /= 1000;
                 i++;
             }
-            string units = "";
+            var units = "";
             while (i > 0) {
                 int unit = (int)'A' + (i % 26) - 1;
                 units = ((char)unit).ToString() + units;
                 i /= 26;
             }
-            //TODO 桁が上がると変化量見えなくなるので、やっぱり長いパターン必要
-            return number + "." + (remainder / 100) + units;
+            var rem = "." + remainder.ToString("000");
+            // var rem = "." + (remainder / 100);
+            rem = rem.TrimEnd('0').TrimEnd('.');
+            return number + rem + units;
         }
     }
 }
