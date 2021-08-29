@@ -11,7 +11,7 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         public bool IsFever { get => Common.Time.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
-        public bool IsAdsCoolTime { get => Common.Time.Now < SaveData.Instance.NextFeverAdsAt; }
+        public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
 
@@ -27,6 +27,16 @@ namespace Ichi.Clicker.Offline
         public TimeSpan CoolTime {
             get {
                 var coolTime = SaveData.Instance.NextFeverAt - Common.Time.Now;
+                if (coolTime < TimeSpan.Zero) {
+                    coolTime = TimeSpan.Zero;
+                }
+                return coolTime;
+            }
+        }
+
+        public TimeSpan AdsCoolTime {
+            get {
+                var coolTime = SaveData.Instance.NextFeverAdsAt - Common.Time.Now;
                 if (coolTime < TimeSpan.Zero) {
                     coolTime = TimeSpan.Zero;
                 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +12,16 @@ namespace Ichi.Clicker
     {
         private Button button;
         private Common.IAds ads;
+        private CancellationToken token;
 
         void Start() {
             this.button = this.GetComponent<Button>();
+            this.token = this.GetCancellationTokenOnDestroy();
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += OnReward;
             DIContainer.FeverRepository.AlterHandler += this.OnAlter;
             this.OnAlter();
+            this.CoolTime().Forget();
         }
 
         void OnDestroy() {
@@ -38,6 +42,12 @@ namespace Ichi.Clicker
 
         private void OnReward() {
             DIContainer.FeverRepository.CoolDown();
+            this.CoolTime().Forget();
+        }
+
+        private async UniTask CoolTime() {
+            await UniTask.Delay(DIContainer.FeverRepository.AdsCoolTime, cancellationToken: this.token);
+            this.OnAlter();
         }
     }
 }

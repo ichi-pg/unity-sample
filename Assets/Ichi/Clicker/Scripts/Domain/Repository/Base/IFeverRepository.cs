@@ -7,6 +7,7 @@ namespace Ichi.Clicker
     public interface IFeverRepository
     {
         TimeSpan CoolTime { get; }
+        TimeSpan AdsCoolTime { get; }
         TimeSpan Interval { get; }
         bool IsAdsCoolTime { get; }
         bool IsCoolTime { get; }
