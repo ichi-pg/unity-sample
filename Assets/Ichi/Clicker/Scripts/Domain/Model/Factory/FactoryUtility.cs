@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     {
         public static BigInteger SumPower(IEnumerable<IFactory> factories) {
             BigInteger power;
-            foreach (var factory in DIContainer.FactoryRepository.AutoFactories) {
+            foreach (var factory in factories) {
                 power += factory.Power;
             }
             return power;
