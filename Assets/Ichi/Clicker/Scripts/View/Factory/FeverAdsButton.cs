@@ -39,6 +39,7 @@ namespace Ichi.Clicker
             DIContainer.FeverRepository.CoolDown();
             //TODO クールダウンボタン非活性
             //TODO フィーバーボタン活性化
+            //TODO 広告自身のクールタイム
         }
 
         private void HandleRewardedAdClosed(object sender, EventArgs args) {
