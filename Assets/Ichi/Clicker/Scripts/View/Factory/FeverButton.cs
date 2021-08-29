@@ -14,49 +14,45 @@ namespace Ichi.Clicker
     {
         private Button button;
         private CancellationToken token;
+        private IFeverRepository repository;
 
-        async void Start() {
+        void Start() {
             this.button = this.GetComponent<Button>();
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FeverRepository.AlterHandler += this.OnAlter;
+            this.repository = DIContainer.FeverRepository;
+            this.repository.AlterHandler += this.OnAlter;
             this.OnAlter();
-            try {
-                await UniTask.Delay(DIContainer.FeverRepository.CoolTime, cancellationToken: this.token);
-                this.OnAlter();
-            } catch(OperationCanceledException) {
-            }
+            this.CoolTime().Forget();
         }
 
         void OnDestroy() {
-            DIContainer.FeverRepository.AlterHandler -= this.OnAlter;
+            this.repository.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
             this.button.interactable =
-                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero &&
-                DIContainer.FeverRepository.RemainDuration <= TimeSpan.Zero;
+                this.repository.CoolTime <= TimeSpan.Zero &&
+                this.repository.RemainDuration <= TimeSpan.Zero;
         }
 
-        public async void Fever() {
-            var loop = new CancellationTokenSource();
-            this.Produce(loop.Token).Forget();
-            try {
-                await UniTask.Delay(DIContainer.FeverRepository.Duration, cancellationToken: this.token);
-                this.OnAlter();
-                loop.Cancel();//TODO DurationのタイミングでCoolTimeがないと連続実行される
-                await UniTask.Delay(DIContainer.FeverRepository.CoolTime, cancellationToken: this.token);
-                this.OnAlter();
-            } catch(OperationCanceledException) {
-                loop.Cancel();
-            }
+        public void Fever() {
+            this.Produce().Forget();
+            this.CoolTime().Forget();
         }
 
-        public async UniTask Produce(CancellationToken cancelToken) {
-            while (true)
+        private async UniTask CoolTime() {
+            await UniTask.Delay(this.repository.CoolTime, cancellationToken: this.token);
+            this.OnAlter();
+        }
+
+        private async UniTask Produce() {
+            do
             {
-                DIContainer.FeverRepository.Produce();
-                await UniTask.Delay(DIContainer.FeverRepository.Interval, cancellationToken: cancelToken);
+                this.repository.Produce();
+                await UniTask.Delay(this.repository.Interval, cancellationToken: this.token);
             }
+            while (this.repository.RemainDuration > TimeSpan.Zero);
+            this.OnAlter();
         }
     }
 }

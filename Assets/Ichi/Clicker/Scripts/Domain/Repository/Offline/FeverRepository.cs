@@ -11,7 +11,6 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
         private int cheatBonus = 1;
         private DateTime finishAt = DateTime.MinValue;
-        private DateTime lastAt = DateTime.MinValue;
         public event Action AlterHandler;
 
         public int Rate {
@@ -43,11 +42,6 @@ namespace Ichi.Clicker.Offline
 
         public void Produce() {
             var now = Common.Time.Now;
-            //TODO
-            // if (now - this.lastAt < this.Interval) {
-            //     throw new Exception("Invalid interval.");
-            // }
-            // this.lastAt = now;
             if (this.finishAt < now) {
                 if (now < SaveData.Instance.NextFeverAt) {
                     throw new Exception("Invalid cool time.");
@@ -63,6 +57,7 @@ namespace Ichi.Clicker.Offline
                 }
             }
             //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
+            //TODO インターバル以上に実行されないこと（エラー）
         }
 
         public void CoolDown() {
