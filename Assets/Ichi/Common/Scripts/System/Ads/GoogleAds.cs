@@ -15,6 +15,7 @@ namespace Ichi.Common
             this.CreateAndLoadRewardedAd();
             //TODO new警告が出るの気持ち悪い
             //TODO ダミーGameObjectが残ることがある
+            //TODO UnityAdsも試したい
         }
 
         public void Play() {
