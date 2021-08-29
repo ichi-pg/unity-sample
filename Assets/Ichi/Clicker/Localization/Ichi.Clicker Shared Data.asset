@@ -79,6 +79,22 @@ MonoBehaviour:
     m_Key: LoginAds
     m_Metadata:
       m_Items: []
+  - m_Id: 3048507781931008
+    m_Key: Status.FeverRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3048507790319616
+    m_Key: Status.FeverTimeLeft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3048507790319617
+    m_Key: Status.FeverCoolTime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3048507790319618
+    m_Key: Status.FeverAdsCoolTime
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

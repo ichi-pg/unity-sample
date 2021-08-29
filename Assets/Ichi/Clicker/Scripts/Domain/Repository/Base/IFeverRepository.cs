@@ -9,6 +9,7 @@ namespace Ichi.Clicker
         TimeSpan CoolTime { get; }
         TimeSpan AdsCoolTime { get; }
         TimeSpan Interval { get; }
+        TimeSpan TimeLeft { get; }
         bool IsAdsCoolTime { get; }
         bool IsCoolTime { get; }
         bool IsFever { get; }

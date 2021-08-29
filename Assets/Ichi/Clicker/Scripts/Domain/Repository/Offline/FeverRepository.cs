@@ -18,7 +18,7 @@ namespace Ichi.Clicker.Offline
         public int Rate {
             get {
                 //施設が多くなると相対的にフィーバーの性能が下がるので補正（ランクアップの動機にもなる）
-                var count = SaveData.Instance.ClickFactories.Count(factory => factory.IsBought);
+                var count = SaveData.Instance.factories.Count(factory => factory.IsBought);
                 //だんだんレベルアップがキツくなるのでフィーバーを乗算して補う
                 return count * count;
             }
@@ -41,6 +41,16 @@ namespace Ichi.Clicker.Offline
                     coolTime = TimeSpan.Zero;
                 }
                 return coolTime;
+            }
+        }
+
+        public TimeSpan TimeLeft {
+            get {
+                var timeLeft = this.finishAt - Common.Time.Now;
+                if (timeLeft < TimeSpan.Zero) {
+                    timeLeft = TimeSpan.Zero;
+                }
+                return timeLeft;
             }
         }
 
