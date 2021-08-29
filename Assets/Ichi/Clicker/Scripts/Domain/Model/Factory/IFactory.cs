@@ -14,8 +14,10 @@ namespace Ichi.Clicker
         bool IsLock { get; }
         bool IsBought { get; }
 
-        //NOTE 単純に Factory = 女の子 でいいんじゃない（カフェ、農園、メイド、基地、冒険者）？
-        //NOTE 正攻法だと精霊、衣装、道具、商品、土地、施設
+        //NOTE 単純に Factory = 女の子 でいいんじゃない？
+        //NOTE カフェ、農園、廃墟、街
+        //NOTE メイド、冒険者、メイド、天使、ケモミミ、アンドロイド、魔女
+        //NOTE 妖精、衣装、料理、農作物、動物、土地、施設、薬、武器
         //NOTE Factory = Merge のパターン
         //NOTE 施設増えすぎた時に下級施設のマージ
         //NOTE マージガチャ
