@@ -7,11 +7,13 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        public TimeSpan Duration { get => TimeSpan.FromSeconds(30); }
-        public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
-        private int cheatBonus = 1;
-        private DateTime finishAt = DateTime.MinValue;
         public event Action AlterHandler;
+        public TimeSpan Interval { get => TimeSpan.FromMilliseconds(100); }
+        public bool IsFever { get => Common.Time.Now < this.finishAt; }
+        public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
+        public bool IsAdsCoolTime { get => Common.Time.Now < SaveData.Instance.NextFeverAdsAt; }
+        private DateTime finishAt = DateTime.MinValue;
+        private int cheatBonus = 1;
 
         public int Rate {
             get {
@@ -24,19 +26,11 @@ namespace Ichi.Clicker.Offline
 
         public TimeSpan CoolTime {
             get {
-                if (SaveData.Instance.NextFeverAt < Common.Time.Now) {
-                    return TimeSpan.Zero;
+                var coolTime = SaveData.Instance.NextFeverAt - Common.Time.Now;
+                if (coolTime < TimeSpan.Zero) {
+                    coolTime = TimeSpan.Zero;
                 }
-                return SaveData.Instance.NextFeverAt - Common.Time.Now;
-            }
-        }
-
-        public TimeSpan RemainDuration {
-            get {
-                if (this.finishAt < Common.Time.Now) {
-                    return TimeSpan.Zero;
-                }
-                return this.finishAt - Common.Time.Now;
+                return coolTime;
             }
         }
 
@@ -46,7 +40,7 @@ namespace Ichi.Clicker.Offline
                 if (now < SaveData.Instance.NextFeverAt) {
                     throw new Exception("Invalid cool time.");
                 }
-                this.finishAt = now + this.Duration;
+                this.finishAt = now + TimeSpan.FromSeconds(30);
                 SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
                 SaveData.Instance.Save();
                 this.AlterHandler?.Invoke();
@@ -57,13 +51,16 @@ namespace Ichi.Clicker.Offline
                 }
             }
             //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
-            //TODO インターバル以上に実行されないこと（エラー）
+            //TODO インターバルを超えたらエラー
         }
 
         public void CoolDown() {
-            SaveData.Instance.NextFeverAt = Common.Time.Now;
+            var now = Common.Time.Now;
+            SaveData.Instance.NextFeverAt = now;
+            SaveData.Instance.NextFeverAdsAt = now + TimeSpan.FromMinutes(30);
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
+            //TODO クールタイムないかフィーバー中ならエラー
         }
 
         public void CheatMode(bool enable) {

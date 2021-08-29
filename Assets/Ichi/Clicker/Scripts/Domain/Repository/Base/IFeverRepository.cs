@@ -7,9 +7,10 @@ namespace Ichi.Clicker
     public interface IFeverRepository
     {
         TimeSpan CoolTime { get; }
-        TimeSpan Duration { get; }
         TimeSpan Interval { get; }
-        TimeSpan RemainDuration { get; }
+        bool IsAdsCoolTime { get; }
+        bool IsCoolTime { get; }
+        bool IsFever { get; }
         int Rate { get; }
         void Produce();
         void CoolDown();

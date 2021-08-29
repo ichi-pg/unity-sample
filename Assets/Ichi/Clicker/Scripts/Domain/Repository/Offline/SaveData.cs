@@ -12,6 +12,7 @@ namespace Ichi.Clicker.Offline
         public static SaveData Instance {
             get {
                 if (instance == null) {
+                    var now = Common.Time.Now;
                     if (Common.JsonSaveData.Exist<SaveData>()) {
                         instance = Common.JsonSaveData.Load<SaveData>();
                         //TODO クラウドセーブ
@@ -19,7 +20,8 @@ namespace Ichi.Clicker.Offline
                         instance = new SaveData() {
                             factories = new List<Factory>(),
                             items = new List<Item>(),
-                            NextFeverAt = Common.Time.Now,
+                            NextFeverAt = now,
+                            NextFeverAdsAt = now,
                         };
                     }
                     Initializer.Initialize(
@@ -39,6 +41,7 @@ namespace Ichi.Clicker.Offline
         public List<Factory> factories;
         public List<Item> items;
         public long nextFeverTicks;
+        public long nextFeverAdsTicks;
         public Item Coin { get; private set; }
         public Item Product { get; private set; }
         public Item LoginProduct { get; private set; }
@@ -48,6 +51,11 @@ namespace Ichi.Clicker.Offline
         public DateTime NextFeverAt {
             get => new DateTime(this.nextFeverTicks);
             set => this.nextFeverTicks = value.Ticks;
+        }
+
+        public DateTime NextFeverAdsAt {
+            get => new DateTime(this.nextFeverAdsTicks);
+            set => this.nextFeverAdsTicks = value.Ticks;
         }
 
         private SaveData() {

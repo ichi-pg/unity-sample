@@ -14,25 +14,23 @@ namespace Ichi.Clicker
     {
         private Button button;
         private CancellationToken token;
-        private IFeverRepository repository;
 
         void Start() {
             this.button = this.GetComponent<Button>();
             this.token = this.GetCancellationTokenOnDestroy();
-            this.repository = DIContainer.FeverRepository;
-            this.repository.AlterHandler += this.OnAlter;
+            DIContainer.FeverRepository.AlterHandler += this.OnAlter;
             this.OnAlter();
             this.CoolTime().Forget();
         }
 
         void OnDestroy() {
-            this.repository.AlterHandler -= this.OnAlter;
+            DIContainer.FeverRepository.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
             this.button.interactable =
-                this.repository.CoolTime <= TimeSpan.Zero &&
-                this.repository.RemainDuration <= TimeSpan.Zero;
+                !DIContainer.FeverRepository.IsCoolTime &&
+                !DIContainer.FeverRepository.IsFever;
         }
 
         public void Fever() {
@@ -41,18 +39,19 @@ namespace Ichi.Clicker
         }
 
         private async UniTask CoolTime() {
-            await UniTask.Delay(this.repository.CoolTime, cancellationToken: this.token);
+            await UniTask.Delay(DIContainer.FeverRepository.CoolTime, cancellationToken: this.token);
             this.OnAlter();
         }
 
         private async UniTask Produce() {
             do
             {
-                this.repository.Produce();
-                await UniTask.Delay(this.repository.Interval, cancellationToken: this.token);
+                DIContainer.FeverRepository.Produce();
+                await UniTask.Delay(DIContainer.FeverRepository.Interval, cancellationToken: this.token);
             }
-            while (this.repository.RemainDuration > TimeSpan.Zero);
+            while (DIContainer.FeverRepository.IsFever);
             this.OnAlter();
+            //TODO このタイミングの広告開放が通知できない
         }
     }
 }
