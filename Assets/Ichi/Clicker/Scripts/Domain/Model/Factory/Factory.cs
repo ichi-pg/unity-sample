@@ -27,7 +27,6 @@ namespace Ichi.Clicker
         public BigInteger Cost { get; private set; }
         public BigInteger CostPerformance { get; private set; }
         public BigInteger Price { get; private set; }
-        public event Action ModifyHander;
 
         public DateTime ProducedAt {
             get => new DateTime(this.producedTicks);
@@ -39,7 +38,6 @@ namespace Ichi.Clicker
             this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
             this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
             this.CostPerformance = this.Cost / (this.NextPower - this.Power);
-            this.ModifyHander?.Invoke();
         }
 
         public void LevelUp(IConsume consume, DateTime now) {

@@ -20,16 +20,16 @@ namespace Ichi.Clicker
         private Text text;
 
         void Start() {
-            Common.DataInjector.ModifyHander += this.OnModify;
-            this.OnModify();
+            Common.DataInjector.AlterHander += this.OnAlter;
+            this.OnAlter();
             this.StartCheatMode();
         }
 
         void OnDestroy() {
-            Common.DataInjector.ModifyHander -= this.OnModify;
+            Common.DataInjector.AlterHander -= this.OnAlter;
         }
 
-        private void OnModify() {
+        private void OnAlter() {
             var adpter = this.FindFactory();
             this.GetComponent<Button>().interactable = !adpter.LevelUpDisable;
             this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adpter);

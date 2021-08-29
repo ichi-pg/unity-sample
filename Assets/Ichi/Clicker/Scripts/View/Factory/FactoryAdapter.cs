@@ -39,7 +39,7 @@ namespace Ichi.Clicker
                 return;
             }
             DIContainer.FactoryRepository.LevelUp(this.Factory);
-            Common.DataInjector.Modify();
+            Common.DataInjector.Alter();
             //TODO シナリオ
             //TODO キャラ
             //TODO シェーダー

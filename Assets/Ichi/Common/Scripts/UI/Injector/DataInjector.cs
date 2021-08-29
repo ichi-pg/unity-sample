@@ -9,7 +9,7 @@ namespace Ichi.Common
 {
     public class DataInjector : MonoBehaviour
     {
-        public static event Action ModifyHander;
+        public static event Action AlterHander;
         public object Data { get; private set; }
         public IResourceLoader Loader { get; private set; }
         private Dictionary<string, UnityAction> actions = new Dictionary<string, UnityAction>();
@@ -18,14 +18,14 @@ namespace Ichi.Common
         private HashSet<Button> buttons = new HashSet<Button>();
 
         void Start() {
-            ModifyHander += this.OnModify;
+            AlterHander += this.OnAlter;
         }
 
         void OnDestroy() {
-            ModifyHander -= this.OnModify;
+            AlterHander -= this.OnAlter;
         }
 
-        private void OnModify() {
+        private void OnAlter() {
             foreach (Text text in this.texts) {
                 this.InjectText(this.Data, text);
             }
@@ -39,8 +39,8 @@ namespace Ichi.Common
             //TODO ReactiveProperty？
         }
 
-        public static void Modify() {
-            ModifyHander?.Invoke();
+        public static void Alter() {
+            AlterHander?.Invoke();
             //TODO 変化したオブジェクトだけ更新したい
         }
 
