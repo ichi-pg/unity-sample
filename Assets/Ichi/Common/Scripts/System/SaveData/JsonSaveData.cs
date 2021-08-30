@@ -9,7 +9,7 @@ namespace Ichi.Common
     public static class JsonSaveData
     {
         public static void Save<T>(T obj, bool pretty = true) where T : IPreSave {
-            //TODO 非同期
+            //TODO マルチスレッド処理
             //TODO 難読化
             //TODO バイナリ
             var path = FilePath(obj.GetType());
