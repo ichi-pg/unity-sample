@@ -44,7 +44,6 @@ namespace Ichi.Clicker
             if (adapter.CanLevelUp) {
                 DIContainer.FactoryRepository.LevelUp(factory);
             }
-            //TODO! 長押し
         }
 
         private IFactory FindFactory() {

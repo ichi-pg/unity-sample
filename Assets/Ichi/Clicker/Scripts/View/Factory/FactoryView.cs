@@ -44,7 +44,6 @@ namespace Ichi.Clicker
 
         public void LevelUp() {
             DIContainer.FactoryRepository.LevelUp(this.factory);
-            //TODO! 長押し
         }
     }
 }
