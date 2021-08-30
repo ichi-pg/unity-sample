@@ -10,8 +10,7 @@ namespace Ichi.Common
     public static class JsonSaveData
     {
         public static void Save<T>(T obj, bool pretty = true) where T : IPreSave {
-            //TODO 難読化
-            //TODO バイナリ
+            //TODO バイナリ（バイナリ用意するならJSON難読化不要。バイナリ暗号化は一考）
             var path = FilePath(obj.GetType());
             SaveTask(obj, pretty, path).Forget();
         }
