@@ -16,7 +16,7 @@ namespace Ichi.Clicker
 
         private static double LevelUpInflation(int level) {
             //レベルが25上がるごとに生産量が倍（シームレス）
-            return Math.Pow(2, (double)level / 25);
+            return Math.Pow(2, (double)level / Inflation.Level);
         }
     }
 }

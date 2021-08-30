@@ -14,7 +14,9 @@ namespace Ichi.Clicker.Offline
 
         public void LevelUp(IFactory factory) {
             (factory as Factory).LevelUp(SaveData.Instance.Coin, Common.Time.Now);
-            SaveData.Instance.Save();
+            if (Inflation.IsInflation(factory.Level)) {
+                SaveData.Instance.Save();
+            }
             this.AlterHandler?.Invoke();
         }
 

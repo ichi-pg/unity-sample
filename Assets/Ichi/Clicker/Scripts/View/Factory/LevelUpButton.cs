@@ -32,10 +32,10 @@ namespace Ichi.Clicker
         }
 
         private void OnAlter() {
-            var adpter = new FactoryAdapter(this.FindFactory());
-            this.button.interactable = adpter.CanLevelUp;
-            this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adpter);
-            this.text.color = adpter.IsInflation ? Color.red : Color.black;
+            var adapter = new FactoryAdapter(this.FindFactory());
+            this.button.interactable = adapter.CanLevelUp;
+            this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adapter);
+            this.text.color = Inflation.IsInflation(adapter.Level + 1) ? Color.red : Color.black;
         }
 
         public void LevelUp() {
