@@ -16,6 +16,7 @@ namespace Ichi.Clicker.Offline
             (factory as Factory).LevelUp(SaveData.Instance.Coin, Common.Time.Now);
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
+            //TODO 現状レベルアップのみ高頻度セーブ。25レベルごとなどに落としてもいい。強制セーブと楽観セーブに分けて使う側は気にしない設計もあり。
         }
 
         public void Produce(IFactory factory) {

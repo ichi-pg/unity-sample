@@ -6,7 +6,7 @@ using System;
 namespace Ichi.Clicker.Offline
 {
     [Serializable]
-    public class SaveData : Common.IPreSave
+    public class SaveData : Common.IPreSave, Common.IPostLoad
     {
         private static SaveData instance = null;
         public static SaveData Instance {
@@ -66,8 +66,15 @@ namespace Ichi.Clicker.Offline
         }
 
         public void PreSave() {
-            //TODO BigIntegerの文字列化（都度せずSave時にまとめて）
-            //TODO 合わせてセーブ頻度落としたい（現状レベルアップのみ高頻度。25レベルごとなどに落としてもいい）
+            foreach (var item in this.items) {
+                item.quantity.PreSave();
+            }
+        }
+
+        public void PostLoad() {
+            foreach (var item in this.items) {
+                item.quantity.PostLoad();
+            }
         }
     }
 }

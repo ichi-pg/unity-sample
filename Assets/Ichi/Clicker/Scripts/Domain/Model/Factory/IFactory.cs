@@ -5,14 +5,13 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface IFactory : ICost
+    public interface IFactory : ICost, ILock
     {
         int Level { get; }
         int Rank { get; }
         int Category { get; }
         BigInteger Power { get; }
         BigInteger NextPower { get; }
-        bool IsLock { get; }
         bool IsBought { get; }
         event Action AlterHandler;
 

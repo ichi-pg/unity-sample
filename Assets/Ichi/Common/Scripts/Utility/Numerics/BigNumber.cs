@@ -6,80 +6,74 @@ using System;
 namespace Ichi.Common
 {
     [Serializable]
-    public class BigNumber
+    public class BigNumber : IPreSave, IPostLoad
     {
         public string s;
-        private BigInteger i;
-        public BigInteger Integer {
-            get {
-                if (this.i == 0 && this.s != "") {
-                    this.i = BigInteger.Parse(this.s);
-                }
-                return this.i;
-            }
-            private set {
-                this.i = value;
-                this.s = value.ToString();
-            }
+        public BigInteger Value { get; private set; }
+
+        public void PreSave() {
+            this.s = this.Value.ToString();
+        }
+
+        public void PostLoad() {
+            this.Value = BigInteger.Parse(this.s);
         }
 
         public BigNumber() {
-            this.s = "";
-            this.i = 0;
+            this.Value = 0;
         }
 
         public BigNumber(BigNumber i) {
-            this.s = i.s;
-            this.i = i.Integer;
+            this.Value = i.Value;
         }
 
         public BigNumber(BigInteger i) {
-            this.s = i.ToString();
-            this.i = i;
+            this.Value = i;
         }
 
         public BigNumber(int i) {
-            this.s = i.ToString();
-            this.i = i;
+            this.Value = i;
         }
 
-        public static BigNumber operator +(BigNumber a, BigNumber b) { a.Integer += b.Integer; return a; }
-        public static BigNumber operator -(BigNumber a, BigNumber b) { a.Integer -= b.Integer; return a; }
-        public static BigNumber operator *(BigNumber a, BigNumber b) { a.Integer *= b.Integer; return a; }
-        public static BigNumber operator /(BigNumber a, BigNumber b) { a.Integer /= b.Integer; return a; }
-        public static bool operator ==(BigNumber a, BigNumber b) => a.Integer == b.Integer;
-        public static bool operator !=(BigNumber a, BigNumber b) => a.Integer != b.Integer;
-        public static bool operator <(BigNumber a, BigNumber b) => a.Integer < b.Integer;
-        public static bool operator <=(BigNumber a, BigNumber b) => a.Integer <= b.Integer;
-        public static bool operator >(BigNumber a, BigNumber b) => a.Integer > b.Integer;
-        public static bool operator >=(BigNumber a, BigNumber b) => a.Integer >= b.Integer;
+        //TODO パフォーマンスのためオペレーター実装せずValue直参照でいい
 
-        public static BigNumber operator +(BigNumber a, BigInteger b) { a.Integer += b; return a; }
-        public static BigNumber operator -(BigNumber a, BigInteger b) { a.Integer -= b; return a; }
-        public static BigNumber operator *(BigNumber a, BigInteger b) { a.Integer *= b; return a; }
-        public static BigNumber operator /(BigNumber a, BigInteger b) { a.Integer /= b; return a; }
-        public static bool operator ==(BigNumber a, BigInteger b) => a.Integer == b;
-        public static bool operator !=(BigNumber a, BigInteger b) => a.Integer != b;
-        public static bool operator <(BigNumber a, BigInteger b) => a.Integer < b;
-        public static bool operator <=(BigNumber a, BigInteger b) => a.Integer <= b;
-        public static bool operator >(BigNumber a, BigInteger b) => a.Integer > b;
-        public static bool operator >=(BigNumber a, BigInteger b) => a.Integer >= b;
+        public static BigNumber operator +(BigNumber a, BigNumber b) { a.Value += b.Value; return a; }
+        public static BigNumber operator -(BigNumber a, BigNumber b) { a.Value -= b.Value; return a; }
+        public static BigNumber operator *(BigNumber a, BigNumber b) { a.Value *= b.Value; return a; }
+        public static BigNumber operator /(BigNumber a, BigNumber b) { a.Value /= b.Value; return a; }
+        public static bool operator ==(BigNumber a, BigNumber b) => a.Value == b.Value;
+        public static bool operator !=(BigNumber a, BigNumber b) => a.Value != b.Value;
+        public static bool operator <(BigNumber a, BigNumber b) => a.Value < b.Value;
+        public static bool operator <=(BigNumber a, BigNumber b) => a.Value <= b.Value;
+        public static bool operator >(BigNumber a, BigNumber b) => a.Value > b.Value;
+        public static bool operator >=(BigNumber a, BigNumber b) => a.Value >= b.Value;
 
-        public static BigNumber operator +(BigNumber a, int b) { a.Integer += b; return a; }
-        public static BigNumber operator -(BigNumber a, int b) { a.Integer -= b; return a; }
-        public static BigNumber operator *(BigNumber a, int b) { a.Integer *= b; return a; }
-        public static BigNumber operator /(BigNumber a, int b) { a.Integer /= b; return a; }
-        public static bool operator ==(BigNumber a, int b) => a.Integer == b;
-        public static bool operator !=(BigNumber a, int b) => a.Integer != b;
-        public static bool operator <(BigNumber a, int b) => a.Integer < b;
-        public static bool operator <=(BigNumber a, int b) => a.Integer <= b;
-        public static bool operator >(BigNumber a, int b) => a.Integer > b;
-        public static bool operator >=(BigNumber a, int b) => a.Integer >= b;
+        public static BigNumber operator +(BigNumber a, BigInteger b) { a.Value += b; return a; }
+        public static BigNumber operator -(BigNumber a, BigInteger b) { a.Value -= b; return a; }
+        public static BigNumber operator *(BigNumber a, BigInteger b) { a.Value *= b; return a; }
+        public static BigNumber operator /(BigNumber a, BigInteger b) { a.Value /= b; return a; }
+        public static bool operator ==(BigNumber a, BigInteger b) => a.Value == b;
+        public static bool operator !=(BigNumber a, BigInteger b) => a.Value != b;
+        public static bool operator <(BigNumber a, BigInteger b) => a.Value < b;
+        public static bool operator <=(BigNumber a, BigInteger b) => a.Value <= b;
+        public static bool operator >(BigNumber a, BigInteger b) => a.Value > b;
+        public static bool operator >=(BigNumber a, BigInteger b) => a.Value >= b;
 
-        public static implicit operator BigInteger(BigNumber a) => a.Integer;
+        public static BigNumber operator +(BigNumber a, int b) { a.Value += b; return a; }
+        public static BigNumber operator -(BigNumber a, int b) { a.Value -= b; return a; }
+        public static BigNumber operator *(BigNumber a, int b) { a.Value *= b; return a; }
+        public static BigNumber operator /(BigNumber a, int b) { a.Value /= b; return a; }
+        public static bool operator ==(BigNumber a, int b) => a.Value == b;
+        public static bool operator !=(BigNumber a, int b) => a.Value != b;
+        public static bool operator <(BigNumber a, int b) => a.Value < b;
+        public static bool operator <=(BigNumber a, int b) => a.Value <= b;
+        public static bool operator >(BigNumber a, int b) => a.Value > b;
+        public static bool operator >=(BigNumber a, int b) => a.Value >= b;
+
+        public static implicit operator BigInteger(BigNumber a) => a.Value;
         public static implicit operator BigNumber(BigInteger a) => new BigNumber(a);
 
-        public static implicit operator int(BigNumber a) => (int)a.Integer;
+        public static implicit operator int(BigNumber a) => (int)a.Value;
         public static implicit operator BigNumber(int a) => new BigNumber(a);
 
         public override string ToString() => this.s;

@@ -10,26 +10,26 @@ namespace Ichi.Clicker
     {
         public Common.BigNumber quantity;
         public int category;
-        public BigInteger Quantity { get => this.quantity.Integer; }
+        public BigInteger Quantity { get => this.quantity.Value; }
         public event Action AlterHandler;
 
-        public bool Consume(BigInteger quantity) {
-            if (quantity < 0) {
+        public bool Consume(BigInteger i) {
+            if (i < 0) {
                 return false;
             }
-            if (this.quantity < quantity) {
+            if (this.quantity < i) {
                 return false;
             }
-            this.quantity -= quantity;
+            this.quantity -= i;
             this.AlterHandler?.Invoke();
             return true;
         }
 
-        public bool Store(BigInteger quantity) {
-            if (quantity < 0) {
+        public bool Store(BigInteger i) {
+            if (i < 0) {
                 return false;
             }
-            this.quantity += quantity;
+            this.quantity += i;
             this.AlterHandler?.Invoke();
             return true;
         }
