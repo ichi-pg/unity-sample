@@ -84,6 +84,7 @@ namespace Ichi.Clicker.Offline
             }
             this.AlterHandler?.Invoke();
             //TODO 時間生産とフィーバー生産のバランス調整 => power/0.1s * 30s * n回/d : power/s * s/d = 1 : 1（前提としてpowerは同値になるrate調整）
+            //TODO フィーバー中にアプリ落ちたらかわいそう
         }
 
         public void CoolDown() {
