@@ -17,12 +17,12 @@ namespace Ichi.Clicker
 
         //NOTE Extenject or VContainer
 
-        //TODO シナリオ
-        //TODO キャラ（3Dならシェーダ・モーション、2DならLive2D）
+        //TODO! シナリオ
+        //TODO! キャラ（3Dならシェーダ・モーション、2DならLive2D）
         //TODO SE
         //TODO BGM
         //TODO 背景
-        //TODO UI素材
+        //TODO! UI素材
         //TODO UIアニメ（DOTween）
         //TODO UIエフェクト（DOTween）
     }

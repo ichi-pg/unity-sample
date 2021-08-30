@@ -68,6 +68,7 @@ namespace Ichi.Clicker.Offline
             this.Produce(token).Forget();
             //TODO 理想プレイフィール = クリック楽しい、オート施設楽ちん、増える楽しい -> 段々キツくなる -> ランクアップ強い -> 段々キツくなる -> フィーバー強い -> ...
             //TODO これに対して必要な調整 = フィーバーのロック機能が必要, 序盤からフィーバー強すぎ長すぎ, ランクアップのカタルシスがない, 序盤のプレイに手応えを感じない（ぬるすぎ？メリハリがない？）, 全体的にレベルアップ早すぎ
+            //TODO やっぱりレベルアップとランクアップだけだと寂しいのはある。フィーバー強化したりするSkillを追加する。
         }
 
         private async UniTask Produce(CancellationToken token) {
