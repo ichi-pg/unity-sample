@@ -66,7 +66,6 @@ namespace Ichi.Clicker.Offline
             var now = Common.Time.Now;
             this.finishAt = now + TimeSpan.FromSeconds(30);
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
-            SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
         }
@@ -82,6 +81,7 @@ namespace Ichi.Clicker.Offline
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
+            SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
             //TODO 時間生産とフィーバー生産のバランス調整 => power/0.1s * 30s * n回/d : power/s * s/d = 1 : 1（前提としてpowerは同値になるrate調整）
         }
