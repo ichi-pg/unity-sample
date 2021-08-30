@@ -66,7 +66,7 @@ namespace Ichi.Clicker.Offline
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
-            //TODO 理想プレイフィール = クリック楽しい -> オート施設楽ちん -> フィーバー強い -> 段々キツくなる -> ランクアップでカタルシス -> ...
+            //TODO 理想プレイフィール = クリック楽しい、オート施設楽ちん、増える楽しい -> 段々キツくなる -> ランクアップ強い -> 段々キツくなる -> フィーバー強い -> ...
             //TODO これに対して必要な調整 = フィーバーのロック機能が必要, 序盤からフィーバー強すぎ長すぎ, ランクアップのカタルシスがない, 序盤のプレイに手応えを感じない（ぬるすぎ？メリハリがない？）, 全体的にレベルアップ早すぎ
         }
 
