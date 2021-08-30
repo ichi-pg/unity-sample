@@ -11,18 +11,13 @@ namespace Ichi.Clicker
                 return 0;
             }
             //定数倍でレベルアップ速度を調整
-            var offsetLevel = OffsetLevel(level, rank);
+            var offsetLevel = OffsetLevel.Calculate(level, rank);
             return LevelUpInflation(offsetLevel) * offsetLevel * 5;
         }
 
         private static BigInteger LevelUpInflation(int level) {
             //レベルが25上がるごとに生産量が倍（階段）
             return BigInteger.Pow(2, level / 25);
-        }
-
-        public static int OffsetLevel(int level, int rank) {
-            //ランクが上がるごとにレベルにオフセット
-            return level + (rank - 1) * (rank - 1) * 25;
         }
     }
 }

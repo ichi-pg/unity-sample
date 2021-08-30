@@ -21,6 +21,7 @@ namespace Ichi.Clicker.Offline
                 //施設が多くなると相対的にフィーバーの性能が下がるので補正（ランクアップの動機にもなる）
                 var count = SaveData.Instance.factories.Count(factory => factory.IsBought);
                 //だんだんレベルアップがキツくなるのでフィーバーを乗算して補う
+                //TODO 階段 : シームレスで指数をなくすなら等倍
                 return count * count;
             }
         }
@@ -82,7 +83,7 @@ namespace Ichi.Clicker.Offline
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
             this.AlterHandler?.Invoke();
-            //TODO 時間生産とフィーバー生産のバランス調整（クリックは最終的にいらない子）
+            //TODO 時間生産とフィーバー生産のバランス調整 => power/0.1s * 30s * n回/d : power/s * s/d = 1 : 1（前提としてpowerは同値になるrate調整）
         }
 
         public void CoolDown() {

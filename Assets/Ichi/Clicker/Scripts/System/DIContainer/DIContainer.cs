@@ -15,6 +15,15 @@ namespace Ichi.Clicker
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
 
-        //TODO Extenject or VContainer ?
+        //NOTE Extenject or VContainer
+
+        //TODO シナリオ
+        //TODO キャラ（3Dならシェーダ・モーション、2DならLive2D）
+        //TODO SE
+        //TODO BGM
+        //TODO 背景
+        //TODO UI素材
+        //TODO UIアニメ（DOTween）
+        //TODO UIエフェクト（DOTween）
     }
 }

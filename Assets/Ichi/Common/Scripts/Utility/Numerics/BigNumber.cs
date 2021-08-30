@@ -12,7 +12,6 @@ namespace Ichi.Common
         private BigInteger i;
         public BigInteger Integer {
             get {
-                //TODO BigIntegerがシリアライズされないので一旦
                 if (this.i == 0 && this.s != "") {
                     this.i = BigInteger.Parse(this.s);
                 }

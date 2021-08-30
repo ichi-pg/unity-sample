@@ -8,13 +8,16 @@ namespace Ichi.Common
 {
     public static class JsonSaveData
     {
-        public static void Save<T>(T obj, bool pretty = true) {
+        public static void Save<T>(T obj, bool pretty = true) where T : IPreSave {
             //TODO 非同期
+            //TODO 難読化
+            //TODO バイナリ
             var path = FilePath(obj.GetType());
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
+            obj.PreSave();
             var writer = new StreamWriter(path);
             var json = JsonUtility.ToJson(obj, pretty);
             writer.Write(json);
@@ -41,8 +44,5 @@ namespace Ichi.Common
         private static string FilePath(Type type) {
             return Application.persistentDataPath + "/" + type.Namespace + "/" + type.Name + ".json";
         }
-
-        //TODO 難読化
-        //TODO バイナリ
     }
 }

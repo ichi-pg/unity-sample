@@ -6,7 +6,7 @@ using System;
 namespace Ichi.Clicker.Offline
 {
     [Serializable]
-    public class SaveData
+    public class SaveData : Common.IPreSave
     {
         private static SaveData instance = null;
         public static SaveData Instance {
@@ -15,7 +15,7 @@ namespace Ichi.Clicker.Offline
                     var now = Common.Time.Now;
                     if (Common.JsonSaveData.Exist<SaveData>()) {
                         instance = Common.JsonSaveData.Load<SaveData>();
-                        //TODO クラウドセーブ
+                        //NOTE クラウドセーブ
                     } else {
                         instance = new SaveData() {
                             factories = new List<Factory>(),
@@ -63,6 +63,11 @@ namespace Ichi.Clicker.Offline
 
         public void Save() {
             Common.JsonSaveData.Save<SaveData>(this);
+        }
+
+        public void PreSave() {
+            //TODO BigIntegerの文字列化（都度せずSave時にまとめて）
+            //TODO 合わせてセーブ頻度落としたい（現状レベルアップのみ高頻度。25レベルごとなどに落としてもいい）
         }
     }
 }

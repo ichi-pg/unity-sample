@@ -13,6 +13,6 @@ namespace Ichi.Common
             return transform;
         }
 
-        //TODO LINQ to GameObject ?
+        //NOTE LINQ to GameObject
     }
 }

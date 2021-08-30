@@ -44,14 +44,6 @@ namespace Ichi.Clicker
 
         public void LevelUp() {
             DIContainer.FactoryRepository.LevelUp(this.factory);
-            //TODO シナリオ
-            //TODO キャラ
-            //TODO シェーダー
-            //TODO SE
-            //TODO BGM
-            //TODO 背景
-            //TODO GUI
-            //TODO インクリメントエフェクト
             //TODO 長押し
         }
     }

@@ -9,7 +9,8 @@ namespace Ichi.Clicker
     {
         public BigInteger Calculate(int level, int rank, int rarity) {
             //パワーに対してレベル分の指数
-            var offsetLevel = PowerCalculator.OffsetLevel(level, rank);
+            //TODO 階段 : シームレスなら指数不要（ゲーム深度でレベルアップ速度は変化しない。ランクアップ速度で深度感は調整する）
+            var offsetLevel = OffsetLevel.Calculate(level, rank);
             return new BigInteger(LevelUpInflation(offsetLevel) * offsetLevel) * offsetLevel;
         }
 
