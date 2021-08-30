@@ -67,8 +67,8 @@ namespace Ichi.Clicker.Offline
             this.finishAt = now + TimeSpan.FromSeconds(30);
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             SaveData.Instance.Save();
-            this.Produce(token).Forget();
             this.AlterHandler?.Invoke();
+            this.Produce(token).Forget();
         }
 
         private async UniTask Produce(CancellationToken token) {
@@ -84,7 +84,6 @@ namespace Ichi.Clicker.Offline
             }
             this.AlterHandler?.Invoke();
             //TODO 時間生産とフィーバー生産のバランス調整 => power/0.1s * 30s * n回/d : power/s * s/d = 1 : 1（前提としてpowerは同値になるrate調整）
-            //TODO フィーバー中にアプリ落ちたらかわいそう
         }
 
         public void CoolDown() {

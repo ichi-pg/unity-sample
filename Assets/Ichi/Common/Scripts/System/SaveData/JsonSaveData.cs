@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Ichi.Common
@@ -9,10 +10,14 @@ namespace Ichi.Common
     public static class JsonSaveData
     {
         public static void Save<T>(T obj, bool pretty = true) where T : IPreSave {
-            //TODO マルチスレッド処理
             //TODO 難読化
             //TODO バイナリ
             var path = FilePath(obj.GetType());
+            SaveTask(obj, pretty, path).Forget();
+        }
+
+        private static async UniTask SaveTask<T>(T obj, bool pretty, string path) where T : IPreSave {
+            await UniTask.SwitchToThreadPool();
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
