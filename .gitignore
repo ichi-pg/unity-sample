@@ -3,3 +3,7 @@ Logs/
 Temp/
 UserSettings/
 .DS_Store
+Assets/AddressableAssetsData*
+Assets/ExternalDependencyManager*
+Assets/GoogleMobileAds*
+Assets/Plugins*
