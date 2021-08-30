@@ -10,7 +10,7 @@ namespace Ichi.Clicker
     {
         public Common.BigNumber quantity;
         public int category;
-        public BigInteger Quantity { get => this.quantity.Value; }
+        public BigInteger Quantity { get => this.quantity; }
         public event Action AlterHandler;
 
         public bool Consume(BigInteger i) {

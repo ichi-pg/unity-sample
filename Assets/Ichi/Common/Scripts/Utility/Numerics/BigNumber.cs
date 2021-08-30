@@ -35,8 +35,6 @@ namespace Ichi.Common
             this.Value = i;
         }
 
-        //TODO パフォーマンスのためオペレーター実装せずValue直参照でいい
-
         public static BigNumber operator +(BigNumber a, BigNumber b) { a.Value += b.Value; return a; }
         public static BigNumber operator -(BigNumber a, BigNumber b) { a.Value -= b.Value; return a; }
         public static BigNumber operator *(BigNumber a, BigNumber b) { a.Value *= b.Value; return a; }
