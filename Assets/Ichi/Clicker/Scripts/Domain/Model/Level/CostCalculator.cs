@@ -8,10 +8,14 @@ namespace Ichi.Clicker
     public class CostCalculator : IStatusCalculator<BigInteger>
     {
         public BigInteger Calculate(int level, int rank, int rarity) {
-            //パワーに対してレベル分の指数
-            //TODO 階段 : シームレスなら指数不要（ゲーム深度でレベルアップ速度は変化しない。ランクアップ速度で深度感は調整する）
             var offsetLevel = OffsetLevel.Calculate(level, rank);
-            return new BigInteger(LevelUpInflation(offsetLevel) * offsetLevel) * offsetLevel;
+            var inflation = LevelUpInflation(offsetLevel);
+            //小数点以下を切り捨てられないので別計算
+            if (inflation < 1000) {
+                return new BigInteger(inflation * offsetLevel) * offsetLevel;
+            }
+            //パワーに対してレベル分の指数
+            return new BigInteger(inflation) * offsetLevel * offsetLevel;
         }
 
         private static double LevelUpInflation(int level) {

@@ -18,11 +18,9 @@ namespace Ichi.Clicker.Offline
 
         public int Rate {
             get {
-                //施設が多くなると相対的にフィーバーの性能が下がるので補正（ランクアップの動機にもなる）
-                var count = SaveData.Instance.factories.Count(factory => factory.IsBought);
-                //だんだんレベルアップがキツくなるのでフィーバーを乗算して補う
-                //TODO 階段 : シームレスで指数をなくすなら等倍
-                return count * count;
+                //全ての施設の性能は等価 -> オートの総生産 = クリックの施設数倍
+                //1日4回ログインで2回ずつフィーバー -> 300s / 0.1s * 8回/日 * n = 86400回/日
+                return SaveData.Instance.factories.Count(factory => factory.IsBought) * 3;
             }
         }
 
@@ -64,10 +62,12 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid cool time.");
             }
             var now = Common.Time.Now;
-            this.finishAt = now + TimeSpan.FromSeconds(30);
+            this.finishAt = now + TimeSpan.FromSeconds(300);
             SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
+            //TODO 理想プレイフィール = クリック楽しい -> オート施設楽ちん -> フィーバー強い -> 段々キツくなる -> ランクアップでカタルシス -> ...
+            //TODO これに対して必要な調整 = フィーバーのロック機能が必要, 序盤からフィーバー強すぎ長すぎ, ランクアップのカタルシスがない, 序盤のプレイに手応えを感じない（ぬるすぎ？メリハリがない？）, 全体的にレベルアップ早すぎ
         }
 
         private async UniTask Produce(CancellationToken token) {
@@ -83,7 +83,6 @@ namespace Ichi.Clicker.Offline
             }
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
-            //TODO 時間生産とフィーバー生産のバランス調整 => power/0.1s * 30s * n回/d : power/s * s/d = 1 : 1（前提としてpowerは同値になるrate調整）
         }
 
         public void CoolDown() {
@@ -98,7 +97,7 @@ namespace Ichi.Clicker.Offline
             }
             var now = Common.Time.Now;
             SaveData.Instance.NextFeverAt = now;
-            SaveData.Instance.NextFeverAdsAt = now + TimeSpan.FromMinutes(30);
+            SaveData.Instance.NextFeverAdsAt = now + TimeSpan.FromMinutes(15);
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
         }

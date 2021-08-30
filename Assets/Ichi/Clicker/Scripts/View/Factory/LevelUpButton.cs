@@ -39,7 +39,11 @@ namespace Ichi.Clicker
         }
 
         public void LevelUp() {
-            DIContainer.FactoryRepository.LevelUp(this.FindFactory());
+            var factory = this.FindFactory();
+            var adapter = new FactoryAdapter(factory);
+            if (adapter.CanLevelUp) {
+                DIContainer.FactoryRepository.LevelUp(factory);
+            }
             //TODO 長押し
         }
 
