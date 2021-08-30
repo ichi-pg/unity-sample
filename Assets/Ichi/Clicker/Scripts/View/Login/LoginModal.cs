@@ -40,7 +40,6 @@ namespace Ichi.Clicker
 
         public void PlayAds() {
             this.ads.Play();
-            //TODO OnCancel
         }
 
         private void OnReward() {
