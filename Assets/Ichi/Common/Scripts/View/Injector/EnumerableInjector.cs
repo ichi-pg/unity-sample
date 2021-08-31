@@ -7,7 +7,7 @@ namespace Ichi.Common
     public class EnumerableInjector : MonoBehaviour
     {
         public void Clear() {
-            HierarchyDestroy.DestroyChildren(this.transform);
+            Hierarchy.DestroyChildren(this.transform);
         }
 
         public void InjectList(IEnumerable enumerable, GameObject prefab, IResourceLoader loader) {

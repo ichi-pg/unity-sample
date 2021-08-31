@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker
 {
-    public class FactoryView : MonoBehaviour
+    public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
     {
         [SerializeField]
         private Text label;

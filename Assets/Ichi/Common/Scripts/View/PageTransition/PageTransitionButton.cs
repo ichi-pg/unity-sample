@@ -11,7 +11,7 @@ namespace Ichi.Common
 
         public void Transition() {
             var canvas = this.GetComponentInParent<Canvas>();
-            HierarchyDestroy.DestroyChildren(canvas.transform);
+            Hierarchy.DestroyChildren(canvas.transform);
             Instantiate(this.page, canvas.transform);
             //TODO UI以外の画面遷移
             //TODO 戻る

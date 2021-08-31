@@ -10,12 +10,12 @@ namespace Ichi.Clicker
         private GameObject prefab;
 
         void Start() {
-            Common.HierarchyDestroy.DestroyChildren(this.transform);
-            foreach (var factory in DIContainer.FactoryRepository.Factories) {
-                Instantiate(this.prefab, this.transform)
-                    .GetComponent<FactoryView>()?
-                    .Initialize(factory);
-            }
+            Common.Hierarchy.DestroyChildren(this.transform);
+            Common.Hierarchy.InstantiateChildren<FactoryView, IFactory>(
+                this.transform,
+                this.prefab,
+                DIContainer.FactoryRepository.Factories
+            );
         }
     }
 }

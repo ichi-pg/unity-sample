@@ -7,7 +7,7 @@ namespace Ichi.Common
     public class CloseModalButton : MonoBehaviour
     {
         public void Close() {
-            Destroy(HierarchySearch.FindParentIn<Canvas>(this.transform).gameObject);
+            Destroy(Hierarchy.FindParentIn<Canvas>(this.transform).gameObject);
         }
     }
 }
