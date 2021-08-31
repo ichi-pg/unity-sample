@@ -16,6 +16,7 @@ namespace Ichi.Common
             if (parentInjector != null && childInjector != null) {
                 childInjector.Inject(parentInjector.Data, parentInjector.Loader);
             }
+            //TODO IChildView
             //TODO 入れ替えるパターン
             //TODO Enumerableだった時バッティングするかも
         }
