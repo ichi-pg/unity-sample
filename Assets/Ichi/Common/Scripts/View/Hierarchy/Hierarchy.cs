@@ -8,7 +8,7 @@ namespace Ichi.Common
     {
         public static void InstantiateChildren<T, U>(Transform transform, GameObject prefab, IEnumerable<U> children) where T : IChildView<U> {
             foreach(var child in children){
-                GameObject.Instantiate(prefab, transform).GetComponent<T>()?.Initialize(child);
+                GameObject.Instantiate(prefab, transform).GetComponent<T>().Initialize(child);
             }
         }
 
