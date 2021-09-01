@@ -12,6 +12,9 @@ namespace Ichi.Clicker.Offline
         public bool IsFever { get => Common.Time.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
+        public TimeSpan CoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAt - Common.Time.Now, TimeSpan.Zero); }
+        public TimeSpan AdsCoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAdsAt - Common.Time.Now, TimeSpan.Zero); }
+        public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - Common.Time.Now, TimeSpan.Zero); }
         public event Action AlterHandler;
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
@@ -24,36 +27,6 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public TimeSpan CoolTime {
-            get {
-                var coolTime = SaveData.Instance.NextFeverAt - Common.Time.Now;
-                if (coolTime < TimeSpan.Zero) {
-                    coolTime = TimeSpan.Zero;
-                }
-                return coolTime;
-            }
-        }
-
-        public TimeSpan AdsCoolTime {
-            get {
-                var coolTime = SaveData.Instance.NextFeverAdsAt - Common.Time.Now;
-                if (coolTime < TimeSpan.Zero) {
-                    coolTime = TimeSpan.Zero;
-                }
-                return coolTime;
-            }
-        }
-
-        public TimeSpan TimeLeft {
-            get {
-                var timeLeft = this.finishAt - Common.Time.Now;
-                if (timeLeft < TimeSpan.Zero) {
-                    timeLeft = TimeSpan.Zero;
-                }
-                return timeLeft;
-            }
-        }
-
         public void Fever(CancellationToken token) {
             if (this.IsFever) {
                 throw new Exception("Invalid fever.");
@@ -63,7 +36,7 @@ namespace Ichi.Clicker.Offline
             }
             var now = Common.Time.Now;
             this.finishAt = now + TimeSpan.FromSeconds(300);
-            SaveData.Instance.NextFeverAt = now + TimeSpan.FromMinutes(30);
+            SaveData.Instance.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
             //TODO 理想プレイフィール = クリック楽しい、オート施設楽ちん、増える楽しい -> 段々キツくなる -> ランクアップ強い -> 段々キツくなる -> フィーバー強い -> ...
@@ -97,8 +70,8 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid ads cool time.");
             }
             var now = Common.Time.Now;
-            SaveData.Instance.NextFeverAt = now;
-            SaveData.Instance.NextFeverAdsAt = now + TimeSpan.FromMinutes(15);
+            SaveData.Instance.nextFeverAt = now;
+            SaveData.Instance.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
             SaveData.Instance.Save();
             this.AlterHandler?.Invoke();
         }

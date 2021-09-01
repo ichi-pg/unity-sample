@@ -12,7 +12,8 @@ namespace Ichi.Clicker
         public int rank;
         public int rarity;
         public int category;
-        public long producedTicks;
+        public Common.TicksTime producedAt;
+        public Common.TicksTime ProducedAt { get => this.producedAt; set => this.producedAt = value; }
         public IStatusCalculator<BigInteger> PowerCalculator { private get; set; }
         public IStatusCalculator<BigInteger> CostCalculator { private get; set; }
         public IProducer Producer { private get; set; }
@@ -28,10 +29,8 @@ namespace Ichi.Clicker
         public BigInteger Price { get; private set; }
         public event Action AlterHandler;
 
-        public DateTime ProducedAt {
-            get => new DateTime(this.producedTicks);
-            set => this.producedTicks = value.Ticks;
-            //TODO これ共通化できる
+        public Factory() {
+            this.producedAt = new Common.TicksTime();
         }
 
         public void Calculate() {

@@ -47,7 +47,7 @@ namespace Ichi.Clicker
             if (item == null) {
                 items.Add(new Item() {
                     category = (int)category,
-                    quantity = new Common.BigNumber(quantity),
+                    quantity = quantity,
                 });
             }
         }

@@ -11,19 +11,19 @@ namespace Ichi.Common
     {
         public static void Save<T>(T obj, bool pretty = true) where T : IPreSave {
             //TODO バイナリ（バイナリ用意するならJSON難読化不要。バイナリ暗号化は一考）
+            obj.PreSave();
+            var json = JsonUtility.ToJson(obj, pretty);
             var path = FilePath(obj.GetType());
-            SaveTask(obj, pretty, path).Forget();
+            SaveTask(json, path).Forget();
         }
 
-        private static async UniTask SaveTask<T>(T obj, bool pretty, string path) where T : IPreSave {
+        private static async UniTask SaveTask(string json, string path) {
             await UniTask.SwitchToThreadPool();
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
-            obj.PreSave();
             var writer = new StreamWriter(path);
-            var json = JsonUtility.ToJson(obj, pretty);
             writer.Write(json);
             writer.Flush();
             writer.Close();

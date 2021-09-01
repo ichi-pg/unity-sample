@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface IProducedAt
     {
-        DateTime ProducedAt { get; set; }
+        Common.TicksTime ProducedAt { get; set; }
     }
 }
