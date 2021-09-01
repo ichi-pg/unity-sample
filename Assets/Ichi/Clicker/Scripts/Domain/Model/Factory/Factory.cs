@@ -25,20 +25,19 @@ namespace Ichi.Clicker
         public BigInteger Power { get; private set; }
         public BigInteger NextPower { get; private set; }
         public BigInteger Cost { get; private set; }
-        public BigInteger CostPerformance { get; private set; }
         public BigInteger Price { get; private set; }
         public event Action AlterHandler;
 
         public DateTime ProducedAt {
             get => new DateTime(this.producedTicks);
             set => this.producedTicks = value.Ticks;
+            //TODO これ共通化できる
         }
 
         public void Calculate() {
             this.Power = this.PowerCalculator.Calculate(this.level, this.rank, this.rarity);
             this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
             this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
-            this.CostPerformance = this.Cost / (this.NextPower - this.Power);
             this.AlterHandler?.Invoke();
         }
 

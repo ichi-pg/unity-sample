@@ -37,7 +37,7 @@ namespace Ichi.Clicker
         private void OnAlter() {
             this.label.text = DIContainer.TextLocalizer.Localize("Factory.Name", this.adapter);
             this.cost.text = DIContainer.TextLocalizer.Localize("Factory.Cost", this.adapter);
-            this.cost.color = Inflation.IsInflation(this.factory.Level + 1) ? Color.red : Color.black;
+            this.cost.color = StatusUtility.IsInflation(this.factory.Level + 1) ? Color.red : Color.black;
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
             this.background.color = this.factory.IsBought ? Color.white : Color.gray;
         }

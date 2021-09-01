@@ -14,10 +14,10 @@ namespace Ichi.Clicker.Offline
 
         public void LevelUp(IFactory factory) {
             (factory as Factory).LevelUp(SaveData.Instance.Coin, Common.Time.Now);
-            if (Inflation.IsInflation(factory.Level)) {
+            if (StatusUtility.IsInflation(factory.Level)) {
                 SaveData.Instance.Save();
             }
-            this.AlterHandler?.Invoke();
+            this.AlterHandler?.Invoke();//TODO 前の人が通知すればいい
         }
 
         public void Produce(IFactory factory) {
