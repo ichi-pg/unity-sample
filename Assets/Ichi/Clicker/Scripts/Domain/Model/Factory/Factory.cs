@@ -37,6 +37,9 @@ namespace Ichi.Clicker
                 throw new Exception("Failed consume.");
             }
             if (!this.IsBought) {
+                if (this.IsLock) {
+                    throw new Exception("Invalid lock.");
+                }
                 this.ProducedAt = now;
             }
             this.level++;
