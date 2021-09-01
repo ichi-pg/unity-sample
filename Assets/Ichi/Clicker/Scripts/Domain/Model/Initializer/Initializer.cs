@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Ichi.Clicker
 {
@@ -34,8 +35,8 @@ namespace Ichi.Clicker
                         factory.Producer = new TimeProducer(factory);
                         break;
                 }
-                factory.PowerCalculator = new PowerCalculator();
-                factory.CostCalculator = new CostCalculator();
+                factory.Power = new BigIntegerStatus(new PowerCalculator());
+                factory.Cost = new BigIntegerStatus(new CostCalculator());
                 factory.Lock = new PremiseLock(factory, premise);
                 factory.Calculate();
                 premise = factory;

@@ -10,8 +10,7 @@ namespace Ichi.Clicker
         int Level { get; }
         int Rank { get; }
         int Category { get; }
-        BigInteger Power { get; }
-        BigInteger NextPower { get; }
+        BigIntegerStatus Power { get; }
         bool IsBought { get; }
         event Action AlterHandler;
 

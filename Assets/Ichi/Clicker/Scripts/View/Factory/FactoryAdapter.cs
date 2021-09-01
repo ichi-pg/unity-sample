@@ -13,7 +13,7 @@ namespace Ichi.Clicker
         public int Level { get => this.factory.Level; }
         public string Cost { get => Common.BigIntegerText.ToString(this.factory.Cost); }
         public string Power { get => Common.BigIntegerText.ToString(this.factory.Power); }
-        public string NextPower { get => Common.BigIntegerText.ToString(this.factory.NextPower); }
+        public string NextPower { get => Common.BigIntegerText.ToString(this.factory.Power.NextValue); }
         public bool CanLevelUp { get => !this.factory.IsLock && DIContainer.CoinRepository.Coin.Quantity >= this.factory.Cost; }
 
         public string Unit {

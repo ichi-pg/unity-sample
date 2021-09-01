@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface ICost
     {
-        BigInteger Cost { get; }
+        BigIntegerStatus Cost { get; }
     }
 }

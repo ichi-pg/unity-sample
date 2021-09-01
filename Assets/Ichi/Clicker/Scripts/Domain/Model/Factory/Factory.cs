@@ -14,8 +14,6 @@ namespace Ichi.Clicker
         public int category;
         public Common.TicksTime producedAt;
         public Common.TicksTime ProducedAt { get => this.producedAt; set => this.producedAt = value; }
-        public IStatusCalculator<BigInteger> PowerCalculator { private get; set; }
-        public IStatusCalculator<BigInteger> CostCalculator { private get; set; }
         public IProducer Producer { private get; set; }
         public ILock Lock { private get; set; }
         public int Level { get => this.level; }
@@ -23,20 +21,14 @@ namespace Ichi.Clicker
         public int Category { get => this.category; }
         public bool IsLock { get => this.Lock.IsLock; }
         public bool IsBought { get => this.level > 0; }
-        public BigInteger Power { get; private set; }
-        public BigInteger NextPower { get; private set; }
-        public BigInteger Cost { get; private set; }
-        public BigInteger Price { get; private set; }
+        public BigIntegerStatus Power { get; set; }
+        public BigIntegerStatus Cost { get; set; }
+        public BigIntegerStatus Price { get; set; }
         public event Action AlterHandler;
 
-        public Factory() {
-            this.producedAt = new Common.TicksTime();
-        }
-
         public void Calculate() {
-            this.Power = this.PowerCalculator.Calculate(this.level, this.rank, this.rarity);
-            this.NextPower = this.PowerCalculator.Calculate(this.level + 1, this.rank, this.rarity);
-            this.Cost = this.CostCalculator.Calculate(this.level, this.rank, this.rarity);
+            this.Power.Calculate(this.level, this.rank, this.rarity);
+            this.Cost.Calculate(this.level, this.rank, this.rarity);
             this.AlterHandler?.Invoke();
         }
 
