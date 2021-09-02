@@ -27,14 +27,6 @@ namespace Ichi.Clicker
                     };
                     factories.Add(factory);
                 }
-                switch (category) {
-                    case FactoryCategory.Click:
-                        factory.Producer = new Producer();
-                        break;
-                    case FactoryCategory.Auto:
-                        factory.Producer = new TimeProducer(factory);
-                        break;
-                }
                 factory.Power = new BigIntegerStatus(new PowerCalculator());
                 factory.Cost = new BigIntegerStatus(new CostCalculator());
                 factory.Lock = new PremiseLock(factory, premise);

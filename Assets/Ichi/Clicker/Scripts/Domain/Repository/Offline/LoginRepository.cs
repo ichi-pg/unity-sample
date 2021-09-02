@@ -19,9 +19,10 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Produce() {
+            var now = Common.Time.Now;
             foreach (var factory in SaveData.Instance.AutoFactories) {
                 if (factory.IsBought) {
-                    factory.Produce(SaveData.Instance.LoginProduct, Common.Time.Now);
+                    TimeProducer.Produce(SaveData.Instance.Coin, factory.Power, now, ref factory.producedAt);
                 }
             }
             SaveData.Instance.Save();

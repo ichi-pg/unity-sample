@@ -24,6 +24,7 @@ namespace Ichi.Clicker.Offline
             }
         }
 
+        //TODO データと挙動分けたい
         public List<Factory> factories;
         public List<Item> items;
         public Common.TicksTime nextFeverAt;

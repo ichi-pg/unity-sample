@@ -6,15 +6,13 @@ using System;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Factory : IFactory, IProducedAt
+    public class Factory : IFactory
     {
         public int level;
         public int rank;
         public int rarity;
         public int category;
         public Common.TicksTime producedAt;
-        public Common.TicksTime ProducedAt { get => this.producedAt; set => this.producedAt = value; }
-        public IProducer Producer { private get; set; }
         public ILock Lock { private get; set; }
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
@@ -33,38 +31,24 @@ namespace Ichi.Clicker
         }
 
         public void LevelUp(IConsume consume, DateTime now) {
-            if (!consume.Consume(this.Cost)) {
-                throw new Exception("Failed consume.");
+            if (this.IsLock) {
+                throw new Exception("Invalid lock.");
             }
+            consume.Consume(this.Cost);
             if (!this.IsBought) {
-                if (this.IsLock) {
-                    throw new Exception("Invalid lock.");
-                }
-                this.ProducedAt = now;
+                this.producedAt = now;//TODO IFactoryあるからTimeFactoryとClickFactoryに分けられそう
             }
             this.level++;
             this.Calculate();
         }
 
-        public bool Sell(IStore store) {
+        public void Sell(IStore store) {
             if (!this.IsBought) {
-                return false;
+                throw new Exception("Invalid bought.");
             }
-            if (!store.Store(this.Price)) {
-                return false;
-            }
+            store.Store(this.Price);
             this.level = 0;
             this.Calculate();
-            return true;
-        }
-
-        public void Produce(IStore store, DateTime now, int bonus = 1) {
-            if (!this.IsBought) {
-                throw new Exception("Not bought factory.");
-            }
-            if (!this.Producer.Produce(store, this.Power * bonus, now)) {
-                throw new Exception("Failed produce.");
-            }
         }
     }
 }

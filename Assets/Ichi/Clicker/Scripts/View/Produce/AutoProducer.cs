@@ -21,12 +21,7 @@ namespace Ichi.Clicker
         private async UniTask Produce(CancellationToken token) {
             while (true)
             {
-                var repository = DIContainer.FactoryRepository;
-                foreach (var factory in repository.AutoFactories) {
-                    if (factory.IsBought) {
-                        repository.Produce(factory);
-                    }
-                }
+                DIContainer.ProduceRepository.TimeProduce();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }

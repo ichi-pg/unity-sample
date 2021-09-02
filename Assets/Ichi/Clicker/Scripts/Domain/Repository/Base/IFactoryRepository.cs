@@ -10,8 +10,6 @@ namespace Ichi.Clicker
         IEnumerable<IFactory> ClickFactories { get; }
         IEnumerable<IFactory> AutoFactories { get; }
         void LevelUp(IFactory factory);
-        void Produce(IFactory factory);
-        void CheatMode(bool enable);
         event Action AlterHandler;
     }
 }

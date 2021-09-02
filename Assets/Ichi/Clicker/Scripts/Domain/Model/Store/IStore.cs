@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface IStore
     {
-        bool Store(BigInteger quantity);
+        void Store(BigInteger quantity);
     }
 }

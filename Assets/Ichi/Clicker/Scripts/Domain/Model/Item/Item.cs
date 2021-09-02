@@ -13,37 +13,32 @@ namespace Ichi.Clicker
         public BigInteger Quantity { get => this.quantity; }
         public event Action AlterHandler;
 
-        public bool Consume(BigInteger i) {
+        public void Consume(BigInteger i) {
             if (i < 0) {
-                return false;
+                throw new Exception("Invalid consume.");
             }
             if (this.quantity < i) {
-                return false;
+                throw new Exception("Invalid consume.");
             }
             this.quantity -= i;
             this.AlterHandler?.Invoke();
-            return true;
         }
 
-        public bool Store(BigInteger i) {
+        public void Store(BigInteger i) {
             if (i < 0) {
-                return false;
+                throw new Exception("Invalid store.");
             }
             this.quantity += i;
             this.AlterHandler?.Invoke();
-            return true;
         }
 
-        public bool Sell(IStore store, int bonus = 1) {
+        public void Sell(IStore store, int bonus = 1) {
             if (this == store) {
-                return false;
+                throw new Exception("Invalid sell.");
             }
-            if (!store.Store(this.quantity * bonus)) {
-                return false;
-            }
+            store.Store(this.quantity * bonus);
             this.quantity = 0;
             this.AlterHandler?.Invoke();
-            return true;
         }
     }
 }

@@ -39,18 +39,14 @@ namespace Ichi.Clicker.Offline
             SaveData.Instance.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
-            //TODO 理想プレイフィール = クリック楽しい、オート施設楽ちん、増える楽しい -> 段々キツくなる -> ランクアップ強い -> 段々キツくなる -> フィーバー強い -> ...
-            //TODO これに対して必要な調整 = フィーバーのロック機能が必要, 序盤からフィーバー強すぎ長すぎ, ランクアップのカタルシスがない, 序盤のプレイに手応えを感じない（ぬるすぎ？メリハリがない？）, 全体的にレベルアップ早すぎ
-            //TODO やっぱりレベルアップとランクアップだけだと寂しいのはある。フィーバー強化したりするSkillを追加する。
         }
 
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                var now = Common.Time.Now;
                 foreach (var factory in SaveData.Instance.ClickFactories) {
                     if (factory.IsBought) {
-                        factory.Produce(SaveData.Instance.Coin, now, this.Rate * this.cheatBonus);
+                        SaveData.Instance.Coin.Store(factory.Power * this.Rate * this.cheatBonus);
                     }
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);

@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface IConsume
     {
-        bool Consume(BigInteger quantity);
+        void Consume(BigInteger quantity);
     }
 }

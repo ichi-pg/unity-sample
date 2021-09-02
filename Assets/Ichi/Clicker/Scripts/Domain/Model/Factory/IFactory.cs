@@ -5,13 +5,14 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface IFactory : ICost, ILock
+    public interface IFactory : ICost
     {
         int Level { get; }
         int Rank { get; }
         int Category { get; }
         BigIntegerStatus Power { get; }
         bool IsBought { get; }
+        bool IsLock { get; }
         event Action AlterHandler;
 
         //NOTE 単純に Factory = 女の子 でいいんじゃない？

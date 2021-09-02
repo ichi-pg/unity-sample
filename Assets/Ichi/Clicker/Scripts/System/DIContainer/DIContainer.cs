@@ -6,6 +6,7 @@ namespace Ichi.Clicker
     public static class DIContainer
     {
         public static IFactoryRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository();
+        public static IProduceRepository ProduceRepository { get; private set; } = new Offline.ProduceRepository();
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository();
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository();
         public static ICoinRepository CoinRepository { get; private set; } = new Offline.CoinRepository();
