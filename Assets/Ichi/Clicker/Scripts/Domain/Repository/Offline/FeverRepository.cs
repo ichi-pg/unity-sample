@@ -77,5 +77,6 @@ namespace Ichi.Clicker.Offline
         }
 
         //TODO 単純にFeverモデルに
+        //TODO レートはSkillモデルに
     }
 }
