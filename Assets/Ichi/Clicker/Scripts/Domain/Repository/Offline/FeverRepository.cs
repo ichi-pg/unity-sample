@@ -75,5 +75,7 @@ namespace Ichi.Clicker.Offline
         public void CheatMode(bool enable) {
             this.cheatBonus = enable ? 100 : 1;
         }
+
+        //TODO 単純にFeverモデルに
     }
 }
