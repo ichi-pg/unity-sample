@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
   m_Name: Ichi.Clicker Shared Data
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   m_TableCollectionName: Ichi.Clicker
   m_TableCollectionNameGuidString: 1d99284da25e5441b917a27bc71ef63b
   m_Entries:
@@ -48,7 +48,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 669928590925824
-    m_Key: Status.Product
+    m_Key: Status.Commodity
     m_Metadata:
       m_Items: []
   - m_Id: 669928603508736

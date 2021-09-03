@@ -30,8 +30,8 @@ namespace Ichi.Clicker.Offline
         public Common.TicksTime nextFeverAt;
         public Common.TicksTime nextFeverAdsAt;
         public Item Coin { get; private set; }
-        public Item Product { get; private set; }
-        public Item LoginProduct { get; private set; }
+        public Item Commodity { get; private set; }
+        public Item LoginCommodity { get; private set; }
         public IEnumerable<Factory> ClickFactories { get; private set; }
         public IEnumerable<Factory> AutoFactories { get; private set; }
 
@@ -76,8 +76,8 @@ namespace Ichi.Clicker.Offline
             this.ClickFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Click);
             this.AutoFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);
             this.Coin = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
-            this.Product = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Product);
-            this.LoginProduct = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginProduct);
+            this.Commodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Commodity);
+            this.LoginCommodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginCommodity);
         }
     }
 }

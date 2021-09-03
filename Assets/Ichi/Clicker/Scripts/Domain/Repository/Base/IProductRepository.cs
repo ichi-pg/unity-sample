@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public interface IProductRepository
+    public interface ICommodityRepository
     {
-        IItem Product { get; }
+        IItem Commodity { get; }
         void Collect();
     }
 }

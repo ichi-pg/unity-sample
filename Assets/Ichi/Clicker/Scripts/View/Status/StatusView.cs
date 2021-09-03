@@ -30,19 +30,19 @@ namespace Ichi.Clicker
             this.adapter = new StatusAdapter();
             DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
-            DIContainer.ProductRepository.Product.AlterHandler += this.OnAlter;
+            DIContainer.CommodityRepository.Commodity.AlterHandler += this.OnAlter;
             this.OnAlter();
         }
 
         void OnDestroy() {
             DIContainer.FactoryRepository.AlterHandler -= this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
-            DIContainer.ProductRepository.Product.AlterHandler -= this.OnAlter;
+            DIContainer.CommodityRepository.Commodity.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
             this.coin.text = DIContainer.TextLocalizer.Localize("Status.Coin", this.adapter);
-            this.product.text = DIContainer.TextLocalizer.Localize("Status.Product", this.adapter);
+            this.product.text = DIContainer.TextLocalizer.Localize("Status.Commodity", this.adapter);
             this.clickPower.text = DIContainer.TextLocalizer.Localize("Status.ClickPower", this.adapter);
             this.autoPower.text = DIContainer.TextLocalizer.Localize("Status.AutoPower", this.adapter);
             this.feverRate.text = DIContainer.TextLocalizer.Localize("Status.FeverRate", this.adapter);

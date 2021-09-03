@@ -7,7 +7,7 @@ namespace Ichi.Clicker
     public enum ItemCategory
     {
         Coin,
-        Product,
-        LoginProduct,
+        Commodity,
+        LoginCommodity,
     }
 }

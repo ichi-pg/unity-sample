@@ -9,7 +9,7 @@ namespace Ichi.Clicker
     public class CollectButton : MonoBehaviour
     {
         public void Collect() {
-            DIContainer.ProductRepository.Collect();
+            DIContainer.CommodityRepository.Collect();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Ichi.Clicker
             Initialize(factories, FactoryCategory.Click, 1, 1, 1);
             Initialize(factories, FactoryCategory.Auto, 2, 20, 0);
             Initialize(items, ItemCategory.Coin, 0);
-            Initialize(items, ItemCategory.Product, 0);
-            Initialize(items, ItemCategory.LoginProduct, 0);
+            Initialize(items, ItemCategory.Commodity, 0);
+            Initialize(items, ItemCategory.LoginCommodity, 0);
         }
 
         private static void Initialize(List<Factory> factories, FactoryCategory category, int rank, int maxRank, int level) {

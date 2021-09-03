@@ -2,7 +2,7 @@
 "Factory.Name","ランク{Rank} Lv{Level}\n生産{Power}/{Unit}"
 "Factory.Cost","Lvアップ{Cost}\n生産{NextPower}/{Unit}"
 "Status.Coin","コイン{Coin}"
-"Status.Product","作物{Product}"
+"Status.Commodity","作物{Commodity}"
 "Status.ClickPower","総生産{ClickPower}/クリック"
 "Status.AutoPower","総生産{AutoPower}/秒"
 "Status.FeverRate","フィーバー倍率x{FeverRate}"
