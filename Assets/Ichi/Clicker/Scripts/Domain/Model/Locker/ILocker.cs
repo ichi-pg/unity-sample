@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public interface ILock
+    public interface ILocker
     {
         bool IsLock { get; }
     }

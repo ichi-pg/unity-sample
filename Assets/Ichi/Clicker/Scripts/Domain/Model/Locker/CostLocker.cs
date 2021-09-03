@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public class PremiseLock : ILock
+    public class CostLocker : ILocker
     {
         private ICost self;
         private ICost premise;
@@ -13,7 +13,7 @@ namespace Ichi.Clicker
             get => this.premise != null && this.premise.Cost < this.self.Cost;
         }
 
-        public PremiseLock(ICost self, ICost premise) {
+        public CostLocker(ICost self, ICost premise) {
             this.self = self;
             this.premise = premise;
         }

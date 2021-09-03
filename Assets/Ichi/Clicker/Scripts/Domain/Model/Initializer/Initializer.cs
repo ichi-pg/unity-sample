@@ -29,7 +29,7 @@ namespace Ichi.Clicker
                 }
                 factory.Power = new BigIntegerStatus(new PowerCalculator());
                 factory.Cost = new BigIntegerStatus(new CostCalculator());
-                factory.Lock = new PremiseLock(factory, premise);
+                factory.Locker = new CostLocker(factory, premise);
                 factory.Calculate();
                 premise = factory;
             }
