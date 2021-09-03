@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public class Sentence : ISentence
+    public interface ILevel
     {
-        public string Text { get; private set; }
+        int Level { get; }
     }
 }

@@ -5,9 +5,8 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface IFactory : ICost
+    public interface IFactory : ICost, ILevel
     {
-        int Level { get; }
         int Rank { get; }
         int Category { get; }
         BigIntegerStatus Power { get; }
