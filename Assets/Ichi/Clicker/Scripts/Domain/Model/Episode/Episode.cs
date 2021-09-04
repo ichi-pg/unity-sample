@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Ichi.Clicker
 {
@@ -9,5 +10,6 @@ namespace Ichi.Clicker
         private ILocker locker;
         public IEnumerable<ISentence> Sentences { get => this.sentences; }
         public bool IsLock { get => this.locker.IsLock; }
+        public event Action AlterHandler;
     }
 }

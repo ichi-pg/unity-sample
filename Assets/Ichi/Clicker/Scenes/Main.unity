@@ -956,6 +956,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7657880956319208270, guid: 514bb855a61104bd4bbacfe5ef03b13f, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657880956319208270, guid: 514bb855a61104bd4bbacfe5ef03b13f, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8001507506359937653, guid: 514bb855a61104bd4bbacfe5ef03b13f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
