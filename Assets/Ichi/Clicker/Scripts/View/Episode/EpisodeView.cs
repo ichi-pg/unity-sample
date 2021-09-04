@@ -24,6 +24,7 @@ namespace Ichi.Clicker
             }
         }
 
+        //TODO トリガー遷移
         //TODO 丸ごとCommonにできそう。宴でいいって話はあるけど。
     }
 }
