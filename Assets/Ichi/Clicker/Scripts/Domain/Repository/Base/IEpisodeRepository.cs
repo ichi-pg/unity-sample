@@ -7,5 +7,6 @@ namespace Ichi.Clicker
     public interface IEpisodeRepository
     {
         IEnumerable<IEpisode> Episodes { get; }
+        void Read(IEpisode episode);
     }
 }

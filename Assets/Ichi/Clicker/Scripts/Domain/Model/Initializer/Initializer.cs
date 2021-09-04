@@ -48,15 +48,21 @@ namespace Ichi.Clicker
 
         private static void Initialize(List<Episode> episodes, List<Factory> factories) {
             foreach (var factory in factories) {
-                for (var i = 1; i <= 5; ++i) {
-                    episodes.Add(new Episode() {
-                        Locker = new LevelLocker(factory, i*100),
-                        Sentences = new List<Sentence>() {
-                            new Sentence() {
-                                Text = "aaaa",
-                            },
+                for (var level = 100; level <= 500; level += 100) {
+                    var episode = episodes.FirstOrDefault(episode => episode.rank == factory.Rank && episode.level == level);
+                    if (episode == null) {
+                        episode = new Episode() {
+                            rank = factory.Rank,
+                            level = level,
+                        };
+                        episodes.Add(episode);
+                    }
+                    episode.Locker = new LevelLocker(factory, level);
+                    episode.Sentences = new List<Sentence>() {
+                        new Sentence() {
+                            Text = "aaaa",
                         },
-                    });
+                    };
                     //TODO シナリオマスターデータ
                 }
             }
