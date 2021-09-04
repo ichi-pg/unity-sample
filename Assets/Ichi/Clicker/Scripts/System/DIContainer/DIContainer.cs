@@ -19,7 +19,6 @@ namespace Ichi.Clicker
 
         //NOTE Extenject or VContainer
 
-        //TODO! シナリオ
         //TODO! キャラ（3Dならシェーダ・モーション、2DならLive2D）
         //TODO SE
         //TODO BGM
