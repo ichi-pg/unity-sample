@@ -24,6 +24,7 @@ namespace Ichi.Clicker
                     text.text = DIContainer.TextLocalizer.Localize(key);
                 }
             }
+            //TODO やはりインスペクターから指定する方が綺麗
         }
     }
 }
