@@ -7,12 +7,13 @@ namespace Ichi.Clicker
 {
     public static class Initializer
     {
-        public static void Initialize(List<Factory> factories, List<Item> items) {
+        public static void Initialize(List<Factory> factories, List<Item> items, List<Episode> episodes) {
             Initialize(factories, FactoryCategory.Click, 1, 1, 1);
             Initialize(factories, FactoryCategory.Auto, 2, 20, 0);
             Initialize(items, ItemCategory.Coin, 0);
             Initialize(items, ItemCategory.Commodity, 0);
             Initialize(items, ItemCategory.LoginCommodity, 0);
+            Initialize(episodes, factories);
         }
 
         private static void Initialize(List<Factory> factories, FactoryCategory category, int rank, int maxRank, int level) {
@@ -42,6 +43,22 @@ namespace Ichi.Clicker
                     category = (int)category,
                     quantity = quantity,
                 });
+            }
+        }
+
+        private static void Initialize(List<Episode> episodes, List<Factory> factories) {
+            foreach (var factory in factories) {
+                for (var i = 1; i <= 5; ++i) {
+                    episodes.Add(new Episode() {
+                        Locker = new LevelLocker(factory, i*100),
+                        Sentences = new List<Sentence>() {
+                            new Sentence() {
+                                Text = "aaaa",
+                            },
+                        },
+                    });
+                    //TODO シナリオマスターデータ
+                }
             }
         }
     }

@@ -5,6 +5,6 @@ namespace Ichi.Clicker
 {
     public class Sentence : ISentence
     {
-        public string Text { get; private set; }
+        public string Text { get; set; }
     }
 }

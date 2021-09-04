@@ -6,10 +6,9 @@ namespace Ichi.Clicker
 {
     public class Episode : IEpisode
     {
-        private List<Sentence> sentences;
-        private ILocker locker;
-        public IEnumerable<ISentence> Sentences { get => this.sentences; }
-        public bool IsLock { get => this.locker.IsLock; }
+        public ILocker Locker { private get; set; }
+        public IEnumerable<ISentence> Sentences { get; set; }
+        public bool IsLock { get => this.Locker.IsLock; }
         public event Action AlterHandler;
 
         //TODO 既読管理

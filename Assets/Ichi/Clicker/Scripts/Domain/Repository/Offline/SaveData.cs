@@ -33,6 +33,7 @@ namespace Ichi.Clicker.Offline
         public Item LoginCommodity { get; private set; }
         public IEnumerable<Factory> ClickFactories { get; private set; }
         public IEnumerable<Factory> AutoFactories { get; private set; }
+        public List<Episode> Episodes { get; private set; }
 
         private SaveData(DateTime now) {
             this.factories = new List<Factory>();
@@ -70,7 +71,8 @@ namespace Ichi.Clicker.Offline
         public void Initialize() {
             Initializer.Initialize(
                 this.factories,
-                this.items
+                this.items,
+                this.Episodes
             );
             this.ClickFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Click);
             this.AutoFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);

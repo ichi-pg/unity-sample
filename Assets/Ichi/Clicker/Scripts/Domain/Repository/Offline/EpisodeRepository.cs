@@ -6,8 +6,6 @@ namespace Ichi.Clicker.Offline
 {
     public class EpisodeRepository : IEpisodeRepository
     {
-        public IEnumerable<IEpisode> Episodes {
-            get => new List<Episode>();//TODO
-        }
+        public IEnumerable<IEpisode> Episodes { get => SaveData.Instance.Episodes; }
     }
 }
