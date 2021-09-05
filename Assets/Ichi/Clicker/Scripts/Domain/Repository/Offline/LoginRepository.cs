@@ -10,11 +10,15 @@ namespace Ichi.Clicker.Offline
     {
         public BigInteger Quantity { get => SaveData.Instance.LoginCommodity.Quantity; }
 
-        public int Percentage {
+        public float Percentage {
             get {
                 var power = FactoryUtility.SumPower(SaveData.Instance.AutoFactories);
                 var count = TimeProducer.Limit.Ticks / TimeProducer.Interval.Ticks;
-                return (int)(SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count));
+                var percentage = SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count);
+                if (percentage > 100) {
+                    return 1f;
+                }
+                return (float)percentage / 100;
             }
         }
 
@@ -22,7 +26,7 @@ namespace Ichi.Clicker.Offline
             var now = Common.Time.Now;
             foreach (var factory in SaveData.Instance.AutoFactories) {
                 if (factory.IsBought) {
-                    TimeProducer.Produce(SaveData.Instance.Coin, factory.Power, now, ref factory.producedAt);
+                    TimeProducer.Produce(SaveData.Instance.LoginCommodity, factory.Power, now, ref factory.producedAt);
                 }
             }
             SaveData.Instance.Save();

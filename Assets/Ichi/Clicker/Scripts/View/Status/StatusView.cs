@@ -10,19 +10,7 @@ namespace Ichi.Clicker
         [SerializeField]
         private Text coin;
         [SerializeField]
-        private Text product;
-        [SerializeField]
-        private Text clickPower;
-        [SerializeField]
-        private Text autoPower;
-        [SerializeField]
-        private Text feverRate;
-        [SerializeField]
-        private Text feverTimeLeft;
-        [SerializeField]
-        private Text feverCoolTime;
-        [SerializeField]
-        private Text feverAdsCoolTime;
+        private Text coolTime;
 
         private StatusAdapter adapter;
 
@@ -41,14 +29,10 @@ namespace Ichi.Clicker
         }
 
         private void OnAlter() {
-            this.coin.text = DIContainer.TextLocalizer.Localize("Status.Coin", this.adapter);
-            this.product.text = DIContainer.TextLocalizer.Localize("Status.Commodity", this.adapter);
-            this.clickPower.text = DIContainer.TextLocalizer.Localize("Status.ClickPower", this.adapter);
-            this.autoPower.text = DIContainer.TextLocalizer.Localize("Status.AutoPower", this.adapter);
-            this.feverRate.text = DIContainer.TextLocalizer.Localize("Status.FeverRate", this.adapter);
-            this.feverTimeLeft.text = DIContainer.TextLocalizer.Localize("Status.FeverTimeLeft", this.adapter);
-            this.feverCoolTime.text = DIContainer.TextLocalizer.Localize("Status.FeverCoolTime", this.adapter);
-            this.feverAdsCoolTime.text = DIContainer.TextLocalizer.Localize("Status.FeverAdsCoolTime", this.adapter);
+            this.coin.text = this.adapter.Coin;
+            this.coolTime.text = this.adapter.FeverCoolTime;
         }
+
+        //TODO 分ける
     }
 }

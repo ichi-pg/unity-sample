@@ -10,9 +10,9 @@ namespace Ichi.Clicker
         public string Coin { get => Common.BigIntegerText.ToString(DIContainer.CoinRepository.Coin.Quantity); }
         public string Commodity { get => Common.BigIntegerText.ToString(DIContainer.CommodityRepository.Commodity.Quantity); }
         public int FeverRate { get => DIContainer.FeverRepository.Rate; }
-        public TimeSpan FeverTimeLeft { get => DIContainer.FeverRepository.TimeLeft; }
-        public TimeSpan FeverCoolTime { get => DIContainer.FeverRepository.CoolTime; }
-        public TimeSpan FeverAdsCoolTime { get => DIContainer.FeverRepository.AdsCoolTime; }
+        public string FeverTimeLeft { get => DIContainer.FeverRepository.TimeLeft.ToString("mm\\:ss"); }
+        public string FeverCoolTime { get => DIContainer.FeverRepository.CoolTime.ToString("mm\\:ss"); }
+        public string FeverAdsCoolTime { get => DIContainer.FeverRepository.AdsCoolTime.ToString("mm\\:ss"); }
 
         public string ClickPower {
             get {

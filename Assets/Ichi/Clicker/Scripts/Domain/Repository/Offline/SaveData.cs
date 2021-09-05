@@ -12,13 +12,8 @@ namespace Ichi.Clicker.Offline
         public static SaveData Instance {
             get {
                 if (instance == null) {
-                    if (Common.JsonSaveData.Exist<SaveData>()) {
-                        instance = Common.JsonSaveData.Load<SaveData>();
-                        //NOTE クラウドセーブ
-                    } else {
-                        instance = new SaveData(Common.Time.Now);
-                    }
-                    instance.Initialize();
+                    instance = Common.JsonSaveData.Exist<SaveData>() ? Common.JsonSaveData.Load<SaveData>() : new SaveData();
+                    instance.Initialize(Common.Time.Now);
                 }
                 return instance;
             }
@@ -26,6 +21,7 @@ namespace Ichi.Clicker.Offline
 
         public List<Factory> factories;
         public List<Item> items;
+        public List<Episode> episodes;
         public Common.TicksTime nextFeverAt;
         public Common.TicksTime nextFeverAdsAt;
         public Item Coin { get; private set; }
@@ -33,17 +29,10 @@ namespace Ichi.Clicker.Offline
         public Item LoginCommodity { get; private set; }
         public IEnumerable<Factory> ClickFactories { get; private set; }
         public IEnumerable<Factory> AutoFactories { get; private set; }
-        public List<Episode> Episodes { get; private set; }
-
-        private SaveData(DateTime now) {
-            this.factories = new List<Factory>();
-            this.items = new List<Item>();
-            this.nextFeverAt = now;
-            this.nextFeverAdsAt = now;
-        }
 
         public void Save() {
             Common.JsonSaveData.Save<SaveData>(this);
+            //NOTE クラウドセーブ
         }
 
         public void PreSave() {
@@ -68,11 +57,16 @@ namespace Ichi.Clicker.Offline
             this.nextFeverAdsAt.PostLoad();
         }
 
-        public void Initialize() {
+        public void Initialize(DateTime now) {
+            this.factories = this.factories ?? new List<Factory>();
+            this.items = this.items ?? new List<Item>();
+            this.episodes = this.episodes ?? new List<Episode>();
+            this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
+            this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
             Initializer.Initialize(
                 this.factories,
                 this.items,
-                this.Episodes
+                this.episodes
             );
             this.ClickFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Click);
             this.AutoFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);

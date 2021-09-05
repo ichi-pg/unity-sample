@@ -10,5 +10,7 @@ namespace Ichi.Common
         public static DateTime Now { get => DateTime.Now; }
         public static TimeSpan Max(TimeSpan a, TimeSpan b)  => a > b ? a : b;
         public static TimeSpan Min(TimeSpan a, TimeSpan b)  => a < b ? a : b;
+        public static DateTime Max(DateTime a, DateTime b)  => a > b ? a : b;
+        public static DateTime Min(DateTime a, DateTime b)  => a < b ? a : b;
     }
 }

@@ -10,47 +10,27 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker
 {
-    [RequireComponent(typeof(Button))]
     public class LevelUpButton : MonoBehaviour
     {
-
         [SerializeField]
-        private Text text;
-        private Button button;
+        private FactoryView factoryView;
 
         void Start() {
-            this.button = this.GetComponent<Button>();
             DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
-            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             this.OnAlter();
             this.StartCheatMode();
         }
 
         void OnDestroy() {
             DIContainer.FactoryRepository.AlterHandler -= this.OnAlter;
-            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
-            var adapter = new FactoryAdapter(this.FindFactory());
-            this.button.interactable = adapter.CanLevelUp;
-            this.text.text = DIContainer.TextLocalizer.Localize("LevelUpButton", adapter);
-            this.text.color = StatusUtility.IsInflation(adapter.Level + 1) ? Color.red : Color.black;
-        }
-
-        public void LevelUp() {
-            var factory = this.FindFactory();
-            var adapter = new FactoryAdapter(factory);
-            if (adapter.CanLevelUp) {
-                DIContainer.FactoryRepository.LevelUp(factory);
-            }
-        }
-
-        private IFactory FindFactory() {
-            return DIContainer.FactoryRepository
-                    .Factories
-                    .OrderBy(factory => factory.Cost)
-                    .FirstOrDefault();
+            this.factoryView.OnDestroy();
+            this.factoryView.Initialize(
+                DIContainer.FactoryRepository.Factories
+                    .OrderBy(factory => factory.Cost).FirstOrDefault()
+            );
         }
 
         [Conditional("UNITY_EDITOR")]
@@ -63,7 +43,7 @@ namespace Ichi.Clicker
             {
                 var cheatMode = this.transform.root.GetComponentInChildren<CheatMode>();
                 if (cheatMode != null && cheatMode.Auto) {
-                    this.LevelUp();
+                    this.factoryView.LevelUp();
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }

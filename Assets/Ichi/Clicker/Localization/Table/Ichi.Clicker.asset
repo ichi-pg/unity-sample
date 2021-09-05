@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
   m_Name: Ichi.Clicker
   m_EditorClassIdentifier: 
-  m_SharedTableData: {fileID: 11400000, guid: 1d99284da25e5441b917a27bc71ef63b, type: 2}
+  m_SharedTableData: {fileID: 11400000, guid: c881b4234b93049728eb60540558435c, type: 2}
   m_Tables:
-  - {fileID: 11400000, guid: af771e3064c0442e6a015d1182df0bf5, type: 2}
+  - {fileID: 11400000, guid: 002b4e01ffbff470695d8ea988f299e2, type: 2}
   m_Extensions:
   - id: 0
   m_Group: String Table
@@ -27,7 +27,7 @@ MonoBehaviour:
         m_ColumnsList:
         - id: 1
         - id: 2
-        m_ConnectedFile: /Users/d.ikeda/workspace/unity-sample/Assets/Ichi/Clicker/Localization/Ichi.Clicker.csv
+        m_ConnectedFile: /Users/d.ikeda/workspace/unity-sample/Assets/Ichi/Clicker/Localization/CSV/Ichi.Clicker.csv
     00000001:
       type: {class: KeyIdColumns, ns: UnityEditor.Localization.Plugins.CSV.Columns, asm: Unity.Localization.Editor}
       data:

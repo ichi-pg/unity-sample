@@ -17,7 +17,7 @@ namespace Ichi.Clicker
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
         public int Category { get => this.category; }
-        public bool IsLock { get => this.Locker.IsLock; }
+        public bool IsLock { get => !this.IsBought && this.Locker.IsLock; }
         public bool IsBought { get => this.level > 0; }
         public BigIntegerStatus Power { get; set; }
         public BigIntegerStatus Cost { get; set; }

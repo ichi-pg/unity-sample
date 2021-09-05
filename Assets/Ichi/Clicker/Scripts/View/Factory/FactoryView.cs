@@ -8,13 +8,17 @@ namespace Ichi.Clicker
     public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
     {
         [SerializeField]
-        private Text label;
+        private Text name;
+        [SerializeField]
+        private Text desc;
         [SerializeField]
         private Text cost;
         [SerializeField]
+        private Text levelUp;
+        [SerializeField]
         private Button levelUpButton;
         [SerializeField]
-        private Image background;
+        private Image lockImage;
 
         private FactoryAdapter adapter;
         private IFactory factory;
@@ -27,7 +31,7 @@ namespace Ichi.Clicker
             this.OnAlter();
         }
 
-        void OnDestroy() {
+        public void OnDestroy() {
             if (this.factory != null) {
                 this.factory.AlterHandler -= this.OnAlter;
             }
@@ -35,15 +39,21 @@ namespace Ichi.Clicker
         }
 
         private void OnAlter() {
-            this.label.text = DIContainer.TextLocalizer.Localize("Factory.Name", this.adapter);
-            this.cost.text = DIContainer.TextLocalizer.Localize("Factory.Cost", this.adapter);
-            this.cost.color = StatusUtility.IsInflation(this.factory.Level + 1) ? Color.red : Color.black;
+            this.name.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
+            this.desc.text = DIContainer.TextLocalizer.Localize("Power") + this.adapter.Power + "/" + this.adapter.Unit;
+            this.cost.text = this.adapter.Cost;
+            this.levelUp.text = DIContainer.TextLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
-            this.background.color = this.factory.IsBought ? Color.white : Color.gray;
+            this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
+            this.lockImage.gameObject.SetActive(this.factory.IsLock);
+            //TODO 開放条件表記（押したらトーストもあり）
+            //TODO アイコン
         }
 
         public void LevelUp() {
-            DIContainer.FactoryRepository.LevelUp(this.factory);
+            if (this.adapter.CanLevelUp) {
+                DIContainer.FactoryRepository.LevelUp(this.factory);
+            }
         }
     }
 }
