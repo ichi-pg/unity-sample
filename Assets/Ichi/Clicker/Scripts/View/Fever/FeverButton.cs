@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,10 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour
     {
+        [SerializeField]
+        private Image gauge;
+        [SerializeField]
+        private Image gaugeParent;
         private Button button;
         private CancellationToken token;
 
@@ -29,11 +34,25 @@ namespace Ichi.Clicker
             this.button.interactable =
                 !DIContainer.FeverRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsFever;
+            Common.Gauge.ResizeY(
+                this.gauge,
+                this.gaugeParent,
+                DIContainer.FeverRepository.DurationRate
+            );
         }
 
         public void Fever() {
             DIContainer.FeverRepository.Fever(this.token);
+            this.UpdateGauge().Forget();
             this.CoolTime().Forget();
+        }
+
+        private async UniTask UpdateGauge() {
+            while (DIContainer.FeverRepository.IsFever)
+            {
+                this.OnAlter();
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: this.token);
+            }
         }
 
         private async UniTask CoolTime() {

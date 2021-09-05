@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 5548485894866962682}
   - component: {fileID: 8025897741421699100}
   m_Layer: 0
-  m_Name: parcentage_image
+  m_Name: gauge_image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,8 +573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quantity: {fileID: 4718571753475022323}
-  percentage: {fileID: 8025897741421699100}
-  percentageParent: {fileID: 2836107905366999525}
+  gauge: {fileID: 8025897741421699100}
+  gaugeParent: {fileID: 2836107905366999525}
   adsButton: {fileID: 7581160401231252100}
 --- !u!114 &1722900453527359128
 MonoBehaviour:
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 1865242063630753030}
   - component: {fileID: 2836107905366999525}
   m_Layer: 0
-  m_Name: parcentage
+  m_Name: gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

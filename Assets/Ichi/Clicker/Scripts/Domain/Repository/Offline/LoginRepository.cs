@@ -10,15 +10,15 @@ namespace Ichi.Clicker.Offline
     {
         public BigInteger Quantity { get => SaveData.Instance.LoginCommodity.Quantity; }
 
-        public float Percentage {
+        public float QuantityRate {
             get {
                 var power = FactoryUtility.SumPower(SaveData.Instance.AutoFactories);
                 var count = TimeProducer.Limit.Ticks / TimeProducer.Interval.Ticks;
-                var percentage = SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count);
-                if (percentage > 100) {
+                var rate = SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count);
+                if (rate > 100) {
                     return 1f;
                 }
-                return (float)percentage / 100;
+                return (float)rate / 100;
             }
         }
 

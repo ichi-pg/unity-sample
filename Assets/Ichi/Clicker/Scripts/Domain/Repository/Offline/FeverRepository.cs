@@ -9,12 +9,13 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
+        private readonly static TimeSpan Duration = TimeSpan.FromSeconds(300);
+
         public bool IsFever { get => Common.Time.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
         public TimeSpan CoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAt - Common.Time.Now, TimeSpan.Zero); }
         public TimeSpan AdsCoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAdsAt - Common.Time.Now, TimeSpan.Zero); }
-        public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - Common.Time.Now, TimeSpan.Zero); }
         public event Action AlterHandler;
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
@@ -27,6 +28,13 @@ namespace Ichi.Clicker.Offline
             }
         }
 
+        public float DurationRate {
+            get {
+                var timeLeft = Common.Time.Max(this.finishAt - Common.Time.Now, TimeSpan.Zero);
+                return (float)timeLeft.Ticks / Duration.Ticks;
+            }
+        }
+
         public void Fever(CancellationToken token) {
             if (this.IsFever) {
                 throw new Exception("Invalid fever.");
@@ -35,7 +43,7 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid cool time.");
             }
             var now = Common.Time.Now;
-            this.finishAt = now + TimeSpan.FromSeconds(300);
+            this.finishAt = now + Duration;
             SaveData.Instance.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();

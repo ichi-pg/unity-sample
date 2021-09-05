@@ -12,9 +12,9 @@ namespace Ichi.Clicker
         [SerializeField]
         private Text quantity;
         [SerializeField]
-        private Image percentage;
+        private Image gauge;
         [SerializeField]
-        private Image percentageParent;
+        private Image gaugeParent;
         [SerializeField]
         private Button adsButton;
         private Common.CloseModalButton closeButton;
@@ -24,11 +24,11 @@ namespace Ichi.Clicker
         void Start() {
             this.closeButton = this.GetComponent<Common.CloseModalButton>();
             this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Quantity);
-            //TODO ゲージ処理の共通化
-            var parentSize = this.percentageParent.rectTransform.sizeDelta;
-            var size = this.percentage.rectTransform.sizeDelta;
-            size.x = parentSize.x * DIContainer.LoginRepository.Percentage;
-            this.percentage.rectTransform.sizeDelta = size;
+            Common.Gauge.ResizeX(
+                this.gauge,
+                this.gaugeParent,
+                DIContainer.LoginRepository.QuantityRate
+            );
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
             this.ads.LoadHandler += this.OnAlter;
