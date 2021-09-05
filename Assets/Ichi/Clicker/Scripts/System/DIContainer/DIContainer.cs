@@ -23,5 +23,7 @@ namespace Ichi.Clicker
         //TODO BGM
         //TODO UIアニメ（DOTween）
         //TODO UIエフェクト（DOTween）
+
+        //TODO RPGにするか、お店にするか。画面上「何が」増えるか演出が必要。
     }
 }
