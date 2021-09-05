@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db39f6e691bd4fc5a4d69dd5180153d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 3350914869286515286}
+  label: {fileID: 3350914869286515286}
   desc: {fileID: 3586253204871927661}
   cost: {fileID: 3376576407253334402}
   levelUp: {fileID: 5958022397323852564}

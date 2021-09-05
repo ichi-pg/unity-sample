@@ -8,7 +8,7 @@ namespace Ichi.Clicker
     public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
     {
         [SerializeField]
-        private Text name;
+        private Text label;
         [SerializeField]
         private Text desc;
         [SerializeField]
@@ -39,7 +39,7 @@ namespace Ichi.Clicker
         }
 
         private void OnAlter() {
-            this.name.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
+            this.label.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
             this.desc.text = DIContainer.TextLocalizer.Localize("Power") + this.adapter.Power + "/" + this.adapter.Unit;
             this.cost.text = this.adapter.Cost;
             this.levelUp.text = DIContainer.TextLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
