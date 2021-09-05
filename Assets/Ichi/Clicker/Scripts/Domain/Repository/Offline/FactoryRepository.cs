@@ -16,7 +16,7 @@ namespace Ichi.Clicker.Offline
             if (StatusUtility.IsInflation(factory.Level)) {
                 SaveData.Instance.Save();
             }
-            this.AlterHandler?.Invoke();//TODO 前の人が通知すればいい
+            this.AlterHandler?.Invoke();
         }
     }
 }

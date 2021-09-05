@@ -18,7 +18,6 @@ namespace Ichi.Clicker
 
         public void Read() {
             this.isRead = true;
-            //TODO 他もPOSTじゃなくてPUTと見做して例外なくてよくない？
         }
     }
 }

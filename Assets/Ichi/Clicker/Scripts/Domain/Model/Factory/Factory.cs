@@ -36,7 +36,7 @@ namespace Ichi.Clicker
             }
             consume.Consume(this.Cost);
             if (!this.IsBought) {
-                this.producedAt = now;//TODO IFactoryあるからTimeFactoryとClickFactoryに分けられそう
+                this.producedAt = now;
             }
             this.level++;
             this.Calculate();

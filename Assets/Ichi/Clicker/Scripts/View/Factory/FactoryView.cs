@@ -29,6 +29,7 @@ namespace Ichi.Clicker
             this.factory.AlterHandler += this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             this.OnAlter();
+            //TODO ロック解除された時に通知されてない（前提条件から通知したい）
         }
 
         public void OnDestroy() {
@@ -47,7 +48,7 @@ namespace Ichi.Clicker
             this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
             this.lockImage.gameObject.SetActive(this.factory.IsLock);
             //TODO 開放条件表記（押したらトーストもあり）
-            //TODO アイコン
+            //TODO 施設アイコン
         }
 
         public void LevelUp() {
