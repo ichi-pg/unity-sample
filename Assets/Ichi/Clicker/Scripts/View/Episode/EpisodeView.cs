@@ -19,7 +19,7 @@ namespace Ichi.Clicker
             //TODO リスト消す、共通モダルコントロール
             //TODO どこ親
             var obj = Instantiate(this.read, this.GetComponentInParent<Canvas>().transform);
-            await obj.GetComponent<ReadEpisodeView>().Play(this.episode);
+            await obj.GetComponent<NovelView>().Play(this.episode);
             Destroy(obj);
         }
     }
