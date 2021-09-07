@@ -70,10 +70,11 @@ crashlytics-build.properties
 # /[Aa]ssets/[Ss]treamingAssets/aa.meta
 # /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Assets
+# External Assets
 /[Aa]ssets/AddressableAssetsData*
 /[Aa]ssets/Plugins*
 /[Aa]ssets/External*
+/[Aa]ssets/Resources*
 
 # For VSCode
 .vscode
