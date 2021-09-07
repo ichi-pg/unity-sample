@@ -13,28 +13,29 @@ namespace Ichi.Clicker
     {
         private Common.AnimationCreater animationCreater;
         private CancellationToken token;
+        private BigInteger beforeQuantity;
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
             this.animationCreater = this.GetComponent<Common.AnimationCreater>();
-            this.CreateLoop().Forget();
+            this.beforeQuantity = DIContainer.CoinRepository.Coin.Quantity;
+            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
         }
 
-        private async UniTask CreateLoop() {
-            while (true)
-            {
-                //TODO 使った分が計上されないので、正確に増えた分を通知で受け取りたい
-                var beforeQuantity = DIContainer.CoinRepository.Coin.Quantity;
-                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: this.token);
-                var quantity = DIContainer.CoinRepository.Coin.Quantity;
-                var diff = quantity - beforeQuantity;
-                if (diff > 0) {
-                    var count = diff.ToString().Length;
-                    for (var i = 0; i < count; ++i) {
-                        this.CreateTask().Forget();
-                    }
+        void OnDestroy() {
+            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
+        }
+
+        private void OnAlter() {
+            var quantity = DIContainer.CoinRepository.Coin.Quantity;
+            var diff = quantity - beforeQuantity;
+            if (diff > 0) {
+                var count = diff.ToString().Length;
+                for (var i = 0; i < count; ++i) {
+                    this.CreateTask().Forget();
                 }
             }
+            this.beforeQuantity = quantity;
         }
 
         private async UniTask CreateTask() {
