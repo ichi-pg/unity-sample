@@ -10,6 +10,9 @@ namespace Ichi.Clicker
     [RequireComponent(typeof(Image))]
     public class CoinAnimation : MonoBehaviour
     {
+        [SerializeField]
+        private Sprite[] sprites;
+
         async void Start() {
             var rect = this.GetComponent<RectTransform>();
             var image = this.GetComponent<Image>();
@@ -23,6 +26,11 @@ namespace Ichi.Clicker
             image.DOFade(0, 2).OnComplete(() => {
                 Destroy(this.gameObject);
             });
+        }
+
+        public void SetSprite(int index) {
+            var image = this.GetComponent<Image>();
+            image.sprite = this.sprites[index];
         }
     }
 }

@@ -8,16 +8,18 @@ using UnityEngine;
 
 namespace Ichi.Clicker
 {
-    [RequireComponent(typeof(Common.AnimationCreater))]
+    [RequireComponent(typeof(RectTransform))]
     public class CoinCreater : MonoBehaviour
     {
-        private Common.AnimationCreater animationCreater;
+        [SerializeField]
+        private GameObject coin;
+        private RectTransform region;
         private CancellationToken token;
         private BigInteger beforeQuantity;
 
         void Start() {
+            this.region = this.GetComponent<RectTransform>();
             this.token = this.GetCancellationTokenOnDestroy();
-            this.animationCreater = this.GetComponent<Common.AnimationCreater>();
             this.beforeQuantity = DIContainer.CoinRepository.Coin.Quantity;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
         }
@@ -30,9 +32,8 @@ namespace Ichi.Clicker
             var quantity = DIContainer.CoinRepository.Coin.Quantity;
             var diff = quantity - beforeQuantity;
             if (diff > 0) {
-                //TODO もうちょい調整。あとDOTweenのMAXまで到達してしまった。
                 var count = diff.ToString().Length / 3 + 1;
-                var index = Math.Min((count - 1) / 3, 2);
+                var index = (int)Math.Min((count - 1) / 3, 2);
                 count -= index * 3;
                 for (var i = 0; i < count; ++i) {
                     this.CreateTask(index).Forget();
@@ -46,7 +47,8 @@ namespace Ichi.Clicker
                 TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
                 cancellationToken: this.token
             );
-            this.animationCreater.Create(index);
+            var obj = Common.AnimationCreater.Create(this.coin, this.region);
+            obj.GetComponent<CoinAnimation>().SetSprite(index);
         }
     }
 }

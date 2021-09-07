@@ -2115,8 +2115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4315538750944879933}
-  - component: {fileID: 5285130052726849028}
-  - component: {fileID: 2193055204444486456}
+  - component: {fileID: 4823671300552477667}
   m_Layer: 5
   m_Name: coin_creater
   m_TagString: Untagged
@@ -2143,24 +2142,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5285130052726849028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7183877205032508003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3afff58f3658c4e1985cd7c0bb3b530a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animations:
-  - {fileID: 1403917943070962844, guid: ed873eb51911945f0abdc51400ff33d7, type: 3}
-  - {fileID: 1403917943070962844, guid: acfe05f5e6c774b1c90794eb44ba3347, type: 3}
-  - {fileID: 1403917943070962844, guid: 894089e10da2245ac8f533cd137e8040, type: 3}
-  region: {fileID: 4315538750944879933}
---- !u!114 &2193055204444486456
+--- !u!114 &4823671300552477667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2172,6 +2154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e583879f29f4bbf800e4d9a721f30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coin: {fileID: 1403917943070962844, guid: 894089e10da2245ac8f533cd137e8040, type: 3}
 --- !u!1 &7709119124179590595
 GameObject:
   m_ObjectHideFlags: 0
