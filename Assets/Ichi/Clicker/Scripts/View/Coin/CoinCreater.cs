@@ -30,20 +30,23 @@ namespace Ichi.Clicker
             var quantity = DIContainer.CoinRepository.Coin.Quantity;
             var diff = quantity - beforeQuantity;
             if (diff > 0) {
-                var count = diff.ToString().Length;
+                //TODO もうちょい調整。あとDOTweenのMAXまで到達してしまった。
+                var count = diff.ToString().Length / 3 + 1;
+                var index = Math.Min((count - 1) / 3, 2);
+                count -= index * 3;
                 for (var i = 0; i < count; ++i) {
-                    this.CreateTask().Forget();
+                    this.CreateTask(index).Forget();
                 }
             }
             this.beforeQuantity = quantity;
         }
 
-        private async UniTask CreateTask() {
+        private async UniTask CreateTask(int index) {
             await UniTask.Delay(
                 TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
                 cancellationToken: this.token
             );
-            this.animationCreater.Create();
+            this.animationCreater.Create(index);
         }
     }
 }
