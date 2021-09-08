@@ -1975,7 +1975,7 @@ GameObject:
   - component: {fileID: 7358004065893066828}
   - component: {fileID: 1601536092477438421}
   m_Layer: 5
-  m_Name: produce_button
+  m_Name: ProduceButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 4315538750944879933}
   - component: {fileID: 4823671300552477667}
   m_Layer: 5
-  m_Name: coin_creater
+  m_Name: CoinCreater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2203,7 +2203,7 @@ GameObject:
   - component: {fileID: 2054087845249710673}
   - component: {fileID: 3576008479876842939}
   m_Layer: 5
-  m_Name: auto_producer
+  m_Name: AutoProducer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -39,10 +39,10 @@ namespace Ichi.Clicker
         }
 
         private async UniTask CheatMode(CancellationToken token) {
+            var cheatMode = (CheatMode)FindObjectOfType(typeof(CheatMode));
             while (true)
             {
-                var cheatMode = this.transform.root.GetComponentInChildren<CheatMode>();
-                if (cheatMode != null && cheatMode.Auto) {
+                if (cheatMode.Auto) {
                     this.factoryView.LevelUp();
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
