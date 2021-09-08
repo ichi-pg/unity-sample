@@ -32,7 +32,7 @@ namespace Ichi.Clicker.Offline
 
         public void Save() {
             Common.JsonSaveData.Save<SaveData>(this);
-            //NOTE クラウドセーブ
+            //TODO クラウドセーブ
         }
 
         public void PreSave() {
