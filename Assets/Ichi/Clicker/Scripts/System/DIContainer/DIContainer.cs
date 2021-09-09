@@ -16,14 +16,12 @@ namespace Ichi.Clicker
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
+        //TODO TimeRepository
+        //TODO View namespace
 
-        //NOTE Extenject or VContainer
+        //NOTE Extenject
 
         //TODO SE
         //TODO BGM
-        //TODO UIアニメ（DOTween）
-        //TODO UIエフェクト（DOTween）
-
-        //TODO RPGにするか、お店にするか。画面上「何が」増えるか演出が必要。
     }
 }

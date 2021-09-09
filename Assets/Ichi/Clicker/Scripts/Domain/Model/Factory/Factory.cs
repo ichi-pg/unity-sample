@@ -22,7 +22,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Power { get; set; }
         public BigIntegerStatus Cost { get; set; }
         public BigIntegerStatus Price { get; set; }
-        public event Action AlterHandler;
+        public event Action AlterHandler;//NOTE UniRx
 
         public void Calculate() {
             this.Power.Calculate(this.level, this.rank, this.rarity);

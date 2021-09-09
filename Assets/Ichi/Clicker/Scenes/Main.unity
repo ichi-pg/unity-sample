@@ -188,7 +188,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &382657862
 Light:
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 469403261}
   - component: {fileID: 469403260}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas (UI)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 619152322}
   - component: {fileID: 619152321}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas (Charactor)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2669,7 +2669,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412341091
 GameObject:
@@ -2684,7 +2684,7 @@ GameObject:
   - component: {fileID: 1412341094}
   - component: {fileID: 1412341093}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas (Background)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
