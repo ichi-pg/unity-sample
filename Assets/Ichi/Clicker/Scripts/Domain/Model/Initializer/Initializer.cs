@@ -9,7 +9,7 @@ namespace Ichi.Clicker
     {
         public static void Initialize(List<Factory> factories, List<Item> items, List<Episode> episodes) {
             Initialize(factories, FactoryCategory.Click, 1, 1, 1);
-            Initialize(factories, FactoryCategory.Auto, 2, 20, 0);
+            Initialize(factories, FactoryCategory.Auto, 2, 5, 0);
             Initialize(items, ItemCategory.Coin, 0);
             Initialize(items, ItemCategory.Commodity, 0);
             Initialize(items, ItemCategory.LoginCommodity, 0);

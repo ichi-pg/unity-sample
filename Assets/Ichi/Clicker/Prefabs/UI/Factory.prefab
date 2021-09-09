@@ -1299,6 +1299,13 @@ MonoBehaviour:
   levelUp: {fileID: 5958022397323852564}
   levelUpButton: {fileID: 7648819680076103955}
   lockImage: {fileID: 3415580934883730822}
+  icon: {fileID: 3764169515817255316}
+  sprites:
+  - {fileID: 21300000, guid: f80cff3c9d2012240b0e4b9f5077a020, type: 3}
+  - {fileID: 21300000, guid: 7c0209505eef692409fb4924ec7c0138, type: 3}
+  - {fileID: 21300000, guid: ca84933663fca2942bdeb9208c2afe7a, type: 3}
+  - {fileID: 21300000, guid: 32bfb2bdd508f6747970ec2f3bba7f86, type: 3}
+  - {fileID: 21300000, guid: 2f8b26d0dc2efeb4bb36f3d1e3803199, type: 3}
 --- !u!1 &8785746830052871374
 GameObject:
   m_ObjectHideFlags: 0

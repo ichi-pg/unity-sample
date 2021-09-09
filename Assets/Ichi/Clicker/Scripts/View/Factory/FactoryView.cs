@@ -19,6 +19,10 @@ namespace Ichi.Clicker
         private Button levelUpButton;
         [SerializeField]
         private Image lockImage;
+        [SerializeField]
+        private Image icon;
+        [SerializeField]
+        private Sprite[] sprites;
 
         private FactoryAdapter adapter;
         private IFactory factory;
@@ -47,8 +51,8 @@ namespace Ichi.Clicker
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
             this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
             this.lockImage.gameObject.SetActive(this.factory.IsLock);
+            this.icon.sprite = this.sprites[this.factory.Rank - 1];
             //TODO 開放条件表記（押したらトーストもあり）
-            //TODO 施設アイコン
         }
 
         public void LevelUp() {
