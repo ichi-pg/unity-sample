@@ -59,8 +59,7 @@ namespace Ichi.Clicker.Offline
             {
                 foreach (var clicker in SaveData.Instance.clickers) {
                     if (clicker.IsBought) {
-                        //TODO Enemy
-                        clicker.Produce(new Enemy(), this.Rate * this.cheatBonus);
+                        clicker.Produce(SaveData.Instance.enemy, this.Rate * this.cheatBonus);
                     }
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);

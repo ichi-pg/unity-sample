@@ -25,6 +25,7 @@ namespace Ichi.Clicker.Offline
         public List<Factory> factories;
         public List<Item> items;
         public List<Episode> episodes;
+        public Enemy enemy;
         public Common.TicksTime nextFeverAt;
         public Common.TicksTime nextFeverAdsAt;
         public Item Coin { get; private set; }
@@ -69,7 +70,8 @@ namespace Ichi.Clicker.Offline
                 this.clickers,
                 this.factories,
                 this.items,
-                this.episodes
+                this.episodes,
+                this.enemy
             );
             this.Coin = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
             this.Commodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Commodity);

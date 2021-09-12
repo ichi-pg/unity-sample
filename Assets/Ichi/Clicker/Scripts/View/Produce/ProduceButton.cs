@@ -7,8 +7,7 @@ namespace Ichi.Clicker.View
     public class ProduceButton : MonoBehaviour
     {
         public void Produce() {
-            //TODO Enemy
-            DIContainer.ClickerRepository.Produce(new Enemy());
+            DIContainer.ClickerRepository.Produce();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Ichi.Clicker
             if (this.hp < 0) {
                 this.hp = 0;
             }
+            //TODO 弱点
             this.AlterHandler?.Invoke();
         }
     }

@@ -9,7 +9,7 @@ namespace Ichi.Clicker
         IEnumerable<IClicker> Clickers { get; }
         event Action AlterHandler;
         void LevelUp(IClicker clicker);
-        void Produce(IEnemy enemy);
+        void Produce();
         void CheatMode(bool enable);
         //TODO EnemyからUnLock
     }

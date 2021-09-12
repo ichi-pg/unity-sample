@@ -7,13 +7,14 @@ namespace Ichi.Clicker
 {
     public static class Initializer
     {
-        public static void Initialize(List<Clicker> clickers, List<Factory> factories, List<Item> items, List<Episode> episodes) {
+        public static void Initialize(List<Clicker> clickers, List<Factory> factories, List<Item> items, List<Episode> episodes, Enemy enemy) {
             Initialize(clickers);
             Initialize(factories);
             Initialize(items, ItemCategory.Coin, clickers.FirstOrDefault().Cost);
             Initialize(items, ItemCategory.Commodity);
             Initialize(items, ItemCategory.LoginCommodity);
             Initialize(episodes, factories);
+            Initialize(enemy);
         }
 
         private static void Initialize(List<Clicker> clickers) {
@@ -77,6 +78,13 @@ namespace Ichi.Clicker
                     };
                     //TODO シナリオマスターデータ
                 }
+            }
+        }
+
+        private static void Initialize(Enemy enemy) {
+            if (enemy == null) {
+                enemy = new Enemy();
+                //TODO
             }
         }
     }

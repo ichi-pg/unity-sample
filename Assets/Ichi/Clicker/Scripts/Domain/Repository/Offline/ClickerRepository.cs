@@ -18,10 +18,10 @@ namespace Ichi.Clicker.Offline
             this.AlterHandler?.Invoke();
         }
 
-        public void Produce(IEnemy enemy) {
+        public void Produce() {
             foreach (var clicker in SaveData.Instance.clickers) {
                 if (clicker.IsBought) {
-                    clicker.Produce(enemy as IStore, this.cheatBonus);
+                    clicker.Produce(SaveData.Instance.enemy, this.cheatBonus);
                 }
             }
         }
