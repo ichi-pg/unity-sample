@@ -9,6 +9,6 @@ namespace Ichi.Clicker
         IEnumerable<ISentence> Sentences { get; }
         bool IsRead { get; }
         bool IsLock { get; }
-        event Action AlterHandler;
+        // event Action AlterHandler;
     }
 }
