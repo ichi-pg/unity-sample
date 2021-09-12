@@ -8,14 +8,15 @@ namespace Ichi.Clicker.Offline
 {
     public class LoginRepository : ILoginRepository
     {
-        public BigInteger Quantity { get => SaveData.Instance.LoginCommodity.Quantity; }
+        public BigInteger Quantity { get => this.saveDataRepository.SaveData.LoginCommodity.Quantity; }
         private ITimeRepository timeRepository;
+        private ISaveDataRepository saveDataRepository;
 
         public float QuantityRate {
             get {
-                var power = SaveData.Instance.factories.Sum(factory => factory.Power);
+                var power = this.saveDataRepository.SaveData.factories.Sum(factory => factory.Power);
                 var count = Factory.Limit.Ticks / Factory.Interval.Ticks;
-                var rate = SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count);
+                var rate = this.saveDataRepository.SaveData.LoginCommodity.Quantity * 100 / (power * count);
                 if (rate > 100) {
                     return 1f;
                 }
@@ -23,23 +24,24 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public LoginRepository(ITimeRepository timeRepository) {
+        public LoginRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
+            this.saveDataRepository = saveDataRepository;
         }
 
         public void Produce() {
             var now = this.timeRepository.Now;
-            foreach (var factory in SaveData.Instance.factories) {
+            foreach (var factory in this.saveDataRepository.SaveData.factories) {
                 if (factory.IsBought) {
-                    factory.Produce(SaveData.Instance.LoginCommodity, now);
+                    factory.Produce(this.saveDataRepository.SaveData.LoginCommodity, now);
                 }
             }
-            SaveData.Instance.Save();
+            this.saveDataRepository.Save();
         }
 
         public void Collect(bool bonus) {
-            SaveData.Instance.LoginCommodity.Sell(SaveData.Instance.Coin, bonus ? 2 : 1);
-            SaveData.Instance.Save();
+            this.saveDataRepository.SaveData.LoginCommodity.Sell(this.saveDataRepository.SaveData.Coin, bonus ? 2 : 1);
+            this.saveDataRepository.Save();
         }
     }
 }

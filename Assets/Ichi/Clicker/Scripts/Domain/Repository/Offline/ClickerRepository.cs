@@ -6,22 +6,27 @@ namespace Ichi.Clicker.Offline
 {
     public class ClickerRepository : IClickerRepository
     {
-        public IEnumerable<IClicker> Clickers { get => SaveData.Instance.clickers; }
+        public IEnumerable<IClicker> Clickers { get => this.saveDataRepository.SaveData.clickers; }
         public event Action AlterHandler;
         private int cheatBonus = 1;
+        private ISaveDataRepository saveDataRepository;
+
+        public ClickerRepository(ISaveDataRepository saveDataRepository) {
+            this.saveDataRepository = saveDataRepository;
+        }
 
         public void LevelUp(IClicker clicker) {
-            (clicker as Clicker).LevelUp(SaveData.Instance.Coin);
+            (clicker as Clicker).LevelUp(this.saveDataRepository.SaveData.Coin);
             if (CalculatorUtility.IsInflation(clicker.Level)) {
-                SaveData.Instance.Save();
+                this.saveDataRepository.Save();
             }
             this.AlterHandler?.Invoke();
         }
 
         public void Produce() {
-            foreach (var clicker in SaveData.Instance.clickers) {
+            foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
                 if (clicker.IsBought) {
-                    clicker.Produce(SaveData.Instance.enemy, this.cheatBonus);
+                    clicker.Produce(this.saveDataRepository.SaveData.enemy, this.cheatBonus);
                 }
             }
         }

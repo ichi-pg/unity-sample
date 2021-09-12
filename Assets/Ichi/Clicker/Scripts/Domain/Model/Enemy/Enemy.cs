@@ -5,6 +5,7 @@ using System;
 
 namespace Ichi.Clicker
 {
+    [Serializable]
     public class Enemy : IEnemy, IStore
     {
         public int rank;

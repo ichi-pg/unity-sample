@@ -6,29 +6,31 @@ namespace Ichi.Clicker.Offline
 {
     public class FactoryRepository : IFactoryRepository
     {
-        public IEnumerable<IFactory> Factories { get => SaveData.Instance.factories; }
+        public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.factories; }
         public event Action AlterHandler;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
+        private ISaveDataRepository saveDataRepository;
 
-        public FactoryRepository(ITimeRepository timeRepository) {
+        public FactoryRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
+            this.saveDataRepository = saveDataRepository;
         }
 
         public void LevelUp(IFactory factory) {
             //TODO 好感度を消費
-            (factory as Factory).LevelUp(SaveData.Instance.Coin, this.timeRepository.Now);
+            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.Coin, this.timeRepository.Now);
             if (CalculatorUtility.IsInflation(factory.Level)) {
-                SaveData.Instance.Save();
+                this.saveDataRepository.Save();
             }
             this.AlterHandler?.Invoke();
         }
 
         public void Produce() {
             var now = this.timeRepository.Now;
-            foreach (var factory in SaveData.Instance.factories) {
+            foreach (var factory in this.saveDataRepository.SaveData.factories) {
                 if (factory.IsBought) {
-                    factory.Produce(SaveData.Instance.Coin, now, this.cheatBonus);
+                    factory.Produce(this.saveDataRepository.SaveData.Coin, now, this.cheatBonus);
                 }
             }
         }

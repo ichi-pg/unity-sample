@@ -5,10 +5,15 @@ namespace Ichi.Clicker.Offline
 {
     public class CommodityRepository : ICommodityRepository
     {
-        public IItem Commodity { get => SaveData.Instance.Commodity; }
+        public IItem Commodity { get => this.saveDataRepository.SaveData.Commodity; }
+        private ISaveDataRepository saveDataRepository;
+
+        public CommodityRepository(ISaveDataRepository saveDataRepository) {
+            this.saveDataRepository = saveDataRepository;
+        }
 
         public void Collect() {
-            SaveData.Instance.Commodity.Sell(SaveData.Instance.Coin);
+            this.saveDataRepository.SaveData.Commodity.Sell(this.saveDataRepository.SaveData.Coin);
         }
     }
 }

@@ -5,6 +5,11 @@ namespace Ichi.Clicker.Offline
 {
     public class CoinRepository : ICoinRepository
     {
-        public IItem Coin { get => SaveData.Instance.Coin; }
+        public IItem Coin { get => this.saveDataRepository.SaveData.Coin; }
+        private ISaveDataRepository saveDataRepository;
+
+        public CoinRepository(ISaveDataRepository saveDataRepository) {
+            this.saveDataRepository = saveDataRepository;
+        }
     }
 }

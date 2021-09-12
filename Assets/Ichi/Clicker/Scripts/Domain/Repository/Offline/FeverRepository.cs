@@ -14,18 +14,19 @@ namespace Ichi.Clicker.Offline
         public bool IsFever { get => this.timeRepository.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
-        public TimeSpan CoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
-        public TimeSpan AdsCoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
+        public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
+        public TimeSpan AdsCoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
         public event Action AlterHandler;
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
+        private ISaveDataRepository saveDataRepository;
 
         public int Rate {
             get {
                 //全ての施設の性能は等価 -> オートの総生産 = クリックの施設数倍
                 //1日4回ログインで2回ずつフィーバー -> 300s / 0.1s * 8回/日 * n = 86400回/日
-                return SaveData.Instance.factories.Count(factory => factory.IsBought) * 3;
+                return this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3;
             }
         }
 
@@ -36,8 +37,9 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public FeverRepository(ITimeRepository timeRepository) {
+        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
+            this.saveDataRepository = saveDataRepository;
         }
 
         public void Fever(CancellationToken token) {
@@ -49,7 +51,7 @@ namespace Ichi.Clicker.Offline
             }
             var now = this.timeRepository.Now;
             this.finishAt = now + Duration;
-            SaveData.Instance.nextFeverAt = now + TimeSpan.FromMinutes(30);
+            this.saveDataRepository.SaveData.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
             this.Produce(token).Forget();
         }
@@ -57,14 +59,14 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                foreach (var clicker in SaveData.Instance.clickers) {
+                foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
                     if (clicker.IsBought) {
-                        clicker.Produce(SaveData.Instance.enemy, this.Rate * this.cheatBonus);
+                        clicker.Produce(this.saveDataRepository.SaveData.enemy, this.Rate * this.cheatBonus);
                     }
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
-            SaveData.Instance.Save();
+            this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();
         }
 
@@ -79,9 +81,9 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid ads cool time.");
             }
             var now = this.timeRepository.Now;
-            SaveData.Instance.nextFeverAt = now;
-            SaveData.Instance.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
-            SaveData.Instance.Save();
+            this.saveDataRepository.SaveData.nextFeverAt = now;
+            this.saveDataRepository.SaveData.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
+            this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();
         }
 

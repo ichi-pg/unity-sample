@@ -7,17 +7,7 @@ namespace Ichi.Clicker
 {
     public static class Initializer
     {
-        public static void Initialize(List<Clicker> clickers, List<Factory> factories, List<Item> items, List<Episode> episodes, Enemy enemy) {
-            Initialize(clickers);
-            Initialize(factories);
-            Initialize(items, ItemCategory.Coin, clickers.FirstOrDefault().Cost);
-            Initialize(items, ItemCategory.Commodity);
-            Initialize(items, ItemCategory.LoginCommodity);
-            Initialize(episodes, factories);
-            Initialize(enemy);
-        }
-
-        private static void Initialize(List<Clicker> clickers) {
+        public static void Initialize(List<Clicker> clickers) {
             for (var rank = 1; rank <= 10; ++rank) {
                 var clicker = clickers.FirstOrDefault(clicker => clicker.rank == rank);
                 if (clicker == null) {
@@ -32,7 +22,7 @@ namespace Ichi.Clicker
             }
         }
 
-        private static void Initialize(List<Factory> factories) {
+        public static void Initialize(List<Factory> factories) {
             for (var rank = 1; rank <= 10; ++rank) {
                 var factory = factories.FirstOrDefault(factory => factory.rank == rank);
                 if (factory == null) {
@@ -49,7 +39,7 @@ namespace Ichi.Clicker
             }
         }
 
-        private static void Initialize(List<Item> items, ItemCategory category, int quantity = 0) {
+        public static void Initialize(List<Item> items, ItemCategory category, int quantity = 0) {
             var item = items.FirstOrDefault(item => item.category == (int)category);
             if (item == null) {
                 items.Add(new Item() {
@@ -59,7 +49,7 @@ namespace Ichi.Clicker
             }
         }
 
-        private static void Initialize(List<Episode> episodes, List<Factory> factories) {
+        public static void Initialize(List<Episode> episodes, List<Factory> factories) {
             foreach (var factory in factories) {
                 for (var level = 100; level <= 500; level += 100) {
                     var episode = episodes.FirstOrDefault(episode => episode.rank == factory.Rank && episode.level == level);
@@ -81,11 +71,8 @@ namespace Ichi.Clicker
             }
         }
 
-        private static void Initialize(Enemy enemy) {
-            if (enemy == null) {
-                enemy = new Enemy();
-                //TODO
-            }
+        public static void Initialize(Enemy enemy) {
+            //TODO
         }
     }
 }

@@ -3,23 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Ichi.Clicker.Offline
+namespace Ichi.Clicker
 {
     [Serializable]
     public class SaveData : Common.IPreSave, Common.IPostLoad
     {
-        private static SaveData instance = null;
-        public static SaveData Instance {
-            get {
-                if (instance == null) {
-                    instance = Common.JsonSaveData.Exist<SaveData>() ? Common.JsonSaveData.Load<SaveData>() : new SaveData();
-                    instance.Initialize(DateTime.Now);
-                    //TODO ITimeRepository, with SaveRepository?
-                }
-                return instance;
-            }
-        }
-
         //TODO TimeKeeperとLevelUpperに分解できない？
         public List<Clicker> clickers;
         public List<Factory> factories;
@@ -32,11 +20,6 @@ namespace Ichi.Clicker.Offline
         public Item Commodity { get; private set; }
         public Item LoginCommodity { get; private set; }
 
-        public void Save() {
-            Common.JsonSaveData.Save<SaveData>(this);
-            //TODO クラウドセーブ
-        }
-
         public void PreSave() {
             foreach (var factory in this.factories) {
                 factory.producedAt.PreSave();
@@ -44,6 +27,7 @@ namespace Ichi.Clicker.Offline
             foreach (var item in this.items) {
                 item.quantity.PreSave();
             }
+            this.enemy.hp.PreSave();
             this.nextFeverAt.PreSave();
             this.nextFeverAdsAt.PreSave();
         }
@@ -55,6 +39,7 @@ namespace Ichi.Clicker.Offline
             foreach (var item in this.items) {
                 item.quantity.PostLoad();
             }
+            this.enemy.hp.PostLoad();
             this.nextFeverAt.PostLoad();
             this.nextFeverAdsAt.PostLoad();
         }
@@ -64,18 +49,19 @@ namespace Ichi.Clicker.Offline
             this.factories = this.factories ?? new List<Factory>();
             this.items = this.items ?? new List<Item>();
             this.episodes = this.episodes ?? new List<Episode>();
-            this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
-            this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
-            Initializer.Initialize(
-                this.clickers,
-                this.factories,
-                this.items,
-                this.episodes,
-                this.enemy
-            );
+            this.enemy = this.enemy ?? new Enemy();
+            Initializer.Initialize(this.clickers);
+            Initializer.Initialize(this.factories);
+            Initializer.Initialize(this.items, ItemCategory.Coin, this.clickers.FirstOrDefault().Cost);
+            Initializer.Initialize(this.items, ItemCategory.Commodity);
+            Initializer.Initialize(this.items, ItemCategory.LoginCommodity);
+            Initializer.Initialize(this.episodes, this.factories);
+            Initializer.Initialize(this.enemy);
             this.Coin = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
             this.Commodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Commodity);
             this.LoginCommodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginCommodity);
+            this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
+            this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
         }
     }
 }
