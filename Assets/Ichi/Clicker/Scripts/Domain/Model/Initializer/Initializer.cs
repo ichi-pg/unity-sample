@@ -22,7 +22,6 @@ namespace Ichi.Clicker
                 if (clicker == null) {
                     clicker = new Clicker() {
                         rank = rank,
-                        rarity = 1,
                     };
                     clickers.Add(clicker);
                 }

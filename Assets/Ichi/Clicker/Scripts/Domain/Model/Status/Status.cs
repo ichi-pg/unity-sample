@@ -13,7 +13,7 @@ namespace Ichi.Clicker
             this.calculator = calculator;
         }
 
-        public void Calculate(int level, int rank, int rarity) {
+        public void Calculate(int level = 1, int rank = 1, int rarity = 1) {
             this.Value = this.calculator.Calculate(level, rank, rarity);
             this.NextValue = this.calculator.Calculate(level + 1, rank, rarity);
         }

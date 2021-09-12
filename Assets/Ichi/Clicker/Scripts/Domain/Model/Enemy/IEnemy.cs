@@ -7,5 +7,9 @@ namespace Ichi.Clicker
 {
     public interface IEnemy
     {
+        int Rank { get; }
+        BigInteger HP { get; }
+        BigInteger MaxHP { get; }
+        event Action AlterHandler;
     }
 }
