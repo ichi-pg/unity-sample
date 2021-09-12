@@ -5,7 +5,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     [RequireComponent(typeof(Common.OpenModalButton))]
     public class AutoProducer : MonoBehaviour

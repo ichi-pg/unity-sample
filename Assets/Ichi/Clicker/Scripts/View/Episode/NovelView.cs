@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     [RequireComponent(typeof(Common.NovelView))]
     public class NovelView : MonoBehaviour

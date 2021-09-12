@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
     {

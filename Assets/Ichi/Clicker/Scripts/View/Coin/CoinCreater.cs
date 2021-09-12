@@ -6,7 +6,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     [RequireComponent(typeof(RectTransform))]
     public class CoinCreater : MonoBehaviour

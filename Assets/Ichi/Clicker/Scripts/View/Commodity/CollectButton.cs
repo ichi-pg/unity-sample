@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     public class CollectButton : MonoBehaviour
     {

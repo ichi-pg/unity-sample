@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     public class SaveController : MonoBehaviour
     {

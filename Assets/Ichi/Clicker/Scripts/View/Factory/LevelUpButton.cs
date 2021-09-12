@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     public class LevelUpButton : MonoBehaviour
     {

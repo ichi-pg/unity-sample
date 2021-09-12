@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     public static class DIContainer
     {
@@ -17,7 +17,6 @@ namespace Ichi.Clicker
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
-        //TODO View namespace
 
         //NOTE Extenject
 

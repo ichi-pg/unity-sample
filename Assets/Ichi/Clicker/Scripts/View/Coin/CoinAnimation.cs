@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-namespace Ichi.Clicker
+namespace Ichi.Clicker.View
 {
     [RequireComponent(typeof(RectTransform))]
     [RequireComponent(typeof(Image))]
