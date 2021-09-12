@@ -7,36 +7,49 @@ namespace Ichi.Clicker
 {
     public static class Initializer
     {
-        public static void Initialize(List<Factory> factories, List<Item> items, List<Episode> episodes) {
-            Initialize(factories, FactoryCategory.Click, 1, 1, 1);
-            Initialize(factories, FactoryCategory.Auto, 2, 5, 0);
-            Initialize(items, ItemCategory.Coin, 0);
-            Initialize(items, ItemCategory.Commodity, 0);
-            Initialize(items, ItemCategory.LoginCommodity, 0);
+        public static void Initialize(List<Clicker> clickers, List<Factory> factories, List<Item> items, List<Episode> episodes) {
+            Initialize(clickers);
+            Initialize(factories);
+            Initialize(items, ItemCategory.Coin, clickers.FirstOrDefault().Cost);
+            Initialize(items, ItemCategory.Commodity);
+            Initialize(items, ItemCategory.LoginCommodity);
             Initialize(episodes, factories);
         }
 
-        private static void Initialize(List<Factory> factories, FactoryCategory category, int rank, int maxRank, int level) {
-            ICost premise = null;
-            for (; rank <= maxRank; ++rank) {
-                var factory = factories.FirstOrDefault(factory => factory.category == (int)category && factory.rank == rank);
+        private static void Initialize(List<Clicker> clickers) {
+            for (var rank = 1; rank <= 10; ++rank) {
+                var clicker = clickers.FirstOrDefault(clicker => clicker.rank == rank);
+                if (clicker == null) {
+                    clicker = new Clicker() {
+                        rank = rank,
+                        rarity = 1,
+                    };
+                    clickers.Add(clicker);
+                }
+                clicker.Power = new BigIntegerStatus(new PowerCalculator());
+                clicker.Cost = new BigIntegerStatus(new CostCalculator());
+                clicker.Calculate();
+            }
+        }
+
+        private static void Initialize(List<Factory> factories) {
+            for (var rank = 1; rank <= 10; ++rank) {
+                var factory = factories.FirstOrDefault(factory => factory.rank == rank);
                 if (factory == null) {
                     factory = new Factory() {
-                        category = (int)category,
                         rank = rank,
-                        level = level,
+                        rarity = 1,
+                        isLock = true,
                     };
                     factories.Add(factory);
                 }
                 factory.Power = new BigIntegerStatus(new PowerCalculator());
                 factory.Cost = new BigIntegerStatus(new CostCalculator());
-                factory.Locker = new CostLocker(factory, premise);
                 factory.Calculate();
-                premise = factory;
             }
         }
 
-        private static void Initialize(List<Item> items, ItemCategory category, int quantity) {
+        private static void Initialize(List<Item> items, ItemCategory category, int quantity = 0) {
             var item = items.FirstOrDefault(item => item.category == (int)category);
             if (item == null) {
                 items.Add(new Item() {

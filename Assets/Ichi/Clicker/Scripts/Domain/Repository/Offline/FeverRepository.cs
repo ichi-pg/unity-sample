@@ -11,14 +11,15 @@ namespace Ichi.Clicker.Offline
     {
         private readonly static TimeSpan Duration = TimeSpan.FromSeconds(300);
 
-        public bool IsFever { get => Common.Time.Now < this.finishAt; }
+        public bool IsFever { get => this.timeRepository.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
-        public TimeSpan CoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAt - Common.Time.Now, TimeSpan.Zero); }
-        public TimeSpan AdsCoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAdsAt - Common.Time.Now, TimeSpan.Zero); }
+        public TimeSpan CoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
+        public TimeSpan AdsCoolTime { get => Common.Time.Max(SaveData.Instance.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
         public event Action AlterHandler;
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
+        private ITimeRepository timeRepository;
 
         public int Rate {
             get {
@@ -30,9 +31,13 @@ namespace Ichi.Clicker.Offline
 
         public float DurationRate {
             get {
-                var timeLeft = Common.Time.Max(this.finishAt - Common.Time.Now, TimeSpan.Zero);
+                var timeLeft = Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero);
                 return (float)timeLeft.Ticks / Duration.Ticks;
             }
+        }
+
+        public FeverRepository(ITimeRepository timeRepository) {
+            this.timeRepository = timeRepository;
         }
 
         public void Fever(CancellationToken token) {
@@ -42,7 +47,7 @@ namespace Ichi.Clicker.Offline
             if (this.IsCoolTime) {
                 throw new Exception("Invalid cool time.");
             }
-            var now = Common.Time.Now;
+            var now = this.timeRepository.Now;
             this.finishAt = now + Duration;
             SaveData.Instance.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.AlterHandler?.Invoke();
@@ -52,9 +57,10 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                foreach (var factory in SaveData.Instance.ClickFactories) {
-                    if (factory.IsBought) {
-                        SaveData.Instance.Coin.Store(factory.Power * this.Rate * this.cheatBonus);
+                foreach (var clicker in SaveData.Instance.clickers) {
+                    if (clicker.IsBought) {
+                        //TODO Enemy
+                        clicker.Produce(new Enemy(), this.Rate * this.cheatBonus);
                     }
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
@@ -73,7 +79,7 @@ namespace Ichi.Clicker.Offline
             if (this.IsAdsCoolTime) {
                 throw new Exception("Invalid ads cool time.");
             }
-            var now = Common.Time.Now;
+            var now = this.timeRepository.Now;
             SaveData.Instance.nextFeverAt = now;
             SaveData.Instance.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
             SaveData.Instance.Save();

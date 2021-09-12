@@ -7,9 +7,9 @@ namespace Ichi.Clicker
     {
         protected T Value { get; private set; }
         public T NextValue { get; private set; }
-        private IStatusCalculator<T> calculator;
+        private ICalculator<T> calculator;
 
-        public Status(IStatusCalculator<T> calculator) {
+        public Status(ICalculator<T> calculator) {
             this.calculator = calculator;
         }
 

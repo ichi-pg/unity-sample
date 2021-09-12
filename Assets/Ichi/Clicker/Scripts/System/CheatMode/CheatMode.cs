@@ -13,7 +13,8 @@ namespace Ichi.Clicker
         public bool Auto { get => this.auto; }
 
         void OnValidate() {
-            DIContainer.ProduceRepository.CheatMode(this.boost);
+            DIContainer.ClickerRepository.CheatMode(this.boost);
+            DIContainer.FactoryRepository.CheatMode(this.boost);
             DIContainer.FeverRepository.CheatMode(this.boost);
         }
     }

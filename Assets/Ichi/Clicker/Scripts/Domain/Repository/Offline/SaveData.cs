@@ -13,12 +13,15 @@ namespace Ichi.Clicker.Offline
             get {
                 if (instance == null) {
                     instance = Common.JsonSaveData.Exist<SaveData>() ? Common.JsonSaveData.Load<SaveData>() : new SaveData();
-                    instance.Initialize(Common.Time.Now);
+                    instance.Initialize(DateTime.Now);
+                    //TODO ITimeRepository, with SaveRepository?
                 }
                 return instance;
             }
         }
 
+        //TODO TimeKeeperとLevelUpperに分解できない？
+        public List<Clicker> clickers;
         public List<Factory> factories;
         public List<Item> items;
         public List<Episode> episodes;
@@ -27,8 +30,6 @@ namespace Ichi.Clicker.Offline
         public Item Coin { get; private set; }
         public Item Commodity { get; private set; }
         public Item LoginCommodity { get; private set; }
-        public IEnumerable<Factory> ClickFactories { get; private set; }
-        public IEnumerable<Factory> AutoFactories { get; private set; }
 
         public void Save() {
             Common.JsonSaveData.Save<SaveData>(this);
@@ -58,18 +59,18 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Initialize(DateTime now) {
+            this.clickers = this.clickers ?? new List<Clicker>();
             this.factories = this.factories ?? new List<Factory>();
             this.items = this.items ?? new List<Item>();
             this.episodes = this.episodes ?? new List<Episode>();
             this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
             this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
             Initializer.Initialize(
+                this.clickers,
                 this.factories,
                 this.items,
                 this.episodes
             );
-            this.ClickFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Click);
-            this.AutoFactories = this.factories.Where(factory => factory.category == (int)FactoryCategory.Auto);
             this.Coin = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
             this.Commodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Commodity);
             this.LoginCommodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginCommodity);

@@ -8,10 +8,10 @@ namespace Ichi.Clicker
     public interface IFactory : ICost, ILevel
     {
         int Rank { get; }
-        int Category { get; }
-        BigIntegerStatus Power { get; }
+        int Rarity { get; }
         bool IsBought { get; }
         bool IsLock { get; }
+        BigIntegerStatus Power { get; }
         event Action AlterHandler;
 
         //TODO モンスター娘を餌付けして仲間にしようクリッカー。

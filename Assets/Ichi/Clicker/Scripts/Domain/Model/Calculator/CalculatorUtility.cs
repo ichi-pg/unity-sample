@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Clicker
 {
-    public static class StatusUtility
+    public static class CalculatorUtility
     {
         public const int InflationLevel = 25;
 

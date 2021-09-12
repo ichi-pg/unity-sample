@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
+using System;
 
 namespace Ichi.Clicker
 {
-    public enum FactoryCategory
+    public interface ITimeRepository
     {
-        Click,
-        Auto,
+        DateTime Now { get; }
     }
 }

@@ -16,19 +16,7 @@ namespace Ichi.Clicker
         public string Power { get => Common.BigIntegerText.ToString(this.factory.Power); }
         public string NextPower { get => Common.BigIntegerText.ToString(this.factory.Power.NextValue); }
         public bool CanLevelUp { get => !this.factory.IsLock && DIContainer.CoinRepository.Coin.Quantity >= this.factory.Cost; }
-
-        public string Unit {
-            get {
-                switch (this.factory.Category) {
-                    case (int)FactoryCategory.Click:
-                        return DIContainer.TextLocalizer.Localize("Click");
-                    case (int)FactoryCategory.Auto:
-                        return DIContainer.TextLocalizer.Localize("Seconds");
-                    default:
-                        return "";
-                }
-            }
-        }
+        public string Unit { get => DIContainer.TextLocalizer.Localize("Seconds"); }
 
         public FactoryAdapter(IFactory factory) {
             this.factory = factory;

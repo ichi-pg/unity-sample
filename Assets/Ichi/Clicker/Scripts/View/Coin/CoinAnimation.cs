@@ -13,7 +13,9 @@ namespace Ichi.Clicker
         [SerializeField]
         private Sprite[] sprites;
 
-        async void Start() {
+        //TODO RequireComponent駆逐
+
+        void Start() {
             var rect = this.GetComponent<RectTransform>();
             var image = this.GetComponent<Image>();
             var pos = rect.localPosition;

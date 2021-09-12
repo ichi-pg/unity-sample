@@ -8,21 +8,22 @@ namespace Ichi.Clicker
     [Serializable]
     public class Factory : IFactory
     {
+        public static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
+        public static readonly TimeSpan Limit = TimeSpan.FromHours(12);
+
         public int level;
         public int rank;
         public int rarity;
-        public int category;
+        public bool isLock;
         public Common.TicksTime producedAt;
-        public ILocker Locker { private get; set; }
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
-        public int Category { get => this.category; }
-        public bool IsLock { get => !this.IsBought && this.Locker.IsLock; }
+        public int Rarity { get => this.rarity; }
         public bool IsBought { get => this.level > 0; }
+        public bool IsLock { get => this.isLock; }
         public BigIntegerStatus Power { get; set; }
         public BigIntegerStatus Cost { get; set; }
-        public BigIntegerStatus Price { get; set; }
-        public event Action AlterHandler;//NOTE UniRx
+        public event Action AlterHandler;
 
         public void Calculate() {
             this.Power.Calculate(this.level, this.rank, this.rarity);
@@ -42,13 +43,15 @@ namespace Ichi.Clicker
             this.Calculate();
         }
 
-        public void Sell(IStore store) {
-            if (!this.IsBought) {
-                throw new Exception("Invalid bought.");
+        public void Produce(IStore store, DateTime now, int bonus = 1) {
+            if (now < this.producedAt) {
+                throw new Exception("Invalid produced at.");
             }
-            store.Store(this.Price);
-            this.level = 0;
-            this.Calculate();
+            var span = now - this.producedAt;
+            span = Common.Time.Min(span, Limit);
+            var count = span.Ticks / Interval.Ticks;
+            store.Store(this.Power * count * bonus);
+            this.producedAt = now;
         }
     }
 }

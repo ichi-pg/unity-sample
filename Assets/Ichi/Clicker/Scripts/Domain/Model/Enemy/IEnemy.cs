@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace Ichi.Clicker
 {
-    public interface IStatusCalculator<T>
+    public interface IEnemy
     {
-        T Calculate(int level, int rank, int rarity);
     }
 }

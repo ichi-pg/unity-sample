@@ -7,7 +7,7 @@ namespace Ichi.Clicker
 {
     public class BigIntegerStatus : Status<BigInteger>, IComparable
     {
-        public BigIntegerStatus(IStatusCalculator<BigInteger> calculator) : base(calculator) {
+        public BigIntegerStatus(ICalculator<BigInteger> calculator) : base(calculator) {
         }
 
         public override string ToString() => this.Value.ToString();

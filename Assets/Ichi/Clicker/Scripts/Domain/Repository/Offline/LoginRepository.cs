@@ -9,11 +9,12 @@ namespace Ichi.Clicker.Offline
     public class LoginRepository : ILoginRepository
     {
         public BigInteger Quantity { get => SaveData.Instance.LoginCommodity.Quantity; }
+        private ITimeRepository timeRepository;
 
         public float QuantityRate {
             get {
-                var power = FactoryUtility.SumPower(SaveData.Instance.AutoFactories);
-                var count = TimeProducer.Limit.Ticks / TimeProducer.Interval.Ticks;
+                var power = SaveData.Instance.factories.Sum(factory => factory.Power);
+                var count = Factory.Limit.Ticks / Factory.Interval.Ticks;
                 var rate = SaveData.Instance.LoginCommodity.Quantity * 100 / (power * count);
                 if (rate > 100) {
                     return 1f;
@@ -22,11 +23,15 @@ namespace Ichi.Clicker.Offline
             }
         }
 
+        public LoginRepository(ITimeRepository timeRepository) {
+            this.timeRepository = timeRepository;
+        }
+
         public void Produce() {
-            var now = Common.Time.Now;
-            foreach (var factory in SaveData.Instance.AutoFactories) {
+            var now = this.timeRepository.Now;
+            foreach (var factory in SaveData.Instance.factories) {
                 if (factory.IsBought) {
-                    TimeProducer.Produce(SaveData.Instance.LoginCommodity, factory.Power, now, ref factory.producedAt);
+                    factory.Produce(SaveData.Instance.LoginCommodity, now);
                 }
             }
             SaveData.Instance.Save();
