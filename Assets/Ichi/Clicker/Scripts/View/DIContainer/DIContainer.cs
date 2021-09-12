@@ -8,7 +8,7 @@ namespace Ichi.Clicker.View
     {
         public static ITimeRepository TimeRepository { get; private set; } = new Offline.TimeRepository();
         public static ISaveDataRepository SaveDataRepository { get; private set; } = new Offline.JsonSaveDataRepository(TimeRepository);
-        public static IFactoryRepository ClickerRepository { get; private set; } = new Offline.ClickerRepository(SaveDataRepository);
+        public static IClickerRepository ClickerRepository { get; private set; } = new Offline.ClickerRepository(SaveDataRepository);
         public static IFactoryRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository(TimeRepository, SaveDataRepository);
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, SaveDataRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, SaveDataRepository);
@@ -19,7 +19,7 @@ namespace Ichi.Clicker.View
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
 
-        public static IFactoryRepository FromFactoryCategory(FactoryCategory category) {
+        public static IClickerRepository FromFactoryCategory(FactoryCategory category) {
             switch (category) {
                 case FactoryCategory.Factory:
                     return FactoryRepository;
