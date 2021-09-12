@@ -31,8 +31,6 @@ namespace Ichi.Clicker
             if (this.damage > this.HP) {
                 this.damage = this.HP;
             }
-            //TODO 弱点
-            //TODO 倒した時
             this.AlterHandler?.Invoke();
         }
     }

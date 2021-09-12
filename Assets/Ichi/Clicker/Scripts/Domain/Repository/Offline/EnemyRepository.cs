@@ -15,7 +15,8 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Encount() {
-            //TODO
+            //TODO 報酬
+            //TODO 次の敵
             this.AlterHandler?.Invoke();
         }
     }

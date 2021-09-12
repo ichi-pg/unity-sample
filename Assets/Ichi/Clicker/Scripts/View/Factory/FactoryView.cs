@@ -57,6 +57,8 @@ namespace Ichi.Clicker.View
             if (this.adapter.CanLevelUp) {
                 DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
             }
+            //TODO エフェクト
+            //TODO SE
         }
     }
 }

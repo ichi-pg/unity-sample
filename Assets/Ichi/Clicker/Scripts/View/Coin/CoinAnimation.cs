@@ -26,6 +26,7 @@ namespace Ichi.Clicker.View
             this.image.DOFade(0, 2).OnComplete(() => {
                 Destroy(this.gameObject);
             });
+            //TODO SE
         }
 
         public void SetSprite(int index) {

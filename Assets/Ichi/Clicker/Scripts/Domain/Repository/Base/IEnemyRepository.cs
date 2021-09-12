@@ -8,5 +8,6 @@ namespace Ichi.Clicker
     {
         IEnemy Enemy { get; }
         event Action AlterHandler;
+        void Encount();
     }
 }

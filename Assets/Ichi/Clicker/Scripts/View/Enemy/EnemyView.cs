@@ -16,7 +16,6 @@ namespace Ichi.Clicker.View
             DIContainer.EnemyRepository.AlterHandler += this.OnChange;
             DIContainer.EnemyRepository.Enemy.AlterHandler += this.OnAlter;
             this.OnChange();
-            this.OnAlter();
         }
 
         void OnDestroy() {
@@ -27,10 +26,13 @@ namespace Ichi.Clicker.View
         private void OnChange() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
+            //TODO 捕獲エフェクト
+            //TODO SE
         }
 
         private void OnAlter() {
-            //TODO
+            //TODO ダメージエフェクト
+            //TODO SE
         }
     }
 }

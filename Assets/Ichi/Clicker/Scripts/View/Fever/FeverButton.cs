@@ -44,6 +44,8 @@ namespace Ichi.Clicker.View
             DIContainer.FeverRepository.Fever(this.token);
             this.UpdateGauge().Forget();
             this.CoolTime().Forget();
+            //エフェクト
+            //SE
         }
 
         private async UniTask UpdateGauge() {

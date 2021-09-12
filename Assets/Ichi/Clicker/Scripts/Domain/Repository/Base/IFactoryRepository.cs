@@ -4,8 +4,12 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface IFactoryRepository : IClickerRepository
+    public interface IFactoryRepository
     {
-        //TODO ドロップ
+        IEnumerable<IFactory> Factories { get; }
+        event Action AlterHandler;
+        void LevelUp(IFactory factory);
+        void Produce();
+        void CheatMode(bool enable);
     }
 }

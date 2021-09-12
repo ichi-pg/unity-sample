@@ -4,15 +4,17 @@ using System;
 
 namespace Ichi.Clicker.Offline
 {
-    public class ClickerRepository : IClickerRepository
+    public class ClickerRepository : IFactoryRepository
     {
         public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.clickers; }
         public event Action AlterHandler;
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
+        private IEnemyRepository enemyRepository;
 
-        public ClickerRepository(ISaveDataRepository saveDataRepository) {
+        public ClickerRepository(ISaveDataRepository saveDataRepository, IEnemyRepository enemyRepository) {
             this.saveDataRepository = saveDataRepository;
+            this.enemyRepository = enemyRepository;
         }
 
         public void LevelUp(IFactory clicker) {
@@ -28,11 +30,10 @@ namespace Ichi.Clicker.Offline
             foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
                 if (clicker.IsBought) {
                     clicker.Produce(enemy, this.cheatBonus);
-                    if (!enemy.IsAlive) {
-                        //TODO エンカウント
-                        //TODO ドロップ
-                        break;
-                    }
+                }
+                if (!enemy.IsAlive) {
+                    this.enemyRepository.Encount();
+                    break;
                 }
             }
         }
