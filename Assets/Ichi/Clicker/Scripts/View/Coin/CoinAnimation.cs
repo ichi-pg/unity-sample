@@ -15,8 +15,6 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private RectTransform rect;
 
-        //TODO RequireComponent駆逐
-
         void Start() {
             var pos = this.rect.localPosition;
             this.rect.DOLocalRotate(Vector3.up * 360 * 8, 2, RotateMode.FastBeyond360);
