@@ -9,7 +9,6 @@ namespace Ichi.Clicker
     public class Item : IItem, IStore, IConsume
     {
         public Common.BigNumber quantity;
-        public int category;
         public BigInteger Quantity { get => this.quantity; }
         public event Action AlterHandler;
 

@@ -8,8 +8,6 @@ namespace Ichi.Clicker
     [Serializable]
     public class SaveData : Common.IPreSave, Common.IPostLoad
     {
-        //TODO TimeKeeperとLevelUpperに分解できない？
-        //TODO itemsじゃなくていいのかも。
         public List<Clicker> clickers;
         public List<Factory> factories;
         public List<Item> items;
@@ -17,9 +15,9 @@ namespace Ichi.Clicker
         public Enemy enemy;
         public Common.TicksTime nextFeverAt;
         public Common.TicksTime nextFeverAdsAt;
-        public Item Coin { get; private set; }
-        public Item Commodity { get; private set; }
-        public Item LoginCommodity { get; private set; }
+        public Item coin;
+        public Item commodity;
+        public Item login;
 
         public void PreSave() {
             foreach (var factory in this.factories) {
@@ -51,18 +49,15 @@ namespace Ichi.Clicker
             this.items = this.items ?? new List<Item>();
             this.episodes = this.episodes ?? new List<Episode>();
             this.enemy = this.enemy ?? new Enemy();
-            Initializer.Initialize(this.clickers);
-            Initializer.Initialize(this.factories);
-            Initializer.Initialize(this.items, ItemCategory.Coin, this.clickers.FirstOrDefault().Cost);
-            Initializer.Initialize(this.items, ItemCategory.Commodity);
-            Initializer.Initialize(this.items, ItemCategory.LoginCommodity);
-            Initializer.Initialize(this.episodes, this.factories);
-            Initializer.Initialize(this.enemy);
-            this.Coin = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Coin);
-            this.Commodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.Commodity);
-            this.LoginCommodity = this.items.FirstOrDefault(item => item.category == (int)ItemCategory.LoginCommodity);
+            //TODO 初期敵
+            this.coin = this.coin ?? new Item();
+            this.commodity = this.coin ?? new Item();
+            this.login = this.coin ?? new Item();
             this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
             this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
+            Initializer.Initialize(this.clickers);
+            Initializer.Initialize(this.factories);
+            Initializer.Initialize(this.episodes, this.factories);
         }
     }
 }

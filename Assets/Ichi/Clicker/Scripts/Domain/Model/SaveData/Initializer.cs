@@ -39,16 +39,6 @@ namespace Ichi.Clicker
             }
         }
 
-        public static void Initialize(List<Item> items, ItemCategory category, int quantity = 0) {
-            var item = items.FirstOrDefault(item => item.category == (int)category);
-            if (item == null) {
-                items.Add(new Item() {
-                    category = (int)category,
-                    quantity = quantity,
-                });
-            }
-        }
-
         public static void Initialize(List<Episode> episodes, List<Factory> factories) {
             foreach (var factory in factories) {
                 for (var level = 100; level <= 500; level += 100) {
@@ -61,18 +51,14 @@ namespace Ichi.Clicker
                         episodes.Add(episode);
                     }
                     episode.Locker = new LevelLocker(factory, level);
-                    episode.Sentences = new List<Sentence>() {
-                        new Sentence() {
+                    episode.Novels = new List<Novel>() {
+                        new Novel() {
                             Text = "aaaa",
                         },
                     };
-                    //TODO シナリオマスターデータ
+                    //NOTE シナリオマスターデータ
                 }
             }
-        }
-
-        public static void Initialize(Enemy enemy) {
-            //TODO
         }
     }
 }

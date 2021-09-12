@@ -14,11 +14,11 @@ namespace Ichi.Clicker.View
         private Text text;
 
         public async UniTask Play(IEpisode episode) {
-            await this.GetComponent<Common.NovelView>().Play(episode.Sentences);
+            await this.GetComponent<Common.NovelView>().Play(episode.Novels);
             DIContainer.EpisodeRepository.Read(episode);
-            //TODO トリガー遷移かNewラベル
-            //TODO リストUI
-            //TODO 外で破壊
+            //NOTE トリガー遷移かNewラベル
+            //NOTE リストUI
+            //NOTE 外で破壊
         }
     }
 }

@@ -16,8 +16,8 @@ namespace Ichi.Clicker.View
         }
 
         public async void Read() {
-            //TODO リスト消す、共通モダルコントロール
-            //TODO どこ親
+            //NOTE リスト消す、共通モダルコントロール
+            //NOTE どこ親
             var obj = Instantiate(this.read, this.GetComponentInParent<Canvas>().transform);
             await obj.GetComponent<NovelView>().Play(this.episode);
             Destroy(obj);

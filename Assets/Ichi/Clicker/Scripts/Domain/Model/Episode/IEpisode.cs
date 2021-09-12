@@ -6,7 +6,7 @@ namespace Ichi.Clicker
 {
     public interface IEpisode
     {
-        IEnumerable<ISentence> Sentences { get; }
+        IEnumerable<Common.INovel> Novels { get; }
         bool IsRead { get; }
         bool IsLock { get; }
         // event Action AlterHandler;
