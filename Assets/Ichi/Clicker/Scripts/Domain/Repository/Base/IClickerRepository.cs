@@ -11,5 +11,6 @@ namespace Ichi.Clicker
         void LevelUp(IFactory factory);
         void Produce();
         void CheatMode(bool enable);
+        //TODO IClickerとIFactoryが敬意的にごちゃってるのでリネーム
     }
 }
