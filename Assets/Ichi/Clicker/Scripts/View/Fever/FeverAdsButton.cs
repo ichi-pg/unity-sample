@@ -7,15 +7,14 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(Button))]
     public class FeverAdsButton : MonoBehaviour
     {
+        [SerializeField]
         private Button button;
         private Common.IAds ads;
         private CancellationToken token;
 
         void Start() {
-            this.button = this.GetComponent<Button>();
             this.token = this.GetCancellationTokenOnDestroy();
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;

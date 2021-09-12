@@ -8,18 +8,17 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(Button))]
     public class FeverButton : MonoBehaviour
     {
         [SerializeField]
         private Image gauge;
         [SerializeField]
         private Image gaugeParent;
+        [SerializeField]
         private Button button;
         private CancellationToken token;
 
         void Start() {
-            this.button = this.GetComponent<Button>();
             this.token = this.GetCancellationTokenOnDestroy();
             DIContainer.FeverRepository.AlterHandler += this.OnAlter;
             this.OnAlter();

@@ -7,14 +7,15 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(Common.NovelView))]
     public class NovelView : MonoBehaviour
     {
+        [SerializeField]
+        private Common.NovelView novelView;
         [SerializeField]
         private Text text;
 
         public async UniTask Play(IEpisode episode) {
-            await this.GetComponent<Common.NovelView>().Play(episode.Novels);
+            await this.novelView.Play(episode.Novels);
             DIContainer.EpisodeRepository.Read(episode);
             //NOTE トリガー遷移かNewラベル
             //NOTE リストUI

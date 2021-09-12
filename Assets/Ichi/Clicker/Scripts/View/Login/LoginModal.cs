@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(Common.CloseModalButton))]
     public class LoginModal : MonoBehaviour
     {
         [SerializeField]
@@ -17,12 +16,12 @@ namespace Ichi.Clicker.View
         private Image gaugeParent;
         [SerializeField]
         private Button adsButton;
-        private Common.CloseModalButton closeButton;
+        [SerializeField]
+        private Common.CloseModalButton closeModalButton;
 
         private Common.IAds ads;
 
         void Start() {
-            this.closeButton = this.GetComponent<Common.CloseModalButton>();
             this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Quantity);
             Common.Gauge.ResizeX(
                 this.gauge,
@@ -41,7 +40,7 @@ namespace Ichi.Clicker.View
 
         public void Collect() {
             DIContainer.LoginRepository.Collect(false);
-            this.closeButton.Close();
+            this.closeModalButton.Close();
         }
 
         public void PlayAds() {
@@ -50,7 +49,7 @@ namespace Ichi.Clicker.View
 
         private void OnReward() {
             DIContainer.LoginRepository.Collect(true);
-            this.closeButton.Close();
+            this.closeModalButton.Close();
         }
     }
 }

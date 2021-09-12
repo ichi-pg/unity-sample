@@ -664,6 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e1af301c1274d65b1ee58f192c84b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1756181006057506095}
 --- !u!1 &4730109757886246601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gauge: {fileID: 7006247594032002009}
   gaugeParent: {fileID: 6179623729425363845}
+  button: {fileID: 6240917050630409557}
 --- !u!114 &4936159220662282860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,6 +2080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 1403917943070962844, guid: 894089e10da2245ac8f533cd137e8040, type: 3}
+  region: {fileID: 4315538750944879933}
 --- !u!1 &7709119124179590595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc738709f8f34113b45e2a4d720783d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openModalButton: {fileID: 2054087845249710673}
 --- !u!1 &8982760975945801049
 GameObject:
   m_ObjectHideFlags: 0

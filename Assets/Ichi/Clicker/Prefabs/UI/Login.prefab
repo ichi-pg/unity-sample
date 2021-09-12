@@ -576,6 +576,7 @@ MonoBehaviour:
   gauge: {fileID: 8025897741421699100}
   gaugeParent: {fileID: 2836107905366999525}
   adsButton: {fileID: 7581160401231252100}
+  closeModalButton: {fileID: 1722900453527359128}
 --- !u!114 &1722900453527359128
 MonoBehaviour:
   m_ObjectHideFlags: 0

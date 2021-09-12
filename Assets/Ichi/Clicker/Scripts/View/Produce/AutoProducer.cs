@@ -7,13 +7,15 @@ using UnityEngine;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(Common.OpenModalButton))]
     public class AutoProducer : MonoBehaviour
     {
+        [SerializeField]
+        private Common.OpenModalButton openModalButton;
+
         void Start() {
             DIContainer.LoginRepository.Produce();
             if (DIContainer.LoginRepository.Quantity > 0) {
-                this.GetComponent<Common.OpenModalButton>().Open();
+                this.openModalButton.Open();
             }
             this.Produce(this.GetCancellationTokenOnDestroy()).Forget();
         }

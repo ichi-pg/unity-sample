@@ -92,3 +92,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ccea2089933dddf4fa80ceaad78691c4, type: 3}
   - {fileID: 21300000, guid: a17054d528263bd459a78a25c87125f9, type: 3}
   - {fileID: 21300000, guid: 29c11e923a5b61f4e9ce6230738fb6d1, type: 3}
+  image: {fileID: 262640156595339106}
+  rect: {fileID: 4016783052294789741}

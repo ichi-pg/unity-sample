@@ -8,17 +8,16 @@ using UnityEngine;
 
 namespace Ichi.Clicker.View
 {
-    [RequireComponent(typeof(RectTransform))]
     public class CoinCreater : MonoBehaviour
     {
         [SerializeField]
         private GameObject coin;
+        [SerializeField]
         private RectTransform region;
         private CancellationToken token;
         private BigInteger beforeQuantity;
 
         void Start() {
-            this.region = this.GetComponent<RectTransform>();
             this.token = this.GetCancellationTokenOnDestroy();
             this.beforeQuantity = DIContainer.CoinRepository.Coin.Quantity;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
