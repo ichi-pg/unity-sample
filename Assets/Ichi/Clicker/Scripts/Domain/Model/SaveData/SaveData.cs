@@ -9,6 +9,7 @@ namespace Ichi.Clicker
     public class SaveData : Common.IPreSave, Common.IPostLoad
     {
         //TODO TimeKeeperとLevelUpperに分解できない？
+        //TODO itemsじゃなくていいのかも。
         public List<Clicker> clickers;
         public List<Factory> factories;
         public List<Item> items;
