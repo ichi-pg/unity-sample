@@ -14,21 +14,23 @@ namespace Ichi.Clicker.View
     {
         [SerializeField]
         private FactoryView factoryView;
+        [SerializeField]
+        private FactoryCategory category;
 
         void Start() {
-            DIContainer.FactoryRepository.AlterHandler += this.OnAlter;
+            DIContainer.FromFactoryCategory(this.category).AlterHandler += this.OnAlter;
             this.OnAlter();
             this.StartCheatMode();
         }
 
         void OnDestroy() {
-            DIContainer.FactoryRepository.AlterHandler -= this.OnAlter;
+            DIContainer.FromFactoryCategory(this.category).AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
             this.factoryView.OnDestroy();
             this.factoryView.Initialize(
-                DIContainer.FactoryRepository.Factories
+                DIContainer.FromFactoryCategory(this.category).Factories
                     .OrderBy(factory => factory.Cost).FirstOrDefault()
             );
         }
@@ -40,8 +42,7 @@ namespace Ichi.Clicker.View
 
         private async UniTask CheatMode(CancellationToken token) {
             var cheatMode = (CheatMode)FindObjectOfType(typeof(CheatMode));
-            while (true)
-            {
+            while (true) {
                 if (cheatMode.Auto) {
                     this.factoryView.LevelUp();
                 }

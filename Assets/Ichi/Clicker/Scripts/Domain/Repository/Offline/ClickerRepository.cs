@@ -4,9 +4,9 @@ using System;
 
 namespace Ichi.Clicker.Offline
 {
-    public class ClickerRepository : IClickerRepository
+    public class ClickerRepository : IFactoryRepository
     {
-        public IEnumerable<IClicker> Clickers { get => this.saveDataRepository.SaveData.clickers; }
+        public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.clickers; }
         public event Action AlterHandler;
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
@@ -15,7 +15,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
-        public void LevelUp(IClicker clicker) {
+        public void LevelUp(IFactory clicker) {
             (clicker as Clicker).LevelUp(this.saveDataRepository.SaveData.Coin);
             if (CalculatorUtility.IsInflation(clicker.Level)) {
                 this.saveDataRepository.Save();

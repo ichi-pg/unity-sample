@@ -23,6 +23,8 @@ namespace Ichi.Clicker
         public bool IsLock { get => this.isLock; }
         public BigIntegerStatus Power { get; set; }
         public BigIntegerStatus Cost { get; set; }
+        public string Unit { get => "Seconds"; }
+        public FactoryCategory Category { get => FactoryCategory.Factory; }
         public event Action AlterHandler;
 
         public void Calculate() {

@@ -8,13 +8,18 @@ namespace Ichi.Clicker.View
     {
         [SerializeField]
         private GameObject prefab;
+        [SerializeField]
+        private Transform parent;
+
+        [SerializeField]
+        private FactoryCategory category;
 
         void Start() {
-            Common.Hierarchy.DestroyChildren(this.transform);
+            Common.Hierarchy.DestroyChildren(this.parent);
             Common.Hierarchy.InstantiateChildren<FactoryView, IFactory>(
-                this.transform,
+                this.parent,
                 this.prefab,
-                DIContainer.FactoryRepository.Factories
+                DIContainer.FromFactoryCategory(this.category).Factories
             );
         }
     }

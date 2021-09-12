@@ -135,6 +135,94 @@ MonoBehaviour:
     m_Key: Factory20
     m_Metadata:
       m_Items: []
+  - m_Id: 2903785524420608
+    m_Key: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003520
+    m_Key: Clicker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003521
+    m_Key: Clicker1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003522
+    m_Key: Clicker2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003523
+    m_Key: Clicker3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003524
+    m_Key: Clicker4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003525
+    m_Key: Clicker5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785537003526
+    m_Key: Clicker6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197824
+    m_Key: Clicker7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197825
+    m_Key: Clicker8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197826
+    m_Key: Clicker9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197827
+    m_Key: Clicker10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197828
+    m_Key: Clicker11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197829
+    m_Key: Clicker12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197830
+    m_Key: Clicker13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197831
+    m_Key: Clicker14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197832
+    m_Key: Clicker15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197833
+    m_Key: Clicker16
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197834
+    m_Key: Clicker17
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197835
+    m_Key: Clicker18
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197836
+    m_Key: Clicker19
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903785541197837
+    m_Key: Clicker20
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

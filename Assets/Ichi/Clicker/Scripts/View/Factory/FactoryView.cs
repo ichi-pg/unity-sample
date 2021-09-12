@@ -33,7 +33,6 @@ namespace Ichi.Clicker.View
             this.factory.AlterHandler += this.OnAlter;
             DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
             this.OnAlter();
-            //TODO ロック解除された時に通知されてない（前提条件から通知したい）
         }
 
         public void OnDestroy() {
@@ -45,19 +44,18 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             this.label.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
-            this.desc.text = DIContainer.TextLocalizer.Localize("Power") + this.adapter.Power + "/" + this.adapter.Unit;
+            this.desc.text = DIContainer.TextLocalizer.Localize("Coin") + this.adapter.Power + "/" + this.adapter.Unit;
             this.cost.text = this.adapter.Cost;
             this.levelUp.text = DIContainer.TextLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
             this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
             this.lockImage.gameObject.SetActive(this.factory.IsLock);
             this.icon.sprite = this.sprites[this.factory.Rank - 1];
-            //TODO 開放条件表記（押したらトーストもあり）
         }
 
         public void LevelUp() {
             if (this.adapter.CanLevelUp) {
-                DIContainer.FactoryRepository.LevelUp(this.factory);
+                DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
             }
         }
     }

@@ -12,6 +12,8 @@ namespace Ichi.Clicker
         bool IsBought { get; }
         bool IsLock { get; }
         BigIntegerStatus Power { get; }
+        string Unit { get; }
+        FactoryCategory Category { get; }
         event Action AlterHandler;
 
         //TODO モンスター娘を餌付けして仲間にしようクリッカー。
