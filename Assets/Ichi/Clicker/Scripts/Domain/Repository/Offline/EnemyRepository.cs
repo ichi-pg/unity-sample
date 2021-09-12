@@ -8,9 +8,15 @@ namespace Ichi.Clicker.Offline
     {
         public IEnemy Enemy { get => this.saveDataRepository.SaveData.enemy; }
         private ISaveDataRepository saveDataRepository;
+        public event Action AlterHandler;
 
         public EnemyRepository(ISaveDataRepository saveDataRepository) {
             this.saveDataRepository = saveDataRepository;
+        }
+
+        public void Encount() {
+            //TODO
+            this.AlterHandler?.Invoke();
         }
     }
 }

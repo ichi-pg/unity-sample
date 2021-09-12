@@ -28,8 +28,8 @@ namespace Ichi.Clicker
                 throw new Exception("Invalid alive.");
             }
             this.damage += i;
-            if (this.Damage > this.HP) {
-                this.damage = (BigInteger)this.HP;
+            if (this.damage > this.HP) {
+                this.damage = this.HP;
             }
             //TODO 弱点
             //TODO 倒した時

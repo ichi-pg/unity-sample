@@ -29,6 +29,10 @@ namespace Ichi.Clicker
                 var i = (int)obj;
                 return this == i;
             }
+            if (obj is Common.BigNumber) {
+                var i = (Common.BigNumber)obj;
+                return this == i;
+            }
             return false;
         }
 
@@ -113,8 +117,23 @@ namespace Ichi.Clicker
         public static bool operator >(int a, BigIntegerStatus b) => a > b.Value;
         public static bool operator >=(int a, BigIntegerStatus b) => a >= b.Value;
 
+        //比較(Common.BigNumber)
+        public static bool operator ==(BigIntegerStatus a, Common.BigNumber b) => a.Value == b;
+        public static bool operator !=(BigIntegerStatus a, Common.BigNumber b) => a.Value != b;
+        public static bool operator <(BigIntegerStatus a, Common.BigNumber b) => a.Value < b;
+        public static bool operator <=(BigIntegerStatus a, Common.BigNumber b) => a.Value <= b;
+        public static bool operator >(BigIntegerStatus a, Common.BigNumber b) => a.Value > b;
+        public static bool operator >=(BigIntegerStatus a, Common.BigNumber b) => a.Value >= b;
+        public static bool operator ==(Common.BigNumber a, BigIntegerStatus b) => a == b.Value;
+        public static bool operator !=(Common.BigNumber a, BigIntegerStatus b) => a != b.Value;
+        public static bool operator <(Common.BigNumber a, BigIntegerStatus b) => a < b.Value;
+        public static bool operator <=(Common.BigNumber a, BigIntegerStatus b) => a <= b.Value;
+        public static bool operator >(Common.BigNumber a, BigIntegerStatus b) => a > b.Value;
+        public static bool operator >=(Common.BigNumber a, BigIntegerStatus b) => a >= b.Value;
+
         //キャスト
         public static implicit operator BigInteger(BigIntegerStatus a) => a.Value;
         public static implicit operator int(BigIntegerStatus a) => (int)a.Value;
+        public static implicit operator Common.BigNumber(BigIntegerStatus a) => a.Value;
     }
 }

@@ -7,5 +7,6 @@ namespace Ichi.Clicker
     public interface IEnemyRepository
     {
         IEnemy Enemy { get; }
+        event Action AlterHandler;
     }
 }
