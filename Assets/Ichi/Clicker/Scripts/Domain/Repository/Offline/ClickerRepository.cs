@@ -24,9 +24,15 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Produce() {
+            var enemy = this.saveDataRepository.SaveData.enemy;
             foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
                 if (clicker.IsBought) {
-                    clicker.Produce(this.saveDataRepository.SaveData.enemy, this.cheatBonus);
+                    clicker.Produce(enemy, this.cheatBonus);
+                    if (!enemy.IsAlive) {
+                        //TODO エンカウント
+                        //TODO ドロップ
+                        break;
+                    }
                 }
             }
         }

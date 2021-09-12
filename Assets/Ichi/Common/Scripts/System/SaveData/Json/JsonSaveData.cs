@@ -22,6 +22,7 @@ namespace Ichi.Common
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
+            //TODO スレッド競合するとエラーる
             var writer = new StreamWriter(path);
             writer.Write(json);
             writer.Flush();

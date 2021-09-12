@@ -9,22 +9,27 @@ namespace Ichi.Clicker
     public class Enemy : IEnemy, IStore
     {
         public int rank;
-        public Common.BigNumber hp;
+        public Common.BigNumber damage;
         public int Rank { get => this.rank; }
-        public BigInteger HP { get => this.hp; }
-        public BigInteger MaxHP { get; set; }
+        public BigInteger Damage { get => this.damage; }
+        public BigIntegerStatus HP { get; set; }
+        public bool IsAlive { get => this.Damage < this.HP; }
         public event Action AlterHandler;
+
+        public void Calculate() {
+            this.HP.Calculate(rank : this.rank);
+        }
 
         public void Store(BigInteger i) {
             if (i < 0) {
                 throw new Exception("Invalid store.");
             }
-            if (this.hp < 0) {
-                throw new Exception("Invalid hp.");
+            if (!this.IsAlive) {
+                throw new Exception("Invalid alive.");
             }
-            this.hp -= i;
-            if (this.hp < 0) {
-                this.hp = 0;
+            this.damage += i;
+            if (this.Damage > this.HP) {
+                this.damage = (BigInteger)this.HP;
             }
             //TODO 弱点
             //TODO 倒した時

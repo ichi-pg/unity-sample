@@ -8,8 +8,8 @@ namespace Ichi.Clicker
     public interface IEnemy
     {
         int Rank { get; }
-        BigInteger HP { get; }
-        BigInteger MaxHP { get; }
+        BigInteger Damage { get; }
+        BigIntegerStatus HP { get; }
         event Action AlterHandler;
     }
 }

@@ -26,7 +26,7 @@ namespace Ichi.Clicker
             foreach (var item in this.items) {
                 item.quantity.PreSave();
             }
-            this.enemy.hp.PreSave();
+            this.enemy.damage.PreSave();
             this.nextFeverAt.PreSave();
             this.nextFeverAdsAt.PreSave();
         }
@@ -38,7 +38,7 @@ namespace Ichi.Clicker
             foreach (var item in this.items) {
                 item.quantity.PostLoad();
             }
-            this.enemy.hp.PostLoad();
+            this.enemy.damage.PostLoad();
             this.nextFeverAt.PostLoad();
             this.nextFeverAdsAt.PostLoad();
         }
@@ -48,8 +48,9 @@ namespace Ichi.Clicker
             this.factories = this.factories ?? new List<Factory>();
             this.items = this.items ?? new List<Item>();
             this.episodes = this.episodes ?? new List<Episode>();
-            this.enemy = this.enemy ?? new Enemy();
-            //TODO 初期敵
+            this.enemy = this.enemy ?? new Enemy() { rank = 1 };
+            this.enemy.HP = new BigIntegerStatus(new HPCalculator());
+            this.enemy.Calculate();
             this.coin = this.coin ?? new Item();
             this.commodity = this.coin ?? new Item();
             this.login = this.coin ?? new Item();
