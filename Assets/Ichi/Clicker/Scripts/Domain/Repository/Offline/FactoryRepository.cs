@@ -18,8 +18,7 @@ namespace Ichi.Clicker.Offline
         }
 
         public void LevelUp(IFactory factory) {
-            //TODO 好感度を消費
-            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.coin, this.timeRepository.Now);
+            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP, this.timeRepository.Now);
             if (CalculatorUtility.IsInflation(factory.Level)) {
                 this.saveDataRepository.Save();
             }
@@ -30,7 +29,7 @@ namespace Ichi.Clicker.Offline
             var now = this.timeRepository.Now;
             foreach (var factory in this.saveDataRepository.SaveData.factories) {
                 if (factory.IsBought) {
-                    factory.Produce(this.saveDataRepository.SaveData.coin, now, this.cheatBonus);
+                    factory.Produce(this.saveDataRepository.SaveData.Coin, now, this.cheatBonus);
                 }
             }
         }

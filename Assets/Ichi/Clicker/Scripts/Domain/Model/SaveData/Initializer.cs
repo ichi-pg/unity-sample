@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Numerics;
 
 namespace Ichi.Clicker
@@ -36,6 +37,18 @@ namespace Ichi.Clicker
                 factory.Power = new BigIntegerStatus(new PowerCalculator());
                 factory.Cost = new BigIntegerStatus(new CostCalculator());
                 factory.Calculate();
+            }
+        }
+
+        public static void Initialize(List<Item> items) {
+            foreach (ItemCategory category in Enum.GetValues(typeof(ItemCategory))) {
+                var item = items.FirstOrDefault(item => item.category == category);
+                if (item == null) {
+                    item = new Item() {
+                        category = category,
+                    };
+                    items.Add(item);
+                }
             }
         }
 

@@ -18,7 +18,7 @@ namespace Ichi.Clicker.Offline
         }
 
         public void LevelUp(IFactory clicker) {
-            (clicker as Clicker).LevelUp(this.saveDataRepository.SaveData.coin);
+            (clicker as Clicker).LevelUp(this.saveDataRepository.SaveData.Coin);
             if (CalculatorUtility.IsInflation(clicker.Level)) {
                 this.saveDataRepository.Save();
             }
