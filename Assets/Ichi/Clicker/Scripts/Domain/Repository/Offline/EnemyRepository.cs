@@ -15,8 +15,26 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Encount() {
-            //TODO 報酬
-            //TODO 次の敵
+            var saveData = this.saveDataRepository.SaveData;
+            var enemy = saveData.enemy;
+            saveData.EXP.Store(enemy.HP);
+            foreach (var factory in saveData.factories) {
+                if (factory.rank != enemy.rank) {
+                    continue;
+                }
+                if (factory.IsLock) {
+                    factory.level = 1;
+                    break;
+                }
+                if (0 == UnityEngine.Random.Range(0, factory.rarity * factory.rarity * 10)) {
+                    factory.rarity++;
+                }
+                break;
+            }
+            enemy.level++;
+            enemy.rank = 11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101));
+            enemy.Calculate();
+            this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();
         }
     }

@@ -8,6 +8,7 @@ namespace Ichi.Clicker
     [Serializable]
     public class Enemy : IEnemy, IStore
     {
+        public int level;
         public int rank;
         public Common.BigNumber damage;
         public int Rank { get => this.rank; }
@@ -17,7 +18,7 @@ namespace Ichi.Clicker
         public event Action AlterHandler;
 
         public void Calculate() {
-            this.HP.Calculate(rank : this.rank);
+            this.HP.Calculate(this.level, this.rank);
         }
 
         public void Store(BigInteger i) {

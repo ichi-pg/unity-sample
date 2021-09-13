@@ -6,6 +6,6 @@ namespace Ichi.Clicker
 {
     public interface ICalculator<T>
     {
-        T Calculate(int level, int rank, int rarity);
+        T Calculate(int level = 1, int rank = 1, int rarity = 1);
     }
 }

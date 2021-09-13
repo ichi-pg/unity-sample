@@ -6,18 +6,8 @@ namespace Ichi.Clicker
 {
     public class PowerCalculator : ICalculator<BigInteger>
     {
-        public BigInteger Calculate(int level, int rank, int rarity) {
-            if (level <= 0) {
-                return 0;
-            }
-            //定数倍でレベルアップ速度を調整
-            var offsetLevel = CalculatorUtility.OffsetLevel(level, rank);
-            return LevelUpInflation(offsetLevel) * offsetLevel * 5;
-        }
-
-        private static BigInteger LevelUpInflation(int level) {
-            //レベルが25上がるごとに生産量が倍（階段）
-            return BigInteger.Pow(2, level / CalculatorUtility.InflationLevel);
+        public BigInteger Calculate(int level = 1, int rank = 1, int rarity = 1) {
+            return level * rank * rarity;
         }
     }
 }

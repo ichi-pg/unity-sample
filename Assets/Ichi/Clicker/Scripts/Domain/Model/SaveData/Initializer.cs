@@ -30,7 +30,6 @@ namespace Ichi.Clicker
                     factory = new Factory() {
                         rank = rank,
                         rarity = 1,
-                        isLock = true,
                     };
                     factories.Add(factory);
                 }

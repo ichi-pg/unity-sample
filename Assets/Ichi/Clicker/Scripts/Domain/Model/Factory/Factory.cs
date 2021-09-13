@@ -14,13 +14,12 @@ namespace Ichi.Clicker
         public int level;
         public int rank;
         public int rarity;
-        public bool isLock;
         public Common.TicksTime producedAt;
         public int Level { get => this.level; }
         public int Rank { get => this.rank; }
         public int Rarity { get => this.rarity; }
         public bool IsBought { get => this.level > 0; }
-        public bool IsLock { get => this.isLock; }
+        public bool IsLock { get => this.level == 0; }
         public BigIntegerStatus Power { get; set; }
         public BigIntegerStatus Cost { get; set; }
         public string Unit { get => "Seconds"; }

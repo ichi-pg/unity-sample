@@ -49,7 +49,10 @@ namespace Ichi.Clicker
             this.factories = this.factories ?? new List<Factory>();
             this.items = this.items ?? new List<Item>();
             this.episodes = this.episodes ?? new List<Episode>();
-            this.enemy = this.enemy ?? new Enemy() { rank = 1 };
+            this.enemy = this.enemy ?? new Enemy() {
+                level = 1,
+                rank = 1,
+            };
             this.enemy.HP = new BigIntegerStatus(new HPCalculator());
             this.enemy.Calculate();
             this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);

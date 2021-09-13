@@ -7,9 +7,8 @@ namespace Ichi.Clicker
 {
     public class HPCalculator : ICalculator<BigInteger>
     {
-        public BigInteger Calculate(int level, int rank, int rarity) {
-            //TODO 調整
-            return 100;
+        public BigInteger Calculate(int level = 1, int rank = 1, int rarity = 1) {
+            return level * rank * rarity * 100;
         }
     }
 }
