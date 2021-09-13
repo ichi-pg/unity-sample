@@ -8,7 +8,7 @@ namespace Ichi.Clicker.Offline
 {
     public class LoginRepository : ILoginRepository
     {
-        public BigInteger Quantity { get => this.saveDataRepository.SaveData.login.Quantity; }
+        public IItem Item { get => this.saveDataRepository.SaveData.login; }
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
 
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
-        public void Produce() {
+        public bool Produce() {
             var now = this.timeRepository.Now;
             foreach (var factory in this.saveDataRepository.SaveData.factories) {
                 if (factory.IsBought) {
@@ -37,6 +37,7 @@ namespace Ichi.Clicker.Offline
                 }
             }
             this.saveDataRepository.Save();
+            return this.saveDataRepository.SaveData.login.Quantity > 0;
         }
 
         public void Collect(bool bonus) {

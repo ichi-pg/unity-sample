@@ -18,6 +18,7 @@ namespace Ichi.Clicker
         public Item coin;
         public Item commodity;
         public Item login;
+        public Item exp;
 
         public void PreSave() {
             foreach (var factory in this.factories) {
@@ -52,8 +53,9 @@ namespace Ichi.Clicker
             this.enemy.HP = new BigIntegerStatus(new HPCalculator());
             this.enemy.Calculate();
             this.coin = this.coin ?? new Item();
-            this.commodity = this.coin ?? new Item();
-            this.login = this.coin ?? new Item();
+            this.commodity = this.commodity ?? new Item();
+            this.login = this.login ?? new Item();
+            this.exp = this.exp ?? new Item();
             this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
             this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
             Initializer.Initialize(this.clickers);

@@ -13,8 +13,9 @@ namespace Ichi.Clicker.View
         public static IFactoryRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository(TimeRepository, SaveDataRepository);
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, SaveDataRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, SaveDataRepository);
-        public static ICoinRepository CoinRepository { get; private set; } = new Offline.CoinRepository(SaveDataRepository);
-        public static ICommodityRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(SaveDataRepository);
+        public static IItemRepository CoinRepository { get; private set; } = new Offline.CoinRepository(SaveDataRepository);
+        public static ICollectRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(SaveDataRepository);
+        public static IItemRepository EXPRepository { get; private set; } = new Offline.EXPRepository(SaveDataRepository);
         public static IEpisodeRepository EpisodeRepository { get; private set; } = new Offline.EpisodeRepository(SaveDataRepository);
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
@@ -26,6 +27,20 @@ namespace Ichi.Clicker.View
                     return FactoryRepository;
                 case FactoryCategory.Clicker:
                     return ClickerRepository;
+            }
+            throw new Exception("Invalid category.");
+        }
+
+        public static IItemRepository FromItemCategory(ItemCategory category) {
+            switch (category) {
+                case ItemCategory.Coin:
+                    return CoinRepository;
+                case ItemCategory.Commodity:
+                    return CommodityRepository;
+                case ItemCategory.Login:
+                    return LoginRepository;
+                case ItemCategory.EXP:
+                    return EXPRepository;
             }
             throw new Exception("Invalid category.");
         }

@@ -31,7 +31,7 @@ namespace Ichi.Clicker.View
             this.factory = factory;
             this.adapter = new FactoryAdapter(factory);
             this.factory.AlterHandler += this.OnAlter;
-            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
+            DIContainer.CoinRepository.Item.AlterHandler += this.OnAlter;
             this.OnAlter();
         }
 
@@ -39,7 +39,7 @@ namespace Ichi.Clicker.View
             if (this.factory != null) {
                 this.factory.AlterHandler -= this.OnAlter;
             }
-            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
+            DIContainer.CoinRepository.Item.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {

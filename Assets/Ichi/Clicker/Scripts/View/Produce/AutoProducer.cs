@@ -13,8 +13,7 @@ namespace Ichi.Clicker.View
         private Common.OpenModalButton openModalButton;
 
         void Start() {
-            DIContainer.LoginRepository.Produce();
-            if (DIContainer.LoginRepository.Quantity > 0) {
+            if (DIContainer.LoginRepository.Produce()) {
                 this.openModalButton.Open();
             }
             this.Produce(this.GetCancellationTokenOnDestroy()).Forget();

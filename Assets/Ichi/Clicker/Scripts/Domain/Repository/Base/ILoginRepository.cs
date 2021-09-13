@@ -5,11 +5,10 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface ILoginRepository
+    public interface ILoginRepository : IItemRepository
     {
-        BigInteger Quantity { get; }
         float QuantityRate { get; }
-        void Produce();
+        bool Produce();
         void Collect(bool bonus);
     }
 }

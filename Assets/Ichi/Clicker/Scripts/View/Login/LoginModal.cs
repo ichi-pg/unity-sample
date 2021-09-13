@@ -22,7 +22,7 @@ namespace Ichi.Clicker.View
         private Common.IAds ads;
 
         void Start() {
-            this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Quantity);
+            this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Item.Quantity);
             Common.Gauge.ResizeX(
                 this.gauge,
                 this.gaugeParent,

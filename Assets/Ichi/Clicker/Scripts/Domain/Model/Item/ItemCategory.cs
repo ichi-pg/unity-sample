@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public interface ICommodityRepository
+    public enum ItemCategory
     {
-        IItem Commodity { get; }
-        void Collect();
+        Coin,
+        Commodity,
+        Login,
+        EXP,
     }
 }

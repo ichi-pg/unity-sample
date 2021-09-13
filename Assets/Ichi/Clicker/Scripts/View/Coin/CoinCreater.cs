@@ -19,16 +19,16 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            this.beforeQuantity = DIContainer.CoinRepository.Coin.Quantity;
-            DIContainer.CoinRepository.Coin.AlterHandler += this.OnAlter;
+            this.beforeQuantity = DIContainer.CoinRepository.Item.Quantity;
+            DIContainer.CoinRepository.Item.AlterHandler += this.OnAlter;
         }
 
         void OnDestroy() {
-            DIContainer.CoinRepository.Coin.AlterHandler -= this.OnAlter;
+            DIContainer.CoinRepository.Item.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {
-            var quantity = DIContainer.CoinRepository.Coin.Quantity;
+            var quantity = DIContainer.CoinRepository.Item.Quantity;
             var diff = quantity - beforeQuantity;
             if (diff > 0) {
                 var count = diff.ToString().Length / 3 + 1;
