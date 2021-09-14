@@ -21,6 +21,7 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             this.text.text = Common.BigIntegerText.ToString(DIContainer.FromItemCategory(this.category).Item.Quantity);
+            //TODO ドラムロール
         }
     }
 }

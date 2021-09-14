@@ -54,6 +54,7 @@ namespace Ichi.Clicker.View
             if (this.adapter.CanLevelUp) {
                 DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
             }
+            //NOTE 長押し
             //NOTE エフェクト
             //NOTE SE
         }
