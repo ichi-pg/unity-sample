@@ -7,6 +7,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -18,17 +19,15 @@ namespace Ichi.Clicker.View
         private FactoryCategory category;
 
         void Start() {
-            DIContainer.FromFactoryCategory(this.category).AlterHandler += this.OnAlter;
+            foreach (var factory in DIContainer.FromFactoryCategory(this.category).Factories) {
+                factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
+            }
             this.OnAlter();
             this.StartCheatMode();
         }
 
-        void OnDestroy() {
-            DIContainer.FromFactoryCategory(this.category).AlterHandler -= this.OnAlter;
-        }
-
         private void OnAlter() {
-            this.factoryView.OnDestroy();
+            //NOTE 購読が蓄積する
             this.factoryView.Initialize(
                 DIContainer.FromFactoryCategory(this.category).Factories
                     .OrderBy(factory => factory.Cost).FirstOrDefault()

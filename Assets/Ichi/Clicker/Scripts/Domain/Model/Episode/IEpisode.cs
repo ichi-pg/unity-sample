@@ -9,6 +9,5 @@ namespace Ichi.Clicker
         IEnumerable<Common.INovel> Novels { get; }
         bool IsRead { get; }
         bool IsLock { get; }
-        // event Action AlterHandler;
     }
 }

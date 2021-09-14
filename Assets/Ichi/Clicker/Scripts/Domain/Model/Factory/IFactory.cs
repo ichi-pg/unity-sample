@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -14,6 +15,6 @@ namespace Ichi.Clicker
         BigIntegerStatus Power { get; }
         string Unit { get; }
         FactoryCategory Category { get; }
-        event Action AlterHandler;
+        IObservable<int> OnLevelUp { get; }
     }
 }

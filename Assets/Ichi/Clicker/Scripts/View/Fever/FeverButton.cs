@@ -5,6 +5,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -18,13 +19,9 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FeverRepository.AlterHandler += this.OnAlter;
+            DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
             this.CoolTime().Forget();
-        }
-
-        void OnDestroy() {
-            DIContainer.FeverRepository.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {

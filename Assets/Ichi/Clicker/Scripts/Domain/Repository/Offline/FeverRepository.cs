@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
@@ -16,7 +17,8 @@ namespace Ichi.Clicker.Offline
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
         public TimeSpan AdsCoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
-        public event Action AlterHandler;
+        public Subject<int> onAlter = new Subject<int>();
+        public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
@@ -52,7 +54,7 @@ namespace Ichi.Clicker.Offline
             var now = this.timeRepository.Now;
             this.finishAt = now + Duration;
             this.saveDataRepository.SaveData.nextFeverAt = now + TimeSpan.FromMinutes(30);
-            this.AlterHandler?.Invoke();
+            this.onAlter.OnNext(0);
             this.Produce(token).Forget();
         }
 
@@ -67,7 +69,7 @@ namespace Ichi.Clicker.Offline
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
             this.saveDataRepository.Save();
-            this.AlterHandler?.Invoke();
+            this.onAlter.OnNext(0);
         }
 
         public void CoolDown() {
@@ -84,7 +86,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.SaveData.nextFeverAt = now;
             this.saveDataRepository.SaveData.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
             this.saveDataRepository.Save();
-            this.AlterHandler?.Invoke();
+            this.onAlter.OnNext(0);
         }
 
         public void CheatMode(bool enable) {

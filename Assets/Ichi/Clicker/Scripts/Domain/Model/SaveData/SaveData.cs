@@ -85,6 +85,7 @@ namespace Ichi.Clicker
                 }
                 clicker.Power = new BigIntegerStatus(new PowerCalculator());
                 clicker.Cost = new BigIntegerStatus(new CostCalculator());
+                clicker.onLevelUp = new Subject<int>();
                 clicker.Calculate();
             }
         }
@@ -102,6 +103,7 @@ namespace Ichi.Clicker
                 }
                 factory.Power = new BigIntegerStatus(new PowerCalculator());
                 factory.Cost = new BigIntegerStatus(new CostCalculator());
+                factory.onLevelUp = new Subject<int>();
                 factory.Calculate();
             }
         }

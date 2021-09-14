@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
@@ -9,7 +10,8 @@ namespace Ichi.Clicker.Offline
         public IEnemy Enemy { get => this.saveDataRepository.SaveData.enemy; }
         private ISaveDataRepository saveDataRepository;
         private ITimeRepository timeRepository;
-        public event Action AlterHandler;
+        public Subject<IEnemy> onEncount = new Subject<IEnemy>();
+        public IObservable<IEnemy> OnEncount { get => this.onEncount; }
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -39,7 +41,7 @@ namespace Ichi.Clicker.Offline
             enemy.damage = 0;
             enemy.Calculate();
             this.saveDataRepository.Save();
-            this.AlterHandler?.Invoke();
+            this.onEncount.OnNext(enemy);
             //TODO やはり討伐失敗も入れないと単調、またはドロップもランダムにする？
             //TODO レベル調整入れないとあっという間にコンテンツ消化する
         }

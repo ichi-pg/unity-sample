@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Threading;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -17,6 +18,6 @@ namespace Ichi.Clicker
         void Fever(CancellationToken token);
         void CoolDown();
         void CheatMode(bool enable);
-        event Action AlterHandler;
+        IObservable<int> OnAlter { get; }
     }
 }

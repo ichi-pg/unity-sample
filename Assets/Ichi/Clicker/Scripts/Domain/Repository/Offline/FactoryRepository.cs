@@ -7,7 +7,6 @@ namespace Ichi.Clicker.Offline
     public class FactoryRepository : IFactoryRepository
     {
         public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.factories; }
-        public event Action AlterHandler;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
@@ -24,7 +23,6 @@ namespace Ichi.Clicker.Offline
         public void LevelUp(IFactory factory) {
             (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP);
             this.saveDataRepository.Save();
-            this.AlterHandler?.Invoke();
         }
 
         public void Produce() {

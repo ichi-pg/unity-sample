@@ -32,15 +32,9 @@ namespace Ichi.Clicker.View
         public void Initialize(IFactory factory) {
             this.factory = factory;
             this.adapter = new FactoryAdapter(factory);
-            this.factory.AlterHandler += this.OnAlter;
+            this.factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
-        }
-
-        public void OnDestroy() {
-            if (this.factory != null) {
-                this.factory.AlterHandler -= this.OnAlter;
-            }
         }
 
         private void OnAlter() {

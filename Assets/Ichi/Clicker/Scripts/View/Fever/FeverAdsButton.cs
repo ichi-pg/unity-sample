@@ -4,6 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -19,13 +20,9 @@ namespace Ichi.Clicker.View
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
             this.ads.LoadHandler += this.OnAlter;
-            DIContainer.FeverRepository.AlterHandler += this.OnAlter;
+            DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
             this.CoolTime().Forget();
-        }
-
-        void OnDestroy() {
-            DIContainer.FeverRepository.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {

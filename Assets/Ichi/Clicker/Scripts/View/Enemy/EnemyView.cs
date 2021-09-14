@@ -17,24 +17,20 @@ namespace Ichi.Clicker.View
         private Sprite[] sprites;
 
         void Start() {
-            DIContainer.EnemyRepository.AlterHandler += this.OnChange;
-            DIContainer.EnemyRepository.Enemy.OnDamage.Subscribe(_ => this.OnAlter()).AddTo(this);
-            this.OnChange();
+            DIContainer.EnemyRepository.OnEncount.Subscribe(_ => this.OnEncount()).AddTo(this);
+            DIContainer.EnemyRepository.Enemy.OnDamage.Subscribe(_ => this.OnDamage()).AddTo(this);
+            this.OnEncount();
         }
 
-        void OnDestroy() {
-            DIContainer.EnemyRepository.AlterHandler -= this.OnChange;
-        }
-
-        private void OnChange() {
+        private void OnEncount() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
-            this.OnAlter();
+            this.OnDamage();
             //TODO 捕獲エフェクト
             //TODO SE
         }
 
-        private void OnAlter() {
+        private void OnDamage() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
         }

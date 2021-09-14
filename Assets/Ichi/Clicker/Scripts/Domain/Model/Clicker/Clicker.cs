@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -19,12 +20,13 @@ namespace Ichi.Clicker
         public BigIntegerStatus Cost { get; set; }
         public string Unit { get => "Click"; }
         public FactoryCategory Category { get => FactoryCategory.Clicker; }
-        public event Action AlterHandler;
+        public Subject<int> onLevelUp;
+        public IObservable<int> OnLevelUp { get => this.onLevelUp; }
 
         public void Calculate() {
             this.Power.Calculate(this.level, this.rank);
             this.Cost.Calculate(this.level, this.rank);
-            this.AlterHandler?.Invoke();
+            this.onLevelUp.OnNext(this.level);
         }
 
         public void LevelUp(IConsume consume) {
