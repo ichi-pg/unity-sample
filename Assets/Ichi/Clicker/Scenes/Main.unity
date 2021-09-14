@@ -7459,9 +7459,9 @@ MonoBehaviour:
   buttons:
   - {fileID: 1850995105}
   - {fileID: 2119648543}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 472305297}
+  - {fileID: 1770050468}
+  - {fileID: 1458648}
 --- !u!1 &1900923204
 GameObject:
   m_ObjectHideFlags: 0
