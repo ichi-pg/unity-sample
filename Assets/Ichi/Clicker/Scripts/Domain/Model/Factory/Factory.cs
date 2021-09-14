@@ -24,6 +24,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Cost { get; set; }
         public string Unit { get => "Seconds"; }
         public FactoryCategory Category { get => FactoryCategory.Factory; }
+        public ItemCategory CostCategory { get => ItemCategory.EXP; }
         public event Action AlterHandler;
 
         //NOTE event、全部UniTaskに変えたい

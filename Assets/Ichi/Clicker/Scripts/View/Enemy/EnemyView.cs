@@ -28,7 +28,7 @@ namespace Ichi.Clicker.View
         private void OnChange() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
-            this.gauge.Resize(0f);
+            this.OnAlter();
             //TODO 捕獲エフェクト
             //TODO SE
         }

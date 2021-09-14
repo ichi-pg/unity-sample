@@ -14,6 +14,7 @@ namespace Ichi.Clicker
         BigIntegerStatus Power { get; }
         string Unit { get; }
         FactoryCategory Category { get; }
+        ItemCategory CostCategory { get; }
         event Action AlterHandler;
     }
 }

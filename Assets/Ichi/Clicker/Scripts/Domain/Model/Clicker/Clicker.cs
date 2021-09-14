@@ -19,6 +19,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Cost { get; set; }
         public string Unit { get => "Click"; }
         public FactoryCategory Category { get => FactoryCategory.Clicker; }
+        public ItemCategory CostCategory { get => ItemCategory.Coin; }
         public event Action AlterHandler;
 
         public void Calculate() {

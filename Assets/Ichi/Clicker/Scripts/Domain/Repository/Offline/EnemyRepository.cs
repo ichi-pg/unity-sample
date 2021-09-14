@@ -22,17 +22,16 @@ namespace Ichi.Clicker.Offline
                 if (factory.rank != enemy.rank) {
                     continue;
                 }
-                if (factory.IsLock) {
-                    factory.level = 1;
-                    break;
-                }
                 if (0 == UnityEngine.Random.Range(0, factory.rarity * factory.rarity * 10)) {
                     factory.rarity++;
                 }
+                factory.level = Math.Max(factory.level, 1);
+                factory.Calculate();
                 break;
             }
             enemy.level++;
             enemy.rank = 11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101));
+            enemy.damage = 0;
             enemy.Calculate();
             this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();

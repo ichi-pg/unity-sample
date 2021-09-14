@@ -23,10 +23,10 @@ namespace Ichi.Common
             var size = this.gauge.sizeDelta;
             switch (this.axis) {
                 case Axis.Horizontal:
-                    size.x = this.frame.sizeDelta.x * rate;
+                    size.x = this.frame.rect.width * rate;
                     break;
                 case Axis.Vertical:
-                    size.y = this.frame.sizeDelta.y * rate;
+                    size.y = this.frame.rect.height * rate;
                     break;
             }
             this.gauge.sizeDelta = size;
