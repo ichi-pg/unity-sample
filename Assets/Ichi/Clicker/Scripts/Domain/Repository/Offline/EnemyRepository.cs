@@ -40,6 +40,8 @@ namespace Ichi.Clicker.Offline
             enemy.Calculate();
             this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();
+            //TODO やはり討伐失敗も入れないと単調、またはドロップもランダムにする？
+            //TODO レベル調整入れないとあっという間にコンテンツ消化する
         }
     }
 }
