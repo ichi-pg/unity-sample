@@ -10,6 +10,8 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Image image;
         [SerializeField]
+        private Common.Gauge gauge;
+        [SerializeField]
         private Sprite[] sprites;
 
         void Start() {
@@ -26,11 +28,15 @@ namespace Ichi.Clicker.View
         private void OnChange() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
+            this.gauge.Resize(0f);
             //TODO 捕獲エフェクト
             //TODO SE
         }
 
         private void OnAlter() {
+            var enemy = DIContainer.EnemyRepository.Enemy;
+            this.gauge.Resize((float)(enemy.Damage * 100 / enemy.HP) / 100f);
+            //TODO BigNumberのfloat割り算拡張が欲しい
             //TODO ダメージエフェクト
             //TODO SE
         }

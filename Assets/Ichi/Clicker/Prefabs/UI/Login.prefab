@@ -573,8 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quantity: {fileID: 4718571753475022323}
-  gauge: {fileID: 8025897741421699100}
-  gaugeParent: {fileID: 2836107905366999525}
+  gauge: {fileID: 6822561159679375182}
   adsButton: {fileID: 7581160401231252100}
   closeModalButton: {fileID: 1722900453527359128}
 --- !u!114 &1722900453527359128
@@ -1099,6 +1098,7 @@ GameObject:
   - component: {fileID: 3064262952707502044}
   - component: {fileID: 1865242063630753030}
   - component: {fileID: 2836107905366999525}
+  - component: {fileID: 6822561159679375182}
   m_Layer: 0
   m_Name: gauge
   m_TagString: Untagged
@@ -1164,6 +1164,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6822561159679375182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943711173181610911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ae632a8508a400a9fe3253dea1a687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauge: {fileID: 4617171302800003544}
+  frame: {fileID: 3064262952707502044}
+  axis: 0
 --- !u!1 &8788393975817782480
 GameObject:
   m_ObjectHideFlags: 0

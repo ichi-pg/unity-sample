@@ -26,6 +26,8 @@ namespace Ichi.Clicker
         public FactoryCategory Category { get => FactoryCategory.Factory; }
         public event Action AlterHandler;
 
+        //NOTE event、全部UniTaskに変えたい
+
         public void Calculate() {
             this.Power.Calculate(this.level, this.rank, this.rarity);
             this.Cost.Calculate(this.level, this.rank, this.rarity);

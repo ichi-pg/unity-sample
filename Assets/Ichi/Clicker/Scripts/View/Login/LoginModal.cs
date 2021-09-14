@@ -11,9 +11,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Text quantity;
         [SerializeField]
-        private Image gauge;
-        [SerializeField]
-        private Image gaugeParent;
+        private Common.Gauge gauge;
         [SerializeField]
         private Button adsButton;
         [SerializeField]
@@ -23,11 +21,7 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Item.Quantity);
-            Common.Gauge.ResizeX(
-                this.gauge,
-                this.gaugeParent,
-                DIContainer.LoginRepository.QuantityRate
-            );
+            this.gauge.Resize(DIContainer.LoginRepository.QuantityRate);
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
             this.ads.LoadHandler += this.OnAlter;

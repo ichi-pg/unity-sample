@@ -11,11 +11,9 @@ namespace Ichi.Clicker.View
     public class FeverButton : MonoBehaviour
     {
         [SerializeField]
-        private Image gauge;
-        [SerializeField]
-        private Image gaugeParent;
-        [SerializeField]
         private Button button;
+        [SerializeField]
+        private Common.Gauge gauge;
         private CancellationToken token;
 
         void Start() {
@@ -33,11 +31,7 @@ namespace Ichi.Clicker.View
             this.button.interactable =
                 !DIContainer.FeverRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsFever;
-            Common.Gauge.ResizeY(
-                this.gauge,
-                this.gaugeParent,
-                DIContainer.FeverRepository.DurationRate
-            );
+            this.gauge.Resize(DIContainer.FeverRepository.DurationRate);
         }
 
         public void Fever() {

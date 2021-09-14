@@ -5,18 +5,31 @@ using UnityEngine.UI;
 
 namespace Ichi.Common
 {
-    public static class Gauge
+    public class Gauge : MonoBehaviour
     {
-        public static void ResizeX(Image image, Image parent, float rate) {
-            var size = image.rectTransform.sizeDelta;
-            size.x = parent.rectTransform.sizeDelta.x * rate;
-            image.rectTransform.sizeDelta = size;
+        public enum Axis {
+            Horizontal,
+            Vertical,
         }
 
-        public static void ResizeY(Image image, Image parent, float rate) {
-            var size = image.rectTransform.sizeDelta;
-            size.y = parent.rectTransform.sizeDelta.y * rate;
-            image.rectTransform.sizeDelta = size;
+        [SerializeField]
+        private RectTransform gauge;
+        [SerializeField]
+        private RectTransform frame;
+        [SerializeField]
+        private Axis axis;
+
+        public void Resize(float rate) {
+            var size = this.gauge.sizeDelta;
+            switch (this.axis) {
+                case Axis.Horizontal:
+                    size.x = this.frame.sizeDelta.x * rate;
+                    break;
+                case Axis.Vertical:
+                    size.y = this.frame.sizeDelta.y * rate;
+                    break;
+            }
+            this.gauge.sizeDelta = size;
         }
     }
 }

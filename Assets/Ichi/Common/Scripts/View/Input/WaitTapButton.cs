@@ -19,5 +19,7 @@ namespace Ichi.Common
         public void Tap() {
             this.isTap = true;
         }
+
+        //TODO Button系コンポーネント、全部UniTask式に変えたい
     }
 }
