@@ -7,6 +7,6 @@ namespace Ichi.Clicker.Offline
     public class TimeRepository : ITimeRepository
     {
         public DateTime Now { get => DateTime.Now; }
-        //TODO サーバーから
+        //NOTE サーバーから
     }
 }

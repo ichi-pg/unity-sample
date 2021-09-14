@@ -37,7 +37,7 @@ namespace Ichi.Clicker.View
         private void OnEncount() {
             this.UpdateEnemy();
             //TODO 捕獲エフェクト
-            //TODO SE
+            //NOTE SE
         }
 
         private void OnDamage() {

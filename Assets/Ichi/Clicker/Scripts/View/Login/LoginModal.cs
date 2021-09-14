@@ -44,8 +44,8 @@ namespace Ichi.Clicker.View
         private void OnReward() {
             DIContainer.LoginRepository.Collect(true);
             this.closeModalButton.Close();
-            //TODO エフェクト
-            //TODO SE
+            //NOTE エフェクト
+            //NOTE SE
         }
     }
 }

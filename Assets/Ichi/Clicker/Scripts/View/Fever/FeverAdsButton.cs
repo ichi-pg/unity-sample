@@ -39,8 +39,8 @@ namespace Ichi.Clicker.View
         private void OnReward() {
             DIContainer.FeverRepository.CoolDown();
             this.CoolTime().Forget();
-            //TODO エフェクト
-            //TODO SE
+            //NOTE エフェクト
+            //NOTE SE
         }
 
         private async UniTask CoolTime() {
