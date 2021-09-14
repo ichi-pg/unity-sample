@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
@@ -10,6 +12,8 @@ namespace Ichi.Clicker.Offline
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
         private IEnemyRepository enemyRepository;
+        private Subject<BigInteger> onProduce = new Subject<BigInteger>();
+        public IObservable<BigInteger> OnProduce { get => this.onProduce; }
 
         public ClickerRepository(ISaveDataRepository saveDataRepository, IEnemyRepository enemyRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -27,16 +31,18 @@ namespace Ichi.Clicker.Offline
 
         public void Produce() {
             var enemy = this.saveDataRepository.SaveData.enemy;
+            BigInteger sumPower;
             foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
-                if (clicker.IsBought && enemy.IsAlive) {
-                    clicker.Produce(enemy, this.cheatBonus);
+                var power = clicker.Power * this.cheatBonus;
+                if (enemy.IsAlive) {
+                    enemy.Store(power);
                 }
-                if (!enemy.IsAlive) {
-                    this.enemyRepository.Encount();
-                    break;
-                }
+                sumPower += power;
             }
-            //TODO まとめて通知したい
+            if (!enemy.IsAlive) {
+                this.enemyRepository.Encount();
+            }
+            this.onProduce.OnNext(sumPower);
         }
 
         public void CheatMode(bool enable) {

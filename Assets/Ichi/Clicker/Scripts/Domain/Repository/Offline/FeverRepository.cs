@@ -17,12 +17,13 @@ namespace Ichi.Clicker.Offline
         public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
         public TimeSpan AdsCoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
-        public Subject<int> onAlter = new Subject<int>();
+        private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
+        private IFactoryRepository factoryRepository;
 
         public int Rate {
             get {
@@ -39,9 +40,10 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
+        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IFactoryRepository factoryRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
+            this.factoryRepository = factoryRepository;
         }
 
         public void Fever(CancellationToken token) {
@@ -61,11 +63,7 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
-                    if (clicker.IsBought) {
-                        clicker.Produce(this.saveDataRepository.SaveData.enemy, this.Rate * this.cheatBonus);
-                    }
-                }
+                this.factoryRepository.Produce();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
             this.saveDataRepository.Save();

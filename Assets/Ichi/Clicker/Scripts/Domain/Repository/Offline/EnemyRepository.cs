@@ -10,7 +10,7 @@ namespace Ichi.Clicker.Offline
         public IEnemy Enemy { get => this.saveDataRepository.SaveData.enemy; }
         private ISaveDataRepository saveDataRepository;
         private ITimeRepository timeRepository;
-        public Subject<IEnemy> onEncount = new Subject<IEnemy>();
+        private Subject<IEnemy> onEncount = new Subject<IEnemy>();
         public IObservable<IEnemy> OnEncount { get => this.onEncount; }
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {

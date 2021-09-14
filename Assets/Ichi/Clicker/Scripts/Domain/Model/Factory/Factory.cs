@@ -43,15 +43,17 @@ namespace Ichi.Clicker
             this.Calculate();
         }
 
-        public void Produce(IStore store, DateTime now, int bonus = 1) {
+        public BigInteger Produce(IStore store, DateTime now, int bonus = 1) {
             if (now < this.producedAt) {
                 throw new Exception("Invalid produced at.");
             }
             var span = now - this.producedAt;
             span = Common.Time.Min(span, Limit);
             var count = span.Ticks / Interval.Ticks;
-            store.Store(this.Power * count * bonus);
+            var power = this.Power * count * bonus;
+            store.Store(power);
             this.producedAt = now;
+            return power;
         }
     }
 }

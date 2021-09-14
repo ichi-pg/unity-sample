@@ -34,9 +34,5 @@ namespace Ichi.Clicker
             this.level++;
             this.Calculate();
         }
-
-        public void Produce(IStore store, int bonus = 1) {
-            store.Store(this.Power * bonus);
-        }
     }
 }
