@@ -28,7 +28,7 @@ namespace Ichi.Clicker.Offline
         public void Produce() {
             var enemy = this.saveDataRepository.SaveData.enemy;
             foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
-                if (clicker.IsBought) {
+                if (clicker.IsBought && enemy.IsAlive) {
                     clicker.Produce(enemy, this.cheatBonus);
                 }
                 if (!enemy.IsAlive) {
@@ -36,6 +36,7 @@ namespace Ichi.Clicker.Offline
                     break;
                 }
             }
+            //TODO まとめて通知したい
         }
 
         public void CheatMode(bool enable) {

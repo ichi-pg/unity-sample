@@ -32,6 +32,7 @@ namespace Ichi.Clicker.Offline
                     factory.Produce(this.saveDataRepository.SaveData.Coin, now, this.cheatBonus);
                 }
             }
+            //TODO まとめて通知したい
         }
 
         public void CheatMode(bool enable) {
