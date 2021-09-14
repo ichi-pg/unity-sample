@@ -42,6 +42,7 @@ namespace Ichi.Clicker.Offline
             enemy.Calculate();
             this.saveDataRepository.Save();
             this.onEncount.OnNext(enemy);
+            //TODO 少なくとも今と別の敵をエンカウントさせる
             //TODO やはり討伐失敗も入れないと単調、またはドロップもランダムにする？
             //TODO レベル調整入れないとあっという間にコンテンツ消化する
         }
