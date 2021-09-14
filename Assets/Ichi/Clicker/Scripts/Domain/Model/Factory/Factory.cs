@@ -24,7 +24,6 @@ namespace Ichi.Clicker
         public BigIntegerStatus Cost { get; set; }
         public string Unit { get => "Seconds"; }
         public FactoryCategory Category { get => FactoryCategory.Factory; }
-        public ItemCategory CostCategory { get => ItemCategory.EXP; }
         public event Action AlterHandler;
 
         //NOTE event、全部UniTaskに変えたい
@@ -35,14 +34,11 @@ namespace Ichi.Clicker
             this.AlterHandler?.Invoke();
         }
 
-        public void LevelUp(IConsume consume, DateTime now) {
+        public void LevelUp(IConsume consume) {
             if (this.IsLock) {
                 throw new Exception("Invalid lock.");
             }
             consume.Consume(this.Cost);
-            if (!this.IsBought) {
-                this.producedAt = now;
-            }
             this.level++;
             this.Calculate();
         }

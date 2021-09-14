@@ -8,6 +8,7 @@ namespace Ichi.Clicker
     {
         IEnumerable<IFactory> Factories { get; }
         event Action AlterHandler;
+        bool CanLevelUp(IFactory factory);
         void LevelUp(IFactory factory);
         void Produce();
         void CheatMode(bool enable);

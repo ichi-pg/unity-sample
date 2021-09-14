@@ -8,10 +8,12 @@ namespace Ichi.Clicker.Offline
     {
         public IEnemy Enemy { get => this.saveDataRepository.SaveData.enemy; }
         private ISaveDataRepository saveDataRepository;
+        private ITimeRepository timeRepository;
         public event Action AlterHandler;
 
-        public EnemyRepository(ISaveDataRepository saveDataRepository) {
+        public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
+            this.timeRepository = timeRepository;
         }
 
         public void Encount() {
@@ -25,7 +27,10 @@ namespace Ichi.Clicker.Offline
                 if (0 == UnityEngine.Random.Range(0, factory.rarity * factory.rarity * 10)) {
                     factory.rarity++;
                 }
-                factory.level = Math.Max(factory.level, 1);
+                if (factory.IsLock) {
+                    factory.level = 1;
+                    factory.producedAt = this.timeRepository.Now;
+                }
                 factory.Calculate();
                 break;
             }

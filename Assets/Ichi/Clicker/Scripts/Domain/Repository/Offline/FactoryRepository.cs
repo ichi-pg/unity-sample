@@ -17,11 +17,13 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
+        public bool CanLevelUp(IFactory factory) {
+            return !factory.IsLock && this.saveDataRepository.SaveData.EXP.Quantity >= factory.Cost;
+        }
+
         public void LevelUp(IFactory factory) {
-            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP, this.timeRepository.Now);
-            if (CalculatorUtility.IsInflation(factory.Level)) {
-                this.saveDataRepository.Save();
-            }
+            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP);
+            this.saveDataRepository.Save();
             this.AlterHandler?.Invoke();
         }
 

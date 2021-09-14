@@ -14,7 +14,7 @@ namespace Ichi.Clicker.View
         public string Cost { get => Common.BigIntegerText.ToString(this.factory.Cost); }
         public string Power { get => Common.BigIntegerText.ToString(this.factory.Power); }
         public string NextPower { get => Common.BigIntegerText.ToString(this.factory.Power.NextValue); }
-        public bool CanLevelUp { get => !this.factory.IsLock && DIContainer.FromItemCategory(this.factory.CostCategory).Item.Quantity >= this.factory.Cost; }
+        public bool CanLevelUp { get => DIContainer.FromFactoryCategory(this.factory.Category).CanLevelUp(this.factory); }
         public string Unit { get => DIContainer.TextLocalizer.Localize(this.factory.Unit); }
 
         public FactoryAdapter(IFactory factory) {
