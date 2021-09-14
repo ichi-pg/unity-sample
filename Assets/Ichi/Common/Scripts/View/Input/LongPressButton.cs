@@ -44,5 +44,7 @@ namespace Ichi.Common
             //TODO 長押し後に1度だけ発火タイプ
             //TODO 普通のボタンタップとの併用タイプ
         }
+
+        //TODO UniRxにあるっぽいのでいらない説
     }
 }
