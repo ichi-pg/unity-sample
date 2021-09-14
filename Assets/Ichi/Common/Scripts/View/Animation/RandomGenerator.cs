@@ -19,5 +19,7 @@ namespace Ichi.Common
             obj.transform.localPosition = new Vector3(x, y , 0);
             return obj;
         }
+
+        //TODO オブジェクトプール
     }
 }
