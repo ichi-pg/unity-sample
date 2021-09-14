@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Ichi.Common
@@ -13,16 +12,10 @@ namespace Ichi.Common
             obj.PreSave();
             var json = JsonUtility.ToJson(obj, pretty);
             var path = FilePath(obj.GetType());
-            SaveTask(json, path).Forget();
-        }
-
-        private static async UniTask SaveTask(string json, string path) {
-            await UniTask.SwitchToThreadPool();
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
-            //TODO スレッド競合するとエラーる
             var writer = new StreamWriter(path);
             writer.Write(json);
             writer.Flush();
