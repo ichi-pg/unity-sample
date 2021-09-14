@@ -8,11 +8,13 @@ namespace Ichi.Clicker.View
     {
         [SerializeField]
         private GameObject prefab;
+        [SerializeField]
+        private Transform parent;
 
         void Start() {
-            Common.Hierarchy.DestroyChildren(this.transform);
+            Common.Hierarchy.DestroyChildren(this.parent);
             Common.Hierarchy.InstantiateChildren<EpisodeView, IEpisode>(
-                this.transform,
+                this.parent,
                 this.prefab,
                 DIContainer.EpisodeRepository.Episodes
             );

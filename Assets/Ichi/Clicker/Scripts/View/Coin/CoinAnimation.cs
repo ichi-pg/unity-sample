@@ -9,11 +9,11 @@ namespace Ichi.Clicker.View
     public class CoinAnimation : MonoBehaviour
     {
         [SerializeField]
-        private Sprite[] sprites;
-        [SerializeField]
         private Image image;
         [SerializeField]
         private RectTransform rect;
+        [SerializeField]
+        private Sprite[] sprites;
 
         void Start() {
             //回転する

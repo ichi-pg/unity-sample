@@ -9,8 +9,6 @@ namespace Ichi.Clicker.View
     public class DamageAnimation : MonoBehaviour
     {
         [SerializeField]
-        private Transform root;
-        [SerializeField]
         private Text text;
         [SerializeField]
         private Image image;
@@ -24,7 +22,6 @@ namespace Ichi.Clicker.View
             this.text.DOFade(0f, 2f).OnComplete(() => {
                 Destroy(this.gameObject);
             });
-            //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
             //TODO SE
         }
 
