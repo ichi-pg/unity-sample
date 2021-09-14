@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -13,12 +15,8 @@ namespace Ichi.Clicker.View
         private ItemCategory category;
 
         void Start() {
-            DIContainer.FromItemCategory(this.category).Item.AlterHandler += this.OnAlter;
+            DIContainer.FromItemCategory(this.category).Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
-        }
-
-        void OnDestroy() {
-            DIContainer.FromItemCategory(this.category).Item.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {

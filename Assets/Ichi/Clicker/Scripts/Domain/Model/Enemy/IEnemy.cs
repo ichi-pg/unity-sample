@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -10,6 +11,6 @@ namespace Ichi.Clicker
         int Rank { get; }
         BigInteger Damage { get; }
         BigIntegerStatus HP { get; }
-        event Action AlterHandler;
+        IObservable<BigInteger> OnDamage { get; }
     }
 }

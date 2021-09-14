@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -11,7 +12,8 @@ namespace Ichi.Clicker
         public Common.BigNumber quantity;
         public ItemCategory category;
         public BigInteger Quantity { get => this.quantity; }
-        public event Action AlterHandler;
+        public Subject<BigInteger> onAlter;
+        public IObservable<BigInteger> OnAlter { get => this.onAlter; }
 
         public void Consume(BigInteger i) {
             if (i < 0) {
@@ -21,7 +23,7 @@ namespace Ichi.Clicker
                 throw new Exception("Invalid consume.");
             }
             this.quantity -= i;
-            this.AlterHandler?.Invoke();
+            this.onAlter.OnNext(-i);
         }
 
         public void Store(BigInteger i) {
@@ -29,7 +31,7 @@ namespace Ichi.Clicker
                 throw new Exception("Invalid store.");
             }
             this.quantity += i;
-            this.AlterHandler?.Invoke();
+            this.onAlter.OnNext(i);
         }
 
         public void Sell(IStore store, int bonus = 1) {
@@ -37,8 +39,8 @@ namespace Ichi.Clicker
                 throw new Exception("Invalid sell.");
             }
             store.Store(this.quantity * bonus);
+            this.onAlter.OnNext(-this.quantity);
             this.quantity = 0;
-            this.AlterHandler?.Invoke();
         }
     }
 }

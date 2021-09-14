@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -16,13 +18,12 @@ namespace Ichi.Clicker.View
 
         void Start() {
             DIContainer.EnemyRepository.AlterHandler += this.OnChange;
-            DIContainer.EnemyRepository.Enemy.AlterHandler += this.OnAlter;
+            DIContainer.EnemyRepository.Enemy.OnDamage.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnChange();
         }
 
         void OnDestroy() {
             DIContainer.EnemyRepository.AlterHandler -= this.OnChange;
-            DIContainer.EnemyRepository.Enemy.AlterHandler -= this.OnAlter;
         }
 
         private void OnChange() {
@@ -36,8 +37,6 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
-            //TODO ダメージエフェクト
-            //TODO SE
         }
     }
 }

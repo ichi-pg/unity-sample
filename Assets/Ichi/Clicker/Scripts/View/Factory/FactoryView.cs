@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -31,7 +33,7 @@ namespace Ichi.Clicker.View
             this.factory = factory;
             this.adapter = new FactoryAdapter(factory);
             this.factory.AlterHandler += this.OnAlter;
-            DIContainer.CoinRepository.Item.AlterHandler += this.OnAlter;
+            DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
@@ -39,7 +41,6 @@ namespace Ichi.Clicker.View
             if (this.factory != null) {
                 this.factory.AlterHandler -= this.OnAlter;
             }
-            DIContainer.CoinRepository.Item.AlterHandler -= this.OnAlter;
         }
 
         private void OnAlter() {

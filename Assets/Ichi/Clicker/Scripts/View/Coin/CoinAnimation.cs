@@ -16,14 +16,17 @@ namespace Ichi.Clicker.View
         private RectTransform rect;
 
         void Start() {
+            //回転する
+            this.rect.DOLocalRotate(Vector3.up * 360f * 8f, 2f, RotateMode.FastBeyond360);
+            //跳ねる
             var pos = this.rect.localPosition;
-            this.rect.DOLocalRotate(Vector3.up * 360 * 8, 2, RotateMode.FastBeyond360);
-            pos.y += this.rect.rect.height*2;
+            pos.y += this.rect.rect.height * 2f;
             this.rect.DOLocalMove(pos, 0.2f).OnComplete(() => {
-                pos.y -= this.rect.rect.height*2;
+                pos.y -= this.rect.rect.height * 2f;
                 this.rect.DOLocalMove(pos, 0.8f).SetEase(Ease.OutBounce);
             });
-            this.image.DOFade(0, 2).OnComplete(() => {
+            //フェードアウト
+            this.image.DOFade(0f, 2f).OnComplete(() => {
                 Destroy(this.gameObject);
             });
             //TODO SE

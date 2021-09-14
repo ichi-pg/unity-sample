@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -15,7 +16,8 @@ namespace Ichi.Clicker
         public BigInteger Damage { get => this.damage; }
         public BigIntegerStatus HP { get; set; }
         public bool IsAlive { get => this.Damage < this.HP; }
-        public event Action AlterHandler;
+        public Subject<BigInteger> onDamage;
+        public IObservable<BigInteger> OnDamage { get => this.onDamage; }
 
         public void Calculate() {
             this.HP.Calculate(this.level, this.rank);
@@ -32,7 +34,7 @@ namespace Ichi.Clicker
             if (this.damage > this.HP) {
                 this.damage = this.HP;
             }
-            this.AlterHandler?.Invoke();
+            this.onDamage.OnNext(i);
         }
     }
 }

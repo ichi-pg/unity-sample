@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System;
+using UniRx;
 
 namespace Ichi.Clicker
 {
@@ -64,6 +66,7 @@ namespace Ichi.Clicker
                 rank = 1,
             };
             this.enemy.HP = new BigIntegerStatus(new HPCalculator());
+            this.enemy.onDamage = new Subject<BigInteger>();
             this.enemy.Calculate();
         }
 
@@ -113,6 +116,7 @@ namespace Ichi.Clicker
                     };
                     this.items.Add(item);
                 }
+                item.onAlter = new Subject<BigInteger>();
             }
             this.Coin = this.items.FirstOrDefault(item => item.category == ItemCategory.Coin);
             this.Commodity = this.items.FirstOrDefault(item => item.category == ItemCategory.Commodity);

@@ -5,31 +5,24 @@ using System.Numerics;
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
     public class CoinCreater : MonoBehaviour
     {
         [SerializeField]
-        private GameObject coin;
+        private GameObject prefab;
         [SerializeField]
-        private RectTransform region;
+        private RectTransform target;
         private CancellationToken token;
-        private BigInteger beforeQuantity;
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            this.beforeQuantity = DIContainer.CoinRepository.Item.Quantity;
-            DIContainer.CoinRepository.Item.AlterHandler += this.OnAlter;
+            DIContainer.CoinRepository.Item.OnAlter.Subscribe(this.OnAlter).AddTo(this);
         }
 
-        void OnDestroy() {
-            DIContainer.CoinRepository.Item.AlterHandler -= this.OnAlter;
-        }
-
-        private void OnAlter() {
-            var quantity = DIContainer.CoinRepository.Item.Quantity;
-            var diff = quantity - beforeQuantity;
+        private void OnAlter(BigInteger diff) {
             if (diff > 0) {
                 var count = diff.ToString().Length / 3 + 1;
                 var index = (int)Math.Min((count - 1) / 3, 2);
@@ -38,7 +31,7 @@ namespace Ichi.Clicker.View
                     this.CreateTask(index).Forget();
                 }
             }
-            this.beforeQuantity = quantity;
+            //TODO レベルに合わせた頻度再調整
         }
 
         private async UniTask CreateTask(int index) {
@@ -46,7 +39,7 @@ namespace Ichi.Clicker.View
                 TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
                 cancellationToken: this.token
             );
-            var obj = Common.AnimationCreater.Create(this.coin, this.region);
+            var obj = Common.AnimationCreater.Create(this.prefab, this.target);
             obj.GetComponent<CoinAnimation>().SetSprite(index);
         }
     }
