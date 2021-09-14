@@ -43,7 +43,9 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.Save();
             this.onEncount.OnNext(enemy);
             //TODO 少なくとも今と別の敵をエンカウントさせる
-            //TODO やはり討伐失敗も入れないと単調、またはドロップもランダムにする？
+            //TODO やはり討伐失敗も入れないと単調（制限時間）
+            //TODO ドロップもランダムにする？
+            //TODO 料理もドロップにする？
             //TODO レベル調整入れないとあっという間にコンテンツ消化する
         }
     }
