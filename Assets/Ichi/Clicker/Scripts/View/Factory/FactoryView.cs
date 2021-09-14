@@ -46,6 +46,8 @@ namespace Ichi.Clicker.View
             this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
             this.lockImage.gameObject.SetActive(this.factory.IsLock);
             this.icon.sprite = this.sprites[this.factory.Rank - 1];
+            //TODO 生産ゲージアニメ
+            //TODO 生産物アイコン差分
         }
 
         public void LevelUp() {
