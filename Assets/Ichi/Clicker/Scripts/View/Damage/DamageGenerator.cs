@@ -7,20 +7,17 @@ using UniRx;
 
 namespace Ichi.Clicker.View
 {
-    public class DamageCreater : MonoBehaviour
+    public class DamageGenerator : MonoBehaviour
     {
         [SerializeField]
-        private GameObject prefab;
-        [SerializeField]
-        private RectTransform target;
+        private Common.RandomGenerator generater;
 
         void Start() {
             DIContainer.EnemyRepository.Enemy.OnDamage.Subscribe(this.OnDamage).AddTo(this);
         }
 
         private void OnDamage(BigInteger damage) {
-            var obj = Common.AnimationCreater.Create(this.prefab, this.target);
-            obj.GetComponent<DamageAnimation>().SetDamage(damage);
+            this.generater.Generate().GetComponent<DamageAnimation>().SetDamage(damage);
         }
     }
 }

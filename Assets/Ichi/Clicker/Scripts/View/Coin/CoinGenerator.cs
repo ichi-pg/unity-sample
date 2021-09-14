@@ -9,12 +9,10 @@ using UniRx;
 
 namespace Ichi.Clicker.View
 {
-    public class CoinCreater : MonoBehaviour
+    public class CoinGenerator : MonoBehaviour
     {
         [SerializeField]
-        private GameObject prefab;
-        [SerializeField]
-        private RectTransform target;
+        private Common.RandomGenerator generater;
         private CancellationToken token;
 
         void Start() {
@@ -39,8 +37,7 @@ namespace Ichi.Clicker.View
                 TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
                 cancellationToken: this.token
             );
-            var obj = Common.AnimationCreater.Create(this.prefab, this.target);
-            obj.GetComponent<CoinAnimation>().SetSprite(index);
+            this.generater.Generate().GetComponent<CoinAnimation>().SetSprite(index);
         }
     }
 }

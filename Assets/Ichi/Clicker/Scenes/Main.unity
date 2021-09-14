@@ -625,8 +625,9 @@ GameObject:
   m_Component:
   - component: {fileID: 93776278}
   - component: {fileID: 93776279}
+  - component: {fileID: 93776280}
   m_Layer: 5
-  m_Name: DamageCreater
+  m_Name: DamageGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,6 +662,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d535252d9a2348de887ebb5a9dde6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generater: {fileID: 93776280}
+--- !u!114 &93776280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93776277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07afb050ed70740c5b432a0ab4c63bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4571658425071374121, guid: b0bef2ecfada241e087febb24615f8cf, type: 3}
@@ -2180,8 +2194,9 @@ GameObject:
   m_Component:
   - component: {fileID: 471996100}
   - component: {fileID: 471996101}
+  - component: {fileID: 471996102}
   m_Layer: 5
-  m_Name: CoinCreater
+  m_Name: CoinGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2216,6 +2231,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e583879f29f4bbf800e4d9a721f30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generater: {fileID: 471996102}
+--- !u!114 &471996102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471996099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07afb050ed70740c5b432a0ab4c63bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1403917943070962844, guid: 894089e10da2245ac8f533cd137e8040, type: 3}
