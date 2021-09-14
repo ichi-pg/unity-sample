@@ -35,8 +35,7 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             var enemy = DIContainer.EnemyRepository.Enemy;
-            this.gauge.Resize((float)(enemy.Damage * 100 / enemy.HP) / 100f);
-            //TODO BigNumberのfloat割り算拡張が欲しい
+            this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
             //TODO ダメージエフェクト
             //TODO SE
         }
