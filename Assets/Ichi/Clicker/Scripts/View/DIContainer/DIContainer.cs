@@ -4,7 +4,7 @@ using System;
 
 namespace Ichi.Clicker.View
 {
-    public static class DIContainer
+    public class DIContainer
     {
         public static ITimeRepository TimeRepository { get; private set; } = new Offline.TimeRepository();
         public static ISaveDataRepository SaveDataRepository { get; private set; } = new Offline.JsonSaveDataRepository(TimeRepository);

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
+using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
@@ -31,13 +32,7 @@ namespace Ichi.Clicker.View
         private IFactory factory;
 
         void Start() {
-            Observable.Interval(TimeSpan.FromMilliseconds(100))
-                .SkipUntil(this.levelUpButton.OnPointerDownAsObservable())
-                .TakeUntil(this.levelUpButton.OnPointerUpAsObservable())
-                .Subscribe(_ => this.LevelUp())
-                .AddTo(this);
-            //TODO 長押し開始までのディレイ
-            //TODO Commonに
+            this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
         }
 
         public void Initialize(IFactory factory) {
