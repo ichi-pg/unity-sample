@@ -4,23 +4,26 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class ItemView : MonoBehaviour
     {
+        [Inject]
+        private IItemRepositories itemRepositories;
         [SerializeField]
         private Text text;
         [SerializeField]
         private ItemCategory category;
 
         void Start() {
-            DIContainer.FromItemCategory(this.category).Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.itemRepositories.Get(this.category).Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
-            this.text.text = Common.BigIntegerText.ToString(DIContainer.FromItemCategory(this.category).Item.Quantity);
+            this.text.text = Common.BigIntegerText.ToString(this.itemRepositories.Get(this.category).Item.Quantity);
             //TODO ドラムロール
         }
     }

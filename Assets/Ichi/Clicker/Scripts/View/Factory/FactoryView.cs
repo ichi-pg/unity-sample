@@ -6,11 +6,19 @@ using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 using Ichi.Common.Extensions;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
     {
+        [Inject]
+        private ICoinRepository coinRepository;
+        [Inject]
+        private Common.ITextLocalizer textLocalizer;
+        [Inject]
+        private IFactoryRepositories factoryRepositories;
+
         [SerializeField]
         private Text label;
         [SerializeField]
@@ -39,15 +47,15 @@ namespace Ichi.Clicker.View
             this.factory = factory;
             this.adapter = new FactoryAdapter(factory);
             this.factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
-            DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.coinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
             this.label.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
-            this.desc.text = DIContainer.TextLocalizer.Localize("Coin") + this.adapter.Power + "/" + this.adapter.Unit;
+            this.desc.text = this.textLocalizer.Localize("Coin") + this.adapter.Power + "/" + this.adapter.Unit;
             this.cost.text = this.adapter.Cost;
-            this.levelUp.text = DIContainer.TextLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
+            this.levelUp.text = this.textLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
             this.levelUpButton.interactable = this.adapter.CanLevelUp;
             this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
             this.lockImage.gameObject.SetActive(this.factory.IsLock);
@@ -58,7 +66,7 @@ namespace Ichi.Clicker.View
 
         public void LevelUp() {
             if (this.adapter.CanLevelUp) {
-                DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
+                this.factoryRepositories.Get(this.factory.Category).LevelUp(this.factory);
             }
             //NOTE エフェクト
             //NOTE SE

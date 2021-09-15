@@ -16,5 +16,7 @@ namespace Ichi.Clicker
         string Unit { get; }
         FactoryCategory Category { get; }
         IObservable<int> OnLevelUp { get; }
+
+        //TODO FactoryとClickerのインターフェイスはFactoryとは別名にしたい。またはFactoryをリネーム。
     }
 }

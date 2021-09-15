@@ -6,11 +6,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using DG.Tweening;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class EnemyView : MonoBehaviour
     {
+        [Inject]
+        private IEnemyRepository enemyRepository;
+        [Inject]
+        private IClickerRepository clickerRepository;
         [SerializeField]
         private Image image;
         [SerializeField]
@@ -19,19 +24,19 @@ namespace Ichi.Clicker.View
         private Sprite[] sprites;
 
         void Start() {
-            DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
-            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            this.enemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
+            this.clickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.UpdateEnemy();
         }
 
         private void UpdateEnemy() {
-            var enemy = DIContainer.EnemyRepository.Enemy;
+            var enemy = this.enemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
             this.UpdateGauge();
         }
 
         private void UpdateGauge() {
-            var enemy = DIContainer.EnemyRepository.Enemy;
+            var enemy = this.enemyRepository.Enemy;
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
         }
 

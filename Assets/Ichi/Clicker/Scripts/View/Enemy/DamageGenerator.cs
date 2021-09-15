@@ -4,16 +4,19 @@ using System.Numerics;
 using System;
 using UnityEngine;
 using UniRx;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class DamageGenerator : MonoBehaviour
     {
+        [Inject]
+        private IClickerRepository clickerRepository;
         [SerializeField]
         private Common.RandomGenerator generater;
 
         void Start() {
-            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            this.clickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
         }
 
         private void OnDamage(BigInteger damage) {

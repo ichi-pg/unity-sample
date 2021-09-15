@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class FactoriesView : MonoBehaviour
     {
+        [Inject]
+        private IFactoryRepositories factoryRepositories;
         [SerializeField]
         private GameObject prefab;
         [SerializeField]
@@ -19,7 +22,7 @@ namespace Ichi.Clicker.View
             Common.Hierarchy.InstantiateChildren<FactoryView, IFactory>(
                 this.parent,
                 this.prefab,
-                DIContainer.FromFactoryCategory(this.category).Factories
+                this.factoryRepositories.Get(this.category).Factories
             );
         }
     }

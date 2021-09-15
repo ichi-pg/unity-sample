@@ -6,16 +6,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using DG.Tweening;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class DropObserver : MonoBehaviour
     {
+        [Inject]
+        private IEnemyRepository enemyRepository;
         [SerializeField]
         private Common.ModalOpener modalOpener;
 
         void Start() {
-            DIContainer.EnemyRepository.OnDrop.Subscribe(this.OnDrop).AddTo(this);
+            this.enemyRepository.OnDrop.Subscribe(this.OnDrop).AddTo(this);
         }
 
         private void OnDrop(IFactory factory) {

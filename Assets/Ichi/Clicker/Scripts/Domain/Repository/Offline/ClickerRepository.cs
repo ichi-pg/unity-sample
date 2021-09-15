@@ -6,7 +6,7 @@ using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
-    public class ClickerRepository : IFactoryRepository
+    public class ClickerRepository : IClickerRepository
     {
         public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.clickers; }
         private int cheatBonus = 1;

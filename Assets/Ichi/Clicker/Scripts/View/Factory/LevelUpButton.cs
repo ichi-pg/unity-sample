@@ -8,18 +8,21 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class LevelUpButton : MonoBehaviour
     {
+        [Inject]
+        private IFactoryRepositories factoryRepositories;
         [SerializeField]
         private FactoryView factoryView;
         [SerializeField]
         private FactoryCategory category;
 
         void Start() {
-            foreach (var factory in DIContainer.FromFactoryCategory(this.category).Factories) {
+            foreach (var factory in this.factoryRepositories.Get(this.category).Factories) {
                 factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             }
             this.OnAlter();
@@ -29,7 +32,7 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             //NOTE 購読が蓄積する
             this.factoryView.Initialize(
-                DIContainer.FromFactoryCategory(this.category).Factories
+                this.factoryRepositories.Get(this.category).Factories
                     .OrderBy(factory => factory.Cost).FirstOrDefault()
             );
         }

@@ -6,18 +6,21 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class CoinGenerator : MonoBehaviour
     {
+        [Inject]
+        private IFactoryRepository factoryRepository;
         [SerializeField]
         private Common.RandomGenerator generater;
         private CancellationToken token;
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FactoryRepository.OnProduce.Subscribe(this.OnAlter).AddTo(this);
+            this.factoryRepository.OnProduce.Subscribe(this.OnAlter).AddTo(this);
         }
 
         private void OnAlter(BigInteger diff) {

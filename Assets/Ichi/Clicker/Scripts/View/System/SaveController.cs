@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class SaveController : MonoBehaviour
     {
+        [Inject]
+        private ISaveDataRepository saveDataRepository;
+
         void OnApplicationFocus(bool focus) {
-            DIContainer.SaveDataRepository.Save();
+            this.saveDataRepository.Save();
         }
 
         void OnApplicationPause(bool pause) {
-            DIContainer.SaveDataRepository.Save();
+            this.saveDataRepository.Save();
         }
 
         void OnApplicationQuit() {
-            DIContainer.SaveDataRepository.Save();
+            this.saveDataRepository.Save();
         }
     }
 }

@@ -6,11 +6,14 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Zenject;
 
 namespace Ichi.Clicker.View
 {
     public class FeverButton : MonoBehaviour
     {
+        [Inject]
+        private IFeverRepository feverRepository;
         [SerializeField]
         private Button button;
         [SerializeField]
@@ -19,20 +22,20 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.feverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
             this.CoolTime().Forget();
         }
 
         private void OnAlter() {
             this.button.interactable =
-                !DIContainer.FeverRepository.IsCoolTime &&
-                !DIContainer.FeverRepository.IsFever;
-            this.gauge.Resize(DIContainer.FeverRepository.DurationRate);
+                !this.feverRepository.IsCoolTime &&
+                !this.feverRepository.IsFever;
+            this.gauge.Resize(this.feverRepository.DurationRate);
         }
 
         public void Fever() {
-            DIContainer.FeverRepository.Fever(this.token);
+            this.feverRepository.Fever(this.token);
             this.UpdateGauge().Forget();
             this.CoolTime().Forget();
             //TODO エフェクト
@@ -40,7 +43,7 @@ namespace Ichi.Clicker.View
         }
 
         private async UniTask UpdateGauge() {
-            while (DIContainer.FeverRepository.IsFever)
+            while (this.feverRepository.IsFever)
             {
                 this.OnAlter();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: this.token);
@@ -48,7 +51,7 @@ namespace Ichi.Clicker.View
         }
 
         private async UniTask CoolTime() {
-            await UniTask.Delay(DIContainer.FeverRepository.CoolTime, cancellationToken: this.token);
+            await UniTask.Delay(this.feverRepository.CoolTime, cancellationToken: this.token);
             this.OnAlter();
         }
     }
