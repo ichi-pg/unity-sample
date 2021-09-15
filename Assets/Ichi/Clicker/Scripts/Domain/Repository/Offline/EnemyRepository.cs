@@ -12,6 +12,8 @@ namespace Ichi.Clicker.Offline
         private ITimeRepository timeRepository;
         private Subject<IEnemy> onEncount = new Subject<IEnemy>();
         public IObservable<IEnemy> OnEncount { get => this.onEncount; }
+        private Subject<IFactory> onDrop = new Subject<IFactory>();
+        public IObservable<IFactory> OnDrop { get => this.onDrop; }
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -32,6 +34,7 @@ namespace Ichi.Clicker.Offline
                 if (factory.IsLock) {
                     factory.level = 1;
                     factory.producedAt = this.timeRepository.Now;
+                    this.onDrop.OnNext(factory);
                 }
                 factory.Calculate();
                 break;
@@ -49,6 +52,7 @@ namespace Ichi.Clicker.Offline
             //TODO レベル調整入れないとあっという間にコンテンツ消化する
             //TODO シンプルにリソースをモンスターだけにして、クリック担当、オート担当、スキル担当に分ける？クリックとオートは掛け算
             //TODO 強敵出現、挑戦、レアリティの高いドロップ
+            //TODO ドロップ->レアリティアップ挑戦（ポーションの見せ方変えただけ）
         }
     }
 }

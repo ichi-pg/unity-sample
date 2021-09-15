@@ -8,6 +8,7 @@ namespace Ichi.Clicker
     public interface IEnemyRepository
     {
         IEnemy Enemy { get; }
+        IObservable<IFactory> OnDrop { get; }
         IObservable<IEnemy> OnEncount { get; }
         void Encount();
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +19,8 @@ namespace Ichi.Clicker.View
         private Sprite[] sprites;
 
         void Start() {
-            DIContainer.EnemyRepository.OnEncount.Subscribe(_ => this.OnEncount()).AddTo(this);
-            DIContainer.ClickerRepository.OnProduce.Subscribe(_ => this.OnDamage()).AddTo(this);
+            DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
+            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.UpdateEnemy();
         }
 
@@ -34,13 +35,13 @@ namespace Ichi.Clicker.View
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
         }
 
-        private void OnEncount() {
+        private void OnEncount(IEnemy enemy) {
             this.UpdateEnemy();
-            //TODO 捕獲エフェクト
+            //NOTE エフェクト
             //NOTE SE
         }
 
-        private void OnDamage() {
+        private void OnDamage(BigInteger damage) {
             this.UpdateGauge();
             //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
         }

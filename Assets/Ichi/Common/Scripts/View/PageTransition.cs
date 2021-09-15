@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ichi.Common
 {
-    public class PageTransitionButton : MonoBehaviour
+    public class PageTransition : MonoBehaviour
     {
         [SerializeField]
         private GameObject page;

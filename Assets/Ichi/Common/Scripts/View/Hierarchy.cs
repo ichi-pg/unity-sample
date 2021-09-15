@@ -32,5 +32,6 @@ namespace Ichi.Common
         }
 
         //NOTE LINQ to GameObject
+        //NOTE Extensions
     }
 }

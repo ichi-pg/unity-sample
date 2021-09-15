@@ -10,11 +10,11 @@ namespace Ichi.Clicker.View
     public class AutoProducer : MonoBehaviour
     {
         [SerializeField]
-        private Common.OpenModalButton openModalButton;
+        private Common.ModalOpener loginModalOpener;
 
         void Start() {
             if (DIContainer.LoginRepository.Produce()) {
-                this.openModalButton.Open();
+                this.loginModalOpener.Open();
             }
             this.Produce(this.GetCancellationTokenOnDestroy()).Forget();
         }

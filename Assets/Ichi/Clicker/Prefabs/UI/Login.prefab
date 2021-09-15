@@ -575,7 +575,7 @@ MonoBehaviour:
   quantity: {fileID: 4718571753475022323}
   gauge: {fileID: 6822561159679375182}
   adsButton: {fileID: 7581160401231252100}
-  closeModalButton: {fileID: 1722900453527359128}
+  closer: {fileID: 1722900453527359128}
 --- !u!114 &1722900453527359128
 MonoBehaviour:
   m_ObjectHideFlags: 0

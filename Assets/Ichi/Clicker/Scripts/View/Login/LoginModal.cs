@@ -15,7 +15,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button adsButton;
         [SerializeField]
-        private Common.CloseModalButton closeModalButton;
+        private Common.ModalCloser closer;
 
         private Common.IAds ads;
 
@@ -24,17 +24,17 @@ namespace Ichi.Clicker.View
             this.gauge.Resize(DIContainer.LoginRepository.QuantityRate);
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
-            this.ads.LoadHandler += this.OnAlter;
-            this.OnAlter();
+            this.ads.LoadHandler += this.OnLoadAds;
+            this.OnLoadAds();
         }
 
-        private void OnAlter() {
+        private void OnLoadAds() {
             this.adsButton.interactable = this.ads.IsLoaded;
         }
 
         public void Collect() {
             DIContainer.LoginRepository.Collect(false);
-            this.closeModalButton.Close();
+            this.closer.Close();
         }
 
         public void PlayAds() {
@@ -43,7 +43,7 @@ namespace Ichi.Clicker.View
 
         private void OnReward() {
             DIContainer.LoginRepository.Collect(true);
-            this.closeModalButton.Close();
+            this.closer.Close();
             //TODO エフェクト
             //TODO SE
         }
