@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
+using DG.Tweening;
 
 namespace Ichi.Common
 {
@@ -19,9 +20,9 @@ namespace Ichi.Common
 
         public async UniTask Play(IEnumerable<INovel> novels) {
             foreach (var novel in novels) {
-                this.text.text = novel.Text;
+                this.text.text = "";
+                this.text.DOText(novel.Text, 0.5f);
                 await this.button.OnClickAsObservable().TakeUntilDestroy(this);
-                //TODO 文字送り
                 //TODO ウィンドウ開閉アニメ
             }
         }
