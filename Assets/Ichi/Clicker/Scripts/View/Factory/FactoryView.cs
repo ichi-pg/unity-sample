@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UniRx.Triggers;
 
 namespace Ichi.Clicker.View
 {
@@ -28,6 +29,16 @@ namespace Ichi.Clicker.View
 
         private FactoryAdapter adapter;
         private IFactory factory;
+
+        void Start() {
+            Observable.Interval(TimeSpan.FromMilliseconds(100))
+                .SkipUntil(this.levelUpButton.OnPointerDownAsObservable())
+                .TakeUntil(this.levelUpButton.OnPointerUpAsObservable())
+                .Subscribe(_ => this.LevelUp())
+                .AddTo(this);
+            //TODO 長押し開始までのディレイ
+            //TODO Commonに
+        }
 
         public void Initialize(IFactory factory) {
             this.factory = factory;
@@ -54,7 +65,6 @@ namespace Ichi.Clicker.View
             if (this.adapter.CanLevelUp) {
                 DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
             }
-            //NOTE 長押し
             //NOTE エフェクト
             //NOTE SE
         }
