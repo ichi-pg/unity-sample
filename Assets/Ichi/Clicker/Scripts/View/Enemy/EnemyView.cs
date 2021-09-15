@@ -37,8 +37,8 @@ namespace Ichi.Clicker.View
 
         private void OnEncount(IEnemy enemy) {
             this.UpdateEnemy();
-            //NOTE エフェクト
-            //NOTE SE
+            //TODO エフェクト
+            //TODO SE
         }
 
         private void OnDamage(BigInteger damage) {

@@ -17,6 +17,6 @@ namespace Ichi.Clicker
         FactoryCategory Category { get; }
         IObservable<int> OnLevelUp { get; }
 
-        //TODO IFactoryとFactoryどっちかリネーム。
+        //NOTE IFactoryとFactoryどっちかリネーム。
     }
 }

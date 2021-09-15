@@ -44,7 +44,5 @@ namespace Ichi.Clicker.View
             }
             throw new Exception("Invalid category.");
         }
-
-        //NOTE Extenject
     }
 }
