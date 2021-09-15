@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker.Offline
 {
-    public class CommodityRepository : ICollectRepository
+    public class CommodityRepository : ICommodityRepository
     {
         public IItem Item { get => this.saveDataRepository.SaveData.Commodity; }
         private ISaveDataRepository saveDataRepository;

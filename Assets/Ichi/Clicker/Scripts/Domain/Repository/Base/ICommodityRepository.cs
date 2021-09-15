@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public interface ICollectRepository : IItemRepository
+    public interface ICommodityRepository : IItemRepository
     {
         void Collect();
     }

@@ -14,7 +14,7 @@ namespace Ichi.Clicker.View
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, SaveDataRepository, ClickerRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, SaveDataRepository);
         public static IItemRepository CoinRepository { get; private set; } = new Offline.CoinRepository(SaveDataRepository);
-        public static ICollectRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(SaveDataRepository);
+        public static ICommodityRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(SaveDataRepository);
         public static IItemRepository EXPRepository { get; private set; } = new Offline.EXPRepository(SaveDataRepository);
         public static IEpisodeRepository EpisodeRepository { get; private set; } = new Offline.EpisodeRepository(SaveDataRepository);
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
