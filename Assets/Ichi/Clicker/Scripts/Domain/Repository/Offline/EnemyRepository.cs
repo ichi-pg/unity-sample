@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using UniRx;
 
@@ -14,6 +15,8 @@ namespace Ichi.Clicker.Offline
         public IObservable<IEnemy> OnEncount { get => this.onEncount; }
         private Subject<IFactory> onDrop = new Subject<IFactory>();
         public IObservable<IFactory> OnDrop { get => this.onDrop; }
+        private Subject<IEnemy> onDestroy = new Subject<IEnemy>();
+        public IObservable<IEnemy> OnDestroy { get => this.OnDestroy; }
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -23,30 +26,22 @@ namespace Ichi.Clicker.Offline
         public void Encount() {
             var saveData = this.saveDataRepository.SaveData;
             var enemy = saveData.enemy;
+            //撃破
+            this.onDestroy.OnNext(enemy);
             saveData.EXP.Store(enemy.HP);
-            foreach (var factory in saveData.factories) {
-                if (factory.rank != enemy.rank) {
-                    continue;
-                }
-                if (0 == UnityEngine.Random.Range(0, factory.rarity * factory.rarity * 10)) {
-                    factory.rarity++;
-                }
-                if (factory.IsLock) {
-                    factory.level = 1;
-                    factory.producedAt = this.timeRepository.Now;
-                    this.onDrop.OnNext(factory);
-                }
-                factory.Calculate();
-                break;
+            //ドロップ
+            var factory = saveData.factories.FirstOrDefault(factory => factory.rank == enemy.rank);
+            var k = factory.rarity + 1;
+            if (UnityEngine.Random.Range(0, k * k * 10) == 0) {
+                factory.RarityUp(this.timeRepository.Now);
+                this.onDrop.OnNext(factory);
             }
-            enemy.level++;
-            enemy.rank = 11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101));
-            enemy.damage = 0;
-            enemy.Calculate();
+            //エンカウント
+            saveData.enemy = new Enemy(11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101)));
+            this.onEncount.OnNext(saveData.enemy);
             this.saveDataRepository.Save();
-            this.onEncount.OnNext(enemy);
             //TODO 少なくとも今と別の敵をエンカウントさせる
-            //TODO やはり討伐失敗も入れないと単調（制限時間->ターン数）
+            //TODO やはり討伐失敗も入れないと単調（制限時間->ターン数=自HP+敵ATKと同義）
             //TODO ドロップもランダムにする？
             //TODO 料理もドロップにする？
             //TODO レベル調整入れないとあっという間にコンテンツ消化する

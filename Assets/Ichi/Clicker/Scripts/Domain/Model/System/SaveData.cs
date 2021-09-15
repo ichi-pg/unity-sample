@@ -23,25 +23,18 @@ namespace Ichi.Clicker
         public Item EXP { get; private set; }
 
         public void PreSave() {
-            foreach (var factory in this.factories) {
-                factory.producedAt.PreSave();
-            }
-            foreach (var item in this.items) {
-                item.quantity.PreSave();
-            }
-            this.enemy.damage.PreSave();
+            this.factories.ForEach(factory => factory.PreSave());
+            this.items.ForEach(item => item.PreSave());
+            this.enemy.PreSave();
             this.nextFeverAt.PreSave();
             this.nextFeverAdsAt.PreSave();
         }
 
         public void PostLoad() {
-            foreach (var factory in this.factories) {
-                factory.producedAt.PostLoad();
-            }
-            foreach (var item in this.items) {
-                item.quantity.PostLoad();
-            }
-            this.enemy.damage.PostLoad();
+            this.clickers.ForEach(clicker => clicker.PostLoad());
+            this.factories.ForEach(factory => factory.PostLoad());
+            this.items.ForEach(item => item.PostLoad());
+            this.enemy.PostLoad();
             this.nextFeverAt.PostLoad();
             this.nextFeverAdsAt.PostLoad();
         }
@@ -61,64 +54,33 @@ namespace Ichi.Clicker
         }
 
         private void InitializeEnemy() {
-            this.enemy = this.enemy ?? new Enemy() {
-                level = 1,
-                rank = 1,
-            };
-            this.enemy.HP = new BigIntegerStatus(new HPCalculator());
-            this.enemy.onDamage = new Subject<BigInteger>();
-            this.enemy.Calculate();
+            this.enemy = this.enemy ?? new Enemy(1);
         }
 
         private void InitializeClickers() {
             this.clickers = this.clickers ?? new List<Clicker>();
             for (var rank = 1; rank <= 10; ++rank) {
-                var clicker = this.clickers.FirstOrDefault(clicker => clicker.rank == rank);
-                if (clicker == null) {
-                    clicker = new Clicker() {
-                        rank = rank,
-                    };
-                    this.clickers.Add(clicker);
+                if (this.clickers.FirstOrDefault(clicker => clicker.rank == rank) == null) {
+                    this.clickers.Add(new Clicker(rank));
                 }
-                if (rank == 1) {
-                    clicker.level = Math.Max(clicker.level, 1);
-                }
-                clicker.Power = new BigIntegerStatus(new PowerCalculator());
-                clicker.Cost = new BigIntegerStatus(new CostCalculator());
-                clicker.onLevelUp = new Subject<int>();
-                clicker.Calculate();
             }
         }
 
         private void InitializeFactories() {
             this.factories = this.factories ?? new List<Factory>();
             for (var rank = 1; rank <= 10; ++rank) {
-                var factory = this.factories.FirstOrDefault(factory => factory.rank == rank);
-                if (factory == null) {
-                    factory = new Factory() {
-                        rank = rank,
-                        rarity = 1,
-                    };
-                    this.factories.Add(factory);
+                if (this.factories.FirstOrDefault(factory => factory.rank == rank) == null) {
+                    this.factories.Add(new Factory(rank));
                 }
-                factory.Power = new BigIntegerStatus(new PowerCalculator());
-                factory.Cost = new BigIntegerStatus(new CostCalculator());
-                factory.onLevelUp = new Subject<int>();
-                factory.Calculate();
             }
         }
 
         private void InitializeItems() {
             this.items = this.items ?? new List<Item>();
             foreach (ItemCategory category in Enum.GetValues(typeof(ItemCategory))) {
-                var item = this.items.FirstOrDefault(item => item.category == category);
-                if (item == null) {
-                    item = new Item() {
-                        category = category,
-                    };
-                    this.items.Add(item);
+                if (this.items.FirstOrDefault(item => item.category == category) == null) {
+                    this.items.Add(new Item(category));
                 }
-                item.onAlter = new Subject<BigInteger>();
             }
             this.Coin = this.items.FirstOrDefault(item => item.category == ItemCategory.Coin);
             this.Commodity = this.items.FirstOrDefault(item => item.category == ItemCategory.Commodity);

@@ -7,13 +7,31 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Item : IItem, IStore, IConsume
+    public class Item : IItem, IStore, IConsume, Common.IPreSave, Common.IPostLoad
     {
         public Common.BigNumber quantity;
         public ItemCategory category;
         public BigInteger Quantity { get => this.quantity; }
-        public Subject<BigInteger> onAlter;
+        private Subject<BigInteger> onAlter;
         public IObservable<BigInteger> OnAlter { get => this.onAlter; }
+
+        public Item(ItemCategory category) {
+            this.category = category;
+            this.Initialize();
+        }
+
+        public void PreSave() {
+            this.quantity.PreSave();
+        }
+
+        public void PostLoad() {
+            this.quantity.PostLoad();
+            this.Initialize();
+        }
+
+        private void Initialize() {
+            this.onAlter = new Subject<BigInteger>();
+        }
 
         public void Consume(BigInteger i) {
             if (i < 0) {

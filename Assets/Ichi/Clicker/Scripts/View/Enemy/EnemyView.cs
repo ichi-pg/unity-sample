@@ -33,6 +33,7 @@ namespace Ichi.Clicker.View
         private void UpdateGauge() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
+            //TODO 撃破のタイミングですぐ切り替わるので、HPが満タンにならない。撃破演出を入れてワンテンポおきたい。
         }
 
         private void OnEncount(IEnemy enemy) {
