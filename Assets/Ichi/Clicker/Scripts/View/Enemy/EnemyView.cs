@@ -19,6 +19,7 @@ namespace Ichi.Clicker.View
         private Sprite[] sprites;
 
         void Start() {
+            DIContainer.EnemyRepository.OnWin.Subscribe(this.OnWin).AddTo(this);
             DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.UpdateEnemy();
@@ -28,12 +29,19 @@ namespace Ichi.Clicker.View
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
             this.UpdateGauge();
+            //TODO 名前描画
+            //TODO レベル描画
+            //TODO 希少性描画
         }
 
         private void UpdateGauge() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
-            //TODO 撃破のタイミングですぐ切り替わるので、HPが満タンにならない。撃破演出を入れてワンテンポおきたい。
+        }
+
+        private void OnWin(IEnemy enemy) {
+            //TODO エフェクト
+            //TODO SE
         }
 
         private void OnEncount(IEnemy enemy) {

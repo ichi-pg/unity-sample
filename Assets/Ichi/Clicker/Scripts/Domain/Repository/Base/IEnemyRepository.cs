@@ -9,7 +9,9 @@ namespace Ichi.Clicker
     {
         IEnemy Enemy { get; }
         IObservable<IFactory> OnDrop { get; }
+        IObservable<IEnemy> OnWin { get; }
         IObservable<IEnemy> OnEncount { get; }
+        void Win();
         void Encount();
     }
 }

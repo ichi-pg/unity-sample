@@ -16,8 +16,6 @@ namespace Ichi.Clicker
         public BigInteger Damage { get => this.damage; }
         public BigIntegerStatus HP { get; private set; }
         public bool IsAlive { get => this.Damage < this.HP; }
-        private Subject<BigInteger> onDamage;
-        public IObservable<BigInteger> OnDamage { get => this.onDamage; }
 
         public Enemy(int rank) {
             this.level = 1;
@@ -35,7 +33,6 @@ namespace Ichi.Clicker
         }
 
         private void Initialize() {
-            this.onDamage = new Subject<BigInteger>();
             this.HP = new BigIntegerStatus(new HPCalculator());
             this.HP.Calculate(this.level, this.rank);
         }
@@ -51,7 +48,6 @@ namespace Ichi.Clicker
             if (this.damage > this.HP) {
                 this.damage = this.HP;
             }
-            this.onDamage.OnNext(i);
         }
     }
 }

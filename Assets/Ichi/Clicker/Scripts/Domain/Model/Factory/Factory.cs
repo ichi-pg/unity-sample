@@ -27,8 +27,6 @@ namespace Ichi.Clicker
         public FactoryCategory Category { get => FactoryCategory.Factory; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
-        private Subject<int> onRarityUp;
-        public IObservable<int> OnRarityUp { get => this.OnRarityUp; }
 
         public Factory(int rank) {
             this.rank = rank;
@@ -46,7 +44,6 @@ namespace Ichi.Clicker
 
         private void Initialize() {
             this.onLevelUp = new Subject<int>();
-            this.onRarityUp = new Subject<int>();
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());
             this.Calculate();
@@ -74,7 +71,6 @@ namespace Ichi.Clicker
             }
             this.rarity++;
             this.Calculate();
-            this.onRarityUp.OnNext(this.rarity);
         }
 
         public BigInteger Produce(IStore store, DateTime now, int bonus = 1) {

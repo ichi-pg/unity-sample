@@ -7,7 +7,12 @@ namespace Ichi.Clicker.View
     public class ProduceButton : MonoBehaviour
     {
         public void Produce() {
-            DIContainer.ClickerRepository.Produce();
+            if (DIContainer.EnemyRepository.Enemy.IsAlive) {
+                DIContainer.ClickerRepository.Produce();
+            } else {
+                DIContainer.EnemyRepository.Encount();
+                //TODO 演出終わるまでのウェイト
+            }
         }
     }
 }

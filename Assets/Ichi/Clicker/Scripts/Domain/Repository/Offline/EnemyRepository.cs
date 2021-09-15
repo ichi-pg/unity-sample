@@ -15,19 +15,22 @@ namespace Ichi.Clicker.Offline
         public IObservable<IEnemy> OnEncount { get => this.onEncount; }
         private Subject<IFactory> onDrop = new Subject<IFactory>();
         public IObservable<IFactory> OnDrop { get => this.onDrop; }
-        private Subject<IEnemy> onDestroy = new Subject<IEnemy>();
-        public IObservable<IEnemy> OnDestroy { get => this.OnDestroy; }
+        private Subject<IEnemy> onWin = new Subject<IEnemy>();
+        public IObservable<IEnemy> OnWin { get => this.onWin; }
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
             this.timeRepository = timeRepository;
         }
 
-        public void Encount() {
+        public void Win() {
             var saveData = this.saveDataRepository.SaveData;
             var enemy = saveData.enemy;
-            //撃破
-            this.onDestroy.OnNext(enemy);
+            if (enemy.IsAlive) {
+                throw new Exception("Invalid alive.");
+            }
+            //勝利
+            this.onWin.OnNext(enemy);
             saveData.EXP.Store(enemy.HP);
             //ドロップ
             var factory = saveData.factories.FirstOrDefault(factory => factory.rank == enemy.rank);
@@ -36,9 +39,18 @@ namespace Ichi.Clicker.Offline
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
             }
+        }
+
+        public void Encount() {
+            var saveData = this.saveDataRepository.SaveData;
+            if (saveData.enemy.IsAlive) {
+                throw new Exception("Invalid alive.");
+            }
             //エンカウント
-            saveData.enemy = new Enemy(11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101)));
-            this.onEncount.OnNext(saveData.enemy);
+            //TODO レベル上昇ロジック
+            var enemy = new Enemy(11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101)));
+            saveData.enemy = enemy;
+            this.onEncount.OnNext(enemy);
             this.saveDataRepository.Save();
             //TODO 少なくとも今と別の敵をエンカウントさせる
             //TODO やはり討伐失敗も入れないと単調（制限時間->ターン数=自HP+敵ATKと同義）

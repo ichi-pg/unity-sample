@@ -9,8 +9,8 @@ namespace Ichi.Clicker
     public interface IEnemy
     {
         int Rank { get; }
+        bool IsAlive { get; }
         BigInteger Damage { get; }
         BigIntegerStatus HP { get; }
-        IObservable<BigInteger> OnDamage { get; }
     }
 }

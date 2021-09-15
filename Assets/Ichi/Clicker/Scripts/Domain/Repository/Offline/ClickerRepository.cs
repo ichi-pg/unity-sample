@@ -31,8 +31,12 @@ namespace Ichi.Clicker.Offline
 
         public void Produce() {
             var enemy = this.saveDataRepository.SaveData.enemy;
+            if (!enemy.IsAlive) {
+                throw new Exception("Invalid alive.");
+            }
             BigInteger sumPower;
             foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
+                //TODO 弱点など
                 var power = clicker.Power * this.cheatBonus;
                 if (enemy.IsAlive) {
                     enemy.Store(power);
@@ -40,7 +44,7 @@ namespace Ichi.Clicker.Offline
                 sumPower += power;
             }
             if (!enemy.IsAlive) {
-                this.enemyRepository.Encount();
+                this.enemyRepository.Win();
             }
             this.onProduce.OnNext(sumPower);
         }
