@@ -7,7 +7,7 @@ using UniRx;
 
 namespace Ichi.Common
 {
-    public class TabView : MonoBehaviour
+    public class TabController : MonoBehaviour
     {
         [SerializeField]
         private GameObject[] views;
