@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
-using DG.Tweening;
 
 namespace Ichi.Clicker.View
 {
@@ -19,8 +17,7 @@ namespace Ichi.Clicker.View
         }
 
         private void OnDrop(IFactory factory) {
-            this.modalOpener.Open();
-            //TODO 引数として渡す
+            this.modalOpener.Open<DropModal, IFactory>(factory);
         }
     }
 }

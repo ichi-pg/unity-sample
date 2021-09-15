@@ -11,15 +11,22 @@ namespace Ichi.Common
         private GameObject modal;
 
         public void Open() {
-            Instantiate(
+            this.Create();
+            //TODO 入れ替えるパターン
+        }
+
+        public void Open<T, U>(U child) where T : IChildView<U> {
+            this.Create().GetComponent<T>().Initialize(child);
+        }
+
+        private GameObject Create() {
+            return Instantiate(
                 this.modal,
                 FindObjectsOfType<Canvas>()
                     .OrderBy(canvas => -canvas.sortingOrder)
                     .FirstOrDefault()
                     .transform
             );
-            //TODO IChildView
-            //TODO 入れ替えるパターン
         }
     }
 }
