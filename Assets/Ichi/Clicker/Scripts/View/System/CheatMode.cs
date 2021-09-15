@@ -17,7 +17,5 @@ namespace Ichi.Clicker.View
             DIContainer.FactoryRepository.CheatMode(this.boost);
             DIContainer.FeverRepository.CheatMode(this.boost);
         }
-
-        //TODO リセットボタン
     }
 }
