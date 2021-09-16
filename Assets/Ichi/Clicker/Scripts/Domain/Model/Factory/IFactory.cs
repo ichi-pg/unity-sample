@@ -18,6 +18,6 @@ namespace Ichi.Clicker
         IObservable<int> OnLevelUp { get; }
 
         //NOTE IFactoryとFactoryどっちかリネーム。スキルも含まれるのでIFactoryをリネームする方が良い。成長し使うもの。道具、配下。
-        //NOTE Minion, Tool, Follower, Servant, Card, Glow, Article, Fortune, Property, Asset, Piece, Hand, Entity, Thing
+        //NOTE Minion, Tool, Gear, Follower, Servant, Card, Glow, Article, Fortune, Property, Asset, Piece, Hand, Entity, Thing
     }
 }
