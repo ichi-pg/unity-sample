@@ -10,11 +10,9 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-
         public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
         public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero); }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
-        private int Rate { get => this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
