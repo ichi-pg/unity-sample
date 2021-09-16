@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Clicker : IFactory, Common.IPostLoad
+    public class Clicker : IGadget, Common.IPostLoad
     {
         public int level;
         public int rank;
@@ -19,7 +19,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
         public string Unit { get => "Click"; }
-        public FactoryCategory Category { get => FactoryCategory.Clicker; }
+        public GadgetCategory Category { get => GadgetCategory.Clicker; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
 

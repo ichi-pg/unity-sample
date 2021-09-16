@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Factory : IFactory, Common.IPreSave, Common.IPostLoad
+    public class Factory : IGadget, Common.IPreSave, Common.IPostLoad
     {
         public static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
         public static readonly TimeSpan Limit = TimeSpan.FromHours(12);
@@ -24,7 +24,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
         public string Unit { get => "Seconds"; }
-        public FactoryCategory Category { get => FactoryCategory.Factory; }
+        public GadgetCategory Category { get => GadgetCategory.Factory; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
 

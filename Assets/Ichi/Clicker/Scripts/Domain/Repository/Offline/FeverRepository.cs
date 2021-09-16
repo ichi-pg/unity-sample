@@ -23,7 +23,7 @@ namespace Ichi.Clicker.Offline
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
-        private IFactoryRepository factoryRepository;
+        private IGadgetRepository factoryRepository;
 
         public int Rate {
             get {
@@ -40,7 +40,7 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IFactoryRepository factoryRepository) {
+        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IGadgetRepository factoryRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
             this.factoryRepository = factoryRepository;

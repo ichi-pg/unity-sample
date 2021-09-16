@@ -9,7 +9,7 @@ using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
-    public class FactoryView : MonoBehaviour, Common.IChildView<IFactory>
+    public class GadgetView : MonoBehaviour, Common.IChildView<IGadget>
     {
         [SerializeField]
         private Text label;
@@ -28,16 +28,16 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Sprite[] sprites;
 
-        private FactoryAdapter adapter;
-        private IFactory factory;
+        private GadgetAdapter adapter;
+        private IGadget factory;
 
         void Start() {
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
         }
 
-        public void Initialize(IFactory factory) {
+        public void Initialize(IGadget factory) {
             this.factory = factory;
-            this.adapter = new FactoryAdapter(factory);
+            this.adapter = new GadgetAdapter(factory);
             this.factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
@@ -58,7 +58,7 @@ namespace Ichi.Clicker.View
 
         public void LevelUp() {
             if (this.adapter.CanLevelUp) {
-                DIContainer.FromFactoryCategory(this.factory.Category).LevelUp(this.factory);
+                DIContainer.FromGadgetCategory(this.factory.Category).LevelUp(this.factory);
             }
             //TODO エフェクト
             //TODO SE

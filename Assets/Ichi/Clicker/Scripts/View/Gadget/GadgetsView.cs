@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ichi.Clicker.View
 {
-    public class FactoriesView : MonoBehaviour
+    public class GadgetsView : MonoBehaviour
     {
         [SerializeField]
         private GameObject prefab;
@@ -12,14 +12,14 @@ namespace Ichi.Clicker.View
         private Transform parent;
 
         [SerializeField]
-        private FactoryCategory category;
+        private GadgetCategory category;
 
         void Start() {
             Common.Hierarchy.DestroyChildren(this.parent);
-            Common.Hierarchy.InstantiateChildren<FactoryView, IFactory>(
+            Common.Hierarchy.InstantiateChildren<GadgetView, IGadget>(
                 this.parent,
                 this.prefab,
-                DIContainer.FromFactoryCategory(this.category).Factories
+                DIContainer.FromGadgetCategory(this.category).Factories
             );
         }
     }

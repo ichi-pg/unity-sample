@@ -13,8 +13,8 @@ namespace Ichi.Clicker.Offline
         private ITimeRepository timeRepository;
         private Subject<IEnemy> onEncount = new Subject<IEnemy>();
         public IObservable<IEnemy> OnEncount { get => this.onEncount; }
-        private Subject<IFactory> onDrop = new Subject<IFactory>();
-        public IObservable<IFactory> OnDrop { get => this.onDrop; }
+        private Subject<IGadget> onDrop = new Subject<IGadget>();
+        public IObservable<IGadget> OnDrop { get => this.onDrop; }
         private Subject<IEnemy> onWin = new Subject<IEnemy>();
         public IObservable<IEnemy> OnWin { get => this.onWin; }
 

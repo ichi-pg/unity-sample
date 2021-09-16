@@ -6,9 +6,9 @@ using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
-    public class FactoryRepository : IFactoryRepository
+    public class FactoryRepository : IGadgetRepository
     {
-        public IEnumerable<IFactory> Factories { get => this.saveDataRepository.SaveData.factories; }
+        public IEnumerable<IGadget> Factories { get => this.saveDataRepository.SaveData.factories; }
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
@@ -20,11 +20,11 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
-        public bool CanLevelUp(IFactory factory) {
+        public bool CanLevelUp(IGadget factory) {
             return !factory.IsLock && this.saveDataRepository.SaveData.EXP.Quantity >= factory.Cost;
         }
 
-        public void LevelUp(IFactory factory) {
+        public void LevelUp(IGadget factory) {
             (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP);
             this.saveDataRepository.Save();
         }

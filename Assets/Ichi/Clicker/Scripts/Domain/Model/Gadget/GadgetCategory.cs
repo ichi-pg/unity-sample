@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public enum FactoryCategory {
-        Factory,
+    public enum GadgetCategory {
         Clicker,
+        Factory,
+        Skill,
     }
 }

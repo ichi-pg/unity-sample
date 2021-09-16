@@ -9,8 +9,8 @@ namespace Ichi.Clicker.View
         public static ITimeRepository TimeRepository { get; private set; } = new Offline.TimeRepository();
         public static ISaveDataRepository SaveDataRepository { get; private set; } = new Offline.JsonSaveDataRepository(TimeRepository);
         public static IEnemyRepository EnemyRepository { get; private set; } = new Offline.EnemyRepository(SaveDataRepository, TimeRepository);
-        public static IFactoryRepository ClickerRepository { get; private set; } = new Offline.ClickerRepository(SaveDataRepository, EnemyRepository);
-        public static IFactoryRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository(TimeRepository, SaveDataRepository);
+        public static IGadgetRepository ClickerRepository { get; private set; } = new Offline.ClickerRepository(SaveDataRepository, EnemyRepository);
+        public static IGadgetRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository(TimeRepository, SaveDataRepository);
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, SaveDataRepository, ClickerRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, SaveDataRepository);
         public static IItemRepository CoinRepository { get; private set; } = new Offline.CoinRepository(SaveDataRepository);
@@ -21,11 +21,11 @@ namespace Ichi.Clicker.View
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
 
-        public static IFactoryRepository FromFactoryCategory(FactoryCategory category) {
+        public static IGadgetRepository FromGadgetCategory(GadgetCategory category) {
             switch (category) {
-                case FactoryCategory.Factory:
+                case GadgetCategory.Factory:
                     return FactoryRepository;
-                case FactoryCategory.Clicker:
+                case GadgetCategory.Clicker:
                     return ClickerRepository;
             }
             throw new Exception("Invalid category.");

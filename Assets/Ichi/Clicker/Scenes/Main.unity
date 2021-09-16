@@ -522,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 1189401889}
-  category: 1
+  category: 0
 --- !u!1 &84895544
 GameObject:
   m_ObjectHideFlags: 0
@@ -7459,7 +7459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 1490961894}
-  category: 0
+  category: 1
 --- !u!1 &1879002716
 GameObject:
   m_ObjectHideFlags: 0

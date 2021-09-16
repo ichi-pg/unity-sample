@@ -16,8 +16,8 @@ namespace Ichi.Clicker.View
             DIContainer.EnemyRepository.OnDrop.Subscribe(this.OnDrop).AddTo(this);
         }
 
-        private void OnDrop(IFactory factory) {
-            this.modalOpener.Open<DropModal, IFactory>(factory);
+        private void OnDrop(IGadget gadget) {
+            this.modalOpener.Open<DropModal, IGadget>(gadget);
         }
     }
 }

@@ -6,11 +6,11 @@ using UniRx;
 
 namespace Ichi.Clicker
 {
-    public interface IFactoryRepository
+    public interface IGadgetRepository
     {
-        IEnumerable<IFactory> Factories { get; }
-        bool CanLevelUp(IFactory factory);
-        void LevelUp(IFactory factory);
+        IEnumerable<IGadget> Factories { get; }
+        bool CanLevelUp(IGadget gadget);
+        void LevelUp(IGadget gadget);
         void Produce();
         void CheatMode(bool enable);
         IObservable<BigInteger> OnProduce { get; }

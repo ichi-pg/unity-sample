@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    public class DropModal : MonoBehaviour, Common.IChildView<IFactory>
+    public class DropModal : MonoBehaviour, Common.IChildView<IGadget>
     {
-        public void Initialize(IFactory factory) {
+        public void Initialize(IGadget gadget) {
             //TODO
         }
     }
