@@ -39,6 +39,7 @@ namespace Ichi.Clicker.Offline
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
             }
+            this.saveDataRepository.Save();
         }
 
         public void Encount() {
