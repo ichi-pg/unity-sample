@@ -22,7 +22,7 @@ namespace Ichi.Clicker.View
         private async UniTask UpdateView(CancellationToken token) {
             while (true) {
                 this.coolTime.text = DIContainer.FeverRepository.CoolTime.ToString("mm\\:ss");
-                this.adsCoolTime.text = DIContainer.FeverRepository.AdsCoolTime.ToString("mm\\:ss");
+                this.adsCoolTime.text = DIContainer.CoolDownRepository.CoolTime.ToString("mm\\:ss");
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }

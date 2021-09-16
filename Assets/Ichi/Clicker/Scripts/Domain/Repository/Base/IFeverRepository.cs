@@ -9,14 +9,10 @@ namespace Ichi.Clicker
     public interface IFeverRepository
     {
         TimeSpan CoolTime { get; }
-        TimeSpan AdsCoolTime { get; }
-        float DurationRate { get; }
-        bool IsAdsCoolTime { get; }
+        float TimeLeftRate { get; }
         bool IsCoolTime { get; }
         bool IsFever { get; }
-        int Rate { get; }
         void Fever(CancellationToken token);
-        void CoolDown();
         void CheatMode(bool enable);
         IObservable<int> OnAlter { get; }
     }

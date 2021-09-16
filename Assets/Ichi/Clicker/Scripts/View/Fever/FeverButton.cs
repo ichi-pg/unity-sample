@@ -28,7 +28,7 @@ namespace Ichi.Clicker.View
             this.button.interactable =
                 !DIContainer.FeverRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsFever;
-            this.gauge.Resize(DIContainer.FeverRepository.DurationRate);
+            this.gauge.Resize(DIContainer.FeverRepository.TimeLeftRate);
         }
 
         public void Fever() {

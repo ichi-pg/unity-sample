@@ -28,7 +28,7 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             this.button.interactable = this.ads.IsLoaded &&
                 DIContainer.FeverRepository.IsCoolTime &&
-                !DIContainer.FeverRepository.IsAdsCoolTime &&
+                !DIContainer.CoolDownRepository.IsCoolTime &&
                 !DIContainer.FeverRepository.IsFever;
         }
 
@@ -37,14 +37,14 @@ namespace Ichi.Clicker.View
         }
 
         private void OnReward() {
-            DIContainer.FeverRepository.CoolDown();
+            DIContainer.CoolDownRepository.CoolDown();
             this.CoolTime().Forget();
             //TODO エフェクト
             //TODO SE
         }
 
         private async UniTask CoolTime() {
-            await UniTask.Delay(DIContainer.FeverRepository.AdsCoolTime, cancellationToken: this.token);
+            await UniTask.Delay(DIContainer.CoolDownRepository.CoolTime, cancellationToken: this.token);
             this.OnAlter();
         }
     }

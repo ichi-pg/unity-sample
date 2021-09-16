@@ -14,9 +14,7 @@ namespace Ichi.Clicker.Offline
 
         public bool IsFever { get => this.timeRepository.Now < this.finishAt; }
         public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
-        public bool IsAdsCoolTime { get => this.AdsCoolTime > TimeSpan.Zero; }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
-        public TimeSpan AdsCoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
@@ -25,7 +23,7 @@ namespace Ichi.Clicker.Offline
         private ISaveDataRepository saveDataRepository;
         private IProduceRepository factoryRepository;
 
-        public int Rate {
+        private int Rate {
             get {
                 //全ての施設の性能は等価 -> オートの総生産 = クリックの施設数倍
                 //1日4回ログインで2回ずつフィーバー -> 300s / 0.1s * 8回/日 * n = 86400回/日
@@ -33,7 +31,7 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public float DurationRate {
+        public float TimeLeftRate {
             get {
                 var timeLeft = Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero);
                 return (float)timeLeft.Ticks / Duration.Ticks;
@@ -66,23 +64,6 @@ namespace Ichi.Clicker.Offline
                 this.factoryRepository.Produce();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
-            this.saveDataRepository.Save();
-            this.onAlter.OnNext(0);
-        }
-
-        public void CoolDown() {
-            if (this.IsFever) {
-                throw new Exception("Invalid fever.");
-            }
-            if (!this.IsCoolTime) {
-                throw new Exception("Invalid cool time.");
-            }
-            if (this.IsAdsCoolTime) {
-                throw new Exception("Invalid ads cool time.");
-            }
-            var now = this.timeRepository.Now;
-            this.saveDataRepository.SaveData.nextFeverAt = now;
-            this.saveDataRepository.SaveData.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
             this.saveDataRepository.Save();
             this.onAlter.OnNext(0);
         }
