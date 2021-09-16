@@ -13,7 +13,7 @@ namespace Ichi.Clicker.Offline
         private ISaveDataRepository saveDataRepository;
         private IEnemyRepository enemyRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
-        public IObservable<BigInteger> OnProduce { get => this.onProduce; }
+        public IObservable<BigInteger> OnExecute { get => this.onProduce; }
 
         public ClickerRepository(ISaveDataRepository saveDataRepository, IEnemyRepository enemyRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.Save();
         }
 
-        public void Produce() {
+        public void Execute() {
             var enemy = this.saveDataRepository.SaveData.enemy;
             if (!enemy.IsAlive) {
                 throw new Exception("Invalid alive.");

@@ -17,7 +17,7 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FactoryRepository.OnProduce.Subscribe(this.OnAlter).AddTo(this);
+            DIContainer.FactoryRepository.OnExecute.Subscribe(this.OnAlter).AddTo(this);
         }
 
         private void OnAlter(BigInteger diff) {

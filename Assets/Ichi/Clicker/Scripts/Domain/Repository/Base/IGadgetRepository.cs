@@ -11,8 +11,8 @@ namespace Ichi.Clicker
         IEnumerable<IGadget> Factories { get; }
         bool CanLevelUp(IGadget gadget);
         void LevelUp(IGadget gadget);
-        void Produce();
+        void Execute();
         void CheatMode(bool enable);
-        IObservable<BigInteger> OnProduce { get; }
+        IObservable<BigInteger> OnExecute { get; }
     }
 }

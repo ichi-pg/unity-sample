@@ -13,7 +13,7 @@ namespace Ichi.Clicker.Offline
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
-        public IObservable<BigInteger> OnProduce { get => this.onProduce; }
+        public IObservable<BigInteger> OnExecute { get => this.onProduce; }
 
         public FactoryRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.Save();
         }
 
-        public void Produce() {
+        public void Execute() {
             var now = this.timeRepository.Now;
             BigInteger power;
             foreach (var factory in this.saveDataRepository.SaveData.factories) {

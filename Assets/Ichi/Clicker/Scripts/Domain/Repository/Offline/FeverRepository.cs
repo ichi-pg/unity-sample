@@ -63,7 +63,7 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                this.factoryRepository.Produce();
+                this.factoryRepository.Execute();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
             this.saveDataRepository.Save();

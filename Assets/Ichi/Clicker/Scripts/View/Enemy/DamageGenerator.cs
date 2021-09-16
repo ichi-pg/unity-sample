@@ -13,7 +13,7 @@ namespace Ichi.Clicker.View
         private Common.RandomGenerator generater;
 
         void Start() {
-            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.ClickerRepository.OnExecute.Subscribe(this.OnDamage).AddTo(this);
         }
 
         private void OnDamage(BigInteger damage) {

@@ -21,7 +21,7 @@ namespace Ichi.Clicker.View
 
         private async UniTask Produce(CancellationToken token) {
             while (true) {
-                DIContainer.FactoryRepository.Produce();
+                DIContainer.FactoryRepository.Execute();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }
