@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 5030369101494901046}
   - component: {fileID: 4503321098379477691}
   m_Layer: 0
-  m_Name: FactoryScroll
+  m_Name: GadgetScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

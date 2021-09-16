@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 1292631162775062816}
   - component: {fileID: 993950159418672031}
   m_Layer: 5
-  m_Name: FactoryModal
+  m_Name: GadgetModal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
