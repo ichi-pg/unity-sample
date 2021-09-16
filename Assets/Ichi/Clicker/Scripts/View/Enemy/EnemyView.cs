@@ -21,7 +21,7 @@ namespace Ichi.Clicker.View
         void Start() {
             DIContainer.EnemyRepository.OnWin.Subscribe(this.OnWin).AddTo(this);
             DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
-            DIContainer.ClickerRepository.OnExecute.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.UpdateEnemy();
         }
 

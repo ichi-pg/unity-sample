@@ -8,7 +8,7 @@ namespace Ichi.Clicker.View
     {
         public void Produce() {
             if (DIContainer.EnemyRepository.Enemy.IsAlive) {
-                DIContainer.ClickerRepository.Execute();
+                DIContainer.ClickerRepository.Produce();
             } else {
                 DIContainer.EnemyRepository.Encount();
                 //TODO 演出終わるまでのウェイト

@@ -23,7 +23,7 @@ namespace Ichi.Clicker.Offline
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
-        private IGadgetRepository factoryRepository;
+        private IProduceRepository factoryRepository;
 
         public int Rate {
             get {
@@ -40,7 +40,7 @@ namespace Ichi.Clicker.Offline
             }
         }
 
-        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IGadgetRepository factoryRepository) {
+        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IProduceRepository factoryRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
             this.factoryRepository = factoryRepository;
@@ -63,7 +63,7 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce(CancellationToken token) {
             while (this.IsFever)
             {
-                this.factoryRepository.Execute();
+                this.factoryRepository.Produce();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
             this.saveDataRepository.Save();

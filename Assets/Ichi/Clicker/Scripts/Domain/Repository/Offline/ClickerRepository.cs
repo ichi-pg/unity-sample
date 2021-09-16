@@ -6,14 +6,14 @@ using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
-    public class ClickerRepository : IGadgetRepository
+    public class ClickerRepository : IProduceRepository
     {
         public IEnumerable<IGadget> Factories { get => this.saveDataRepository.SaveData.clickers; }
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
         private IEnemyRepository enemyRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
-        public IObservable<BigInteger> OnExecute { get => this.onProduce; }
+        public IObservable<BigInteger> OnProduce { get => this.onProduce; }
 
         public ClickerRepository(ISaveDataRepository saveDataRepository, IEnemyRepository enemyRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.Save();
         }
 
-        public void Execute() {
+        public void Produce() {
             var enemy = this.saveDataRepository.SaveData.enemy;
             if (!enemy.IsAlive) {
                 throw new Exception("Invalid alive.");

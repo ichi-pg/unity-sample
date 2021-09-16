@@ -6,14 +6,14 @@ using UniRx;
 
 namespace Ichi.Clicker.Offline
 {
-    public class FactoryRepository : IGadgetRepository
+    public class FactoryRepository : IProduceRepository
     {
         public IEnumerable<IGadget> Factories { get => this.saveDataRepository.SaveData.factories; }
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
-        public IObservable<BigInteger> OnExecute { get => this.onProduce; }
+        public IObservable<BigInteger> OnProduce { get => this.onProduce; }
 
         public FactoryRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository.Save();
         }
 
-        public void Execute() {
+        public void Produce() {
             var now = this.timeRepository.Now;
             BigInteger power;
             foreach (var factory in this.saveDataRepository.SaveData.factories) {
