@@ -6,7 +6,7 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public static class StatusLinq
+    public static class StatusExtensions
     {
         public static BigInteger Sum<T>(this IEnumerable<T> list, Func<T, BigIntegerStatus> selector) {
             BigInteger res;

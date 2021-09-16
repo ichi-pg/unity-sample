@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
@@ -15,9 +16,8 @@ namespace Ichi.Clicker.View
         private GadgetCategory category;
 
         void Start() {
-            Common.Hierarchy.DestroyChildren(this.parent);
-            Common.Hierarchy.InstantiateChildren<GadgetView, IGadget>(
-                this.parent,
+            this.parent.DestroyChildren();
+            this.parent.InstantiateChildren<GadgetView, IGadget>(
                 this.prefab,
                 DIContainer.FromGadgetCategory(this.category).Gadgets
             );

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ichi.Common.Extensions;
 
 namespace Ichi.Common
 {
@@ -10,9 +11,9 @@ namespace Ichi.Common
         private GameObject page;
 
         public void Transition() {
-            var canvas = this.GetComponentInParent<Canvas>();
-            Hierarchy.DestroyChildren(canvas.transform);
-            Instantiate(this.page, canvas.transform);
+            var canvas = this.GetComponentInParent<Canvas>().transform;
+            canvas.DestroyChildren();
+            Instantiate(this.page, canvas);
             //TODO UI以外の画面遷移
             //TODO 戻る
             //TODO フッターなど重ねる系

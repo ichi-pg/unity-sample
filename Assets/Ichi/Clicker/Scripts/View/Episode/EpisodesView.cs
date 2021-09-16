@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
@@ -12,9 +13,8 @@ namespace Ichi.Clicker.View
         private Transform parent;
 
         void Start() {
-            Common.Hierarchy.DestroyChildren(this.parent);
-            Common.Hierarchy.InstantiateChildren<EpisodeView, IEpisode>(
-                this.parent,
+            this.parent.DestroyChildren();
+            this.parent.InstantiateChildren<EpisodeView, IEpisode>(
                 this.prefab,
                 DIContainer.EpisodeRepository.Episodes
             );

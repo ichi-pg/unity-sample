@@ -8,7 +8,7 @@ using UniRx.Triggers;
 
 namespace Ichi.Common.Extensions
 {
-    public static class LongPress
+    public static class ButtonExtensions
     {
         public static IObservable<long> OnLongPressAsObservable(this Button button, double delay, double interval) {
             return button.OnPointerDownAsObservable()
