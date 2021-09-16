@@ -42,9 +42,15 @@ namespace Ichi.Clicker.Offline
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
             this.factoryRepository = factoryRepository;
+            this.CoolTimeTask().Forget();
         }
 
-        public void Fever(CancellationToken token) {
+        private async UniTask CoolTimeTask() {
+            await UniTask.Delay(this.CoolTime);
+            this.onAlter.OnNext(0);
+        }
+
+        public void Fever() {
             if (this.IsFever) {
                 throw new Exception("Invalid fever.");
             }
@@ -54,15 +60,15 @@ namespace Ichi.Clicker.Offline
             var now = this.timeRepository.Now;
             this.finishAt = now + Duration;
             this.saveDataRepository.SaveData.nextFeverAt = now + TimeSpan.FromMinutes(30);
-            this.onAlter.OnNext(0);
-            this.Produce(token).Forget();
+            this.Produce().Forget();
         }
 
-        private async UniTask Produce(CancellationToken token) {
+        private async UniTask Produce() {
             while (this.IsFever)
             {
                 this.factoryRepository.Produce();
-                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
+                this.onAlter.OnNext(0);
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100));
             }
             this.saveDataRepository.Save();
             this.onAlter.OnNext(0);

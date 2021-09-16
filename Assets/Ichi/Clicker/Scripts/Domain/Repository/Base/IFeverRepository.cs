@@ -12,7 +12,7 @@ namespace Ichi.Clicker
         float TimeLeftRate { get; }
         bool IsCoolTime { get; }
         bool IsFever { get; }
-        void Fever(CancellationToken token);
+        void Fever();
         void CheatMode(bool enable);
         IObservable<int> OnAlter { get; }
     }
