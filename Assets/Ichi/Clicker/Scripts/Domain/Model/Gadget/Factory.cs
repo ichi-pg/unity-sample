@@ -20,9 +20,10 @@ namespace Ichi.Clicker
         public int Rank { get => this.rank; }
         public int Rarity { get => this.rarity; }
         public bool IsBought { get => this.level > 0; }
-        public bool IsLock { get => this.rarity == 0; }
+        public bool IsLock { get => this.level == 0; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
+        public string Store { get => "Coin"; }
         public string Unit { get => "Seconds"; }
         public GadgetCategory Category { get => GadgetCategory.Factory; }
         private Subject<int> onLevelUp;
@@ -30,6 +31,7 @@ namespace Ichi.Clicker
 
         public Factory(int rank) {
             this.rank = rank;
+            this.rarity = 1;
             this.Initialize();
         }
 
@@ -68,8 +70,9 @@ namespace Ichi.Clicker
             if (this.IsLock) {
                 this.level = 1;
                 this.producedAt = now;
+            } else {
+                this.rarity++;
             }
-            this.rarity++;
             this.Calculate();
         }
 

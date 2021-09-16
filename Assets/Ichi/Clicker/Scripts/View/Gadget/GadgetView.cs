@@ -28,37 +28,37 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Sprite[] sprites;
 
-        private GadgetAdapter adapter;
-        private IGadget factory;
+        private IGadget gadget;
 
         void Start() {
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
         }
 
-        public void Initialize(IGadget factory) {
-            this.factory = factory;
-            this.adapter = new GadgetAdapter(factory);
-            this.factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
+        public void Initialize(IGadget gadget) {
+            this.gadget = gadget;
+            this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
-            this.label.text = this.factory.IsBought ? this.adapter.Name + " Lv" + this.factory.Level : this.adapter.Name;
-            this.desc.text = DIContainer.TextLocalizer.Localize("Coin") + this.adapter.Power + "/" + this.adapter.Unit;
-            this.cost.text = this.adapter.Cost;
-            this.levelUp.text = DIContainer.TextLocalizer.Localize(this.factory.IsBought ? "LevelUp" : "Buy");
-            this.levelUpButton.interactable = this.adapter.CanLevelUp;
-            this.levelUpButton.gameObject.SetActive(!this.factory.IsLock);
-            this.lockImage.gameObject.SetActive(this.factory.IsLock);
-            this.icon.sprite = this.sprites[this.factory.Rank - 1];
+            var unit = DIContainer.TextLocalizer.Localize(this.gadget.Unit);
+            this.label.text = this.gadget.Name();
+            this.desc.text = DIContainer.TextLocalizer.Localize(this.gadget.Store) + this.gadget.PowerString() + "/" + unit;
+            this.cost.text = Common.BigIntegerText.ToString(this.gadget.Cost);
+            this.levelUp.text = DIContainer.TextLocalizer.Localize(this.gadget.IsBought ? "LevelUp" : "Buy");
+            this.levelUpButton.interactable = this.gadget.CanLevelUp();
+            this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
+            this.lockImage.gameObject.SetActive(this.gadget.IsLock);
+            this.icon.sprite = this.sprites[this.gadget.Rank - 1];
             //TODO 生産ゲージアニメ
             //TODO 生産物アイコン差分
+            //TODO Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
         }
 
         public void LevelUp() {
-            if (this.adapter.CanLevelUp) {
-                DIContainer.FromGadgetCategory(this.factory.Category).LevelUp(this.factory);
+            if (this.gadget.CanLevelUp()) {
+                DIContainer.FromGadgetCategory(this.gadget.Category).LevelUp(this.gadget);
             }
             //TODO エフェクト
             //TODO SE
