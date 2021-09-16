@@ -20,7 +20,7 @@ namespace Ichi.Clicker.View
         private Common.IAds ads;
 
         void Start() {
-            this.quantity.text = Common.BigIntegerText.ToString(DIContainer.LoginRepository.Item.Quantity);
+            this.quantity.text = Common.Texts.ToString(DIContainer.LoginRepository.Item.Quantity);
             this.gauge.Resize(DIContainer.LoginRepository.QuantityRate);
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;

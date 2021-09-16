@@ -15,9 +15,9 @@ namespace Ichi.Clicker.View
         }
         public static string PowerString(this IGadget gadget) {
             if (gadget.Level > 0) {
-                return Common.BigIntegerText.ToString(gadget.Power);
+                return Common.Texts.ToString(gadget.Power);
             }
-            return Common.BigIntegerText.ToString(gadget.Power.NextValue);
+            return Common.Texts.ToString(gadget.Power.NextValue);
         }
 
         public static bool CanLevelUp(this IGadget gadget) {

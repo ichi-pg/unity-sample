@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Ichi.Common
 {
-    public static class BigIntegerText
+    public static class Texts
     {
         public static string ToString(BigInteger number) {
             BigInteger remainder = 0;

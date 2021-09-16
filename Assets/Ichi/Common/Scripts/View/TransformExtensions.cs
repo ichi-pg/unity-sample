@@ -7,13 +7,13 @@ namespace Ichi.Common.Extensions
     public static class TransformExtensions
     {
         public static void InstantiateChildren<T, U>(this Transform transform, GameObject prefab, IEnumerable<U> children) where T : IChildView<U> {
-            foreach(var child in children){
+            foreach (var child in children) {
                 GameObject.Instantiate(prefab, transform).GetComponent<T>().Initialize(child);
             }
         }
 
         public static void DestroyChildren(this Transform transform) {
-            foreach(Transform child in transform){
+            foreach (Transform child in transform) {
                 Object.Destroy(child.gameObject);
             }
         }
@@ -30,8 +30,5 @@ namespace Ichi.Common.Extensions
             }
             return transform;
         }
-
-        //NOTE LINQ to GameObject
-        //NOTE Extensions
     }
 }

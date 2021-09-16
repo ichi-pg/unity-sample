@@ -16,7 +16,7 @@ namespace Ichi.Clicker.Offline
             get {
                 var power = this.saveDataRepository.SaveData.factories.Sum(factory => factory.Power);
                 var count = Factory.Limit.Ticks / Factory.Interval.Ticks;
-                return Common.BigIntegerRate.Rate(this.saveDataRepository.SaveData.Login.Quantity, power * count);
+                return Common.Math.Divide(this.saveDataRepository.SaveData.Login.Quantity, power * count);
             }
         }
 

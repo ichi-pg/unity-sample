@@ -4,9 +4,9 @@ using System.Numerics;
 
 namespace Ichi.Common
 {
-    public static class BigIntegerRate
+    public static class Math
     {
-        public static float Rate(BigInteger a, BigInteger b) {
+        public static float Divide(BigInteger a, BigInteger b) {
             if (a == 0 || b == 0) {
                 return 0f;
             }

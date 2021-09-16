@@ -36,7 +36,7 @@ namespace Ichi.Clicker.View
 
         private void UpdateGauge() {
             var enemy = DIContainer.EnemyRepository.Enemy;
-            this.gauge.Resize(Common.BigIntegerRate.Rate(enemy.Damage, enemy.HP));
+            this.gauge.Resize(Common.Math.Divide(enemy.Damage, enemy.HP));
         }
 
         private void OnWin(IEnemy enemy) {
