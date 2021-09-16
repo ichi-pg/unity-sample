@@ -13,18 +13,19 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
         public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero); }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
+        private int Rate { get => this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
-        private IProduceRepository factoryRepository;
+        private IProduceRepository produceRepository;
 
-        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IProduceRepository factoryRepository) {
+        public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IProduceRepository produceRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
-            this.factoryRepository = factoryRepository;
+            this.produceRepository = produceRepository;
             this.CoolTimeTask().Forget();
         }
 
@@ -49,7 +50,8 @@ namespace Ichi.Clicker.Offline
         private async UniTask Produce() {
             while (this.TimeLeft > TimeSpan.Zero)
             {
-                this.factoryRepository.Produce();
+                //TODO レートのってない
+                this.produceRepository.Produce();
                 this.onAlter.OnNext(0);
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100));
             }
