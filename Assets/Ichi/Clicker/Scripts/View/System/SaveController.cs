@@ -17,7 +17,5 @@ namespace Ichi.Clicker.View
         void OnApplicationQuit() {
             DIContainer.SaveDataRepository.Save();
         }
-
-        //TODO リセットボタン
     }
 }

@@ -40,6 +40,14 @@ namespace Ichi.Common
             return obj;
         }
 
+        public static void Delete<T>() {
+            var path = FilePath(typeof(T));
+            if (!File.Exists(path)) {
+                throw new Exception("Not found save data.");
+            }
+            File.Delete(path);
+        }
+
         private static string FilePath(Type type) {
             return Application.persistentDataPath + "/" + type.Namespace + "/" + type.Name + ".json";
         }
