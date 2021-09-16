@@ -16,8 +16,8 @@ namespace Ichi.Clicker.Offline
 
         public void Save() {
             Common.JsonSaveData.Save<SaveData>(this.SaveData);
-            //NOTE クラウドセーブ
-            //NOTE バイナリ
+            //TODO クラウドセーブ
+            //TODO バイナリ
         }
 
         private void Load() {

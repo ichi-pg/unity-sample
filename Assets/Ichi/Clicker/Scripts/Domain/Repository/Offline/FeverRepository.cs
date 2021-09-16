@@ -72,7 +72,7 @@ namespace Ichi.Clicker.Offline
             this.cheatBonus = enable ? 100 : 1;
         }
 
-        //NOTE 単純にFeverモデルに
-        //NOTE レートはSkillモデルに
+        //TODO 単純にFeverモデルに
+        //TODO レートはSkillモデルに
     }
 }
