@@ -8,7 +8,7 @@ namespace Ichi.Clicker
 {
     public interface IGadgetRepository
     {
-        IEnumerable<IGadget> Factories { get; }
+        IEnumerable<IGadget> Gadgets { get; }
         bool CanLevelUp(IGadget gadget);
         void LevelUp(IGadget gadget);
     }

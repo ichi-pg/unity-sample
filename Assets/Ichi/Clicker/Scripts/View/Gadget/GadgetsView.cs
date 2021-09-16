@@ -19,7 +19,7 @@ namespace Ichi.Clicker.View
             Common.Hierarchy.InstantiateChildren<GadgetView, IGadget>(
                 this.parent,
                 this.prefab,
-                DIContainer.FromGadgetCategory(this.category).Factories
+                DIContainer.FromGadgetCategory(this.category).Gadgets
             );
         }
     }

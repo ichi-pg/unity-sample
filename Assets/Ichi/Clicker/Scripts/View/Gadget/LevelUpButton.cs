@@ -19,7 +19,7 @@ namespace Ichi.Clicker.View
         private GadgetCategory category;
 
         void Start() {
-            foreach (var factory in DIContainer.FromGadgetCategory(this.category).Factories) {
+            foreach (var factory in DIContainer.FromGadgetCategory(this.category).Gadgets) {
                 factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             }
             this.OnAlter();
@@ -29,7 +29,7 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             //NOTE 購読が蓄積する
             this.gadgetView.Initialize(
-                DIContainer.FromGadgetCategory(this.category).Factories
+                DIContainer.FromGadgetCategory(this.category).Gadgets
                     .OrderBy(factory => factory.Cost).FirstOrDefault()
             );
         }

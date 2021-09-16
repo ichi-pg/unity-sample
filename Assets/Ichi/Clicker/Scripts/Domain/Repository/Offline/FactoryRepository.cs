@@ -8,7 +8,7 @@ namespace Ichi.Clicker.Offline
 {
     public class FactoryRepository : IProduceRepository
     {
-        public IEnumerable<IGadget> Factories { get => this.saveDataRepository.SaveData.factories; }
+        public IEnumerable<IGadget> Gadgets { get => this.saveDataRepository.SaveData.factories; }
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
