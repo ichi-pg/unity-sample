@@ -12,7 +12,7 @@ namespace Ichi.Common
 
         public void Open() {
             this.Create();
-            //TODO 入れ替えるパターン
+            //NOTE 入れ替えるパターン
         }
 
         public void Open<T, U>(U child) where T : IChildView<U> {

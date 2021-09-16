@@ -14,10 +14,10 @@ namespace Ichi.Common
             var canvas = this.GetComponentInParent<Canvas>().transform;
             canvas.DestroyChildren();
             Instantiate(this.page, canvas);
-            //TODO UI以外の画面遷移
-            //TODO 戻る
-            //TODO フッターなど重ねる系
-            //TODO フッターなどトグル表示
+            //NOTE UI以外の画面遷移
+            //NOTE 戻る
+            //NOTE フッターなど重ねる系
+            //NOTE フッターなどトグル表示
         }
     }
 }
