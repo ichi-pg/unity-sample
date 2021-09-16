@@ -10,11 +10,11 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        private readonly static TimeSpan Duration = TimeSpan.FromSeconds(300);
 
-        public bool IsFever { get => this.timeRepository.Now < this.finishAt; }
-        public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
+        public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
+        public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero); }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
+        private int Rate { get => this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get; }
         private DateTime finishAt = DateTime.MinValue;
@@ -22,21 +22,6 @@ namespace Ichi.Clicker.Offline
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
         private IProduceRepository factoryRepository;
-
-        private int Rate {
-            get {
-                //全ての施設の性能は等価 -> オートの総生産 = クリックの施設数倍
-                //1日4回ログインで2回ずつフィーバー -> 300s / 0.1s * 8回/日 * n = 86400回/日
-                return this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3;
-            }
-        }
-
-        public float TimeLeftRate {
-            get {
-                var timeLeft = Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero);
-                return (float)timeLeft.Ticks / Duration.Ticks;
-            }
-        }
 
         public FeverRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IProduceRepository factoryRepository) {
             this.timeRepository = timeRepository;
@@ -51,20 +36,20 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Fever() {
-            if (this.IsFever) {
-                throw new Exception("Invalid fever.");
+            if (this.TimeLeft > TimeSpan.Zero) {
+                throw new Exception("Invalid time left.");
             }
-            if (this.IsCoolTime) {
+            if (this.CoolTime > TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
             var now = this.timeRepository.Now;
-            this.finishAt = now + Duration;
+            this.finishAt = now + this.Duration;
             this.saveDataRepository.SaveData.nextFeverAt = now + TimeSpan.FromMinutes(30);
             this.Produce().Forget();
         }
 
         private async UniTask Produce() {
-            while (this.IsFever)
+            while (this.TimeLeft > TimeSpan.Zero)
             {
                 this.factoryRepository.Produce();
                 this.onAlter.OnNext(0);

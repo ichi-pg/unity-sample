@@ -10,7 +10,6 @@ namespace Ichi.Clicker.Offline
 {
     public class CoolDownRepository : ICoolDownRepository
     {
-        public bool IsCoolTime { get => this.CoolTime > TimeSpan.Zero; }
         public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
@@ -31,14 +30,14 @@ namespace Ichi.Clicker.Offline
         }
 
         public void CoolDown() {
-            if (this.feverRepository.IsFever) {
-                throw new Exception("Invalid fever.");
+            if (this.feverRepository.TimeLeft > TimeSpan.Zero) {
+                throw new Exception("Invalid time left.");
             }
-            if (!this.feverRepository.IsCoolTime) {
+            if (this.feverRepository.CoolTime <= TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
-            if (this.IsCoolTime) {
-                throw new Exception("Invalid ads cool time.");
+            if (this.CoolTime > TimeSpan.Zero) {
+                throw new Exception("Invalid cool time.");
             }
             var now = this.timeRepository.Now;
             this.saveDataRepository.SaveData.nextFeverAt = now;

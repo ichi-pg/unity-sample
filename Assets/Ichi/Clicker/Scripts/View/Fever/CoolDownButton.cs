@@ -24,9 +24,9 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             this.button.interactable = this.ads.IsLoaded &&
-                DIContainer.FeverRepository.IsCoolTime &&
-                !DIContainer.CoolDownRepository.IsCoolTime &&
-                !DIContainer.FeverRepository.IsFever;
+                DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
+                DIContainer.CoolDownRepository.CoolTime <= TimeSpan.Zero &&
+                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
         }
 
         public void PlayAds() {

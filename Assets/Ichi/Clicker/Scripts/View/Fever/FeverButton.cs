@@ -22,9 +22,9 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             this.button.interactable =
-                !DIContainer.FeverRepository.IsCoolTime &&
-                !DIContainer.FeverRepository.IsFever;
-            this.gauge.Resize(DIContainer.FeverRepository.TimeLeftRate);
+                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero &&
+                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+            this.gauge.Resize((float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.Duration.Ticks);
         }
 
         public void Fever() {

@@ -9,7 +9,6 @@ namespace Ichi.Clicker
     public interface ICoolDownRepository
     {
         TimeSpan CoolTime { get; }
-        bool IsCoolTime { get; }
         void CoolDown();
         IObservable<int> OnAlter { get; }
     }
