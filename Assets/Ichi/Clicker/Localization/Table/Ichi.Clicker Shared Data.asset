@@ -223,16 +223,16 @@ MonoBehaviour:
     m_Key: Clicker20
     m_Metadata:
       m_Items: []
-  - m_Id: 4630776103559168
+  - m_Id: 4716079849922560
     m_Key: Skill
     m_Metadata:
       m_Items: []
-  - m_Id: 4633228282421248
-    m_Key: FeverSkill
+  - m_Id: 4716079849922561
+    m_Key: Skill1
     m_Metadata:
       m_Items: []
-  - m_Id: 4633228299198464
-    m_Key: CoolDownSkill
+  - m_Id: 4716079849922562
+    m_Key: Skill2
     m_Metadata:
       m_Items: []
   m_Metadata:
