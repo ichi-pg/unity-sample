@@ -5,19 +5,23 @@ using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
-    public class EpisodesView : MonoBehaviour
+    public class GadgetListView : MonoBehaviour
     {
         [SerializeField]
         private GameObject prefab;
         [SerializeField]
         private Transform parent;
+        [SerializeField]
+        private GadgetCategory category;
+        [SerializeField]
+        private GadgetViewData viewData;
 
         void Start() {
             this.parent.DestroyChildren();
-            this.parent.InstantiateChildren<EpisodeView, IEpisode>(
+            this.parent.InstantiateChildren<GadgetView, IGadget>(
                 this.prefab,
-                DIContainer.EpisodeRepository.Episodes,
-                (view, episode) => view.Initialize(episode)
+                DIContainer.FromGadgetCategory(this.category).Gadgets,
+                (view, gadget) => view.Initialize(gadget, viewData)
             );
         }
     }
