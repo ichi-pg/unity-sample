@@ -43,11 +43,10 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            var unit = DIContainer.TextLocalizer.Localize(this.gadget.Unit);
             this.label.text = this.gadget.Name();
-            this.desc.text = DIContainer.TextLocalizer.Localize(this.gadget.Store) + this.gadget.PowerString() + "/" + unit;
-            this.cost.text = Common.Texts.ToString(this.gadget.Cost);
-            this.levelUp.text = DIContainer.TextLocalizer.Localize(this.gadget.IsBought ? "LevelUp" : "Buy");
+            this.desc.text = this.gadget.Store() + this.gadget.Power() + "/" + this.gadget.Unit();
+            this.cost.text = this.gadget.Cost();
+            this.levelUp.text = this.gadget.LevelUp();
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
             this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
