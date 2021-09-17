@@ -271,6 +271,7 @@ MonoBehaviour:
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 127881503930388144}
   category: 0
+  viewData: {fileID: 11400000, guid: a5fdb58ae14344327b1796d6aedb3da0, type: 2}
 --- !u!1 &2925748627421859852
 GameObject:
   m_ObjectHideFlags: 0

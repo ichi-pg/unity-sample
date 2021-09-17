@@ -29,17 +29,15 @@ namespace Ichi.Clicker.View
         private Image costImage;
 
         private IGadget gadget;
-        private Sprite[] gadgetSprites;
-        private Sprite costSprite;
+        private GadgetViewData data;
 
         void Start() {
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
         }
 
-        public void Initialize(IGadget gadget, Sprite[] gadgetSprites, Sprite costSprite) {
+        public void Initialize(IGadget gadget, GadgetViewData data) {
             this.gadget = gadget;
-            this.gadgetSprites = gadgetSprites;
-            this.costSprite = costSprite;
+            this.data = data;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             var item = DIContainer.ItemRepository.GetItem(ItemCategory.Coin);
             item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -47,15 +45,15 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.label.text = this.gadget.Name();
-            this.desc.text = this.gadget.Store() + this.gadget.Power() + "/" + this.gadget.Unit();
+            this.label.text = this.data.Name(this.gadget);
+            this.desc.text = this.data.Store + this.gadget.Power() + "/" + this.data.Unit;
             this.cost.text = this.gadget.Cost();
             this.levelUp.text = this.gadget.LevelUp();
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
             this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
-            this.gadgetImage.sprite = this.gadgetSprites[this.gadget.Rank - 1];
-            this.costImage.sprite = this.costSprite;
+            this.gadgetImage.sprite = this.data.GadgetSprites[this.gadget.Rank - 1];
+            this.costImage.sprite = this.data.CostSprite;
             //NEXT 生産ゲージアニメ
             //NEXT Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
             //NEXT スキル実行ボタン

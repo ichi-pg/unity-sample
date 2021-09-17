@@ -14,16 +14,14 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private GadgetCategory category;
         [SerializeField]
-        private Sprite costSprite;
-        [SerializeField]
-        private Sprite[] gadgetSprites;
+        private GadgetViewData viewData;
 
         void Start() {
             this.parent.DestroyChildren();
             this.parent.InstantiateChildren<GadgetView, IGadget>(
                 this.prefab,
                 DIContainer.FromGadgetCategory(this.category).Gadgets,
-                (view, gadget) => view.Initialize(gadget, gadgetSprites, costSprite)
+                (view, gadget) => view.Initialize(gadget, viewData)
             );
         }
     }

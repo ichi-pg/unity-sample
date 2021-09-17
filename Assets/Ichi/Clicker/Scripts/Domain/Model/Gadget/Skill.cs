@@ -19,9 +19,6 @@ namespace Ichi.Clicker
         public bool IsLock { get => false; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
-        public string Name { get => this.category + "Skill"; }
-        public string Store { get => ""; }
-        public string Unit { get => ""; }
         public GadgetCategory Category { get => GadgetCategory.Skill; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }

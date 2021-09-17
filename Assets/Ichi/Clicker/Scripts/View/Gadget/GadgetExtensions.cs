@@ -6,14 +6,6 @@ namespace Ichi.Clicker.View
 {
     public static class GadgetExtensions
     {
-        public static string Name(this IGadget gadget) {
-            var name = DIContainer.TextLocalizer.Localize(gadget.Name);
-            if (gadget.Level > 0) {
-                return name + " Lv" + gadget.Level;
-            }
-            return name;
-        }
-
         public static string Power(this IGadget gadget) {
             if (gadget.Level > 0) {
                 return Common.Texts.ToString(gadget.Power);
@@ -23,14 +15,6 @@ namespace Ichi.Clicker.View
 
         public static string Cost(this IGadget gadget) {
             return Common.Texts.ToString(gadget.Cost);
-        }
-
-        public static string Unit(this IGadget gadget) {
-            return DIContainer.TextLocalizer.Localize(gadget.Unit);
-        }
-
-        public static string Store(this IGadget gadget) {
-            return DIContainer.TextLocalizer.Localize(gadget.Store);
         }
 
         public static bool CanLevelUp(this IGadget gadget) {

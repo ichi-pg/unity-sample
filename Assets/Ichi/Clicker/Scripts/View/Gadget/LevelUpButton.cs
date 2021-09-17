@@ -14,14 +14,11 @@ namespace Ichi.Clicker.View
     public class LevelUpButton : MonoBehaviour
     {
         [SerializeField]
-        private GadgetView gadgetView;
+        private GadgetView view;
         [SerializeField]
         private GadgetCategory category;
         [SerializeField]
-        private Sprite costSprite;
-        [SerializeField]
-        private Sprite[] gadgetSprites;
-        //TODO カテゴリごとの素材設定共通化
+        private GadgetViewData viewData;
 
         void Start() {
             foreach (var factory in DIContainer.FromGadgetCategory(this.category).Gadgets) {
@@ -33,11 +30,10 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             //NOTE 購読が蓄積する
-            this.gadgetView.Initialize(
+            this.view.Initialize(
                 DIContainer.FromGadgetCategory(this.category).Gadgets
                     .OrderBy(factory => factory.Cost).FirstOrDefault(),
-                this.gadgetSprites,
-                this.costSprite
+                this.viewData
             );
         }
 
@@ -50,7 +46,7 @@ namespace Ichi.Clicker.View
             var cheatMode = (CheatMode)FindObjectOfType(typeof(CheatMode));
             while (true) {
                 if (cheatMode.Auto) {
-                    this.gadgetView.LevelUp();
+                    this.view.LevelUp();
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
