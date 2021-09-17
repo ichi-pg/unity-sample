@@ -2344,7 +2344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 477336094}
-        m_TargetAssemblyTypeName: Ichi.Common.OpenModalButton, Ichi.Common
+        m_TargetAssemblyTypeName: Ichi.Common.ModalOpener, Ichi.Common
         m_MethodName: Open
         m_Mode: 1
         m_Arguments:
