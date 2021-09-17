@@ -14,6 +14,7 @@ namespace Ichi.Clicker.View
 
         void Start() {
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
         }
 
         private void OnDamage(BigInteger damage) {

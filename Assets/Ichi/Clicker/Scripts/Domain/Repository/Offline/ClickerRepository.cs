@@ -11,13 +11,11 @@ namespace Ichi.Clicker.Offline
         public IEnumerable<IGadget> Gadgets { get => this.saveDataRepository.SaveData.clickers; }
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
-        private IEnemyRepository enemyRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
         public IObservable<BigInteger> OnProduce { get => this.onProduce; }
 
-        public ClickerRepository(ISaveDataRepository saveDataRepository, IEnemyRepository enemyRepository) {
+        public ClickerRepository(ISaveDataRepository saveDataRepository) {
             this.saveDataRepository = saveDataRepository;
-            this.enemyRepository = enemyRepository;
         }
 
         public bool CanLevelUp(IGadget clicker) {
@@ -34,19 +32,8 @@ namespace Ichi.Clicker.Offline
             if (!enemy.IsAlive) {
                 throw new Exception("Invalid alive.");
             }
-            BigInteger sumPower;
-            foreach (var clicker in this.saveDataRepository.SaveData.clickers) {
-                //TODO 弱点など
-                var power = clicker.Power * this.cheatBonus;
-                if (enemy.IsAlive) {
-                    enemy.Store(power);
-                }
-                sumPower += power;
-            }
-            if (!enemy.IsAlive) {
-                this.enemyRepository.Win();
-            }
-            this.onProduce.OnNext(sumPower);
+            var power = this.saveDataRepository.SaveData.clickers.Produce(enemy, this.cheatBonus);
+            this.onProduce.OnNext(power);
         }
 
         public void CheatMode(bool enable) {

@@ -22,6 +22,7 @@ namespace Ichi.Clicker.View
             DIContainer.EnemyRepository.OnWin.Subscribe(this.OnWin).AddTo(this);
             DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.UpdateEnemy();
         }
 
@@ -52,6 +53,9 @@ namespace Ichi.Clicker.View
 
         private void OnDamage(BigInteger damage) {
             this.UpdateGauge();
+            if (!DIContainer.EnemyRepository.Enemy.IsAlive) {
+                DIContainer.EnemyRepository.Win();
+            }
             //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
         }
     }

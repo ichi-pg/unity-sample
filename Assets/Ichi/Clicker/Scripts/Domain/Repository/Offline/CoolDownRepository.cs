@@ -15,13 +15,14 @@ namespace Ichi.Clicker.Offline
         private ISaveDataRepository saveDataRepository;
         private IFeverRepository feverRepository;
         private Subject<int> onAlter = new Subject<int>();
-        public IObservable<int> OnAlter { get; }
+        public IObservable<int> OnAlter { get => this.onAlter; }
 
         public CoolDownRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IFeverRepository feverRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
             this.feverRepository = feverRepository;
             this.CoolTimeTask().Forget();
+            //TODO feverRepositoryに依存させずモデルに依存させる。
         }
 
         private async UniTask CoolTimeTask() {

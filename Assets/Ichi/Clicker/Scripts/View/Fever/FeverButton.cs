@@ -16,6 +16,7 @@ namespace Ichi.Clicker.View
 
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(_ => this.UpdateGauge()).AddTo(this);
             DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
@@ -24,6 +25,10 @@ namespace Ichi.Clicker.View
             this.button.interactable =
                 DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero &&
                 DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+            this.UpdateGauge();
+        }
+
+        private void UpdateGauge() {
             this.gauge.Resize((float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.Duration.Ticks);
         }
 
