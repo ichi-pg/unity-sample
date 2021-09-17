@@ -49,6 +49,9 @@ namespace Ichi.Clicker
         }
 
         public void LevelUp(IConsume consume) {
+            if (this.IsLock) {
+                throw new Exception("Invalid lock.");
+            }
             consume.Consume(this.Cost);
             this.level++;
             this.Calculate();
