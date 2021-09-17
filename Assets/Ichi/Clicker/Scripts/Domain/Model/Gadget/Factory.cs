@@ -21,7 +21,7 @@ namespace Ichi.Clicker
         public int Rarity { get => this.rarity; }
         public bool IsBought { get => this.level > 0; }
         public bool IsLock { get => this.level == 0; }
-        public bool HasCost { get => this.IsBought; }
+        public bool HasLevelUp { get => this.IsBought; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
         public GadgetCategory Category { get => GadgetCategory.Factory; }
