@@ -16,7 +16,7 @@ namespace Ichi.Common
             //NOTE 入れ替えるパターン
         }
 
-        public T Open<T>() where T : Component {
+        public T OpenWith<T>() where T : Component {
             return this.Create().GetComponent<T>();
         }
 
