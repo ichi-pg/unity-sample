@@ -6,13 +6,13 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Skill : IGadget
+    public class Skill : IGadget, ILevelUpper
     {
         public SkillCategory category;
         public Common.TicksTime coolDownAt;
         public int level;
         public DateTime FinishAt { get; set; }
-        public int Level { get => this.level; }
+        public int Level { get => this.level; set => this.level = value; }
         public int Rank { get => (int)this.category + 1; }
         public int Rarity { get => 1; }
         public bool IsBought { get => true; }
@@ -23,6 +23,7 @@ namespace Ichi.Clicker
         public GadgetCategory Category { get => GadgetCategory.Skill; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
+        public IObserver<int> LevelUpObserver { get => this.onLevelUp; }
 
         public Skill(SkillCategory category) {
             this.category = category;
@@ -44,13 +45,6 @@ namespace Ichi.Clicker
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());
             this.Calculate();
-            //NEXT 共通化可能
-        }
-
-        private void Calculate() {
-            this.Power.Calculate(this.level);
-            this.Cost.Calculate(this.level);
-            //NEXT 共通化可能
         }
 
         public TimeSpan CoolTime(DateTime now) {
@@ -59,17 +53,6 @@ namespace Ichi.Clicker
 
         public TimeSpan TimeLeft(DateTime now) {
             return Common.Time.Max(this.FinishAt - now, TimeSpan.Zero);
-        }
-
-        public void LevelUp(IConsume consume) {
-            if (this.IsLock) {
-                throw new Exception("Invalid lock.");
-            }
-            consume.Consume(this.Cost);
-            this.level++;
-            this.Calculate();
-            this.onLevelUp.OnNext(this.level);
-            //NEXT 共通化可能
         }
     }
 }

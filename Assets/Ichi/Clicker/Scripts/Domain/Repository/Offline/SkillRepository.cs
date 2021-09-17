@@ -15,12 +15,12 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
-        public bool CanLevelUp(IGadget skill) {
-            return this.saveDataRepository.SaveData.Gem.Quantity >= skill.Cost;
+        public bool CanLevelUp(IGadget gadget) {
+            return this.saveDataRepository.SaveData.Gem.Quantity >= gadget.Cost;
         }
 
-        public void LevelUp(IGadget skill) {
-            (skill as Skill).LevelUp(this.saveDataRepository.SaveData.Gem);
+        public void LevelUp(IGadget gadget) {
+            (gadget as ILevelUpper).LevelUp(this.saveDataRepository.SaveData.Gem);
             this.saveDataRepository.Save();
         }
     }

@@ -20,12 +20,12 @@ namespace Ichi.Clicker.Offline
             this.saveDataRepository = saveDataRepository;
         }
 
-        public bool CanLevelUp(IGadget factory) {
-            return !factory.IsLock && this.saveDataRepository.SaveData.EXP.Quantity >= factory.Cost;
+        public bool CanLevelUp(IGadget gadget) {
+            return !gadget.IsLock && this.saveDataRepository.SaveData.EXP.Quantity >= gadget.Cost;
         }
 
-        public void LevelUp(IGadget factory) {
-            (factory as Factory).LevelUp(this.saveDataRepository.SaveData.EXP);
+        public void LevelUp(IGadget gadget) {
+            (gadget as ILevelUpper).LevelUp(this.saveDataRepository.SaveData.EXP);
             this.saveDataRepository.Save();
         }
 

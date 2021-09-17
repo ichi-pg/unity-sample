@@ -7,12 +7,12 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Clicker : IGadget
+    public class Clicker : IGadget, ILevelUpper
     {
         public int level;
         public int rank;
         public int Rarity { get => 1; }
-        public int Level { get => this.level; }
+        public int Level { get => this.level; set => this.level = value; }
         public int Rank { get => this.rank; }
         public bool IsBought { get => this.level > 0; }
         public bool IsLock { get => false; }
@@ -22,6 +22,7 @@ namespace Ichi.Clicker
         public GadgetCategory Category { get => GadgetCategory.Clicker; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
+        public IObserver<int> LevelUpObserver { get => this.onLevelUp; }
 
         public Clicker(int rank) {
             if (rank == 1) {
@@ -40,21 +41,6 @@ namespace Ichi.Clicker
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());
             this.Calculate();
-        }
-
-        private void Calculate() {
-            this.Power.Calculate(this.level, this.rank);
-            this.Cost.Calculate(this.level, this.rank);
-        }
-
-        public void LevelUp(IConsume consume) {
-            if (this.IsLock) {
-                throw new Exception("Invalid lock.");
-            }
-            consume.Consume(this.Cost);
-            this.level++;
-            this.Calculate();
-            this.onLevelUp.OnNext(this.level);
         }
     }
 }
