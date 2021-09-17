@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Enemy : IEnemy, IAliveStore, Common.IPreSave, Common.IPostLoad
+    public class Enemy : IEnemy, IAliveStore
     {
         public int level;
         public int rank;

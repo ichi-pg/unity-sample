@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Item : IItem, IStore, IConsume, Common.IPreSave, Common.IPostLoad
+    public class Item : IItem, IStore, IConsume
     {
         public Common.BigNumber quantity;
         public ItemCategory category;

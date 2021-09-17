@@ -5,7 +5,7 @@ using System;
 namespace Ichi.Common
 {
     [Serializable]
-    public struct TicksTime : IPreSave, IPostLoad, IComparable
+    public struct TicksTime : IComparable
     {
         public long ticks;
         private DateTime value;

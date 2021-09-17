@@ -27,7 +27,7 @@ namespace Ichi.Common
             return File.Exists(path);
         }
 
-        public static T Load<T>() where T : IPostLoad {
+        public static T Load<T>() {
             var path = FilePath(typeof(T));
             if (!File.Exists(path)) {
                 throw new Exception("Not found save data.");
@@ -35,9 +35,7 @@ namespace Ichi.Common
             var reader = new StreamReader(path);
             var json = reader.ReadToEnd();
             reader.Close();
-            var obj = JsonUtility.FromJson<T>(json);
-            obj.PostLoad();
-            return obj;
+            return JsonUtility.FromJson<T>(json);
         }
 
         public static void Delete<T>() {

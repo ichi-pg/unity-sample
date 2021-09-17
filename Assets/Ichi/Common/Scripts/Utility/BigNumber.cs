@@ -6,7 +6,7 @@ using System;
 namespace Ichi.Common
 {
     [Serializable]
-    public struct BigNumber : IPreSave, IPostLoad, IComparable
+    public struct BigNumber : IComparable
     {
         public string s;
         private BigInteger value;

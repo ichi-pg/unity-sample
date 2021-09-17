@@ -8,15 +8,16 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class SaveData : Common.IPreSave, Common.IPostLoad
+    public class SaveData : Common.IPreSave
     {
         public List<Clicker> clickers;
         public List<Factory> factories;
         public List<Item> items;
         public List<Episode> episodes;
+        public List<Skill> skills;
         public Enemy enemy;
-        public Common.TicksTime nextFeverAt;
-        public Common.TicksTime nextFeverAdsAt;
+        public Skill Fever { get; private set; }
+        public Skill CoolDown { get; private set; }
         public Item Coin { get; private set; }
         public Item Commodity { get; private set; }
         public Item Login { get; private set; }
@@ -25,40 +26,33 @@ namespace Ichi.Clicker
         public void PreSave() {
             this.factories.ForEach(factory => factory.PreSave());
             this.items.ForEach(item => item.PreSave());
+            this.skills.ForEach(skill => skill.PreSave());
             this.enemy.PreSave();
-            this.nextFeverAt.PreSave();
-            this.nextFeverAdsAt.PreSave();
         }
 
-        public void PostLoad() {
-            this.clickers.ForEach(clicker => clicker.PostLoad());
-            this.factories.ForEach(factory => factory.PostLoad());
-            this.items.ForEach(item => item.PostLoad());
-            this.enemy.PostLoad();
-            this.nextFeverAt.PostLoad();
-            this.nextFeverAdsAt.PostLoad();
-        }
-
-        public void Initialize(DateTime now) {
-            this.InitializeFever(now);
+        public void Initialize() {
             this.InitializeEnemy();
             this.InitializeClickers();
             this.InitializeFactories();
             this.InitializeItems();
             this.InitializeEpisodes();
-        }
-
-        private void InitializeFever(DateTime now) {
-            this.nextFeverAt = Common.Time.Max(this.nextFeverAt, now);
-            this.nextFeverAdsAt = Common.Time.Max(this.nextFeverAdsAt, now);
+            this.InitializeSkills();
         }
 
         private void InitializeEnemy() {
-            this.enemy = this.enemy ?? new Enemy(1);
+            if (this.enemy == null) {
+                this.enemy = new Enemy(1);
+            } else {
+                this.enemy.PostLoad();
+            }
         }
 
         private void InitializeClickers() {
-            this.clickers = this.clickers ?? new List<Clicker>();
+            if (this.clickers == null) {
+                this.clickers = new List<Clicker>();
+            } else {
+                this.clickers.ForEach(clicker => clicker.PostLoad());
+            }
             for (var rank = 1; rank <= 10; ++rank) {
                 if (this.clickers.FirstOrDefault(clicker => clicker.rank == rank) == null) {
                     this.clickers.Add(new Clicker(rank));
@@ -67,7 +61,11 @@ namespace Ichi.Clicker
         }
 
         private void InitializeFactories() {
-            this.factories = this.factories ?? new List<Factory>();
+            if (this.factories == null) {
+                this.factories = new List<Factory>();
+            } else {
+                this.factories.ForEach(factory => factory.PostLoad());
+            }
             for (var rank = 1; rank <= 10; ++rank) {
                 if (this.factories.FirstOrDefault(factory => factory.rank == rank) == null) {
                     this.factories.Add(new Factory(rank));
@@ -76,7 +74,11 @@ namespace Ichi.Clicker
         }
 
         private void InitializeItems() {
-            this.items = this.items ?? new List<Item>();
+            if (this.items == null) {
+                this.items = new List<Item>();
+            } else {
+                this.items.ForEach(item => item.PostLoad());
+            }
             foreach (ItemCategory category in Enum.GetValues(typeof(ItemCategory))) {
                 if (this.items.FirstOrDefault(item => item.category == category) == null) {
                     this.items.Add(new Item(category));
@@ -106,9 +108,24 @@ namespace Ichi.Clicker
                             Text = "aaaa",
                         },
                     };
-                    //NOTE シナリオマスターデータ
+                    //NOTE シナリオマスターデータ（そもそもローカライズあるからここで初期化できない）
                 }
             }
+        }
+
+        private void InitializeSkills() {
+            if (this.skills == null) {
+                this.skills = new List<Skill>();
+            } else {
+                this.skills.ForEach(skill => skill.PostLoad());
+            }
+            foreach (SkillCategory category in Enum.GetValues(typeof(SkillCategory))) {
+                if (this.skills.FirstOrDefault(skill => skill.category == category) == null) {
+                    this.skills.Add(new Skill(category));
+                }
+            }
+            this.Fever = this.skills.FirstOrDefault(skill => skill.category == SkillCategory.Fever);
+            this.CoolDown = this.skills.FirstOrDefault(skill => skill.category == SkillCategory.CoolDown);
         }
     }
 }

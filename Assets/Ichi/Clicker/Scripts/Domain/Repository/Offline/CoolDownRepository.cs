@@ -10,19 +10,16 @@ namespace Ichi.Clicker.Offline
 {
     public class CoolDownRepository : ICoolDownRepository
     {
-        public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAdsAt - this.timeRepository.Now, TimeSpan.Zero); }
+        public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.CoolDown.CoolTime(this.timeRepository.Now); }
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
-        private IFeverRepository feverRepository;
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get => this.onAlter; }
 
-        public CoolDownRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository, IFeverRepository feverRepository) {
+        public CoolDownRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
-            this.feverRepository = feverRepository;
             this.CoolTimeTask().Forget();
-            //TODO feverRepositoryに依存させずモデルに依存させる。
         }
 
         private async UniTask CoolTimeTask() {
@@ -31,18 +28,20 @@ namespace Ichi.Clicker.Offline
         }
 
         public void CoolDown() {
-            if (this.feverRepository.TimeLeft > TimeSpan.Zero) {
+            var fever = this.saveDataRepository.SaveData.Fever;
+            var coolDown = this.saveDataRepository.SaveData.CoolDown;
+            var now = this.timeRepository.Now;
+            if (fever.TimeLeft(now) > TimeSpan.Zero) {
                 throw new Exception("Invalid time left.");
             }
-            if (this.feverRepository.CoolTime <= TimeSpan.Zero) {
+            if (fever.CoolTime(now) <= TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
-            if (this.CoolTime > TimeSpan.Zero) {
+            if (coolDown.CoolTime(now) > TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
-            var now = this.timeRepository.Now;
-            this.saveDataRepository.SaveData.nextFeverAt = now;
-            this.saveDataRepository.SaveData.nextFeverAdsAt = now + TimeSpan.FromMinutes(15);
+            fever.coolDownAt = now;
+            coolDown.coolDownAt = now + TimeSpan.FromMinutes(15);
             this.saveDataRepository.Save();
             this.onAlter.OnNext(0);
         }

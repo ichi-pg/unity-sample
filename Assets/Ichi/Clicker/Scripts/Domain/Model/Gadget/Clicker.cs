@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Clicker : IGadget, Common.IPostLoad
+    public class Clicker : IGadget
     {
         public int level;
         public int rank;

@@ -7,7 +7,7 @@ using UniRx;
 namespace Ichi.Clicker
 {
     [Serializable]
-    public class Factory : IGadget, Common.IPreSave, Common.IPostLoad
+    public class Factory : IGadget
     {
         public static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
         public static readonly TimeSpan Limit = TimeSpan.FromHours(12);

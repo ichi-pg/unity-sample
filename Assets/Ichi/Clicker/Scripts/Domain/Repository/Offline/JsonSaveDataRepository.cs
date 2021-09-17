@@ -7,10 +7,8 @@ namespace Ichi.Clicker.Offline
     {
         public SaveData SaveData { get; private set; }
         public bool Exists { get => Common.JsonSaveData.Exist<SaveData>(); }
-        private ITimeRepository timeRepository;
 
-        public JsonSaveDataRepository(ITimeRepository timeRepository) {
-            this.timeRepository = timeRepository;
+        public JsonSaveDataRepository() {
             this.Load();
         }
 
@@ -26,7 +24,7 @@ namespace Ichi.Clicker.Offline
             } else {
                 this.SaveData = new SaveData();
             }
-            this.SaveData.Initialize(timeRepository.Now);
+            this.SaveData.Initialize();
         }
 
         public void Delete() {

@@ -12,14 +12,13 @@ namespace Ichi.Clicker.Offline
     public class FeverRepository : IFeverRepository
     {
         public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
-        public TimeSpan TimeLeft { get => Common.Time.Max(this.finishAt - this.timeRepository.Now, TimeSpan.Zero); }
-        public TimeSpan CoolTime { get => Common.Time.Max(this.saveDataRepository.SaveData.nextFeverAt - this.timeRepository.Now, TimeSpan.Zero); }
+        public TimeSpan TimeLeft { get => this.saveDataRepository.SaveData.Fever.TimeLeft(this.timeRepository.Now); }
+        public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.Fever.CoolTime(this.timeRepository.Now); }
         private int Rate { get => this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get => this.onAlter; }
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
         public IObservable<BigInteger> OnProduce { get => this.onProduce; }
-        private DateTime finishAt = DateTime.MinValue;
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
@@ -36,15 +35,17 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Fever() {
-            if (this.TimeLeft > TimeSpan.Zero) {
+            var now = this.timeRepository.Now;
+            var fever = this.saveDataRepository.SaveData.Fever;
+            if (fever.TimeLeft(now) > TimeSpan.Zero) {
                 throw new Exception("Invalid time left.");
             }
-            if (this.CoolTime > TimeSpan.Zero) {
+            if (fever.CoolTime(now) > TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
-            var now = this.timeRepository.Now;
-            this.finishAt = now + this.Duration;
-            this.saveDataRepository.SaveData.nextFeverAt = now + TimeSpan.FromMinutes(30);
+            fever.FinishAt = now + this.Duration;
+            fever.coolDownAt = now + TimeSpan.FromMinutes(30);
+            this.saveDataRepository.Save();
             this.onAlter.OnNext(0);
             this.Produce().Forget();
         }
@@ -66,8 +67,5 @@ namespace Ichi.Clicker.Offline
         public void CheatMode(bool enable) {
             this.cheatBonus = enable ? 100 : 1;
         }
-
-        //TODO 単純にFeverモデルに
-        //TODO レートはSkillモデルに
     }
 }
