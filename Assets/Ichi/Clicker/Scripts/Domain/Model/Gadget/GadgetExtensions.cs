@@ -10,12 +10,14 @@ namespace Ichi.Clicker
         public static BigInteger Produce(this IEnumerable<IGadget> list, IAliveStore store, int rate) {
             BigInteger res;
             foreach (var gadget in list) {
-                //TODO 弱点など
-                var power = gadget.Power * rate;
-                if (store.IsAlive) {
-                    store.Store(power);
+                if (gadget.IsBought) {
+                    //TODO 弱点など
+                    var power = gadget.Power * rate;
+                    if (store.IsAlive) {
+                        store.Store(power);
+                    }
+                    res += power;
                 }
-                res += power;
             }
             return res;
         }
