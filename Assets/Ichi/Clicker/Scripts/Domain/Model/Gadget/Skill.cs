@@ -4,6 +4,7 @@ using System;
 
 namespace Ichi.Clicker
 {
+    [Serializable]
     public class Skill
     {
         public SkillCategory category;
