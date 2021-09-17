@@ -23,9 +23,10 @@ namespace Ichi.Clicker.View
         public string Store { get => DIContainer.TextLocalizer.Localize(this.store); }
 
         public string Name(IGadget gadget) {
-            var name = DIContainer.TextLocalizer.Localize(this.category.ToString() + gadget.Rank);
+            var name = (Rarity)(gadget.Rarity - 1) + " " +
+                DIContainer.TextLocalizer.Localize(this.category.ToString() + gadget.Rank);
             if (gadget.Level > 0) {
-                return name + " Lv" + gadget.Level;
+                return name + " Lv" + gadget.Level + " ";
             }
             return name;
         }
