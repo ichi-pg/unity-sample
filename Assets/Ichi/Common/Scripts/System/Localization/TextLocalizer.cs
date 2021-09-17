@@ -16,6 +16,9 @@ namespace Ichi.Common
         }
 
         public string Localize(string key, params object[] values) {
+            if (key == "") {
+                return "";
+            }
             return this.table.GetTable().GetEntry(key).GetLocalizedString(values);
         }
     }

@@ -54,6 +54,7 @@ namespace Ichi.Clicker.View
             //NEXT 生産ゲージアニメ
             //NEXT 生産物アイコン差分
             //NEXT Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
+            //NEXT スキル実行ボタン
         }
 
         public void LevelUp() {

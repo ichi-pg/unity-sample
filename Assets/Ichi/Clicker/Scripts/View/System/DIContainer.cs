@@ -12,6 +12,7 @@ namespace Ichi.Clicker.View
         public static IEnemyRepository EnemyRepository { get; private set; } = new Offline.EnemyRepository(saveDataRepository, TimeRepository);
         public static IProduceRepository ClickerRepository { get; private set; } = new Offline.ClickerRepository(saveDataRepository);
         public static IProduceRepository FactoryRepository { get; private set; } = new Offline.FactoryRepository(TimeRepository, saveDataRepository);
+        public static IGadgetRepository SkillRepository { get; private set; } = new Offline.SkillRepository(saveDataRepository);
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, saveDataRepository);
         public static ICoolDownRepository CoolDownRepository { get; private set; } = new Offline.CoolDownRepository(TimeRepository, saveDataRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, saveDataRepository);
@@ -29,6 +30,8 @@ namespace Ichi.Clicker.View
                     return FactoryRepository;
                 case GadgetCategory.Clicker:
                     return ClickerRepository;
+                case GadgetCategory.Skill:
+                    return SkillRepository;
             }
             throw new Exception("Invalid category.");
         }

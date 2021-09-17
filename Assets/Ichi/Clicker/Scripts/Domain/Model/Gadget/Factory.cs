@@ -23,6 +23,7 @@ namespace Ichi.Clicker
         public bool IsLock { get => this.level == 0; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
+        public string Name { get => "Factory" + this.rank; }
         public string Store { get => "Coin"; }
         public string Unit { get => "Seconds"; }
         public GadgetCategory Category { get => GadgetCategory.Factory; }

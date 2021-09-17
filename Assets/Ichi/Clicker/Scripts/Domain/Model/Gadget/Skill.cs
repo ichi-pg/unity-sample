@@ -19,11 +19,12 @@ namespace Ichi.Clicker
         public bool IsLock { get => false; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
+        public string Name { get => "Skill" + this.category; }
         public string Store { get => ""; }
         public string Unit { get => ""; }
         public GadgetCategory Category { get => GadgetCategory.Skill; }
         private Subject<int> onLevelUp;
-        public IObservable<int> OnLevelUp { get; }
+        public IObservable<int> OnLevelUp { get => this.onLevelUp; }
 
         public Skill(SkillCategory category) {
             this.category = category;
@@ -45,6 +46,7 @@ namespace Ichi.Clicker
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());
             this.Calculate();
+            //NEXT 共通化可能
         }
 
         private void Calculate() {
@@ -71,8 +73,5 @@ namespace Ichi.Clicker
             this.onLevelUp.OnNext(this.level);
             //NEXT 共通化可能
         }
-
-        //NEXT レベルアップ
-        //NEXT GadgetView
     }
 }

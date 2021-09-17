@@ -13,6 +13,7 @@ namespace Ichi.Clicker
         bool IsBought { get; }
         bool IsLock { get; }
         BigIntegerStatus Power { get; }
+        string Name { get; }
         string Store { get; }
         string Unit { get; }
         GadgetCategory Category { get; }
