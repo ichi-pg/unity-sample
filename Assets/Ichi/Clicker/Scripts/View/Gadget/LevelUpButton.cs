@@ -17,6 +17,11 @@ namespace Ichi.Clicker.View
         private GadgetView gadgetView;
         [SerializeField]
         private GadgetCategory category;
+        [SerializeField]
+        private Sprite costSprite;
+        [SerializeField]
+        private Sprite[] gadgetSprites;
+        //TODO カテゴリごとの素材設定共通化
 
         void Start() {
             foreach (var factory in DIContainer.FromGadgetCategory(this.category).Gadgets) {
@@ -30,7 +35,9 @@ namespace Ichi.Clicker.View
             //NOTE 購読が蓄積する
             this.gadgetView.Initialize(
                 DIContainer.FromGadgetCategory(this.category).Gadgets
-                    .OrderBy(factory => factory.Cost).FirstOrDefault()
+                    .OrderBy(factory => factory.Cost).FirstOrDefault(),
+                this.gadgetSprites,
+                this.costSprite
             );
         }
 

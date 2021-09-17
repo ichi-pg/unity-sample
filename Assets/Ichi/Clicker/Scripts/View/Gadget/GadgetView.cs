@@ -24,18 +24,22 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Image lockImage;
         [SerializeField]
-        private Image icon;
+        private Image gadgetImage;
         [SerializeField]
-        private Sprite[] sprites;
+        private Image costImage;
 
         private IGadget gadget;
+        private Sprite[] gadgetSprites;
+        private Sprite costSprite;
 
         void Start() {
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
         }
 
-        public void Initialize(IGadget gadget) {
+        public void Initialize(IGadget gadget, Sprite[] gadgetSprites, Sprite costSprite) {
             this.gadget = gadget;
+            this.gadgetSprites = gadgetSprites;
+            this.costSprite = costSprite;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             var item = DIContainer.ItemRepository.GetItem(ItemCategory.Coin);
             item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -50,9 +54,9 @@ namespace Ichi.Clicker.View
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
             this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
-            this.icon.sprite = this.sprites[this.gadget.Rank - 1];
+            this.gadgetImage.sprite = this.gadgetSprites[this.gadget.Rank - 1];
+            this.costImage.sprite = this.costSprite;
             //NEXT 生産ゲージアニメ
-            //NEXT 生産物アイコン差分
             //NEXT Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
             //NEXT スキル実行ボタン
         }
