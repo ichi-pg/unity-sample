@@ -51,9 +51,9 @@ namespace Ichi.Clicker.View
             this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
             this.icon.sprite = this.sprites[this.gadget.Rank - 1];
-            //TODO 生産ゲージアニメ
-            //TODO 生産物アイコン差分
-            //TODO Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
+            //NEXT 生産ゲージアニメ
+            //NEXT 生産物アイコン差分
+            //NEXT Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
         }
 
         public void LevelUp() {
