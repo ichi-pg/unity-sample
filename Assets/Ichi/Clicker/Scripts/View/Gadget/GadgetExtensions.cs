@@ -7,7 +7,7 @@ namespace Ichi.Clicker.View
     public static class GadgetExtensions
     {
         public static string Power(this IGadget gadget) {
-            if (gadget.Level > 0) {
+            if (gadget.IsBought) {
                 return Common.Texts.ToString(gadget.Power);
             }
             return Common.Texts.ToString(gadget.Power.NextValue);

@@ -25,7 +25,7 @@ namespace Ichi.Clicker.View
         public string Name(IGadget gadget) {
             var name = (Rarity)(gadget.Rarity - 1) + " " +
                 DIContainer.TextLocalizer.Localize(this.category.ToString() + gadget.Rank);
-            if (gadget.Level > 0) {
+            if (gadget.IsBought) {
                 return name + " Lv" + gadget.Level + " ";
             }
             return name;
