@@ -3,11 +3,8 @@ using System.Collections.Generic;
 
 namespace Ichi.Clicker
 {
-    public interface ISaveDataRepository
+    public interface ISaveDataRepository : ISaveRepository
     {
         SaveData SaveData { get; }
-        bool Exists { get; }
-        void Save();
-        void Delete();
     }
 }

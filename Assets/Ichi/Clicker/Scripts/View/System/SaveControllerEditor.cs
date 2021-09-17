@@ -13,8 +13,8 @@ namespace Ichi.Clicker.View
             base.OnInspectorGUI();
 
             if (GUILayout.Button("Delete")) {
-                if (DIContainer.SaveDataRepository.Exists) {
-                    DIContainer.SaveDataRepository.Delete();
+                if (DIContainer.SaveRepository.Exists) {
+                    DIContainer.SaveRepository.Delete();
                     if (EditorApplication.isPlaying) {
                         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     }
