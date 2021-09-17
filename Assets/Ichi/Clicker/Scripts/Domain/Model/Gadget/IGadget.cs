@@ -12,6 +12,7 @@ namespace Ichi.Clicker
         int Rarity { get; }
         bool IsBought { get; }
         bool IsLock { get; }
+        bool HasCost { get; }
         BigIntegerStatus Power { get; }
         GadgetCategory Category { get; }
         IObservable<int> OnLevelUp { get; }

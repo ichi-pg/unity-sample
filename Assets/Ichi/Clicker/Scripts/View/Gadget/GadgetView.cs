@@ -48,14 +48,15 @@ namespace Ichi.Clicker.View
             this.label.text = this.data.Name(this.gadget);
             this.desc.text = this.data.Store + this.gadget.Power() + "/" + this.data.Unit;
             this.cost.text = this.gadget.Cost();
+            this.cost.gameObject.SetActive(this.gadget.HasCost);
             this.levelUp.text = this.gadget.LevelUp();
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
             this.levelUpButton.gameObject.SetActive(!this.gadget.IsLock);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
             this.gadgetImage.sprite = this.data.GadgetSprites[this.gadget.Rank - 1];
             this.costImage.sprite = this.data.CostSprite;
+            this.costImage.gameObject.SetActive(this.gadget.HasCost);
             //NEXT 生産ゲージアニメ
-            //NEXT Clicker以外開放コスト描画するのおかしい（Clickerもドロップにしたら全部非表示でいい）
             //NEXT スキル実行ボタン
         }
 
