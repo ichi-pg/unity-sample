@@ -13,14 +13,16 @@ namespace Ichi.Clicker.View
         private Text text;
         [SerializeField]
         private ItemCategory category;
+        private IItem item;
 
         void Start() {
-            DIContainer.FromItemCategory(this.category).Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.item = DIContainer.ItemRepository.GetItem(this.category);
+            this.item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
-            this.text.text = Common.Texts.ToString(DIContainer.FromItemCategory(this.category).Item.Quantity);
+            this.text.text = Common.Texts.ToString(this.item.Quantity);
             //TODO ドラムロール
         }
     }

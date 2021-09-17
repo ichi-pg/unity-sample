@@ -9,5 +9,6 @@ namespace Ichi.Clicker
         Commodity,
         Login,
         EXP,
+        Gem,
     }
 }

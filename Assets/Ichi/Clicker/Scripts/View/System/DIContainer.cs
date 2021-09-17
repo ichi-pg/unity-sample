@@ -16,9 +16,8 @@ namespace Ichi.Clicker.View
         public static IFeverRepository FeverRepository { get; private set; } = new Offline.FeverRepository(TimeRepository, saveDataRepository);
         public static ICoolDownRepository CoolDownRepository { get; private set; } = new Offline.CoolDownRepository(TimeRepository, saveDataRepository);
         public static ILoginRepository LoginRepository { get; private set; } = new Offline.LoginRepository(TimeRepository, saveDataRepository);
-        public static IItemRepository CoinRepository { get; private set; } = new Offline.CoinRepository(saveDataRepository);
         public static ICommodityRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(saveDataRepository);
-        public static IItemRepository EXPRepository { get; private set; } = new Offline.EXPRepository(saveDataRepository);
+        public static IItemRepository ItemRepository { get; private set; } = new Offline.ItemRepository(saveDataRepository);
         public static IEpisodeRepository EpisodeRepository { get; private set; } = new Offline.EpisodeRepository(saveDataRepository);
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
@@ -32,20 +31,6 @@ namespace Ichi.Clicker.View
                     return ClickerRepository;
                 case GadgetCategory.Skill:
                     return SkillRepository;
-            }
-            throw new Exception("Invalid category.");
-        }
-
-        public static IItemRepository FromItemCategory(ItemCategory category) {
-            switch (category) {
-                case ItemCategory.Coin:
-                    return CoinRepository;
-                case ItemCategory.Commodity:
-                    return CommodityRepository;
-                case ItemCategory.Login:
-                    return LoginRepository;
-                case ItemCategory.EXP:
-                    return EXPRepository;
             }
             throw new Exception("Invalid category.");
         }

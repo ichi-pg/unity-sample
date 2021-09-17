@@ -37,7 +37,8 @@ namespace Ichi.Clicker.View
         public void Initialize(IGadget gadget) {
             this.gadget = gadget;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
-            DIContainer.CoinRepository.Item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            var item = DIContainer.ItemRepository.GetItem(ItemCategory.Coin);
+            item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 

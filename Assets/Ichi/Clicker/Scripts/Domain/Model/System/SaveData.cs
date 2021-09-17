@@ -22,6 +22,7 @@ namespace Ichi.Clicker
         public Item Commodity { get; private set; }
         public Item Login { get; private set; }
         public Item EXP { get; private set; }
+        public Item Gem { get; private set; }
 
         public void PreSave() {
             this.factories.ForEach(factory => factory.PreSave());
@@ -88,6 +89,7 @@ namespace Ichi.Clicker
             this.Commodity = this.items.FirstOrDefault(item => item.category == ItemCategory.Commodity);
             this.Login = this.items.FirstOrDefault(item => item.category == ItemCategory.Login);
             this.EXP = this.items.FirstOrDefault(item => item.category == ItemCategory.EXP);
+            this.Gem = this.items.FirstOrDefault(item => item.category == ItemCategory.Gem);
         }
 
         private void InitializeEpisodes() {

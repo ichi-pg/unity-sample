@@ -5,7 +5,6 @@ namespace Ichi.Clicker.Offline
 {
     public class CommodityRepository : ICommodityRepository
     {
-        public IItem Item { get => this.saveDataRepository.SaveData.Commodity; }
         private ISaveDataRepository saveDataRepository;
 
         public CommodityRepository(ISaveDataRepository saveDataRepository) {

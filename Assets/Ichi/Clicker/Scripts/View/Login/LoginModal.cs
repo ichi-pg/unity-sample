@@ -20,8 +20,9 @@ namespace Ichi.Clicker.View
         private Common.IAds ads;
 
         void Start() {
-            this.quantity.text = Common.Texts.ToString(DIContainer.LoginRepository.Item.Quantity);
-            this.gauge.Resize(DIContainer.LoginRepository.QuantityRate);
+            var item = DIContainer.ItemRepository.GetItem(ItemCategory.Login);
+            this.quantity.text = Common.Texts.ToString(item.Quantity);
+            this.gauge.Resize(DIContainer.LoginRepository.Rate);
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
             this.ads.LoadHandler += this.OnLoadAds;

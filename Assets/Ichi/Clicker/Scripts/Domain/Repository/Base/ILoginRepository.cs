@@ -5,9 +5,9 @@ using System;
 
 namespace Ichi.Clicker
 {
-    public interface ILoginRepository : IItemRepository
+    public interface ILoginRepository
     {
-        float QuantityRate { get; }
+        float Rate { get; }
         bool Produce();
         void Collect(bool bonus);
     }

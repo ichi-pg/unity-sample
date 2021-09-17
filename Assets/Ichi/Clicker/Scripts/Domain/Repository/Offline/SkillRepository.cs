@@ -16,12 +16,11 @@ namespace Ichi.Clicker.Offline
         }
 
         public bool CanLevelUp(IGadget skill) {
-            return this.saveDataRepository.SaveData.Coin.Quantity >= skill.Cost;
+            return this.saveDataRepository.SaveData.Gem.Quantity >= skill.Cost;
         }
 
         public void LevelUp(IGadget skill) {
-            //NEXT 専用コストでダイヤとか
-            (skill as Skill).LevelUp(this.saveDataRepository.SaveData.Coin);
+            (skill as Skill).LevelUp(this.saveDataRepository.SaveData.Gem);
             this.saveDataRepository.Save();
         }
     }
