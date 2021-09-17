@@ -23,6 +23,7 @@ namespace Ichi.Clicker.View
                 Destroy(this.gameObject);
             });
             //TODO SE
+            //TODO ランダムは数字だけにしてハートはぽよぽよさせた方が良いかも？
         }
 
         public void SetDamage(System.Numerics.BigInteger damage) {

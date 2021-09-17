@@ -48,19 +48,17 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid alive.");
             }
             //エンカウント
-            //TODO レベル上昇ロジック
             var enemy = new Enemy(11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101)));
             saveData.enemy = enemy;
             this.onEncount.OnNext(enemy);
             this.saveDataRepository.Save();
-            //TODO 少なくとも今と別の敵をエンカウントさせる
-            //TODO やはり討伐失敗も入れないと単調（制限時間->ターン数=自HP+敵ATKと同義）
-            //TODO ドロップもランダムにする？
-            //TODO 料理もドロップにする？
-            //TODO レベル調整入れないとあっという間にコンテンツ消化する
-            //TODO シンプルにリソースをモンスターだけにして、クリック担当、オート担当、スキル担当に分ける？クリックとオートは掛け算
-            //TODO 強敵出現、挑戦、レアリティの高いドロップ
-            //TODO ドロップ->レアリティアップ挑戦（ポーションの見せ方変えただけ）
+            //TODO 必ず別の敵をエンカウントさせる
+            //TODO 捕獲済み敵ランク+2までエンカウント、ドロップする
+            //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする
+            //TODO 敵レベルの成長ルールは？
+            //TODO 討伐失敗入れる（ターン数=自HP+敵ATKと同義な調整の制限時間）？
+            //TODO 強敵出現、挑戦、レアリティの高いドロップ？
+            //TODO ドロップ->レアリティアップ挑戦（ポーションの見せ方変えただけ）？
         }
     }
 }
