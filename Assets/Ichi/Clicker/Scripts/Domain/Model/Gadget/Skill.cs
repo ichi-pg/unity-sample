@@ -30,5 +30,8 @@ namespace Ichi.Clicker
         public TimeSpan TimeLeft(DateTime now) {
             return Common.Time.Max(this.FinishAt - now, TimeSpan.Zero);
         }
+
+        //TODO レベルアップ
+        //TODO GadgetView
     }
 }
