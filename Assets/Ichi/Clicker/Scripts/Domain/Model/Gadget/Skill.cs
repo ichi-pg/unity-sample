@@ -31,7 +31,7 @@ namespace Ichi.Clicker
             return Common.Time.Max(this.FinishAt - now, TimeSpan.Zero);
         }
 
-        //TODO レベルアップ
-        //TODO GadgetView
+        //NEXT レベルアップ
+        //NEXT GadgetView
     }
 }

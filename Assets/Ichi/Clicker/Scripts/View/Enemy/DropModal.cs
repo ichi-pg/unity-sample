@@ -8,7 +8,7 @@ namespace Ichi.Clicker.View
     public class DropModal : MonoBehaviour, Common.IChildView<IGadget>
     {
         public void Initialize(IGadget gadget) {
-            //TODO
+            //NEXT
         }
     }
 }
