@@ -62,7 +62,7 @@ namespace Ichi.Clicker.View
 
         public void LevelUp() {
             if (this.gadget.CanLevelUp()) {
-                DIContainer.FromGadgetCategory(this.gadget.Category).LevelUp(this.gadget);
+                DIContainer.GadgetRepository.LevelUp(this.gadget);
             }
             //TODO エフェクト
             //TODO SE

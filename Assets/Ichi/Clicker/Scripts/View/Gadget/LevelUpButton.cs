@@ -21,7 +21,7 @@ namespace Ichi.Clicker.View
         private GadgetViewData viewData;
 
         void Start() {
-            foreach (var factory in DIContainer.FromGadgetCategory(this.category).Gadgets) {
+            foreach (var factory in DIContainer.GadgetRepository.GetGadgets(this.category)) {
                 factory.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             }
             this.OnAlter();
@@ -31,7 +31,7 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             //NOTE 購読が蓄積する
             this.view.Initialize(
-                DIContainer.FromGadgetCategory(this.category).Gadgets
+                DIContainer.GadgetRepository.GetGadgets(this.category)
                     .OrderBy(factory => factory.Cost).FirstOrDefault(),
                 this.viewData
             );

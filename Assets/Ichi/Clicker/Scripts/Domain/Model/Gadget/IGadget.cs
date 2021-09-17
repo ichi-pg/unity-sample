@@ -15,6 +15,7 @@ namespace Ichi.Clicker
         bool HasLevelUp { get; }
         BigIntegerStatus Power { get; }
         GadgetCategory Category { get; }
+        ItemCategory CostCategory { get; }
         IObservable<int> OnLevelUp { get; }
     }
 }

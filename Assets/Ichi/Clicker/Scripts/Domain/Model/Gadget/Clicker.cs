@@ -20,6 +20,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
         public GadgetCategory Category { get => GadgetCategory.Clicker; }
+        public ItemCategory CostCategory { get => ItemCategory.Coin; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
         public IObserver<int> LevelUpObserver { get => this.onLevelUp; }

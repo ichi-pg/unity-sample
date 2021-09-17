@@ -6,7 +6,7 @@ using UniRx;
 
 namespace Ichi.Clicker
 {
-    public interface IProduceRepository : IGadgetRepository
+    public interface IProduceRepository
     {
         void Produce();
         void CheatMode(bool enable);

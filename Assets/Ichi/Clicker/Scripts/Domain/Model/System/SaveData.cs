@@ -16,6 +16,7 @@ namespace Ichi.Clicker
         public List<Episode> episodes;
         public List<Skill> skills;
         public Enemy enemy;
+        public List<IGadget> Gadgets { get; private set; }
         public Skill Fever { get; private set; }
         public Skill CoolDown { get; private set; }
         public Item Coin { get; private set; }
@@ -32,6 +33,7 @@ namespace Ichi.Clicker
         }
 
         public void Initialize() {
+            this.Gadgets = new List<IGadget>();
             this.InitializeEnemy();
             this.InitializeClickers();
             this.InitializeFactories();
@@ -59,6 +61,7 @@ namespace Ichi.Clicker
                     this.clickers.Add(new Clicker(rank));
                 }
             }
+            this.Gadgets.AddRange(this.clickers);
         }
 
         private void InitializeFactories() {
@@ -72,6 +75,7 @@ namespace Ichi.Clicker
                     this.factories.Add(new Factory(rank));
                 }
             }
+            this.Gadgets.AddRange(this.factories);
         }
 
         private void InitializeItems() {
@@ -126,6 +130,7 @@ namespace Ichi.Clicker
                     this.skills.Add(new Skill(category));
                 }
             }
+            this.Gadgets.AddRange(this.skills);
             this.Fever = this.skills.FirstOrDefault(skill => skill.category == SkillCategory.Fever);
             this.CoolDown = this.skills.FirstOrDefault(skill => skill.category == SkillCategory.CoolDown);
         }

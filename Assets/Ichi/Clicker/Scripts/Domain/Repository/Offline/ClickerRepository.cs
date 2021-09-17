@@ -8,7 +8,6 @@ namespace Ichi.Clicker.Offline
 {
     public class ClickerRepository : IProduceRepository
     {
-        public IEnumerable<IGadget> Gadgets { get => this.saveDataRepository.SaveData.clickers; }
         private int cheatBonus = 1;
         private ISaveDataRepository saveDataRepository;
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
@@ -16,15 +15,6 @@ namespace Ichi.Clicker.Offline
 
         public ClickerRepository(ISaveDataRepository saveDataRepository) {
             this.saveDataRepository = saveDataRepository;
-        }
-
-        public bool CanLevelUp(IGadget gadget) {
-            return this.saveDataRepository.SaveData.Coin.Quantity >= gadget.Cost;
-        }
-
-        public void LevelUp(IGadget gadget) {
-            (gadget as ILevelUpper).LevelUp(this.saveDataRepository.SaveData.Coin);
-            this.saveDataRepository.Save();
         }
 
         public void Produce() {

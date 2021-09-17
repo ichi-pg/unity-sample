@@ -8,7 +8,6 @@ namespace Ichi.Clicker.Offline
 {
     public class FactoryRepository : IProduceRepository
     {
-        public IEnumerable<IGadget> Gadgets { get => this.saveDataRepository.SaveData.factories; }
         private int cheatBonus = 1;
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
@@ -18,15 +17,6 @@ namespace Ichi.Clicker.Offline
         public FactoryRepository(ITimeRepository timeRepository, ISaveDataRepository saveDataRepository) {
             this.timeRepository = timeRepository;
             this.saveDataRepository = saveDataRepository;
-        }
-
-        public bool CanLevelUp(IGadget gadget) {
-            return !gadget.IsLock && this.saveDataRepository.SaveData.EXP.Quantity >= gadget.Cost;
-        }
-
-        public void LevelUp(IGadget gadget) {
-            (gadget as ILevelUpper).LevelUp(this.saveDataRepository.SaveData.EXP);
-            this.saveDataRepository.Save();
         }
 
         public void Produce() {

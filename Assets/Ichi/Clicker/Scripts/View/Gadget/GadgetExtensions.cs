@@ -18,7 +18,7 @@ namespace Ichi.Clicker.View
         }
 
         public static bool CanLevelUp(this IGadget gadget) {
-            return DIContainer.FromGadgetCategory(gadget.Category).CanLevelUp(gadget);
+            return DIContainer.GadgetRepository.CanLevelUp(gadget);
         }
 
         public static string LevelUp(this IGadget gadget) {
