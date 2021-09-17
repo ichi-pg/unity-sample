@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    public class EpisodeView : MonoBehaviour, Common.IChildView<IEpisode>
+    public class EpisodeView : MonoBehaviour
     {
         [SerializeField]
         private GameObject read;

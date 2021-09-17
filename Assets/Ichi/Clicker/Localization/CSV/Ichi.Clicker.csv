@@ -51,5 +51,5 @@
 "Factory19","モンスター19"
 "Factory20","モンスター20"
 "Skill","スキル"
-"SkillFever","フィーバー"
-"SkillCoolDown","クールダウン"
+"FeverSkill","フィーバー"
+"CoolDownSkill","クールダウン"

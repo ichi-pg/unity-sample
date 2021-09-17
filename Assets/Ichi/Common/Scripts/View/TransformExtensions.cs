@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Ichi.Common.Extensions
 {
     public static class TransformExtensions
     {
-        public static void InstantiateChildren<T, U>(this Transform transform, GameObject prefab, IEnumerable<U> children) where T : IChildView<U> {
+        public static void InstantiateChildren<T, U>(this Transform transform, GameObject prefab, IEnumerable<U> children, Action<T, U> initializer) where T : Component {
             foreach (var child in children) {
-                GameObject.Instantiate(prefab, transform).GetComponent<T>().Initialize(child);
+                initializer(
+                    GameObject.Instantiate(prefab, transform).GetComponent<T>(),
+                    child
+                );
             }
         }
 
         public static void DestroyChildren(this Transform transform) {
             foreach (Transform child in transform) {
-                Object.Destroy(child.gameObject);
+                GameObject.Destroy(child.gameObject);
             }
         }
 
@@ -24,7 +28,7 @@ namespace Ichi.Common.Extensions
             }
         }
 
-        public static Transform FindParentIn<T>(this Transform transform) where T : Object {
+        public static Transform FindParentIn<T>(this Transform transform) where T : UnityEngine.Object {
             while (transform.parent.GetComponent<T>() == null) {
                 transform = transform.parent;
             }

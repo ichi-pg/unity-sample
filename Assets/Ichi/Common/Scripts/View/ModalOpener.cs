@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 namespace Ichi.Common
@@ -15,8 +16,8 @@ namespace Ichi.Common
             //NOTE 入れ替えるパターン
         }
 
-        public void Open<T, U>(U child) where T : IChildView<U> {
-            this.Create().GetComponent<T>().Initialize(child);
+        public T Open<T>() where T : Component {
+            return this.Create().GetComponent<T>();
         }
 
         private GameObject Create() {

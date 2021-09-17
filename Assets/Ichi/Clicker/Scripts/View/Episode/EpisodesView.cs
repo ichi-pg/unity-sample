@@ -16,7 +16,8 @@ namespace Ichi.Clicker.View
             this.parent.DestroyChildren();
             this.parent.InstantiateChildren<EpisodeView, IEpisode>(
                 this.prefab,
-                DIContainer.EpisodeRepository.Episodes
+                DIContainer.EpisodeRepository.Episodes,
+                (view, episode) => view.Initialize(episode)
             );
         }
     }

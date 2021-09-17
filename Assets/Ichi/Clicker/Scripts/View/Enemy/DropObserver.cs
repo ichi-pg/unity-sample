@@ -17,7 +17,7 @@ namespace Ichi.Clicker.View
         }
 
         private void OnDrop(IGadget gadget) {
-            this.modalOpener.Open<DropModal, IGadget>(gadget);
+            this.modalOpener.Open<DropModal>().Initialize(gadget);
         }
     }
 }

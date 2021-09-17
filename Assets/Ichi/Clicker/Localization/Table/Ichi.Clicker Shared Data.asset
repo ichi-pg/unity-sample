@@ -228,11 +228,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4633228282421248
-    m_Key: SkillFever
+    m_Key: FeverSkill
     m_Metadata:
       m_Items: []
   - m_Id: 4633228299198464
-    m_Key: SkillCoolDown
+    m_Key: CoolDownSkill
     m_Metadata:
       m_Items: []
   m_Metadata:

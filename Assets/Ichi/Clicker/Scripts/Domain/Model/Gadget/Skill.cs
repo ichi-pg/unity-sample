@@ -13,13 +13,13 @@ namespace Ichi.Clicker
         public int level;
         public DateTime FinishAt { get; set; }
         public int Level { get => this.level; }
-        public int Rank { get => 1; }
+        public int Rank { get => (int)this.category + 1; }
         public int Rarity { get => 1; }
         public bool IsBought { get => true; }
         public bool IsLock { get => false; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
-        public string Name { get => "Skill" + this.category; }
+        public string Name { get => this.category + "Skill"; }
         public string Store { get => ""; }
         public string Unit { get => ""; }
         public GadgetCategory Category { get => GadgetCategory.Skill; }

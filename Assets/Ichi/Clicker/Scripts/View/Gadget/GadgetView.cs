@@ -9,7 +9,7 @@ using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
 {
-    public class GadgetView : MonoBehaviour, Common.IChildView<IGadget>
+    public class GadgetView : MonoBehaviour
     {
         [SerializeField]
         private Text label;
