@@ -30,7 +30,7 @@ namespace Ichi.Clicker.View
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
             this.UpdateGauge();
-            //TODO 名前描画
+            //TODO 名前描画（諸説）
             //TODO レベル描画
             //TODO 希少性描画
         }
@@ -41,13 +41,15 @@ namespace Ichi.Clicker.View
         }
 
         private void OnWin(IEnemy enemy) {
-            //TODO エフェクト
+            //TODO 撃破エフェクト
+            //TODO ハート貯まるエフェクト
             //TODO SE
         }
 
         private void OnEncount(IEnemy enemy) {
             this.UpdateEnemy();
             //TODO エフェクト
+            //TODO 希少性エフェクト
             //TODO SE
         }
 
