@@ -24,6 +24,7 @@ namespace Ichi.Clicker.View
             });
             //TODO SE
             //TODO ランダムは数字だけにしてハートはぽよぽよさせた方が良いかも？
+            //TODO お菓子食べてる感じ出したい
         }
 
         public void SetDamage(System.Numerics.BigInteger damage) {
