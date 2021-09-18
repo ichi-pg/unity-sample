@@ -45,13 +45,14 @@ namespace Ichi.Clicker.View
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
                     this.gameObject.AddComponent<FeverButton>().button = this.gameObject.AddComponent<Button>();
+                    this.UpdateDesc().Forget();
                     break;
                 case WorkCategory.CoolDown:
                     this.gameObject.AddComponent<CoolDownButton>().button = this.gameObject.AddComponent<Button>();
+                    this.UpdateDesc().Forget();
                     break;
             }
             this.OnAlter();
-            this.UpdateDesc().Forget();
         }
 
         private async UniTask UpdateDesc() {
@@ -66,6 +67,7 @@ namespace Ichi.Clicker.View
             this.label.text = this.data.Name(this.gadget);
             this.descImage.sprite = this.data.DescSprite;
             this.descImage.gameObject.SetActive(this.data.DescSprite != null);
+            this.desc.text = this.gadget.Desc();
             this.cost.text = this.gadget.Cost();
             this.cost.gameObject.SetActive(this.gadget.HasLevelUp);
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
@@ -76,7 +78,6 @@ namespace Ichi.Clicker.View
             this.costImage.sprite = this.data.CostSprite;
             this.costImage.gameObject.SetActive(this.gadget.HasLevelUp);
             //NEXT 生産ゲージアニメ
-            //NEXT スキル実行ボタン
         }
 
         public void LevelUp() {
