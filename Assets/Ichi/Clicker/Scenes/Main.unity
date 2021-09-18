@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 100528931}
   - component: {fileID: 100528933}
   - component: {fileID: 100528932}
+  - component: {fileID: 100528934}
   m_Layer: 0
   m_Name: ads_ool_time
   m_TagString: Untagged
@@ -912,6 +913,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100528930}
   m_CullTransparentMesh: 1
+--- !u!114 &100528934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100528930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7656c357f5242bb80eed731562e5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1879002718}
+  category: 1
 --- !u!1 &170220301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,19 +3040,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 745843995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 745843993}
-        m_TargetAssemblyTypeName: Ichi.Clicker.FeverAdsButton, Ichi.Clicker
-        m_MethodName: PlayAds
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &745843995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4033,7 +4036,6 @@ GameObject:
   - component: {fileID: 901989349}
   - component: {fileID: 901989353}
   - component: {fileID: 901989352}
-  - component: {fileID: 901989350}
   m_Layer: 5
   m_Name: status
   m_TagString: Untagged
@@ -4065,20 +4067,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 190}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &901989350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901989348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d7656c357f5242bb80eed731562e5cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coolTime: {fileID: 1361626237}
-  adsCoolTime: {fileID: 1879002718}
 --- !u!114 &901989352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5915,6 +5903,8 @@ GameObject:
   - component: {fileID: 1467468960}
   - component: {fileID: 1467468959}
   - component: {fileID: 1467468958}
+  - component: {fileID: 1467468964}
+  - component: {fileID: 1467468963}
   m_Layer: 0
   m_Name: wand
   m_TagString: Untagged
@@ -5969,7 +5959,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1467468960}
-  gauge: {fileID: 0}
 --- !u!114 &1467468960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6013,19 +6002,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467468961}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1467468959}
-        m_TargetAssemblyTypeName: Ichi.Clicker.FeverButton, Ichi.Clicker
-        m_MethodName: Fever
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1467468961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6064,6 +6041,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467468956}
   m_CullTransparentMesh: 1
+--- !u!114 &1467468963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467468956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ae632a8508a400a9fe3253dea1a687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauge: {fileID: 1723654273}
+  frame: {fileID: 1467468957}
+  axis: 0
+--- !u!114 &1467468964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467468956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edde4408ce64742baa2c42df89f9bb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauge: {fileID: 1467468963}
 --- !u!1 &1469637737
 GameObject:
   m_ObjectHideFlags: 0
@@ -9179,6 +9184,7 @@ GameObject:
   - component: {fileID: 2099220239}
   - component: {fileID: 2099220241}
   - component: {fileID: 2099220240}
+  - component: {fileID: 2099220242}
   m_Layer: 0
   m_Name: cool_time
   m_TagString: Untagged
@@ -9245,6 +9251,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099220238}
   m_CullTransparentMesh: 1
+--- !u!114 &2099220242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099220238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7656c357f5242bb80eed731562e5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1361626237}
+  category: 0
 --- !u!1 &2109772001
 GameObject:
   m_ObjectHideFlags: 0

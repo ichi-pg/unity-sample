@@ -19,6 +19,7 @@ namespace Ichi.Clicker.View
         public static ICommodityRepository CommodityRepository { get; private set; } = new Offline.CommodityRepository(saveDataRepository);
         public static IItemRepository ItemRepository { get; private set; } = new Offline.ItemRepository(saveDataRepository);
         public static IEpisodeRepository EpisodeRepository { get; private set; } = new Offline.EpisodeRepository(saveDataRepository);
+        public static ISkillRepository SkillRepository { get; private set; } = new Offline.SkillRepository(saveDataRepository);
         public static Common.ITextLocalizer TextLocalizer { get; private set; } = new Common.TextLocalizer("Ichi.Clicker");
         public static Common.IResourceLoader ResourceLoader { get; private set; } = new Common.ResourceLoader();
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();

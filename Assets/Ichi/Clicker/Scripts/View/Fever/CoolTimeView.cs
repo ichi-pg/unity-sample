@@ -11,18 +11,25 @@ namespace Ichi.Clicker.View
     public class CoolTimeView : MonoBehaviour
     {
         [SerializeField]
-        private Text coolTime;
+        private Text text;
         [SerializeField]
-        private Text adsCoolTime;
+        private SkillCategory category;
 
         void Start() {
-            this.UpdateView(this.GetCancellationTokenOnDestroy()).Forget();
+            this.UpdateView().Forget();
         }
 
-        private async UniTask UpdateView(CancellationToken token) {
+        private async UniTask UpdateView() {
+            var token = this.GetCancellationTokenOnDestroy();
+            var skill = DIContainer.SkillRepository.GetSkill(this.category);
             while (true) {
-                this.coolTime.text = DIContainer.FeverRepository.CoolTime.ToString("mm\\:ss");
-                this.adsCoolTime.text = DIContainer.CoolDownRepository.CoolTime.ToString("mm\\:ss");
+                var timeLeft = skill.TimeLeft(DIContainer.TimeRepository.Now);
+                if (timeLeft > TimeSpan.Zero) {
+                    this.text.text = timeLeft.ToString("mm\\:ss");
+                } else {
+                    var coolTime = skill.CoolTime(DIContainer.TimeRepository.Now);
+                    this.text.text = coolTime.ToString("mm\\:ss");
+                }
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }

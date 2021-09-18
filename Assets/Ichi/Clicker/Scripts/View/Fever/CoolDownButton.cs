@@ -19,6 +19,7 @@ namespace Ichi.Clicker.View
             this.ads.LoadHandler += this.OnAlter;
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.button.OnClickAsObservable().Subscribe(_ => this.PlayAds()).AddTo(this);
             this.OnAlter();
         }
 
