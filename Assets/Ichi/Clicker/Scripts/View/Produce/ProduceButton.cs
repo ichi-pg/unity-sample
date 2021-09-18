@@ -11,7 +11,7 @@ namespace Ichi.Clicker.View
                 DIContainer.ClickerRepository.Produce();
             } else {
                 DIContainer.EnemyRepository.Encount();
-                //TODO 演出終わるまでのウェイト
+                //TODO 演出してスムーズに移動
             }
         }
     }
