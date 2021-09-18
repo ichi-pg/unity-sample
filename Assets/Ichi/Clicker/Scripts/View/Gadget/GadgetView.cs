@@ -41,8 +41,7 @@ namespace Ichi.Clicker.View
             this.gadget = gadget;
             this.data = data;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
-            DIContainer.ItemRepository.GetItem(ItemCategory.Coin)
-                .OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
