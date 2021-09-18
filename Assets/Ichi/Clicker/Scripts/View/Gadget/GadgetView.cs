@@ -62,6 +62,7 @@ namespace Ichi.Clicker.View
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
             //TODO タップできそうなアピール
+            //TODO 実行中であると分かりやすいアニメーション
         }
 
         private void OnAlter() {
