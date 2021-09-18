@@ -43,7 +43,7 @@ namespace Ichi.Clicker
         }
 
         private void Initialize() {
-            this.WorkCategory = (WorkCategory)Enum.Parse(typeof(WorkCategory), this.category.ToString());
+            this.WorkCategory = this.category.Cast();
             this.onLevelUp = new Subject<int>();
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());

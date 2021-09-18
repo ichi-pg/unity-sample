@@ -33,14 +33,11 @@ namespace Ichi.Clicker.View
         private IGadget gadget;
         private GadgetViewData data;
 
-        void Start() {
-            this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
-        }
-
         public void Initialize(IGadget gadget, GadgetViewData data) {
             this.gadget = gadget;
             this.data = data;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
             DIContainer.EnemyRepository.OnDrop.Where(x => x == gadget).Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             switch (gadget.WorkCategory) {

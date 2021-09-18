@@ -23,13 +23,7 @@ namespace Ichi.Clicker.View
             var token = this.GetCancellationTokenOnDestroy();
             var skill = DIContainer.SkillRepository.GetSkill(this.category);
             while (true) {
-                var timeLeft = skill.TimeLeft(DIContainer.TimeRepository.Now);
-                if (timeLeft > TimeSpan.Zero) {
-                    this.text.text = timeLeft.ToString("mm\\:ss");
-                } else {
-                    var coolTime = skill.CoolTime(DIContainer.TimeRepository.Now);
-                    this.text.text = coolTime.ToString("mm\\:ss");
-                }
+                this.text.text = skill.CoolTime();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }
