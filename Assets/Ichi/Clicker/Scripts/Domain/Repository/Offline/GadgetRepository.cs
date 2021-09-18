@@ -14,7 +14,7 @@ namespace Ichi.Clicker.Offline
 
         public IEnumerable<IGadget> GetGadgets(GadgetCategory category) {
             return this.saveDataRepository.SaveData.Gadgets
-                .Where(gadget => gadget.Category == category);
+                .Where(gadget => gadget.GadgetCategory == category);
         }
 
         private Item GetCost(IGadget gadget) {

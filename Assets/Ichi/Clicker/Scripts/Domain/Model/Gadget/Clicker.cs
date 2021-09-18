@@ -19,7 +19,7 @@ namespace Ichi.Clicker
         public bool HasLevelUp { get => true; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
-        public GadgetCategory Category { get => GadgetCategory.Clicker; }
+        public GadgetCategory GadgetCategory { get => GadgetCategory.Clicker; }
         public ItemCategory CostCategory { get => ItemCategory.Coin; }
         public WorkCategory WorkCategory { get => WorkCategory.Clicker; }
         private Subject<int> onLevelUp;

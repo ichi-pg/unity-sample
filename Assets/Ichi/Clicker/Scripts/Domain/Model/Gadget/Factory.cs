@@ -24,7 +24,7 @@ namespace Ichi.Clicker
         public bool HasLevelUp { get => this.IsBought; }
         public BigIntegerStatus Power { get; private set; }
         public BigIntegerStatus Cost { get; private set; }
-        public GadgetCategory Category { get => GadgetCategory.Factory; }
+        public GadgetCategory GadgetCategory { get => GadgetCategory.Factory; }
         public ItemCategory CostCategory { get => ItemCategory.EXP; }
         public WorkCategory WorkCategory { get => WorkCategory.Factory; }
         private Subject<int> onLevelUp;
