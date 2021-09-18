@@ -11,6 +11,7 @@ namespace Ichi.Clicker
         public SkillCategory category;
         public Common.TicksTime coolDownAt;
         public int level;
+        //TODO クイック再生だとリセットされなくて困る。
         public DateTime FinishAt { get; set; }
         public int Level { get => this.level; set => this.level = value; }
         public int Rank { get => (int)this.category + 1; }

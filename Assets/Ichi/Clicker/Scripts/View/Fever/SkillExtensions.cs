@@ -12,12 +12,14 @@ namespace Ichi.Clicker.View
     {
         public static string CoolTime(this Skill skill) {
             var timeLeft = skill.TimeLeft(DIContainer.TimeRepository.Now);
+            var coolTime = skill.CoolTime(DIContainer.TimeRepository.Now);
             if (timeLeft > TimeSpan.Zero) {
                 return timeLeft.ToString("mm\\:ss");
-            } else {
-                var coolTime = skill.CoolTime(DIContainer.TimeRepository.Now);
+            }
+            if (coolTime > TimeSpan.Zero) {
                 return coolTime.ToString("mm\\:ss");
             }
+            return null;
         }
     }
 }

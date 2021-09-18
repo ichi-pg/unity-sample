@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -49,13 +51,21 @@ namespace Ichi.Clicker.View
                     break;
             }
             this.OnAlter();
+            this.UpdateDesc().Forget();
+        }
+
+        private async UniTask UpdateDesc() {
+            var token = this.GetCancellationTokenOnDestroy();
+            while (true) {
+                this.desc.text = this.gadget.Desc();
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+            }
         }
 
         private void OnAlter() {
             this.label.text = this.data.Name(this.gadget);
             this.descImage.sprite = this.data.DescSprite;
             this.descImage.gameObject.SetActive(this.data.DescSprite != null);
-            this.desc.text = this.gadget.Desc();
             this.cost.text = this.gadget.Cost();
             this.cost.gameObject.SetActive(this.gadget.HasLevelUp);
             this.levelUpButton.interactable = this.gadget.CanLevelUp();

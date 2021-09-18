@@ -23,7 +23,7 @@ namespace Ichi.Clicker.View
             var token = this.GetCancellationTokenOnDestroy();
             var skill = DIContainer.SkillRepository.GetSkill(this.category);
             while (true) {
-                this.text.text = skill.CoolTime();
+                this.text.text = skill.CoolTime() ?? "00:00";
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }

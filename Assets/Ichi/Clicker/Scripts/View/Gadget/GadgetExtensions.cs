@@ -22,7 +22,13 @@ namespace Ichi.Clicker.View
         }
 
         public static string Desc(this IGadget gadget) {
-            return DIContainer.TextLocalizer.Localize(gadget.WorkCategory + "Desc", gadget.Power());
+            var desc = DIContainer.TextLocalizer.Localize(gadget.WorkCategory + "Desc", gadget.Power());
+            switch (gadget.WorkCategory) {
+                case WorkCategory.Fever:
+                case WorkCategory.CoolDown:
+                    return DIContainer.SkillRepository.GetSkill(gadget.WorkCategory.Cast()).CoolTime() ?? desc;
+            }
+            return desc;
         }
     }
 }
