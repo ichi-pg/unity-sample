@@ -15,7 +15,7 @@ namespace Ichi.Clicker
         }
 
         public static void LevelUp(this ILevelUpper upper, IConsume consume) {
-            if (upper.IsLock) {
+            if (!upper.HasLevelUp) {
                 throw new Exception("Invalid lock.");
             }
             consume.Consume(upper.Cost);

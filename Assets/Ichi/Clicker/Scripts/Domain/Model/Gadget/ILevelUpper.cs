@@ -11,7 +11,7 @@ namespace Ichi.Clicker
         int Level { get; set; }
         int Rank { get; }
         int Rarity { get; }
-        bool IsLock { get; }
+        bool HasLevelUp { get; }
         BigIntegerStatus Power { get; }
         BigIntegerStatus Cost { get; }
         IObserver<int> LevelUpObserver { get; }
