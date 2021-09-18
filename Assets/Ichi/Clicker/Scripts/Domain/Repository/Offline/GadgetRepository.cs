@@ -23,7 +23,7 @@ namespace Ichi.Clicker.Offline
         }
 
         public bool CanLevelUp(IGadget gadget) {
-            return !gadget.IsLock && this.GetCost(gadget).Quantity >= gadget.Cost;
+            return gadget.HasLevelUp && this.GetCost(gadget).Quantity >= gadget.Cost;
         }
 
         public void LevelUp(IGadget gadget) {
