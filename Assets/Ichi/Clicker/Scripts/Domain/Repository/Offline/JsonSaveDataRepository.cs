@@ -18,7 +18,7 @@ namespace Ichi.Clicker.Offline
             //TODO バイナリ
         }
 
-        private void Load() {
+        public void Load() {
             if (this.Exists) {
                 this.SaveData = Common.JsonSaveData.Load<SaveData>();
             } else {

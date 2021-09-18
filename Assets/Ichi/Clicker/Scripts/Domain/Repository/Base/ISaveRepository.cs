@@ -7,6 +7,7 @@ namespace Ichi.Clicker
     {
         bool Exists { get; }
         void Save();
+        void Load();
         void Delete();
     }
 }

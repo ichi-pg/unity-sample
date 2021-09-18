@@ -6,6 +6,10 @@ namespace Ichi.Clicker.View
 {
     public class SaveController : MonoBehaviour
     {
+        void Awake() {
+            DIContainer.SaveRepository.Load();
+        }
+
         void OnApplicationFocus(bool focus) {
             DIContainer.SaveRepository.Save();
         }
