@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: ja
   m_SharedData: {fileID: 11400000, guid: c881b4234b93049728eb60540558435c, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - id: 0
   m_TableData:
   - m_Id: 255170779799581
     m_Localized: "\u30E2\u30F3\u30B9\u30BF\u30FC20"
@@ -106,20 +107,12 @@ MonoBehaviour:
     m_Localized: "\u30AA\u30D5\u30E9\u30A4\u30F3\u751F\u7523"
     m_Metadata:
       m_Items: []
-  - m_Id: 255170779799559
-    m_Localized: "\u5F37\u5316"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 255170779799558
-    m_Localized: "\u958B\u653E"
-    m_Metadata:
-      m_Items: []
   - m_Id: 255170779799557
     m_Localized: "\u79D2"
     m_Metadata:
       m_Items: []
   - m_Id: 255170779799556
-    m_Localized: "\u30AF\u30EA\u30C3\u30AF"
+    m_Localized: "\u30BF\u30C3\u30D7"
     m_Metadata:
       m_Items: []
   - m_Id: 255170779799555
@@ -238,5 +231,27 @@ MonoBehaviour:
     m_Localized: "\u30D5\u30A3\u30FC\u30D0\u30FC"
     m_Metadata:
       m_Items: []
+  - m_Id: 4926686167556096
+    m_Localized: "{0}/\u30BF\u30C3\u30D7"
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 4926686175944704
+    m_Localized: "{0}/\u79D2"
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 4926686175944705
+    m_Localized: "30\u79D2\u9593\u3001\u81EA\u52D5\u30BF\u30C3\u30D7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4926686175944706
+    m_Localized: "\u5E83\u544A\u8996\u8074\u3067\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u30EA\u30BB\u30C3\u30C8"
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 12e06f66207d110011e06f66207d110010e06f66207d11000fe06f66207d11000ee06f66207d11000de06f66207d11000ce06f66207d11000be06f66207d11000ae06f66207d110009e06f66207d110008e06f66207d110007e06f66207d110006e06f66207d110005e06f66207d110004e06f66207d110003e06f66207d110002e06f66207d110001e06f66207d110000e06f66207d110000e0af65207d110000e0aff1f57d110000e06ff2f57d110000e06f83cb80110000e0ef82cb801100

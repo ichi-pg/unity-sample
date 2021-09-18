@@ -9,9 +9,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private GadgetCategory category;
         [SerializeField]
-        private string store;
-        [SerializeField]
-        private string unit;
+        private Sprite descSprite;
         [SerializeField]
         private Sprite costSprite;
         [SerializeField]
@@ -19,8 +17,7 @@ namespace Ichi.Clicker.View
 
         public Sprite[] GadgetSprites { get => this.gadgetSprites; }
         public Sprite CostSprite { get => this.costSprite; }
-        public string Unit { get => DIContainer.TextLocalizer.Localize(this.unit); }
-        public string Store { get => DIContainer.TextLocalizer.Localize(this.store); }
+        public Sprite DescSprite { get => this.descSprite; }
 
         public string Name(IGadget gadget) {
             var name = (Rarity)(gadget.Rarity - 1) + " " +

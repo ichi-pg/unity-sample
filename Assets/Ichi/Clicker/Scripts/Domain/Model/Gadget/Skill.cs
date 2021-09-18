@@ -22,6 +22,7 @@ namespace Ichi.Clicker
         public BigIntegerStatus Cost { get; private set; }
         public GadgetCategory Category { get => GadgetCategory.Skill; }
         public ItemCategory CostCategory { get => ItemCategory.Gem; }
+        public WorkCategory WorkCategory { get; private set; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
         public IObserver<int> LevelUpObserver { get => this.onLevelUp; }
@@ -42,6 +43,7 @@ namespace Ichi.Clicker
         }
 
         private void Initialize() {
+            this.WorkCategory = (WorkCategory)Enum.Parse(typeof(WorkCategory), this.category.ToString());
             this.onLevelUp = new Subject<int>();
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());

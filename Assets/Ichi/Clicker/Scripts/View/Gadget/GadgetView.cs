@@ -18,13 +18,15 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Text cost;
         [SerializeField]
-        private Text levelUp;
-        [SerializeField]
         private Button levelUpButton;
+        [SerializeField]
+        private Image disableImage;
         [SerializeField]
         private Image lockImage;
         [SerializeField]
         private Image gadgetImage;
+        [SerializeField]
+        private Image descImage;
         [SerializeField]
         private Image costImage;
 
@@ -39,19 +41,21 @@ namespace Ichi.Clicker.View
             this.gadget = gadget;
             this.data = data;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
-            var item = DIContainer.ItemRepository.GetItem(ItemCategory.Coin);
-            item.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            DIContainer.ItemRepository.GetItem(ItemCategory.Coin)
+                .OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
             this.label.text = this.data.Name(this.gadget);
-            this.desc.text = this.data.Store + this.gadget.Power() + "/" + this.data.Unit;
+            this.descImage.sprite = this.data.DescSprite;
+            this.descImage.gameObject.SetActive(this.data.DescSprite != null);
+            this.desc.text = this.gadget.Desc();
             this.cost.text = this.gadget.Cost();
             this.cost.gameObject.SetActive(this.gadget.HasLevelUp);
-            this.levelUp.text = this.gadget.LevelUp();
             this.levelUpButton.interactable = this.gadget.CanLevelUp();
             this.levelUpButton.gameObject.SetActive(this.gadget.HasLevelUp);
+            this.disableImage.gameObject.SetActive(!this.gadget.IsBought);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
             this.gadgetImage.sprite = this.data.GadgetSprites[this.gadget.Rank - 1];
             this.costImage.sprite = this.data.CostSprite;

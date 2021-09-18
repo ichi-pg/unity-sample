@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5a735f97af6495eac4c25b5d03b17c, type: 3}
   m_Name: Clicker
   m_EditorClassIdentifier: 
+  category: 0
+  desc: DescClicker
+  descSprite: {fileID: 21300000, guid: 99d19519646dde946ac7b9029d2a9e89, type: 3}
+  costSprite: {fileID: 21300000, guid: 29c11e923a5b61f4e9ce6230738fb6d1, type: 3}
   gadgetSprites:
   - {fileID: 21300000, guid: ca84933663fca2942bdeb9208c2afe7a, type: 3}
   - {fileID: 21300000, guid: 5b0abbe74973caf4db55db7f915e21d7, type: 3}
@@ -23,7 +27,3 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aa9ebfbe6f4696343a5276e9b2fbb6fa, type: 3}
   - {fileID: 21300000, guid: 64872af41ee27ef468f2737ef99cf9f8, type: 3}
   - {fileID: 21300000, guid: 0e5a3abc1a213384b8f6bd9f2676ddbd, type: 3}
-  costSprite: {fileID: 21300000, guid: 29c11e923a5b61f4e9ce6230738fb6d1, type: 3}
-  name: Clicker
-  store: Damage
-  unit: Click

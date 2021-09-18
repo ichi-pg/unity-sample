@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Factory
   m_EditorClassIdentifier: 
   category: 1
-  store: Coin
-  unit: Seconds
+  desc: DescFactory
+  descSprite: {fileID: 21300000, guid: 29c11e923a5b61f4e9ce6230738fb6d1, type: 3}
   costSprite: {fileID: 21300000, guid: 99d19519646dde946ac7b9029d2a9e89, type: 3}
   gadgetSprites:
   - {fileID: 21300000, guid: cb5b3b65dbed74d60866ecca81b47dce, type: 3}

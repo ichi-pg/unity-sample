@@ -21,8 +21,8 @@ namespace Ichi.Clicker.View
             return DIContainer.GadgetRepository.CanLevelUp(gadget);
         }
 
-        public static string LevelUp(this IGadget gadget) {
-            return DIContainer.TextLocalizer.Localize(gadget.IsBought ? "LevelUp" : "Buy");
+        public static string Desc(this IGadget gadget) {
+            return DIContainer.TextLocalizer.Localize(gadget.WorkCategory + "Desc", gadget.Power());
         }
     }
 }

@@ -39,14 +39,6 @@ MonoBehaviour:
     m_Key: Seconds
     m_Metadata:
       m_Items: []
-  - m_Id: 255170779799558
-    m_Key: Buy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 255170779799559
-    m_Key: LevelUp
-    m_Metadata:
-      m_Items: []
   - m_Id: 255170779799560
     m_Key: OfflineProduce
     m_Metadata:
@@ -233,6 +225,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4716079849922562
     m_Key: Skill2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4926686167556096
+    m_Key: ClickerDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4926686175944704
+    m_Key: FactoryDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4926686175944705
+    m_Key: FeverDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4926686175944706
+    m_Key: CoolDownDesc
     m_Metadata:
       m_Items: []
   m_Metadata:
