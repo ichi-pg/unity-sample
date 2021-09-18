@@ -14,7 +14,8 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
         public TimeSpan TimeLeft { get => this.saveDataRepository.SaveData.Fever.TimeLeft(this.timeRepository.Now); }
         public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.Fever.CoolTime(this.timeRepository.Now); }
-        private int Rate { get => this.saveDataRepository.SaveData.factories.Count(factory => factory.IsBought) * 3; }
+        //TODO
+        private int Rate { get => 1; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get => this.onAlter; }
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();

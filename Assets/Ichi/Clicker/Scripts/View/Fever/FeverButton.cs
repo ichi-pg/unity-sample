@@ -10,7 +10,7 @@ namespace Ichi.Clicker.View
     public class FeverButton : MonoBehaviour
     {
         [SerializeField]
-        private Button button;
+        public Button button;
 
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);

@@ -29,6 +29,8 @@ namespace Ichi.Clicker.View
         private Image descImage;
         [SerializeField]
         private Image costImage;
+        [SerializeField]
+        private Button workButton;
 
         private IGadget gadget;
         private GadgetViewData data;
@@ -43,6 +45,14 @@ namespace Ichi.Clicker.View
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.OnAlter();
+            switch (gadget.WorkCategory) {
+                case WorkCategory.Fever:
+                    this.gameObject.AddComponent<FeverButton>().button = this.workButton;
+                    break;
+                case WorkCategory.CoolDown:
+                    this.gameObject.AddComponent<CoolDownButton>().button = this.workButton;
+                    break;
+            }
         }
 
         private void OnAlter() {

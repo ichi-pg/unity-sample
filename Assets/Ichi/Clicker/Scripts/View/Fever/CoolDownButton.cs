@@ -10,7 +10,7 @@ namespace Ichi.Clicker.View
     public class CoolDownButton : MonoBehaviour
     {
         [SerializeField]
-        private Button button;
+        public Button button;
         private Common.IAds ads;
 
         void Start() {
