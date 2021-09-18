@@ -61,6 +61,7 @@ namespace Ichi.Clicker.View
                 this.desc.text = this.gadget.Desc();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
+            //TODO タップできそうなアピール
         }
 
         private void OnAlter() {
