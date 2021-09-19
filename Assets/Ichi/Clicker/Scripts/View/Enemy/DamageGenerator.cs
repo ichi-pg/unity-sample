@@ -18,7 +18,7 @@ namespace Ichi.Clicker.View
         }
 
         private void OnDamage(BigInteger damage) {
-            this.generater.Generate().GetComponent<DamageAnimation>().SetDamage(damage);
+            this.generater.Generate<DamageAnimation>().Play(damage);
         }
     }
 }

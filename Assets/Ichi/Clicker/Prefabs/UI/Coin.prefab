@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5365148562996984170}
   - component: {fileID: 262640156595339106}
   - component: {fileID: 372276488585676567}
+  - component: {fileID: 6914793200181092251}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -88,9 +89,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94c8c419340f457eacdb954b6594eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolable: {fileID: 6914793200181092251}
+  image: {fileID: 262640156595339106}
+  rect: {fileID: 4016783052294789741}
   sprites:
   - {fileID: 21300000, guid: ccea2089933dddf4fa80ceaad78691c4, type: 3}
   - {fileID: 21300000, guid: a17054d528263bd459a78a25c87125f9, type: 3}
   - {fileID: 21300000, guid: 29c11e923a5b61f4e9ce6230738fb6d1, type: 3}
-  image: {fileID: 262640156595339106}
-  rect: {fileID: 4016783052294789741}
+--- !u!114 &6914793200181092251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403917943070962844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8b1080ed3554ee3b30930ac8e888b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

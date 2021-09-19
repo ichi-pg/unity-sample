@@ -9,13 +9,16 @@ namespace Ichi.Clicker.View
     public class CoinAnimation : MonoBehaviour
     {
         [SerializeField]
+        private Common.Poolable poolable;
+        [SerializeField]
         private Image image;
         [SerializeField]
         private RectTransform rect;
         [SerializeField]
         private Sprite[] sprites;
 
-        void Start() {
+        public void Play(int index) {
+            image.sprite = this.sprites[index];
             //回転する
             this.rect.DOLocalRotate(Vector3.up * 360f * 8f, 2f, RotateMode.FastBeyond360);
             //跳ねる
@@ -27,13 +30,10 @@ namespace Ichi.Clicker.View
             });
             //フェードアウト
             this.image.DOFade(0f, 2f).OnComplete(() => {
-                Destroy(this.gameObject);
+                this.poolable.Return();
+                this.image.color = Color.white;
             });
             //TODO SE
-        }
-
-        public void SetSprite(int index) {
-            image.sprite = this.sprites[index];
         }
     }
 }

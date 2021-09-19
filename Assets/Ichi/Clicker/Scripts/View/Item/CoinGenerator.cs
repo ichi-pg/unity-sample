@@ -37,7 +37,7 @@ namespace Ichi.Clicker.View
                 TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
                 cancellationToken: this.token
             );
-            this.generater.Generate().GetComponent<CoinAnimation>().SetSprite(index);
+            this.generater.Generate<CoinAnimation>().Play(index);
         }
     }
 }

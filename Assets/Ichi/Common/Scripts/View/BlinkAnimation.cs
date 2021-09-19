@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-namespace Ichi.Clicker.View
+namespace Ichi.Common
 {
     public class BlinkAnimation : MonoBehaviour
     {
