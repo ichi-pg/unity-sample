@@ -21,5 +21,9 @@ namespace Ichi.Clicker
             }
             return res;
         }
+
+        public static Rarity Rarity(this IGadget gadget) {
+            return (Rarity)(gadget.Rarity - 1);
+        }
     }
 }

@@ -71,7 +71,7 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.label.text = this.data.Name(this.gadget);
+            this.label.text = this.gadget.Name();
             this.descImage.sprite = this.data.DescSprite;
             this.descImage.gameObject.SetActive(this.data.DescSprite != null);
             this.desc.text = this.gadget.Desc();
@@ -81,7 +81,7 @@ namespace Ichi.Clicker.View
             this.levelUpButton.gameObject.SetActive(this.gadget.HasLevelUp);
             this.disableImage.gameObject.SetActive(!this.gadget.IsBought);
             this.lockImage.gameObject.SetActive(this.gadget.IsLock);
-            this.gadgetImage.sprite = this.data.GadgetSprites[this.gadget.Rank - 1];
+            this.gadgetImage.sprite = this.data.GadgetSprite(gadget);
             this.costImage.sprite = this.data.CostSprite;
             this.costImage.gameObject.SetActive(this.gadget.HasLevelUp);
             //TODO 生産ゲージアニメ

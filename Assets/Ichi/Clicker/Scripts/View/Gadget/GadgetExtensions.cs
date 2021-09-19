@@ -6,6 +6,15 @@ namespace Ichi.Clicker.View
 {
     public static class GadgetExtensions
     {
+        public static string Name(this IGadget gadget) {
+            var name = gadget.Rarity() + " " +
+                DIContainer.TextLocalizer.Localize(gadget.GadgetCategory.ToString() + gadget.Rank);
+            if (gadget.IsBought) {
+                return name + " Lv" + gadget.Level + " ";
+            }
+            return name;
+        }
+
         public static string Power(this IGadget gadget) {
             if (gadget.IsBought) {
                 return Common.Texts.ToString(gadget.Power);

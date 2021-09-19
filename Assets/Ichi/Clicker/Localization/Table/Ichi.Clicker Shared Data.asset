@@ -247,6 +247,14 @@ MonoBehaviour:
     m_Key: Tap
     m_Metadata:
       m_Items: []
+  - m_Id: 5340243870867456
+    m_Key: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5340630531170304
+    m_Key: Drop
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1792,6 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modalOpener: {fileID: 380601447}
+  viewData: {fileID: 11400000, guid: 2f279cedee64548bfb68fd354c2da1bd, type: 2}
 --- !u!114 &380601447
 MonoBehaviour:
   m_ObjectHideFlags: 0
