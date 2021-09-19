@@ -31,8 +31,12 @@ namespace Ichi.Clicker.Offline
                     factory.Produce(this.saveDataRepository.SaveData.Login, now, 1);
                 }
             }
-            this.saveDataRepository.Save();
-            return this.saveDataRepository.SaveData.Login.Quantity > 0;
+            if (this.Rate >= 0.1f) {
+                this.saveDataRepository.Save();
+                return true;
+            }
+            this.Collect(false);
+            return false;
         }
 
         public void Collect(bool bonus) {

@@ -15,12 +15,12 @@ namespace Ichi.Clicker.View
         void Start() {
             if (DIContainer.LoginRepository.Produce()) {
                 this.loginModalOpener.Open();
-                //TODO 10%以下は無視してポップしなくていいかな
             }
-            this.Produce(this.GetCancellationTokenOnDestroy()).Forget();
+            this.Produce().Forget();
         }
 
-        private async UniTask Produce(CancellationToken token) {
+        private async UniTask Produce() {
+            var token = this.GetCancellationTokenOnDestroy();
             while (true) {
                 DIContainer.FactoryRepository.Produce();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);

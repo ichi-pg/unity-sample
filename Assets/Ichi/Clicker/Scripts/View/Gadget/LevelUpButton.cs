@@ -39,10 +39,11 @@ namespace Ichi.Clicker.View
 
         [Conditional("UNITY_EDITOR")]
         private void StartCheatMode() {
-            this.CheatMode(this.GetCancellationTokenOnDestroy()).Forget();
+            this.CheatMode().Forget();
         }
 
-        private async UniTask CheatMode(CancellationToken token) {
+        private async UniTask CheatMode() {
+            var token = this.GetCancellationTokenOnDestroy();
             var cheatMode = (CheatMode)FindObjectOfType(typeof(CheatMode));
             while (true) {
                 if (cheatMode.Auto) {

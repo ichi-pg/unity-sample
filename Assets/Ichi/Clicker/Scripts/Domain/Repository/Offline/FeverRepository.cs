@@ -51,8 +51,7 @@ namespace Ichi.Clicker.Offline
 
         private async UniTask Produce() {
             var fever = this.saveDataRepository.SaveData.Fever;
-            while (this.TimeLeft > TimeSpan.Zero)
-            {
+            while (this.TimeLeft > TimeSpan.Zero) {
                 var enemy = this.saveDataRepository.SaveData.enemy;
                 if (enemy.IsAlive) {
                     var power = this.saveDataRepository.SaveData.clickers.Produce(enemy, this.cheatBonus * fever.Power);
