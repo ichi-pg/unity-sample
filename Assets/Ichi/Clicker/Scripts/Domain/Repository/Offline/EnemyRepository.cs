@@ -61,6 +61,7 @@ namespace Ichi.Clicker.Offline
                 )
                 .Select(factory => factory.Rank);
             var maxRank = ranks.Max();
+            //TODO 不都合なければオブジェクト使い回しでFAしていい。
             saveData.enemy = new Enemy(
                 ranks.SelectMany(i => Enumerable.Repeat<int>(i, maxRank - i + 1))
                     .OrderBy(i => Guid.NewGuid())
