@@ -34,7 +34,7 @@ namespace Ichi.Clicker.Offline
             saveData.EXP.Store(enemy.HP);
             //ドロップ
             var factory = saveData.factories.FirstOrDefault(factory => factory.Rank == enemy.Rank);
-            var k = factory.Rarity + factory.Rank - 2;
+            var k = factory.Rarity;
             if (UnityEngine.Random.Range(0, k * k * 10) == 0) {
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
@@ -70,7 +70,6 @@ namespace Ichi.Clicker.Offline
             //NEXT 料理は敵ランクを開放しないと手が出ない階段購入額にする。
             //NEXT 合わせて生産コインも階段にする。
             //NEXT 合わせて敵のHPも増やす。レベル形式。
-            //NEXT 上級のドロップを等率にするか、上級の出現率を等率にする。
             //TODO ダンジョンを「選ぶ」要素。
             //TODO 討伐失敗入れる（ターン数=自HP+敵ATKと同義な調整の制限時間）？
             //TODO 強敵出現、挑戦、レアリティの高いドロップ？
