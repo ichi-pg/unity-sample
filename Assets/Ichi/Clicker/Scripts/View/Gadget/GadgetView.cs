@@ -79,7 +79,7 @@ namespace Ichi.Clicker.View
             this.gadgetImage.sprite = this.data.GadgetSprites[this.gadget.Rank - 1];
             this.costImage.sprite = this.data.CostSprite;
             this.costImage.gameObject.SetActive(this.gadget.HasLevelUp);
-            //NEXT 生産ゲージアニメ
+            //TODO 生産ゲージアニメ
         }
 
         public void LevelUp() {

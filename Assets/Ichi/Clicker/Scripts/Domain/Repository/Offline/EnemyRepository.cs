@@ -33,8 +33,8 @@ namespace Ichi.Clicker.Offline
             this.onWin.OnNext(enemy);
             saveData.EXP.Store(enemy.HP);
             //ドロップ
-            var factory = saveData.factories.FirstOrDefault(factory => factory.rank == enemy.rank);
-            var k = factory.rarity + factory.rank - 2;
+            var factory = saveData.factories.FirstOrDefault(factory => factory.Rank == enemy.Rank);
+            var k = factory.Rarity + factory.Rank - 2;
             if (UnityEngine.Random.Range(0, k * k * 10) == 0) {
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
@@ -48,12 +48,24 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid alive.");
             }
             //エンカウント
-            var enemy = new Enemy(11 - (int)Math.Sqrt(UnityEngine.Random.Range(1, 101)));
-            saveData.enemy = enemy;
-            this.onEncount.OnNext(enemy);
+            var boughtMaxRank = saveData.factories.
+                Where(factory => factory.IsBought).
+                Select(factory => factory.Rank).
+                Max();
+            var ranks = saveData.factories
+                .Where(
+                    factory => factory.Rank <= boughtMaxRank + 2 &&
+                    factory.Rank != saveData.enemy.Rank
+                )
+                .Select(factory => factory.Rank);
+            var maxRank = ranks.Max();
+            saveData.enemy = new Enemy(
+                ranks.SelectMany(i => Enumerable.Repeat<int>(i, maxRank - i + 1))
+                    .OrderBy(i => Guid.NewGuid())
+                    .FirstOrDefault()
+            );
+            this.onEncount.OnNext(saveData.enemy);
             this.saveDataRepository.Save();
-            //TODO 必ず別の敵をエンカウントさせる
-            //TODO 捕獲済み敵ランク+2までエンカウント、ドロップする
             //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする
             //TODO ダンジョンを「選ぶ」要素。
             //TODO 敵レベルの成長ルールは？
