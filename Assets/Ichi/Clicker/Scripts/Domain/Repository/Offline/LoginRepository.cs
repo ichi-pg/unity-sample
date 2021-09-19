@@ -28,7 +28,7 @@ namespace Ichi.Clicker.Offline
             var now = this.timeRepository.Now;
             foreach (var factory in this.saveDataRepository.SaveData.factories) {
                 if (factory.IsBought) {
-                    factory.Produce(this.saveDataRepository.SaveData.Login, now);
+                    factory.Produce(this.saveDataRepository.SaveData.Login, now, 1);
                 }
             }
             this.saveDataRepository.Save();

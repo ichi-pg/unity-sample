@@ -7,12 +7,12 @@ namespace Ichi.Clicker
 {
     public static class GadgetExtensions
     {
-        public static BigInteger Produce(this IEnumerable<IGadget> list, IAliveStore store, int rate) {
+        public static BigInteger Produce(this IEnumerable<IGadget> list, IAliveStore store, BigInteger bonus) {
             BigInteger res;
             foreach (var gadget in list) {
                 if (gadget.IsBought) {
                     //TODO 弱点など
-                    var power = gadget.Power * rate;
+                    var power = gadget.Power * bonus;
                     if (store.IsAlive) {
                         store.Store(power);
                     }

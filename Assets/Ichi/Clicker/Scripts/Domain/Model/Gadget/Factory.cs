@@ -63,7 +63,7 @@ namespace Ichi.Clicker
             this.Calculate();
         }
 
-        public BigInteger Produce(IStore store, DateTime now, int bonus = 1) {
+        public BigInteger Produce(IStore store, DateTime now, BigInteger bonus) {
             if (now < this.producedAt) {
                 throw new Exception("Invalid produced at.");
             }

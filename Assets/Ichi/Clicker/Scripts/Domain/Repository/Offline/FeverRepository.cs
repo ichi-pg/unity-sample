@@ -14,8 +14,6 @@ namespace Ichi.Clicker.Offline
         public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
         public TimeSpan TimeLeft { get => this.saveDataRepository.SaveData.Fever.TimeLeft(this.timeRepository.Now); }
         public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.Fever.CoolTime(this.timeRepository.Now); }
-        //TODO
-        private int Rate { get => 1; }
         private Subject<int> onAlter = new Subject<int>();
         public IObservable<int> OnAlter { get => this.onAlter; }
         private Subject<BigInteger> onProduce = new Subject<BigInteger>();
@@ -52,11 +50,12 @@ namespace Ichi.Clicker.Offline
         }
 
         private async UniTask Produce() {
+            var fever = this.saveDataRepository.SaveData.Fever;
             while (this.TimeLeft > TimeSpan.Zero)
             {
                 var enemy = this.saveDataRepository.SaveData.enemy;
                 if (enemy.IsAlive) {
-                    var power = this.saveDataRepository.SaveData.clickers.Produce(enemy, this.cheatBonus * this.Rate);
+                    var power = this.saveDataRepository.SaveData.clickers.Produce(enemy, this.cheatBonus * fever.Power);
                     this.onProduce.OnNext(power);
                 }
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100));
