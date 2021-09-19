@@ -11,7 +11,6 @@ namespace Ichi.Clicker
             BigInteger res;
             foreach (var gadget in list) {
                 if (gadget.IsBought) {
-                    //TODO 弱点など
                     var power = gadget.Power * bonus;
                     if (store.IsAlive) {
                         store.Store(power);
