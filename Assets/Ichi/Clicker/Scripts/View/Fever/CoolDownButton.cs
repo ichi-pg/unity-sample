@@ -7,10 +7,10 @@ using UniRx;
 
 namespace Ichi.Clicker.View
 {
-    public class CoolDownButton : MonoBehaviour
+    public class CoolDownButton : MonoBehaviour, ISkillButton
     {
         [SerializeField]
-        public Button button;
+        private Button button;
         private Common.IAds ads;
 
         void Start() {
@@ -32,12 +32,17 @@ namespace Ichi.Clicker.View
 
         public void PlayAds() {
             this.ads.Play();
+            //TODO 確認ポップアップ
         }
 
         private void OnReward() {
             DIContainer.CoolDownRepository.CoolDown();
             //TODO エフェクト
             //TODO SE
+        }
+
+        public void SetButton(Button button) {
+            this.button = button;
         }
     }
 }

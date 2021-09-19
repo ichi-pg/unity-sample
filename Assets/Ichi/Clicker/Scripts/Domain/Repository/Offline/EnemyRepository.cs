@@ -66,13 +66,15 @@ namespace Ichi.Clicker.Offline
             );
             this.onEncount.OnNext(saveData.enemy);
             this.saveDataRepository.Save();
-            //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする
+            //NEXT 料理は敵ランクを開放しないと手が出ない階段購入額にする。
+            //NEXT 合わせて生産コインも階段にする。
+            //NEXT 合わせて敵のHPも増やす。レベル形式。
             //TODO ダンジョンを「選ぶ」要素。
-            //TODO 敵レベルの成長ルールは？
             //TODO 討伐失敗入れる（ターン数=自HP+敵ATKと同義な調整の制限時間）？
             //TODO 強敵出現、挑戦、レアリティの高いドロップ？
             //TODO ドロップ->レアリティアップ挑戦（ポーションの見せ方変えただけ）？
             //TODO リズムとか長押し防御とかフリックとか、敵を倒すことにあそびを儲けても？外れる？
+            //TODO Cliker=攻防HPの方が楽しいかも？明確にバトル感。
         }
     }
 }

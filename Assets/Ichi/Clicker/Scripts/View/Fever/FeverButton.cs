@@ -7,10 +7,10 @@ using UniRx;
 
 namespace Ichi.Clicker.View
 {
-    public class FeverButton : MonoBehaviour
+    public class FeverButton : MonoBehaviour, ISkillButton
     {
         [SerializeField]
-        public Button button;
+        private Button button;
 
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -29,6 +29,10 @@ namespace Ichi.Clicker.View
             DIContainer.FeverRepository.Fever();
             //TODO エフェクト
             //TODO SE
+        }
+
+        public void SetButton(Button button) {
+            this.button = button;
         }
     }
 }

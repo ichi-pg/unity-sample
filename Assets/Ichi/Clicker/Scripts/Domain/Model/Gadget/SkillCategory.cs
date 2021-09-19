@@ -6,7 +6,7 @@ namespace Ichi.Clicker
     public enum SkillCategory {
         Fever,
         CoolDown,
-        //TODO 生産ブーストスキル
-        //TODO ドロップ2倍スキル
+        //NEXT 生産ブーストスキル
+        //NEXT ドロップ2倍スキル
     }
 }

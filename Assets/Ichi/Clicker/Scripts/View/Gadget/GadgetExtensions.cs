@@ -21,14 +21,18 @@ namespace Ichi.Clicker.View
             return DIContainer.GadgetRepository.CanLevelUp(gadget);
         }
 
-        public static string Desc(this IGadget gadget) {
-            var desc = DIContainer.TextLocalizer.Localize(gadget.WorkCategory + "Desc", gadget.Power());
+        public static string CoolTime(this IGadget gadget) {
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
                 case WorkCategory.CoolDown:
-                    return DIContainer.SkillRepository.GetSkill(gadget.WorkCategory.Cast()).CoolTime() ?? desc;
+                    return DIContainer.SkillRepository.GetSkill(gadget.WorkCategory.Cast()).CoolTime();
+                default:
+                    return null;
             }
-            return desc;
+        }
+
+        public static string Desc(this IGadget gadget) {
+            return gadget.CoolTime() ?? DIContainer.TextLocalizer.Localize(gadget.WorkCategory + "Desc", gadget.Power());
         }
     }
 }

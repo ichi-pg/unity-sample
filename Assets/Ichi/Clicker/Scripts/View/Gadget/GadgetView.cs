@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
+using DG.Tweening;
 using Ichi.Common.Extensions;
 
 namespace Ichi.Clicker.View
@@ -19,6 +20,8 @@ namespace Ichi.Clicker.View
         private Text desc;
         [SerializeField]
         private Text cost;
+        [SerializeField]
+        private Text tap;
         [SerializeField]
         private Button levelUpButton;
         [SerializeField]
@@ -40,28 +43,30 @@ namespace Ichi.Clicker.View
             this.data = data;
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
+            this.tap.gameObject.SetActive(false);
             DIContainer.EnemyRepository.OnDrop.Where(x => x == gadget).Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
-                    this.gameObject.AddComponent<FeverButton>().button = this.gameObject.AddComponent<Button>();
-                    this.UpdateDesc().Forget();
+                    this.UpdateSkill<FeverButton>().Forget();
                     break;
                 case WorkCategory.CoolDown:
-                    this.gameObject.AddComponent<CoolDownButton>().button = this.gameObject.AddComponent<Button>();
-                    this.UpdateDesc().Forget();
+                    this.UpdateSkill<CoolDownButton>().Forget();
                     break;
             }
             this.OnAlter();
         }
 
-        private async UniTask UpdateDesc() {
+        private async UniTask UpdateSkill<T>() where T : Component, ISkillButton {
+            var button = this.gameObject.AddComponent<Button>();
+            this.gameObject.AddComponent<T>().SetButton(button);
             var token = this.GetCancellationTokenOnDestroy();
+            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
             while (true) {
+                this.tap.gameObject.SetActive(button.interactable);
                 this.desc.text = this.gadget.Desc();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
-            //TODO タップできそうなアピール
             //TODO 実行中であると分かりやすいアニメーション
         }
 
