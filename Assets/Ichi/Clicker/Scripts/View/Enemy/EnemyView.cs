@@ -29,6 +29,7 @@ namespace Ichi.Clicker.View
         private void UpdateEnemy() {
             var enemy = DIContainer.EnemyRepository.Enemy;
             this.image.sprite = this.sprites[enemy.Rank - 1];
+            this.image.color = Color.white;
             this.UpdateGauge();
             //TODO 名前描画（諸説）
             //TODO レベル描画
@@ -58,6 +59,7 @@ namespace Ichi.Clicker.View
             if (!DIContainer.EnemyRepository.Enemy.IsAlive) {
                 DIContainer.EnemyRepository.Win();
             }
+            //TODO ダメージ満タン再起動で進行不可能になる
             //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
         }
     }

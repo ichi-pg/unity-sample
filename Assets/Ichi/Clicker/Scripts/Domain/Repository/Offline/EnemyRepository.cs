@@ -42,6 +42,7 @@ namespace Ichi.Clicker.Offline
                 this.onDrop.OnNext(factory);
             }
             this.saveDataRepository.Save();
+            //TODO 死んでれば何度でもドロップを呼べてしまう
         }
 
         public void Encount() {
