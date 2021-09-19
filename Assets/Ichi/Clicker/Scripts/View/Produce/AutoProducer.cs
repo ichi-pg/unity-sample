@@ -15,6 +15,7 @@ namespace Ichi.Clicker.View
         void Start() {
             if (DIContainer.LoginRepository.Produce()) {
                 this.loginModalOpener.Open();
+                //TODO 10%以下は無視してポップしなくていいかな
             }
             this.Produce(this.GetCancellationTokenOnDestroy()).Forget();
         }
