@@ -35,7 +35,9 @@ namespace Ichi.Clicker.Offline
             //ドロップ
             var factory = saveData.factories.FirstOrDefault(factory => factory.Rank == enemy.Rank);
             var k = factory.Rarity;
-            if (UnityEngine.Random.Range(0, k * k * 10) == 0) {
+            var a = UnityEngine.Random.Range(0, k * k * 10) == 0;
+            var b = factory.Rank == 1 && !factory.IsBought;
+            if (a || b) {
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
             }
