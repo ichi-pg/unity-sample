@@ -6,8 +6,13 @@ namespace Ichi.Clicker.View
 {
     public class ProduceButton : MonoBehaviour
     {
+        void Start() {
+            if (DIContainer.EnemyRepository.Enemy == null) {
+                DIContainer.EnemyRepository.Encount();
+            }
+        }
+
         public void Produce() {
-            //TODO 起動時に自動エンカウント
             //TODO 演出してスムーズに移動
             if (DIContainer.EnemyRepository.Enemy == null) {
                 DIContainer.EnemyRepository.Encount();
