@@ -8,7 +8,7 @@ namespace Ichi.Clicker.Offline
 {
     public class EnemyRepository : IEnemyRepository
     {
-        public IEnemy Enemy { get => this.saveDataRepository.SaveData.enemy; }
+        public IEnemy Enemy { get => this.saveDataRepository.SaveData.Enemy; }
         private ISaveDataRepository saveDataRepository;
         private ITimeRepository timeRepository;
         private Subject<IEnemy> onEncount = new Subject<IEnemy>();
@@ -17,6 +17,7 @@ namespace Ichi.Clicker.Offline
         public IObservable<IGadget> OnDrop { get => this.onDrop; }
         private Subject<IEnemy> onWin = new Subject<IEnemy>();
         public IObservable<IEnemy> OnWin { get => this.onWin; }
+        private Enemy beforeEnemy;
 
         public EnemyRepository(ISaveDataRepository saveDataRepository, ITimeRepository timeRepository) {
             this.saveDataRepository = saveDataRepository;
@@ -25,12 +26,14 @@ namespace Ichi.Clicker.Offline
 
         public void Win() {
             var saveData = this.saveDataRepository.SaveData;
-            var enemy = saveData.enemy;
-            if (enemy.IsAlive) {
-                throw new Exception("Invalid alive.");
+            var enemy = saveData.Enemy;
+            if (enemy == null) {
+                throw new Exception("Not found enemy.");
             }
-            //勝利
-            this.onWin.OnNext(enemy);
+            if (enemy.IsAlive) {
+                throw new Exception("Enemy is alive.");
+            }
+            //経験値
             saveData.EXP.Store(enemy.HP);
             //ドロップ
             var factory = saveData.factories.FirstOrDefault(factory => factory.Rank == enemy.Rank);
@@ -41,34 +44,44 @@ namespace Ichi.Clicker.Offline
                 factory.RarityUp(this.timeRepository.Now);
                 this.onDrop.OnNext(factory);
             }
+            //通知とセーブ
+            saveData.Enemy = null;
+            this.beforeEnemy = enemy;
+            this.onWin.OnNext(enemy);
             this.saveDataRepository.Save();
-            //TODO 死んでれば何度でもドロップを呼べてしまう
         }
 
         public void Encount() {
             var saveData = this.saveDataRepository.SaveData;
-            if (saveData.enemy.IsAlive) {
-                throw new Exception("Invalid alive.");
+            var enemy = saveData.Enemy;
+            if (enemy != null && enemy.IsAlive) {
+                throw new Exception("Enemy is alive.");
             }
             //エンカウント
-            var boughtMaxRank = saveData.factories.
-                Where(factory => factory.IsBought).
-                Select(factory => factory.Rank).
-                Max();
-            var ranks = saveData.factories
-                .Where(
-                    factory => factory.Rank <= boughtMaxRank + 2 &&
-                    factory.Rank != saveData.enemy.Rank
-                )
-                .Select(factory => factory.Rank);
-            var maxRank = ranks.Max();
-            //TODO 不都合なければオブジェクト使い回しでFAしていい。
-            saveData.enemy = new Enemy(
-                ranks.SelectMany(i => Enumerable.Repeat<int>(i, maxRank - i + 1))
-                    .OrderBy(i => Guid.NewGuid())
-                    .FirstOrDefault()
-            );
-            this.onEncount.OnNext(saveData.enemy);
+            var boughtFactories = saveData.factories.Where(factory => factory.IsBought);
+            Enemy newEnemy;
+            if (boughtFactories.Count() > 0) {
+                var boughtMaxRank = boughtFactories.Select(factory => factory.Rank).Max();
+                var ranks = saveData.factories
+                    .Where(
+                        factory => factory.Rank <= boughtMaxRank + 2 &&
+                        (this.beforeEnemy == null || factory.Rank != this.beforeEnemy.Rank)
+                    )
+                    .Select(factory => factory.Rank);
+                var maxRank = ranks.Max();
+                newEnemy = new Enemy(
+                    ranks.SelectMany(i => Enumerable.Repeat<int>(i, maxRank - i + 1))
+                        .OrderBy(i => Guid.NewGuid())
+                        .FirstOrDefault()
+                );
+            } else {
+                //最初の敵
+                newEnemy = new Enemy(1);
+            }
+            //通知とセーブ
+            saveData.Enemy = newEnemy;
+            this.beforeEnemy = null;
+            this.onEncount.OnNext(newEnemy);
             this.saveDataRepository.Save();
             //NEXT 順番にレアリティ上げるんじゃなくて、確率で渡す。
             //NEXT 料理は敵ランクを開放しないと手が出ない階段購入額にする。

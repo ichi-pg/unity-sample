@@ -23,21 +23,10 @@ namespace Ichi.Clicker.View
             DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
-            this.UpdateEnemy();
+            this.OnEncount(DIContainer.EnemyRepository.Enemy);
         }
 
-        private void UpdateEnemy() {
-            var enemy = DIContainer.EnemyRepository.Enemy;
-            this.image.sprite = this.sprites[enemy.Rank - 1];
-            this.image.color = Color.white;
-            this.UpdateGauge();
-            //TODO 名前描画（諸説）
-            //TODO レベル描画
-            //TODO 希少性描画
-        }
-
-        private void UpdateGauge() {
-            var enemy = DIContainer.EnemyRepository.Enemy;
+        private void UpdateGauge(IEnemy enemy) {
             this.gauge.Resize(Common.Math.Divide(enemy.Damage, enemy.HP));
         }
 
@@ -48,17 +37,26 @@ namespace Ichi.Clicker.View
         }
 
         private void OnEncount(IEnemy enemy) {
-            this.UpdateEnemy();
+            if (enemy == null) {
+                this.image.gameObject.SetActive(false);
+                this.gauge.gameObject.SetActive(false);
+                return;
+            }
+            this.image.gameObject.SetActive(true);
+            this.gauge.gameObject.SetActive(true);
+            this.image.sprite = this.sprites[enemy.Rank - 1];
+            this.image.color = Color.white;
+            this.UpdateGauge(enemy);
+            //TODO 名前描画（諸説）
+            //TODO レベル描画
+            //TODO 希少性描画
             //TODO エフェクト
             //TODO 希少性エフェクト
             //TODO SE
         }
 
         private void OnDamage(BigInteger damage) {
-            this.UpdateGauge();
-            if (!DIContainer.EnemyRepository.Enemy.IsAlive) {
-                DIContainer.EnemyRepository.Win();
-            }
+            this.UpdateGauge(DIContainer.EnemyRepository.Enemy);
             //TODO ダメージ満タン再起動で進行不可能になる
             //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
         }

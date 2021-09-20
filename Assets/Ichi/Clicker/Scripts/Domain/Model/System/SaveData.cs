@@ -15,7 +15,6 @@ namespace Ichi.Clicker
         public List<Item> items;
         public List<Episode> episodes;
         public List<Skill> skills;
-        public Enemy enemy;
         public List<IGadget> Gadgets { get; private set; }
         public Skill Fever { get; private set; }
         public Skill CoolDown { get; private set; }
@@ -24,30 +23,21 @@ namespace Ichi.Clicker
         public Item Login { get; private set; }
         public Item EXP { get; private set; }
         public Item Gem { get; private set; }
+        public Enemy Enemy { get; set; }
 
         public void PreSave() {
             this.factories.ForEach(factory => factory.PreSave());
             this.items.ForEach(item => item.PreSave());
             this.skills.ForEach(skill => skill.PreSave());
-            this.enemy.PreSave();
         }
 
         public void Initialize() {
             this.Gadgets = new List<IGadget>();
-            this.InitializeEnemy();
             this.InitializeClickers();
             this.InitializeFactories();
             this.InitializeItems();
             this.InitializeEpisodes();
             this.InitializeSkills();
-        }
-
-        private void InitializeEnemy() {
-            if (this.enemy == null) {
-                this.enemy = new Enemy(1);
-            } else {
-                this.enemy.PostLoad();
-            }
         }
 
         private void InitializeClickers() {

@@ -18,9 +18,12 @@ namespace Ichi.Clicker.Offline
         }
 
         public void Produce() {
-            var enemy = this.saveDataRepository.SaveData.enemy;
+            var enemy = this.saveDataRepository.SaveData.Enemy;
+            if (enemy == null) {
+                throw new Exception("Not found enemy.");
+            }
             if (!enemy.IsAlive) {
-                throw new Exception("Invalid alive.");
+                throw new Exception("Enemy is not alive.");
             }
             var power = this.saveDataRepository.SaveData.clickers.Produce(enemy, this.cheatBonus);
             this.onProduce.OnNext(power);
