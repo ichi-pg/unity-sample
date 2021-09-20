@@ -38,7 +38,6 @@ namespace Ichi.Clicker.View
             this.image.DOFade(0f, 0.5f);
             this.lifeBar.DOFade(0f, 0.5f);
             //TODO SE
-            // this.image.transform.DOScale(2f, 0.5f).SetEase(Ease.OutExpo);中心軸なら近いけど、いまいち。フェードだけで十分感。
         }
 
         private void OnEncount(IEnemy enemy) {
