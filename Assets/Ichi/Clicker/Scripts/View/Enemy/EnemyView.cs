@@ -37,7 +37,6 @@ namespace Ichi.Clicker.View
             this.image.DOFade(0f, 0.5f);
             this.lifeBar.DOFade(0f, 0.5f);
             //TODO 懐いた感じのエフェクト
-            //TODO 経験値が貯まるエフェクト
             //TODO SE
         }
 

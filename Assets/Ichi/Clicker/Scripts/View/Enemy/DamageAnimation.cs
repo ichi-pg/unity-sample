@@ -13,7 +13,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Text text;
         [SerializeField]
-        private Image image;
+        private CanvasGroup group;
 
         public void Play(System.Numerics.BigInteger damage) {
             this.text.text = damage.ToString();
@@ -21,12 +21,9 @@ namespace Ichi.Clicker.View
             this.transform.localScale = Vector3.zero;
             this.transform.DOScale(Vector3.one, 1f).SetEase(Ease.OutElastic);
             //フェードアウト
-            var color = this.text.color;
-            this.image.DOFade(0f, 2f);
-            this.text.DOFade(0f, 2f).OnComplete(() => {
+            this.group.alpha = 1f;
+            this.group.DOFade(0f, 2f).OnComplete(() => {
                 this.poolable.Return();
-                this.image.color = Color.white;
-                this.text.color = color;
             });
             //TODO SE
             //TODO ランダムは数字だけにしてハートはぽよぽよさせた方が良いかも？

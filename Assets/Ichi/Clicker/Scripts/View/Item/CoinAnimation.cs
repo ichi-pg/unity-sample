@@ -29,9 +29,9 @@ namespace Ichi.Clicker.View
                 this.rect.DOLocalMove(pos, 0.8f).SetEase(Ease.OutBounce);
             });
             //フェードアウト
+            this.image.color = Color.white;
             this.image.DOFade(0f, 2f).OnComplete(() => {
                 this.poolable.Return();
-                this.image.color = Color.white;
             });
             //TODO SE
         }
