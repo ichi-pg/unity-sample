@@ -37,8 +37,8 @@ namespace Ichi.Clicker.View
         private void OnWin(IEnemy enemy) {
             this.image.DOFade(0f, 0.5f);
             this.lifeBar.DOFade(0f, 0.5f);
-            //TODO 懐いた感じのエフェクト
             //TODO SE
+            // this.image.transform.DOScale(2f, 0.5f).SetEase(Ease.OutExpo);中心軸なら近いけど、いまいち。フェードだけで十分感。
         }
 
         private void OnEncount(IEnemy enemy) {
@@ -56,7 +56,6 @@ namespace Ichi.Clicker.View
             this.lifeBar.DOFade(1f, 0.5f);
             this.UpdateGauge(enemy);
             //TODO 名前、レベル描画
-            //TODO 希少性表現
             //TODO SE
         }
 
