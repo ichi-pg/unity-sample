@@ -11,8 +11,11 @@ namespace Ichi.Clicker.View
         private Image gadgetImage;
         [SerializeField]
         private Text rarity;
+        [SerializeField]
+        private GadgetViewDataList dataList;
 
-        public void Initialize(IGadget gadget, GadgetViewData data) {
+        public void Initialize(IGadget gadget) {
+            var data = this.dataList.GetViewData(gadget.GadgetCategory);
             this.gadgetImage.sprite = data.GadgetSprite(gadget);
             this.rarity.text = gadget.Rarity().ToString();
             //TODO モンスターアイコン素材（ドット絵だと楽しそう）

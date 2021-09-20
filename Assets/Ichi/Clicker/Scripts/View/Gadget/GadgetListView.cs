@@ -13,15 +13,13 @@ namespace Ichi.Clicker.View
         private Transform parent;
         [SerializeField]
         private GadgetCategory category;
-        [SerializeField]
-        private GadgetViewData viewData;
 
         void Start() {
             this.parent.DestroyChildren();
             this.parent.InstantiateChildren<GadgetView, IGadget>(
                 this.prefab,
                 DIContainer.GadgetRepository.GetGadgets(this.category),
-                (view, gadget) => view.Initialize(gadget, viewData)
+                (view, gadget) => view.Initialize(gadget)
             );
         }
     }

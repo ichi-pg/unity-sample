@@ -1166,6 +1166,7 @@ MonoBehaviour:
   gadgetImage: {fileID: 3764169515817255316}
   descImage: {fileID: 6499540264663048045}
   costImage: {fileID: 8263403486008088900}
+  dataList: {fileID: 11400000, guid: 1578aeb1dea964f88a6afb954baf2648, type: 2}
 --- !u!1 &8785746830052871374
 GameObject:
   m_ObjectHideFlags: 0

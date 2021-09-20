@@ -223,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gadgetImage: {fileID: 366139207886990622}
   rarity: {fileID: 5627982571747063823}
+  dataList: {fileID: 11400000, guid: 1578aeb1dea964f88a6afb954baf2648, type: 2}
 --- !u!1 &2884763802076904990
 GameObject:
   m_ObjectHideFlags: 0

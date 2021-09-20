@@ -17,8 +17,6 @@ namespace Ichi.Clicker.View
         private GadgetView view;
         [SerializeField]
         private GadgetCategory category;
-        [SerializeField]
-        private GadgetViewData viewData;
 
         void Start() {
             foreach (var factory in DIContainer.GadgetRepository.GetGadgets(this.category)) {
@@ -31,9 +29,10 @@ namespace Ichi.Clicker.View
         private void OnAlter() {
             //NOTE 購読が蓄積する
             this.view.Initialize(
-                DIContainer.GadgetRepository.GetGadgets(this.category)
-                    .OrderBy(factory => factory.Cost).FirstOrDefault(),
-                this.viewData
+                DIContainer.GadgetRepository
+                    .GetGadgets(this.category)
+                    .OrderBy(factory => factory.Cost)
+                    .FirstOrDefault()
             );
         }
 

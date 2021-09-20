@@ -34,13 +34,15 @@ namespace Ichi.Clicker.View
         private Image descImage;
         [SerializeField]
         private Image costImage;
+        [SerializeField]
+        private GadgetViewDataList dataList;
 
         private IGadget gadget;
         private GadgetViewData data;
 
-        public void Initialize(IGadget gadget, GadgetViewData data) {
+        public void Initialize(IGadget gadget) {
             this.gadget = gadget;
-            this.data = data;
+            this.data = this.dataList.GetViewData(gadget.GadgetCategory);
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
             this.tap.gameObject.SetActive(false);

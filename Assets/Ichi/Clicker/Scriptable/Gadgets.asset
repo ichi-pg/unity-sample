@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984ae663996da4a07a314ffcc624b403, type: 3}
+  m_Name: Gadgets
+  m_EditorClassIdentifier: 
+  list:
+  - {fileID: 11400000, guid: a5fdb58ae14344327b1796d6aedb3da0, type: 2}
+  - {fileID: 11400000, guid: 2f279cedee64548bfb68fd354c2da1bd, type: 2}
+  - {fileID: 11400000, guid: dac255094e91544bfa73e99075f20ac5, type: 2}
