@@ -84,6 +84,7 @@ namespace Ichi.Clicker.Offline
             this.beforeEnemy = null;
             this.onEncount.OnNext(newEnemy);
             this.saveDataRepository.Save();
+            //TODO ドロップと同じ感じでダンジョン変更選択肢をランダムポップすれば？
             //TODO 順番にレアリティ上げるんじゃなくて、確率で渡す。
             //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする。
             //TODO 合わせて生産コインも階段にする。
@@ -95,6 +96,7 @@ namespace Ichi.Clicker.Offline
             //TODO リズムとか長押し防御とかフリックとか、敵を倒すことにあそびを儲けても？外れる？
             //TODO Cliker=攻防HPの方が楽しいかも？明確にバトル感。
             //TODO 弱点いる？
+            //TODO 同じモンスター複数所持、モンスター装備式、攻防HPスキル欄。がやはりしっくりくる？
         }
     }
 }

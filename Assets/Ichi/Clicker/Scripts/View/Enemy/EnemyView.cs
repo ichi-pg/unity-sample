@@ -15,6 +15,8 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Image image;
         [SerializeField]
+        private Transform center;
+        [SerializeField]
         private Common.Gauge gauge;
         [SerializeField]
         private CanvasGroup lifeBar;
@@ -38,6 +40,7 @@ namespace Ichi.Clicker.View
             this.image.DOFade(0f, 0.5f);
             this.lifeBar.DOFade(0f, 0.5f);
             //TODO SE
+            //TODO ハートブワああ
         }
 
         private void OnEncount(IEnemy enemy) {
@@ -60,7 +63,11 @@ namespace Ichi.Clicker.View
 
         private void OnDamage(BigInteger damage) {
             this.UpdateGauge(DIContainer.EnemyRepository.Enemy);
-            //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
+            this.center.transform.DOScale(0.98f, 0.1f).OnComplete(() => {
+                this.center.transform.DOScale(1f, 0.1f);
+            });
+            //TODO 表情を変えたい
+            //TODO ランダムセリフもあり
         }
     }
 }
