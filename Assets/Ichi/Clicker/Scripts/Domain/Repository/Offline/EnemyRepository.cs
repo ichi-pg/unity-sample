@@ -85,6 +85,7 @@ namespace Ichi.Clicker.Offline
             this.onEncount.OnNext(newEnemy);
             this.saveDataRepository.Save();
             //TODO ドロップと同じ感じでダンジョン変更選択肢をランダムポップすれば？
+            //TODO フィーバーもランダムポップにすると良いのでは？
             //TODO 順番にレアリティ上げるんじゃなくて、確率で渡す。
             //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする。
             //TODO 合わせて生産コインも階段にする。
