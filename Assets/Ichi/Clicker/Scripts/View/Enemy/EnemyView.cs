@@ -41,6 +41,7 @@ namespace Ichi.Clicker.View
             this.lifeBar.DOFade(0f, 0.5f);
             //TODO SE
             //TODO ハートブワああ
+            //TODO きらきら
         }
 
         private void OnEncount(IEnemy enemy) {

@@ -34,6 +34,7 @@ namespace Ichi.Clicker.View
                 this.poolable.Return();
             });
             //TODO SE
+            //TODO きらきら
         }
     }
 }

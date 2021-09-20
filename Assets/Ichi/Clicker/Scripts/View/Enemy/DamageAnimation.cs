@@ -27,7 +27,7 @@ namespace Ichi.Clicker.View
                 this.poolable.Return();
             });
             //TODO SE
-            //TODO お菓子食べてる感じ出したい？
+            //TODO きらきら
         }
     }
 }
