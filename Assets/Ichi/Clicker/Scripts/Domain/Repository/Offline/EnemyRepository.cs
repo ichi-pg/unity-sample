@@ -84,10 +84,10 @@ namespace Ichi.Clicker.Offline
             this.beforeEnemy = null;
             this.onEncount.OnNext(newEnemy);
             this.saveDataRepository.Save();
-            //NEXT 順番にレアリティ上げるんじゃなくて、確率で渡す。
-            //NEXT 料理は敵ランクを開放しないと手が出ない階段購入額にする。
-            //NEXT 合わせて生産コインも階段にする。
-            //NEXT 合わせて敵のHPも増やす。レベル形式。
+            //TODO 順番にレアリティ上げるんじゃなくて、確率で渡す。
+            //TODO 料理は敵ランクを開放しないと手が出ない階段購入額にする。
+            //TODO 合わせて生産コインも階段にする。
+            //TODO 合わせて敵のHPも増やす。レベル形式。
             //TODO ダンジョンを「選ぶ」要素。
             //TODO 討伐失敗入れる（ターン数=自HP+敵ATKと同義な調整の制限時間）？
             //TODO 強敵出現、挑戦、レアリティの高いドロップ？

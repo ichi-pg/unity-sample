@@ -27,6 +27,7 @@ namespace Ichi.Clicker.View
                 return;
             }
             DIContainer.EnemyRepository.Win();
+            //TODO 撃破中の空白にタップ誘導
         }
 
         private void OnDamage(BigInteger damage) {

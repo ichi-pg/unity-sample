@@ -23,7 +23,6 @@ namespace Ichi.Clicker.View
 
         private void OnAlter() {
             this.text.text = Common.Texts.ToString(this.item.Quantity);
-            //TODO ドラムロール
         }
     }
 }
