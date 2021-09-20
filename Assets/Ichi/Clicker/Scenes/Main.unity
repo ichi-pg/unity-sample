@@ -523,7 +523,6 @@ MonoBehaviour:
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 1189401889}
   category: 0
-  viewData: {fileID: 11400000, guid: a5fdb58ae14344327b1796d6aedb3da0, type: 2}
 --- !u!1 &84895544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1167,7 @@ GameObject:
   - component: {fileID: 235935290}
   - component: {fileID: 235935289}
   - component: {fileID: 235935291}
+  - component: {fileID: 235935292}
   m_Layer: 0
   m_Name: life_bar
   m_TagString: Untagged
@@ -1249,6 +1249,18 @@ MonoBehaviour:
   gauge: {fileID: 27901668}
   frame: {fileID: 235935288}
   axis: 0
+--- !u!225 &235935292
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235935287}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &253643849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,7 +1804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modalOpener: {fileID: 380601447}
-  viewData: {fileID: 11400000, guid: 2f279cedee64548bfb68fd354c2da1bd, type: 2}
 --- !u!114 &380601447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,6 +2857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 655236765}
   gauge: {fileID: 235935291}
+  lifeBar: {fileID: 235935292}
   sprites:
   - {fileID: 21300000, guid: cb5b3b65dbed74d60866ecca81b47dce, type: 3}
   - {fileID: 21300000, guid: c0bd115db39914aa5b9dcf6b8f84f411, type: 3}
@@ -7600,7 +7612,6 @@ MonoBehaviour:
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 862471413}
   category: 2
-  viewData: {fileID: 11400000, guid: dac255094e91544bfa73e99075f20ac5, type: 2}
 --- !u!1 &1594193196
 GameObject:
   m_ObjectHideFlags: 0
@@ -8527,7 +8538,6 @@ MonoBehaviour:
   prefab: {fileID: 8588690730413765469, guid: 736f627cb4ecb4c04b87697d7812eb48, type: 3}
   parent: {fileID: 1490961894}
   category: 1
-  viewData: {fileID: 11400000, guid: 2f279cedee64548bfb68fd354c2da1bd, type: 2}
 --- !u!1 &1879002716
 GameObject:
   m_ObjectHideFlags: 0

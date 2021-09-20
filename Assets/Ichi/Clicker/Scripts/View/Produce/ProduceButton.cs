@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using System;
 using UnityEngine;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
@@ -10,16 +13,24 @@ namespace Ichi.Clicker.View
             if (DIContainer.EnemyRepository.Enemy == null) {
                 DIContainer.EnemyRepository.Encount();
             }
+            DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
         }
 
         public void Produce() {
-            //TODO 演出してスムーズに移動
             if (DIContainer.EnemyRepository.Enemy == null) {
                 DIContainer.EnemyRepository.Encount();
                 return;
             }
             if (DIContainer.EnemyRepository.Enemy.IsAlive) {
                 DIContainer.ClickerRepository.Produce();
+                return;
+            }
+            DIContainer.EnemyRepository.Win();
+        }
+
+        private void OnDamage(BigInteger damage) {
+            if (DIContainer.EnemyRepository.Enemy.IsAlive) {
                 return;
             }
             DIContainer.EnemyRepository.Win();
