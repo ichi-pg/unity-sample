@@ -23,7 +23,6 @@ namespace Ichi.Common
                 this.text.text = "";
                 this.text.DOText(novel.Text, 0.5f);
                 await this.button.OnClickAsObservable().TakeUntilDestroy(this);
-                //NOTE ウィンドウ開閉アニメ
             }
         }
     }

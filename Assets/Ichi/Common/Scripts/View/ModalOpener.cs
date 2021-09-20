@@ -14,7 +14,6 @@ namespace Ichi.Common
         public void Open() {
             this.Create();
             //NOTE 入れ替えるパターン
-            //NOTE 開閉アニメーション
             //NOTE 実は全画面モダルだけでヒストリー遷移になる
         }
 

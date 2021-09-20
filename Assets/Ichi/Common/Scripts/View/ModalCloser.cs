@@ -8,7 +8,15 @@ namespace Ichi.Common
     public class ModalCloser : MonoBehaviour
     {
         public void Close() {
-            Destroy(this.transform.FindParentIn<Canvas>().gameObject);
+            var modal = this.transform.FindParentIn<Canvas>().gameObject;
+            var animation = modal.GetComponentInChildren<ModalAnimation>();
+            if (animation == null) {
+                Destroy(modal);
+            } else {
+                animation.Close(() => {
+                    Destroy(modal);
+                });
+            }
         }
     }
 }
