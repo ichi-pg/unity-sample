@@ -27,6 +27,7 @@ namespace Ichi.Clicker.View
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             this.OnEncount(DIContainer.EnemyRepository.Enemy);
+            this.image.transform.DOScale(0.99f, 3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
 
         private void UpdateGauge(IEnemy enemy) {
