@@ -18,5 +18,9 @@ namespace Ichi.Clicker.View
             //TODO モンスターアイコン素材（ドット絵だと楽しそう）
             //NOTE 背景パンパカパーン
         }
+
+        void OnDestroy() {
+            DIContainer.EnemyRepository.Encount();
+        }
     }
 }

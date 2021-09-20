@@ -6,6 +6,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
+using Random = UnityEngine.Random;
 
 namespace Ichi.Clicker.View
 {
@@ -34,7 +35,7 @@ namespace Ichi.Clicker.View
 
         private async UniTask CreateTask(int index) {
             await UniTask.Delay(
-                TimeSpan.FromMilliseconds((double)UnityEngine.Random.Range(0, 500)),
+                TimeSpan.FromMilliseconds((double)Random.Range(0, 500)),
                 cancellationToken: this.token
             );
             this.generater.Generate<CoinAnimation>().Play(index);

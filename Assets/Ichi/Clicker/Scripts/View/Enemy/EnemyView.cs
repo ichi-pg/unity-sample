@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using DG.Tweening;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Ichi.Clicker.View
 {
@@ -15,6 +16,8 @@ namespace Ichi.Clicker.View
         private Image image;
         [SerializeField]
         private Common.Gauge gauge;
+        [SerializeField]
+        private CanvasGroup lifeBar;
         [SerializeField]
         private Sprite[] sprites;
 
@@ -31,8 +34,10 @@ namespace Ichi.Clicker.View
         }
 
         private void OnWin(IEnemy enemy) {
-            //TODO 撃破エフェクト
-            //TODO ハート貯まるエフェクト
+            this.image.DOFade(0f, 0.5f);
+            this.lifeBar.DOFade(0f, 0.5f);
+            //TODO 懐いた感じのエフェクト
+            //TODO 経験値が貯まるエフェクト
             //TODO SE
         }
 
@@ -45,19 +50,18 @@ namespace Ichi.Clicker.View
             this.image.gameObject.SetActive(true);
             this.gauge.gameObject.SetActive(true);
             this.image.sprite = this.sprites[enemy.Rank - 1];
-            this.image.color = Color.white;
+            this.image.color = new Color(1f, 1f, 1f, 0f);
+            this.lifeBar.alpha = 0f;
+            this.image.DOFade(1f, 0.5f);
+            this.lifeBar.DOFade(1f, 0.5f);
             this.UpdateGauge(enemy);
-            //TODO 名前描画（諸説）
-            //TODO レベル描画
-            //TODO 希少性描画
-            //TODO エフェクト
-            //TODO 希少性エフェクト
+            //TODO 名前、レベル描画
+            //TODO 希少性表現
             //TODO SE
         }
 
         private void OnDamage(BigInteger damage) {
             this.UpdateGauge(DIContainer.EnemyRepository.Enemy);
-            //TODO ダメージ満タン再起動で進行不可能になる
             //TODO キャラもアニメしないと物足りない。表情も変えたい。欲を言えばLive2D。
         }
     }
