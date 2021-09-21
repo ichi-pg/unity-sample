@@ -21,7 +21,9 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Text cost;
         [SerializeField]
-        private Text tap;
+        private CanvasGroup tap;
+        [SerializeField]
+        private CanvasGroup blink;
         [SerializeField]
         private Button levelUpButton;
         [SerializeField]
@@ -46,6 +48,7 @@ namespace Ichi.Clicker.View
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
             this.tap.gameObject.SetActive(false);
+            this.blink.gameObject.SetActive(false);
             DIContainer.EnemyRepository.OnDrop.Where(x => x == gadget).Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             switch (gadget.WorkCategory) {
@@ -61,15 +64,18 @@ namespace Ichi.Clicker.View
 
         private async UniTask UpdateSkill<T>() where T : Component, ISkillButton {
             var button = this.gameObject.AddComponent<Button>();
-            this.gameObject.AddComponent<T>().SetButton(button);
+            var skill = this.gameObject.AddComponent<T>();
+            skill.SetButton(button);
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
             while (true) {
                 this.tap.gameObject.SetActive(button.interactable);
+                this.blink.gameObject.SetActive(skill.IsActive);
                 this.desc.text = this.gadget.Desc();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
-            //TODO 実行中であると分かりやすいアニメーション
+            //TODO 発動中が分かりやすいアニメーション（ブリンク微妙）
+            //TODO 動的にモダルオープナーがついてないバグ
         }
 
         private void OnAlter() {

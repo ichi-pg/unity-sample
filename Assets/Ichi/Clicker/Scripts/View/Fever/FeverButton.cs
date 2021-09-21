@@ -12,6 +12,8 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button button;
 
+        public bool IsActive { get => DIContainer.FeverRepository.TimeLeft > TimeSpan.Zero; }
+
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -20,9 +22,8 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.button.interactable =
-                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero &&
-                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+            this.button.interactable = !this.IsActive &&
+                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero;
         }
 
         private void Fever() {

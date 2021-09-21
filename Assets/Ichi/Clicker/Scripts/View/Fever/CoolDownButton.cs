@@ -14,6 +14,8 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Common.ModalOpener modalOpener;
 
+        public bool IsActive { get => false; }
+
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
