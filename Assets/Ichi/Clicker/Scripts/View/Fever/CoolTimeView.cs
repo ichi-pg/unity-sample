@@ -15,21 +15,24 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private SkillCategory category;
 
+        private Skill skill;
+
         void Start() {
+            this.SetCategory(this.category);
             this.UpdateView().Forget();
         }
 
         private async UniTask UpdateView() {
             var token = this.GetCancellationTokenOnDestroy();
             while (true) {
-                var skill = DIContainer.SkillRepository.GetSkill(this.category);
-                this.text.text = skill.CoolTime() ?? "00:00";
+                this.text.text = this.skill.CoolTime() ?? "00:00";
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
         }
 
         public void SetCategory(SkillCategory category) {
             this.category = category;
+            this.skill = DIContainer.SkillRepository.GetSkill(this.category);
         }
     }
 }

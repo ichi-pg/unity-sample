@@ -35,5 +35,9 @@ namespace Ichi.Clicker.View
             }
             return 0f;
         }
+
+        public static bool IsWork(this Skill skill) {
+            return skill.TimeLeft(DIContainer.TimeRepository.Now) > TimeSpan.Zero;
+        }
     }
 }

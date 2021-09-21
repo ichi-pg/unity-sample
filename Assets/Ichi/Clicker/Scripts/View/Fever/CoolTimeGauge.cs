@@ -13,26 +13,35 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Image gauge;
         [SerializeField]
+        private Image background;
+        [SerializeField]
         private SkillCategory category;
 
+        private Skill skill;
+        private Color color;
+
         void Start() {
+            this.color = this.gauge.color;
+            this.SetCategory(this.category);
             this.UpdateView().Forget();
         }
 
         private async UniTask UpdateView() {
             var token = this.GetCancellationTokenOnDestroy();
             while (true) {
-                var skill = DIContainer.SkillRepository.GetSkill(this.category);
-                var rate = skill.CoolTimeRate();
+                var rate = this.skill.CoolTimeRate();
+                var color = skill.IsWork() ? this.color : new Color(0f, 0f, 0f, this.color.a);
                 this.gauge.fillAmount = rate;
                 this.gameObject.SetActive(rate > 0f);
+                this.gauge.color = color;
+                this.background.color = color;
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
-                //TODO 発動中とクールダウンの見た目変えないと分からない
             }
         }
 
         public void SetCategory(SkillCategory category) {
             this.category = category;
+            this.skill = DIContainer.SkillRepository.GetSkill(this.category);
         }
     }
 }
