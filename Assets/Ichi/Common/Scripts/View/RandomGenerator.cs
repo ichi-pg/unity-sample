@@ -10,12 +10,14 @@ namespace Ichi.Common
         [SerializeField]
         private GameObject prefab;
         [SerializeField]
+        private Transform parent;
+        [SerializeField]
         private RectTransform target;
 
         private PoolablePool pool;
 
         void Start() {
-            this.pool = new PoolablePool(this.prefab, this.target);
+            this.pool = new PoolablePool(this.prefab, this.parent);
         }
 
         public T Generate<T>() where T : Component {
