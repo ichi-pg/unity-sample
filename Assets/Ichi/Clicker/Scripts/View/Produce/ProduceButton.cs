@@ -18,7 +18,7 @@ namespace Ichi.Clicker.View
                 DIContainer.EnemyRepository.Encount();
             }
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
-            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnFeverDamage).AddTo(this);
             this.button.OnClickAsObservable().Subscribe(_ => this.Produce()).AddTo(this);
         }
 
@@ -40,6 +40,14 @@ namespace Ichi.Clicker.View
                 return;
             }
             DIContainer.EnemyRepository.Win();
+        }
+
+        private void OnFeverDamage(BigInteger damage) {
+            if (DIContainer.EnemyRepository.Enemy.IsAlive) {
+                return;
+            }
+            DIContainer.EnemyRepository.Win();
+            DIContainer.EnemyRepository.Encount();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Ichi.Clicker.View
 {
     public interface ISkillButton
     {
-        bool IsWork { get; }
+        float WorkRate { get; }
         bool IsInteractable { get; }
     }
 }

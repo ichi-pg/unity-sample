@@ -23,6 +23,9 @@ namespace Ichi.Clicker.View
         }
 
         void OnDestroy() {
+            if (DIContainer.EnemyRepository.Enemy != null && DIContainer.EnemyRepository.Enemy.IsAlive) {
+                return;
+            }
             DIContainer.EnemyRepository.Encount();
         }
     }

@@ -23,8 +23,6 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private CanvasGroup tap;
         [SerializeField]
-        private CanvasGroup blink;
-        [SerializeField]
         private Button levelUpButton;
         [SerializeField]
         private Button skillButton;
@@ -38,6 +36,8 @@ namespace Ichi.Clicker.View
         private Image descImage;
         [SerializeField]
         private Image costImage;
+        [SerializeField]
+        private Image feverImage;
         [SerializeField]
         private GadgetViewDataList dataList;
         [SerializeField]
@@ -58,18 +58,16 @@ namespace Ichi.Clicker.View
             this.OnAlter();
             //スキル用の処理
             this.tap.gameObject.SetActive(false);
-            this.blink.gameObject.SetActive(false);
+            this.feverImage.gameObject.SetActive(false);
             this.skillButton.enabled = false;
             this.feverButton.enabled = false;
             this.coolDownButton.enabled = false;
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
-                    this.skillButton.enabled = true;
                     this.feverButton.enabled = true;
                     this.UpdateSkill(this.feverButton).Forget();
                     break;
                 case WorkCategory.CoolDown:
-                    this.skillButton.enabled = true;
                     this.coolDownButton.enabled = true;
                     this.UpdateSkill(this.coolDownButton).Forget();
                     break;
@@ -77,15 +75,16 @@ namespace Ichi.Clicker.View
         }
 
         private async UniTask UpdateSkill(ISkillButton skillButton) {
+            this.skillButton.enabled = true;
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
+            this.feverImage.gameObject.SetActive(true);
             while (true) {
                 this.tap.gameObject.SetActive(skillButton.IsInteractable);
-                this.blink.gameObject.SetActive(skillButton.IsWork);
+                this.feverImage.fillAmount = skillButton.WorkRate;
                 this.desc.text = this.gadget.Desc();
-                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
-            //TODO 発動中が分かりやすいアニメーション（ブリンク微妙）
         }
 
         private void OnAlter() {

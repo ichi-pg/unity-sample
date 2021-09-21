@@ -12,10 +12,10 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button button;
 
-        public bool IsWork { get => DIContainer.FeverRepository.TimeLeft > TimeSpan.Zero; }
+        public float WorkRate { get => (float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.Duration.Ticks; }
         public bool IsInteractable {
             get =>
-                !this.IsWork &&
+                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero &&
                 DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero;
         }
 

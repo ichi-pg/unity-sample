@@ -14,7 +14,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Common.ModalOpener modalOpener;
 
-        public bool IsWork { get => false; }
+        public float WorkRate { get => 0f; }
         public bool IsInteractable {
             get =>
                 DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
