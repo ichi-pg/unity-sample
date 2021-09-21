@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 2403340903989076313}
   - component: {fileID: 2092530898166695292}
   - component: {fileID: 507703629279719159}
+  - component: {fileID: 1958956588957482579}
   m_Layer: 0
   m_Name: tap
   m_TagString: Untagged
@@ -283,7 +284,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7b4934757864db586a013308f37792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 800134515288235389}
+  group: {fileID: 1958956588957482579}
+--- !u!225 &1958956588957482579
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075489976409129965}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1152646703180340053
 GameObject:
   m_ObjectHideFlags: 0
