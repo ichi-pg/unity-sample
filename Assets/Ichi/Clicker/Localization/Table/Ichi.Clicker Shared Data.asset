@@ -263,6 +263,10 @@ MonoBehaviour:
     m_Key: PlayAds
     m_Metadata:
       m_Items: []
+  - m_Id: 6181779118481408
+    m_Key: GadgetTap
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

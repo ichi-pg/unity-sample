@@ -18,10 +18,12 @@ namespace Ichi.Clicker.View
         private SkillCategory category;
 
         private Skill skill;
-        private Color color;
+        private Color gaugeColor;
+        private Color backgroundColor;
 
         void Start() {
-            this.color = this.gauge.color;
+            this.gaugeColor = this.gauge.color;
+            this.backgroundColor = this.background.color;
             this.SetCategory(this.category);
             this.UpdateView().Forget();
         }
@@ -30,11 +32,11 @@ namespace Ichi.Clicker.View
             var token = this.GetCancellationTokenOnDestroy();
             while (true) {
                 var rate = this.skill.CoolTimeRate();
-                var color = skill.IsWork() ? this.color : new Color(0f, 0f, 0f, this.color.a);
+                var isWork = skill.IsWork();
                 this.gauge.fillAmount = rate;
                 this.gameObject.SetActive(rate > 0f);
-                this.gauge.color = color;
-                this.background.color = color;
+                this.gauge.color = isWork ? this.gaugeColor : new Color(0f, 0f, 0f, this.gaugeColor.a);
+                this.background.color = isWork ? this.backgroundColor : new Color(0f, 0f, 0f, this.backgroundColor.a);
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
         }

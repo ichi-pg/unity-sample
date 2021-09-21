@@ -10,9 +10,14 @@ namespace Ichi.Common
     {
         [SerializeField]
         private CanvasGroup group;
+        private Tween tween;
 
         void Start() {
-            this.group.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo);
+            this.tween = this.group.DOFade(0f, 1f).From().SetLoops(-1, LoopType.Yoyo);
+        }
+
+        void OnEnable() {
+            this.tween.Restart();
         }
     }
 }
