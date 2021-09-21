@@ -99,6 +99,7 @@ namespace Ichi.Clicker.Offline
             //TODO Cliker=攻防HPの方が楽しいかも？明確にバトル感。
             //TODO 弱点いる？
             //TODO 同じモンスター複数所持、モンスター装備式、攻防HPスキル欄。がやはりしっくりくる？
+            //TODO いっそgg4にしちゃうのは？
         }
     }
 }
