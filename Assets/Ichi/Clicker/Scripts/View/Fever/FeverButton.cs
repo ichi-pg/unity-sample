@@ -25,7 +25,7 @@ namespace Ichi.Clicker.View
                 DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
         }
 
-        public void Fever() {
+        private void Fever() {
             DIContainer.FeverRepository.Fever();
             //TODO エフェクト
             //TODO SE

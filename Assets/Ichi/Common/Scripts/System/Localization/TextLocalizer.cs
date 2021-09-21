@@ -21,5 +21,7 @@ namespace Ichi.Common
             }
             return this.table.GetTable().GetEntry(key).GetLocalizedString(values);
         }
+
+        //TODO キーリストを取れるようにしてEditorで設定できるようにしたい（UI設定を抽象化したい）
     }
 }

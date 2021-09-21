@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Numerics;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 
 namespace Ichi.Clicker.View
 {
     public class ProduceButton : MonoBehaviour
     {
+        [SerializeField]
+        private Button button;
+
         void Start() {
             if (DIContainer.EnemyRepository.Enemy == null) {
                 DIContainer.EnemyRepository.Encount();
             }
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
             DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            this.button.OnClickAsObservable().Subscribe(_ => this.Produce()).AddTo(this);
         }
 
-        public void Produce() {
+        private void Produce() {
             if (DIContainer.EnemyRepository.Enemy == null) {
                 DIContainer.EnemyRepository.Encount();
                 return;

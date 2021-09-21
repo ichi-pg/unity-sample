@@ -11,34 +11,25 @@ namespace Ichi.Clicker.View
     {
         [SerializeField]
         private Button button;
-        private Common.IAds ads;
+        [SerializeField]
+        private Common.ModalOpener modalOpener;
 
         void Start() {
-            this.ads = DIContainer.AdsCreator.Create();
-            this.ads.RewardHandler += this.OnReward;
-            this.ads.LoadHandler += this.OnAlter;
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
-            this.button.OnClickAsObservable().Subscribe(_ => this.PlayAds()).AddTo(this);
+            this.button.OnClickAsObservable().Subscribe(_ => this.OpenModal()).AddTo(this);
             this.OnAlter();
         }
 
         private void OnAlter() {
-            this.button.interactable = this.ads.IsLoaded &&
+            this.button.interactable =
                 DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
                 DIContainer.CoolDownRepository.CoolTime <= TimeSpan.Zero &&
                 DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
         }
 
-        public void PlayAds() {
-            this.ads.Play();
-            //TODO 確認ポップアップ
-        }
-
-        private void OnReward() {
-            DIContainer.CoolDownRepository.CoolDown();
-            //TODO エフェクト
-            //TODO SE
+        private void OpenModal() {
+            this.modalOpener.Open();
         }
 
         public void SetButton(Button button) {

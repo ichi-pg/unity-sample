@@ -3007,6 +3007,7 @@ GameObject:
   - component: {fileID: 745843995}
   - component: {fileID: 745843994}
   - component: {fileID: 745843993}
+  - component: {fileID: 745843997}
   m_Layer: 0
   m_Name: clock
   m_TagString: Untagged
@@ -3047,6 +3048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 745843994}
+  modalOpener: {fileID: 745843997}
 --- !u!114 &745843994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3129,6 +3131,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745843991}
   m_CullTransparentMesh: 1
+--- !u!114 &745843997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745843991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed2c452a34ba4b1fa48b34108e49d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modal: {fileID: 1812456321201454185, guid: d07ca263d25ab4d7aa0f13625325ac2c, type: 3}
 --- !u!1001 &862471411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9193,6 +9208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08116e37d4ee9454fb9bcd5ed359c0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 2082541081}
 --- !u!114 &2082541081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9236,19 +9252,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2082541082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2082541080}
-        m_TargetAssemblyTypeName: Ichi.Clicker.View.ProduceButton, Ichi.Clicker
-        m_MethodName: Produce
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2082541082
 MonoBehaviour:
   m_ObjectHideFlags: 0

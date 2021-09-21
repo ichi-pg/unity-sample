@@ -8,30 +8,20 @@ using UniRx;
 
 namespace Ichi.Clicker.View
 {
-    public class LoginModal : MonoBehaviour
+    public class CoolDownModal : MonoBehaviour
     {
         [SerializeField]
-        private Text quantity;
-        [SerializeField]
-        private Common.Gauge gauge;
-        [SerializeField]
         private Button adsButton;
-        [SerializeField]
-        private Button collectButton;
         [SerializeField]
         private Common.ModalCloser closer;
 
         private Common.IAds ads;
 
         void Start() {
-            var item = DIContainer.ItemRepository.GetItem(ItemCategory.Login);
-            this.quantity.text = Common.Texts.ToString(item.Quantity);
-            this.gauge.Resize(DIContainer.LoginRepository.Rate);
             this.ads = DIContainer.AdsCreator.Create();
             this.ads.RewardHandler += this.OnReward;
             this.ads.LoadHandler += this.OnLoadAds;
             this.adsButton.OnClickAsObservable().Subscribe(_ => this.PlayAds()).AddTo(this);
-            this.collectButton.OnClickAsObservable().Subscribe(_ => this.Collect()).AddTo(this);
             this.OnLoadAds();
         }
 
@@ -39,17 +29,12 @@ namespace Ichi.Clicker.View
             this.adsButton.interactable = this.ads.IsLoaded;
         }
 
-        private void Collect() {
-            DIContainer.LoginRepository.Collect(false);
-            this.closer.Close();
-        }
-
         private void PlayAds() {
             this.ads.Play();
         }
 
         private void OnReward() {
-            DIContainer.LoginRepository.Collect(true);
+            DIContainer.CoolDownRepository.CoolDown();
             this.closer.Close();
             //TODO エフェクト
             //TODO SE

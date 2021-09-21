@@ -255,6 +255,14 @@ MonoBehaviour:
     m_Key: Drop
     m_Metadata:
       m_Items: []
+  - m_Id: 5836896193208320
+    m_Key: CoolDownAds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5836896197402624
+    m_Key: PlayAds
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
