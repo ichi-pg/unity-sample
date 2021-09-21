@@ -32,7 +32,8 @@ namespace Ichi.Clicker.View
 
         private void Fever() {
             DIContainer.FeverRepository.Fever();
-            //TODO エフェクト
+            //TODO 発動エフェクト
+            //TODO 発動中、画面全体エフェクト
             //TODO SE
         }
     }
