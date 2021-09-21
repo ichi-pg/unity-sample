@@ -18,19 +18,14 @@ namespace Ichi.Clicker.View
 
         void Start() {
             this.token = this.GetCancellationTokenOnDestroy();
-            DIContainer.FactoryRepository.OnProduce.Subscribe(this.OnAlter).AddTo(this);
+            DIContainer.ItemRepository.GetItem(ItemCategory.Coin).OnAlter.Subscribe(this.OnAlter).AddTo(this);
         }
 
         private void OnAlter(BigInteger diff) {
             if (diff > 0) {
-                var count = diff.ToString().Length / 3 + 1;
-                var index = (int)Math.Min((count - 1) / 3, 2);
-                count -= index * 3;
-                for (var i = 0; i < count; ++i) {
-                    this.CreateTask(index).Forget();
-                }
+                var index = (int)Common.Math.Min(diff / 1000, 2);
+                this.CreateTask(index).Forget();
             }
-            //TODO レベルに合わせた頻度再調整
         }
 
         private async UniTask CreateTask(int index) {

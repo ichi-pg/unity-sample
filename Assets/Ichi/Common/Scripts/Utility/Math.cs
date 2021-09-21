@@ -12,5 +12,13 @@ namespace Ichi.Common
             }
             return (float)(a * 100 / b) / 100f;
         }
+
+        public static BigInteger Max(BigInteger a, BigInteger b) {
+            return a > b ? a : b;
+        }
+
+        public static BigInteger Min(BigInteger a, BigInteger b) {
+            return a < b ? a : b;
+        }
     }
 }
