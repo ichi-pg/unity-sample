@@ -71,6 +71,7 @@ namespace Ichi.Clicker.View
             this.center.transform.DOScale(0.98f, 0.1f).OnComplete(() => {
                 this.center.transform.DOScale(1f, 0.1f);
             });
+            //TODO フィーバーの時ぽよぽよが高速すぎて微妙
             //TODO 表情を変えたい
             //TODO ランダムセリフもあり
         }
