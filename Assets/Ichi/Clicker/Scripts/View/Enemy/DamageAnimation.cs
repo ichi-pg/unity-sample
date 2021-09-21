@@ -28,6 +28,7 @@ namespace Ichi.Clicker.View
             });
             //TODO SE
             //TODO きらきら
+            //TODO タップした位置にエフェクト
         }
     }
 }
