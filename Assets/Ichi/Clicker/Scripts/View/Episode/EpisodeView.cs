@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace Ichi.Clicker.View
 {
     public class EpisodeView : MonoBehaviour
     {
         [SerializeField]
-        private GameObject read;
+        private Common.ModalOpener modalOpener;
+        [SerializeField]
+        private Button button;
         private IEpisode episode;
 
         public void Initialize(IEpisode episode) {
             this.episode = episode;
+            this.button.OnClickAsObservable().Subscribe(_ => this.OpenModal().Forget()).AddTo(this);
         }
 
-        public async void Read() {
-            //NOTE リスト消す、共通モダルコントロール
-            //NOTE どこ親
-            var obj = Instantiate(this.read, this.GetComponentInParent<Canvas>().transform);
-            await obj.GetComponent<NovelView>().Play(this.episode);
-            Destroy(obj);
+        public async UniTask OpenModal() {
+            await this.modalOpener.OpenWith<Common.NovelView>().Play(this.episode.Novels);
         }
     }
 }
