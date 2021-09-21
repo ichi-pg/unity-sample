@@ -1189,7 +1189,11 @@ GameObject:
   - component: {fileID: 8128303468441047409}
   - component: {fileID: 5626757957994228192}
   - component: {fileID: 8706054296450867482}
+  - component: {fileID: 8105877198026845792}
   - component: {fileID: 6623606288129010632}
+  - component: {fileID: 3445915285565905246}
+  - component: {fileID: 8168946556606524201}
+  - component: {fileID: 2653158532741915172}
   m_Layer: 0
   m_Name: Gadget
   m_TagString: Untagged
@@ -1260,6 +1264,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8105877198026845792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588690730413765469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 8706054296450867482}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6623606288129010632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,12 +1326,55 @@ MonoBehaviour:
   tap: {fileID: 1958956588957482579}
   blink: {fileID: 4663123315343453866}
   levelUpButton: {fileID: 7648819680076103955}
+  skillButton: {fileID: 8105877198026845792}
   disableImage: {fileID: 3415580934883730822}
   lockImage: {fileID: 4907043528250770960}
   gadgetImage: {fileID: 3764169515817255316}
   descImage: {fileID: 6499540264663048045}
   costImage: {fileID: 8263403486008088900}
   dataList: {fileID: 11400000, guid: 1578aeb1dea964f88a6afb954baf2648, type: 2}
+  feverButton: {fileID: 3445915285565905246}
+  coolDownButton: {fileID: 8168946556606524201}
+--- !u!114 &3445915285565905246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588690730413765469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f0a155f41c7481892e636dc73cda54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8105877198026845792}
+--- !u!114 &8168946556606524201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588690730413765469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e1af301c1274d65b1ee58f192c84b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8105877198026845792}
+  modalOpener: {fileID: 2653158532741915172}
+--- !u!114 &2653158532741915172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588690730413765469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed2c452a34ba4b1fa48b34108e49d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modal: {fileID: 1812456321201454185, guid: d07ca263d25ab4d7aa0f13625325ac2c, type: 3}
 --- !u!1 &8785746830052871374
 GameObject:
   m_ObjectHideFlags: 0

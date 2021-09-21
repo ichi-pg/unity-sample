@@ -27,6 +27,8 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button levelUpButton;
         [SerializeField]
+        private Button skillButton;
+        [SerializeField]
         private Image disableImage;
         [SerializeField]
         private Image lockImage;
@@ -38,6 +40,10 @@ namespace Ichi.Clicker.View
         private Image costImage;
         [SerializeField]
         private GadgetViewDataList dataList;
+        [SerializeField]
+        private FeverButton feverButton;
+        [SerializeField]
+        private CoolDownButton coolDownButton;
 
         private IGadget gadget;
         private GadgetViewData data;
@@ -47,35 +53,39 @@ namespace Ichi.Clicker.View
             this.data = this.dataList.GetViewData(gadget.GadgetCategory);
             this.gadget.OnLevelUp.Subscribe(_ => this.OnAlter()).AddTo(this);
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
-            this.tap.gameObject.SetActive(false);
-            this.blink.gameObject.SetActive(false);
             DIContainer.EnemyRepository.OnDrop.Where(x => x == gadget).Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+            this.OnAlter();
+            //スキル用の処理
+            this.tap.gameObject.SetActive(false);
+            this.blink.gameObject.SetActive(false);
+            this.skillButton.enabled = false;
+            this.feverButton.enabled = false;
+            this.coolDownButton.enabled = false;
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
-                    this.UpdateSkill<FeverButton>().Forget();
+                    this.skillButton.enabled = true;
+                    this.feverButton.enabled = true;
+                    this.UpdateSkill(this.feverButton).Forget();
                     break;
                 case WorkCategory.CoolDown:
-                    this.UpdateSkill<CoolDownButton>().Forget();
+                    this.skillButton.enabled = true;
+                    this.coolDownButton.enabled = true;
+                    this.UpdateSkill(this.coolDownButton).Forget();
                     break;
             }
-            this.OnAlter();
         }
 
-        private async UniTask UpdateSkill<T>() where T : Component, ISkillButton {
-            var button = this.gameObject.AddComponent<Button>();
-            var skill = this.gameObject.AddComponent<T>();
-            skill.SetButton(button);
+        private async UniTask UpdateSkill(ISkillButton skillButton) {
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
             while (true) {
-                this.tap.gameObject.SetActive(button.interactable);
-                this.blink.gameObject.SetActive(skill.IsActive);
+                this.tap.gameObject.SetActive(skillButton.IsInteractable);
+                this.blink.gameObject.SetActive(skillButton.IsWork);
                 this.desc.text = this.gadget.Desc();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
             }
             //TODO 発動中が分かりやすいアニメーション（ブリンク微妙）
-            //TODO 動的にモダルオープナーがついてないバグ
         }
 
         private void OnAlter() {

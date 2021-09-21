@@ -12,7 +12,12 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button button;
 
-        public bool IsActive { get => DIContainer.FeverRepository.TimeLeft > TimeSpan.Zero; }
+        public bool IsWork { get => DIContainer.FeverRepository.TimeLeft > TimeSpan.Zero; }
+        public bool IsInteractable {
+            get =>
+                !this.IsWork &&
+                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero;
+        }
 
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -22,18 +27,13 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.button.interactable = !this.IsActive &&
-                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero;
+            this.button.interactable = this.IsInteractable;
         }
 
         private void Fever() {
             DIContainer.FeverRepository.Fever();
             //TODO エフェクト
             //TODO SE
-        }
-
-        public void SetButton(Button button) {
-            this.button = button;
         }
     }
 }

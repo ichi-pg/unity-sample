@@ -8,7 +8,7 @@ namespace Ichi.Clicker.View
 {
     public interface ISkillButton
     {
-        bool IsActive { get; }
-        void SetButton(Button button);
+        bool IsWork { get; }
+        bool IsInteractable { get; }
     }
 }

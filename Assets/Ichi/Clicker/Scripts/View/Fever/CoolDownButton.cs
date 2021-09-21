@@ -14,7 +14,13 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Common.ModalOpener modalOpener;
 
-        public bool IsActive { get => false; }
+        public bool IsWork { get => false; }
+        public bool IsInteractable {
+            get =>
+                DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
+                DIContainer.CoolDownRepository.CoolTime <= TimeSpan.Zero &&
+                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+        }
 
         void Start() {
             DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
@@ -24,18 +30,11 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.button.interactable =
-                DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
-                DIContainer.CoolDownRepository.CoolTime <= TimeSpan.Zero &&
-                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+            this.button.interactable = this.IsInteractable;
         }
 
         private void OpenModal() {
             this.modalOpener.Open();
-        }
-
-        public void SetButton(Button button) {
-            this.button = button;
         }
     }
 }
