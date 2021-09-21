@@ -37,13 +37,15 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Image costImage;
         [SerializeField]
-        private Image feverImage;
-        [SerializeField]
         private GadgetViewDataList dataList;
         [SerializeField]
         private FeverButton feverButton;
         [SerializeField]
         private CoolDownButton coolDownButton;
+        [SerializeField]
+        private CoolTimeGauge coolTimeGauge;
+        [SerializeField]
+        private CoolTimeView coolTimeView;
 
         private IGadget gadget;
         private GadgetViewData data;
@@ -58,31 +60,38 @@ namespace Ichi.Clicker.View
             this.OnAlter();
             //スキル用の処理
             this.tap.gameObject.SetActive(false);
-            this.feverImage.gameObject.SetActive(false);
-            this.skillButton.enabled = false;
+            this.coolTimeGauge.gameObject.SetActive(true);
+            this.coolTimeView.gameObject.SetActive(true);
+            this.skillButton.enabled = true;
             this.feverButton.enabled = false;
             this.coolDownButton.enabled = false;
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
                     this.feverButton.enabled = true;
+                    this.coolTimeGauge.SetCategory(SkillCategory.Fever);
+                    this.coolTimeView.SetCategory(SkillCategory.Fever);
                     this.UpdateSkill(this.feverButton).Forget();
                     break;
                 case WorkCategory.CoolDown:
                     this.coolDownButton.enabled = true;
+                    this.coolTimeGauge.SetCategory(SkillCategory.CoolDown);
+                    this.coolTimeView.SetCategory(SkillCategory.CoolDown);
                     this.UpdateSkill(this.coolDownButton).Forget();
+                    break;
+                default:
+                    this.skillButton.enabled = false;
+                    this.coolTimeGauge.gameObject.SetActive(false);
+                    this.coolTimeView.gameObject.SetActive(false);
                     break;
             }
         }
 
         private async UniTask UpdateSkill(ISkillButton skillButton) {
-            this.skillButton.enabled = true;
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
-            this.feverImage.gameObject.SetActive(true);
             while (true) {
+                //TODO これだけなら通知でいい
                 this.tap.gameObject.SetActive(skillButton.IsInteractable);
-                this.feverImage.fillAmount = skillButton.WorkRate;
-                this.desc.text = this.gadget.Desc();
                 await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
             }
         }

@@ -23,6 +23,8 @@ namespace Ichi.Clicker
         public GadgetCategory GadgetCategory { get => GadgetCategory.Skill; }
         public ItemCategory CostCategory { get => ItemCategory.Gem; }
         public WorkCategory WorkCategory { get; private set; }
+        public TimeSpan MaxTimeLeft { get; private set; }
+        public TimeSpan MaxCoolTime { get; private set; }
         private Subject<int> onLevelUp;
         public IObservable<int> OnLevelUp { get => this.onLevelUp; }
         public IObserver<int> LevelUpObserver { get => this.onLevelUp; }
@@ -47,6 +49,16 @@ namespace Ichi.Clicker
             this.onLevelUp = new Subject<int>();
             this.Power = new BigIntegerStatus(new PowerCalculator());
             this.Cost = new BigIntegerStatus(new CostCalculator());
+            switch (this.category) {
+                case SkillCategory.Fever:
+                    this.MaxTimeLeft = TimeSpan.FromMinutes(5);
+                    this.MaxCoolTime = TimeSpan.FromMinutes(30);
+                    break;
+                case SkillCategory.CoolDown:
+                    this.MaxTimeLeft = TimeSpan.MaxValue;
+                    this.MaxCoolTime = TimeSpan.FromMinutes(15);
+                    break;
+            }
             this.Calculate();
         }
 

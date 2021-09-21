@@ -11,7 +11,7 @@ namespace Ichi.Clicker.Offline
 {
     public class FeverRepository : IFeverRepository
     {
-        public TimeSpan Duration { get => TimeSpan.FromSeconds(300); }
+        public TimeSpan MaxTimeLeft { get => this.saveDataRepository.SaveData.Fever.MaxTimeLeft; }
         public TimeSpan TimeLeft { get => this.saveDataRepository.SaveData.Fever.TimeLeft(this.timeRepository.Now); }
         public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.Fever.CoolTime(this.timeRepository.Now); }
         private Subject<int> onAlter = new Subject<int>();
@@ -42,8 +42,8 @@ namespace Ichi.Clicker.Offline
             if (fever.CoolTime(now) > TimeSpan.Zero) {
                 throw new Exception("Invalid cool time.");
             }
-            fever.FinishAt = now + this.Duration;
-            fever.coolDownAt = now + TimeSpan.FromMinutes(30);
+            fever.FinishAt = now + fever.MaxTimeLeft;
+            fever.coolDownAt = now + fever.MaxCoolTime;
             this.saveDataRepository.Save();
             this.onAlter.OnNext(0);
             this.Produce().Forget();

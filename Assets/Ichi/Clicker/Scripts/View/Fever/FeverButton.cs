@@ -12,7 +12,6 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private Button button;
 
-        public float WorkRate { get => (float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.Duration.Ticks; }
         public bool IsInteractable {
             get =>
                 DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero &&

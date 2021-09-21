@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 namespace Ichi.Clicker.View
 {
-    public class CoolTimeView : MonoBehaviour
+    public class CoolTimeGauge : MonoBehaviour
     {
         [SerializeField]
-        private Text text;
+        private Image gauge;
         [SerializeField]
         private SkillCategory category;
 
@@ -23,8 +23,11 @@ namespace Ichi.Clicker.View
             var token = this.GetCancellationTokenOnDestroy();
             while (true) {
                 var skill = DIContainer.SkillRepository.GetSkill(this.category);
-                this.text.text = skill.CoolTime() ?? "00:00";
-                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+                var rate = skill.CoolTimeRate();
+                this.gauge.fillAmount = rate;
+                this.gameObject.SetActive(rate > 0f);
+                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
+                //TODO 発動中とクールダウンの見た目変えないと分からない
             }
         }
 

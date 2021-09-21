@@ -41,7 +41,7 @@ namespace Ichi.Clicker.Offline
                 throw new Exception("Invalid cool time.");
             }
             fever.coolDownAt = now;
-            coolDown.coolDownAt = now + TimeSpan.FromMinutes(15);
+            coolDown.coolDownAt = now + coolDown.MaxCoolTime;
             this.saveDataRepository.Save();
             this.onAlter.OnNext(0);
         }

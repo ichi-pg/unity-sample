@@ -19,7 +19,7 @@ namespace Ichi.Clicker.View
         }
 
         private void OnAlter() {
-            this.gauge.Resize((float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.Duration.Ticks);
+            this.gauge.Resize((float)DIContainer.FeverRepository.TimeLeft.Ticks / DIContainer.FeverRepository.MaxTimeLeft.Ticks);
         }
     }
 }
