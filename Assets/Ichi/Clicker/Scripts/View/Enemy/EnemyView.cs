@@ -33,12 +33,16 @@ namespace Ichi.Clicker.View
         }
 
         private void UpdateGauge(IEnemy enemy) {
+            if (enemy == null) {
+                return;
+            }
             this.gauge.Resize(Common.Math.Divide(enemy.Damage, enemy.HP));
         }
 
         private void OnWin(IEnemy enemy) {
             this.image.DOFade(0f, 0.5f);
             this.lifeBar.DOFade(0f, 0.5f);
+            this.UpdateGauge(enemy);
             //TODO SE
             //TODO ハートブワああ
             //TODO きらきら
