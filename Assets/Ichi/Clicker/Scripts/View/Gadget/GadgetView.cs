@@ -49,6 +49,7 @@ namespace Ichi.Clicker.View
 
         private IGadget gadget;
         private GadgetViewData data;
+        private ISkillButton cachedSkillButon;
 
         public void Initialize(IGadget gadget) {
             this.gadget = gadget;
@@ -57,43 +58,27 @@ namespace Ichi.Clicker.View
             this.levelUpButton.OnLongPressAsObservable(0.5d, 100d).Subscribe(_ => this.LevelUp()).AddTo(this);
             DIContainer.EnemyRepository.OnDrop.Where(x => x == gadget).Subscribe(_ => this.OnAlter()).AddTo(this);
             DIContainer.ItemRepository.GetItem(gadget.CostCategory).OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
-            this.OnAlter();
             //スキル用の処理
-            this.tap.gameObject.SetActive(false);
-            this.coolTimeGauge.gameObject.SetActive(true);
-            this.coolTimeView.gameObject.SetActive(true);
-            this.skillButton.enabled = true;
-            this.feverButton.enabled = false;
-            this.coolDownButton.enabled = false;
             switch (gadget.WorkCategory) {
                 case WorkCategory.Fever:
-                    this.feverButton.enabled = true;
-                    this.coolTimeGauge.SetCategory(SkillCategory.Fever);
-                    this.coolTimeView.SetCategory(SkillCategory.Fever);
-                    this.UpdateSkill(this.feverButton).Forget();
+                    this.cachedSkillButon = this.feverButton;
                     break;
                 case WorkCategory.CoolDown:
-                    this.coolDownButton.enabled = true;
-                    this.coolTimeGauge.SetCategory(SkillCategory.CoolDown);
-                    this.coolTimeView.SetCategory(SkillCategory.CoolDown);
-                    this.UpdateSkill(this.coolDownButton).Forget();
-                    break;
-                default:
-                    this.skillButton.enabled = false;
-                    this.coolTimeGauge.gameObject.SetActive(false);
-                    this.coolTimeView.gameObject.SetActive(false);
+                    this.cachedSkillButon = this.coolDownButton;
                     break;
             }
-        }
-
-        private async UniTask UpdateSkill(ISkillButton skillButton) {
-            var token = this.GetCancellationTokenOnDestroy();
-            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: token);
-            while (true) {
-                //TODO これだけなら通知でいい
-                this.tap.gameObject.SetActive(skillButton.IsInteractable);
-                await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
+            if (this.cachedSkillButon != null) {
+                this.coolTimeGauge.SetCategory(gadget.WorkCategory.Cast());
+                this.coolTimeView.SetCategory(gadget.WorkCategory.Cast());
+                DIContainer.FeverRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
+                DIContainer.CoolDownRepository.OnAlter.Subscribe(_ => this.OnAlter()).AddTo(this);
             }
+            this.coolTimeGauge.gameObject.SetActive(this.cachedSkillButon != null);
+            this.coolTimeView.gameObject.SetActive(this.cachedSkillButon != null);
+            this.skillButton.enabled = this.cachedSkillButon != null;
+            this.feverButton.enabled = this.cachedSkillButon == this.feverButton;
+            this.coolDownButton.enabled = this.cachedSkillButon == this.coolDownButton;
+            this.OnAlter();
         }
 
         private void OnAlter() {
@@ -110,6 +95,7 @@ namespace Ichi.Clicker.View
             this.gadgetImage.sprite = this.data.GadgetSprite(gadget);
             this.costImage.sprite = this.data.CostSprite;
             this.costImage.gameObject.SetActive(this.gadget.HasLevelUp);
+            this.tap.gameObject.SetActive(this.cachedSkillButon != null ? this.cachedSkillButon.IsInteractable : false);
         }
 
         public void LevelUp() {
