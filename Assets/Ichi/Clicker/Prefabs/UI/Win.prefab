@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6914793200181092251}
   - component: {fileID: 6181914096172786402}
   m_Layer: 0
-  m_Name: Tap
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,21 +69,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heart
       objectReference: {fileID: 0}
-    - target: {fileID: 1878720312558868, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
+    - target: {fileID: 1225616259324072, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1878720312558868, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4032091950274674, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4032091950274674, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4032091950274674, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4032091950274674, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -135,15 +139,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4608248244129964, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4608248244129964, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4608248244129964, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4608248244129964, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
       propertyPath: m_LocalPosition.z
