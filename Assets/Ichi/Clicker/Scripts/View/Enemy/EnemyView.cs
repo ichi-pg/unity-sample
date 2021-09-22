@@ -44,7 +44,7 @@ namespace Ichi.Clicker.View
             this.lifeBar.DOFade(0f, 0.5f);
             this.UpdateGauge(enemy);
             //TODO SE
-            //TODO きらきら
+            //NOTE エフェクトのブラッシュアップ（きらきらなど）と引き算
         }
 
         private void OnEncount(IEnemy enemy) {

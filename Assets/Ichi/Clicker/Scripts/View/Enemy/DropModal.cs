@@ -19,8 +19,7 @@ namespace Ichi.Clicker.View
             this.gadgetImage.sprite = data.GadgetSprite(gadget);
             this.rarity.text = gadget.Rarity().ToString();
             //TODO モンスターアイコン素材（ドット絵だと楽しそう）
-            //TODO きらきら
-            //TODO ぱんぱかぱーん？
+            //NOTE エフェクト（きらきら、ぱんぱかぱーんなど）必要性
         }
 
         void OnDestroy() {
