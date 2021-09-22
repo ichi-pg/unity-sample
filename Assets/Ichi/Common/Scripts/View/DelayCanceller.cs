@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Ichi.Common
 {
-    public class DelayCanceler : MonoBehaviour
+    public class DelayCanceller : MonoBehaviour
     {
         private CancellationTokenSource tokenSource;
 

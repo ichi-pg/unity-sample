@@ -5633,7 +5633,7 @@ GameObject:
   - component: {fileID: 1337154215}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8817,7 +8817,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
-  m_Text: "\u30AA\u30D5\u30E9\u30A4\u30F3\u751F\u7523"
+  m_Text: New Text
 --- !u!222 &1861346411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9408,6 +9408,7 @@ GameObject:
   - component: {fileID: 2082541081}
   - component: {fileID: 2082541080}
   - component: {fileID: 2082541084}
+  - component: {fileID: 2082541085}
   m_Layer: 5
   m_Name: ProduceButton
   m_TagString: Untagged
@@ -9544,6 +9545,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2372a5d0e744a0ba451babf7842d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2082541085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082541078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bc843d3c536466e8d5054a2c4a8723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1403917943070962844, guid: a350c783eb6044b3da8b82a2cdb39807, type: 3}
+  parent: {fileID: 2082541079}
+  target: {fileID: 2082541079}
 --- !u!1 &2099220238
 GameObject:
   m_ObjectHideFlags: 0

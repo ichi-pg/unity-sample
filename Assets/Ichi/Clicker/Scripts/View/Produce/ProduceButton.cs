@@ -15,7 +15,7 @@ namespace Ichi.Clicker.View
         [SerializeField]
         private CanvasGroup tap;
         [SerializeField]
-        private Common.DelayCanceler delayCanceler;
+        private Common.DelayCanceller delayCanceler;
 
         void Start() {
             if (DIContainer.EnemyRepository.Enemy == null) {
