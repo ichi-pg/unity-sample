@@ -13,9 +13,12 @@ namespace Ichi.Clicker.View
         private Button button;
 
         public bool IsInteractable {
-            get =>
-                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero &&
-                DIContainer.FeverRepository.CoolTime <= TimeSpan.Zero;
+            get {
+                var now = DIContainer.TimeRepository.Now;
+                var fever = DIContainer.SkillRepository.GetSkill(SkillCategory.Fever);
+                return fever.TimeLeft(now) <= TimeSpan.Zero &&
+                    fever.CoolTime(now) <= TimeSpan.Zero;
+            }
         }
 
         void Start() {

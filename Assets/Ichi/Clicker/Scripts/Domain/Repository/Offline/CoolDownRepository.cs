@@ -10,7 +10,6 @@ namespace Ichi.Clicker.Offline
 {
     public class CoolDownRepository : ICoolDownRepository
     {
-        public TimeSpan CoolTime { get => this.saveDataRepository.SaveData.CoolDown.CoolTime(this.timeRepository.Now); }
         private ITimeRepository timeRepository;
         private ISaveDataRepository saveDataRepository;
         private Subject<int> onAlter = new Subject<int>();
@@ -23,7 +22,9 @@ namespace Ichi.Clicker.Offline
         }
 
         private async UniTask CoolTimeTask() {
-            await UniTask.Delay(this.CoolTime);
+            var now = this.timeRepository.Now;
+            var coolDown = this.saveDataRepository.SaveData.CoolDown;
+            await UniTask.Delay(coolDown.CoolTime(now));
             this.onAlter.OnNext(0);
         }
 

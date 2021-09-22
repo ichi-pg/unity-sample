@@ -15,10 +15,14 @@ namespace Ichi.Clicker.View
         private Common.ModalOpener modalOpener;
 
         public bool IsInteractable {
-            get =>
-                DIContainer.FeverRepository.CoolTime > TimeSpan.Zero &&
-                DIContainer.CoolDownRepository.CoolTime <= TimeSpan.Zero &&
-                DIContainer.FeverRepository.TimeLeft <= TimeSpan.Zero;
+            get {
+                var now = DIContainer.TimeRepository.Now;
+                var fever = DIContainer.SkillRepository.GetSkill(SkillCategory.Fever);
+                var coolDown = DIContainer.SkillRepository.GetSkill(SkillCategory.CoolDown);
+                return fever.CoolTime(now) > TimeSpan.Zero &&
+                    coolDown.CoolTime(now) <= TimeSpan.Zero &&
+                    fever.TimeLeft(now) <= TimeSpan.Zero;
+            }
         }
 
         void Start() {
