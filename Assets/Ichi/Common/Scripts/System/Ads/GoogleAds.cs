@@ -15,8 +15,8 @@ namespace Ichi.Common
 
         public GoogleAds() {
             this.CreateAndLoadRewardedAd();
-            //TODO new警告が出るの気持ち悪い
-            //TODO ダミーGameObjectが残ることがある
+            //NOTE new警告が出るの気持ち悪い（仕様っぽい）
+            //NOTE ダミーGameObjectが残ることがある
             //TODO UnityAdsも試したい
             //TODO Loadedまでボタン非表示じゃなくてダミー広告出すのが主流？
         }
