@@ -25,6 +25,5 @@ namespace Ichi.Clicker.View
         public static Common.IAdsCreator AdsCreator { get; private set; } = new Common.GoogleAdsCreator();
 
         //TODO メニュー（データ引き継ぎ、クレジット）
-        //TODO 残りのフッターはダンジョンとエピソードでちょうどいいかも
     }
 }

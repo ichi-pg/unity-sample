@@ -25,7 +25,7 @@ namespace Ichi.Clicker.View
             if (diff > 0) {
                 var index = (int)Common.Math.Min(diff / 1000, 2);
                 this.CreateTask(index).Forget();
-                //TODO 全額をまとめて1000で割った個数でゴールドをばら撒く？
+                //NOTE 全額をまとめて1000で割った個数でゴールドをばら撒く？
             }
         }
 

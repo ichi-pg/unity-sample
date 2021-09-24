@@ -33,7 +33,7 @@ namespace Ichi.Clicker.View
             this.image.DOFade(0f, 2f).OnComplete(() => {
                 this.poolable.Return();
             });
-            //TODO SE
+            //NOTE SE
             //NOTE エフェクトのブラッシュアップ（きらきらなど）と引き算
         }
     }

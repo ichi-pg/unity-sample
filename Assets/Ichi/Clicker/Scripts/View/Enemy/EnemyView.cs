@@ -27,7 +27,7 @@ namespace Ichi.Clicker.View
             DIContainer.EnemyRepository.OnWin.Subscribe(this.OnWin).AddTo(this);
             DIContainer.EnemyRepository.OnEncount.Subscribe(this.OnEncount).AddTo(this);
             DIContainer.ClickerRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
-            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnDamage).AddTo(this);
+            DIContainer.FeverRepository.OnProduce.Subscribe(this.OnFeverDamage).AddTo(this);
             this.OnEncount(DIContainer.EnemyRepository.Enemy);
             this.image.transform.DOScale(0.99f, 3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
@@ -70,8 +70,11 @@ namespace Ichi.Clicker.View
             this.center.transform.DOScale(0.98f, 0.1f).OnComplete(() => {
                 this.center.transform.DOScale(1f, 0.1f);
             });
-            //TODO フィーバーの時ぽよぽよが高速すぎて微妙
             //TODO 表情を変えたい、ランダムセリフも
+        }
+
+        private void OnFeverDamage(BigInteger damage) {
+            this.UpdateGauge(DIContainer.EnemyRepository.Enemy);
         }
     }
 }
